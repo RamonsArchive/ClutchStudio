@@ -1,15 +1,73 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import localFont from "next/font/local";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const funnelSans = localFont({
+  src: [
+    {
+      path: "./fonts/static/FunnelSans-Light.woff2",
+      weight: "300",
+      style: "light",
+    },
+    {
+      path: "./fonts/static/FunnelSans-LightItalic.woff2",
+      weight: "300",
+      style: "italic",
+    },
+    {
+      path: "./fonts/static/FunnelSans-Regular.woff2",
+      weight: "400",
+      style: "regular",
+    },
+    {
+      path: "./fonts/static/FunnelSans-Italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "./fonts/static/FunnelSans-Medium.woff2",
+      weight: "500",
+      style: "medium",
+    },
+    {
+      path: "./fonts/static/FunnelSans-MediumItalic.woff2",
+      weight: "500",
+      style: "italic",
+    },
+    {
+      path: "./fonts/static/FunnelSans-SemiBold.woff2",
+      weight: "600",
+      style: "semibold",
+    },
+    {
+      path: "./fonts/static/FunnelSans-SemiBoldItalic.woff2",
+      weight: "600",
+      style: "italic",
+    },
+    {
+      path: "./fonts/static/FunnelSans-Bold.woff2",
+      weight: "700",
+      style: "bold",
+    },
+    {
+      path: "./fonts/static/FunnelSans-BoldItalic.woff2",
+      weight: "700",
+      style: "italic",
+    },
+    {
+      path: "./fonts/static/FunnelSans-ExtraBold.woff2",
+      weight: "800",
+      style: "extrabold",
+    },
+    {
+      path: "./fonts/static/FunnelSans-ExtraBoldItalic.woff2",
+      weight: "800",
+      style: "italic",
+    },
+  ],
+  variable: "--font-funnel-sans",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -24,11 +82,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <body className={`${funnelSans.variable} antialiased`}>{children}</body>
     </html>
   );
 }
