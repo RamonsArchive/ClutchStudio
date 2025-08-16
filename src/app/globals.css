@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #F0F8FF; /* Very light blue background instead of white */
   --foreground: #171717;
 }
 
@@ -10,22 +10,94 @@ html {
   scrollbar-width: none;
 }
 
-/* 2. For WebKit browsers (Chrome, Safari, Opera) */
+/* For WebKit browsers (Chrome, Safari, Opera) */
 body::-webkit-scrollbar {
-  display: none;                 /* literally remove it */
-}
+  display: none; /* literally remove it */
+} 
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --breakpoint-xs: 30rem; /* 480px */
+  
+  /* Primary Color Variations (Your Blue #0060CD) */
+  --color-primary-50: #EBF4FF;   /* Very light blue for subtle backgrounds */
+  --color-primary-100: #DBEAFE;  /* Light blue for cards/containers */
+  --color-primary-200: #BFDBFE;  /* Lighter blue for hover states */
+  --color-primary-300: #93C5FD;  /* Medium-light blue */
+  --color-primary-400: #60A5FA;  /* Medium blue */
+  --color-primary-500: #0060CD;  /* Your primary blue */
+  --color-primary-600: #0052B4;  /* Darker blue for hover states */
+  --color-primary-700: #00449B;  /* Dark blue for navbar backdrop */
+  --color-primary-800: #003682;  /* Darker blue */
+  --color-primary-900: #002969;  /* Darkest blue for deep shadows */
+
+  /* Secondary Color Variations (Your Green #008E1A) */
+  --color-secondary-50: #F0FDF4;   /* Very light green */
+  --color-secondary-100: #DCFCE7;  /* Light green for containers */
+  --color-secondary-200: #BBF7D0;  /* Lighter green */
+  --color-secondary-300: #86EFAC;  /* Medium-light green */
+  --color-secondary-400: #4ADE80;  /* Medium green */
+  --color-secondary-500: #008E1A;  /* Your primary green */
+  --color-secondary-600: #007A17;  /* Darker green */
+  --color-secondary-700: #006614;  /* Dark green */
+  --color-secondary-800: #005211;  /* Darker green */
+  --color-secondary-900: #003E0E;  /* Darkest green */
+
+  /* primary background */
+  --color-primary-background: #44668D;
+
+  /* Accent Color Variations (Purple for highlights) */
+  --color-accent-50: #FAF5FF;    /* Very light purple */
+  --color-accent-100: #F3E8FF;   /* Light purple */
+  --color-accent-200: #E9D5FF;   /* Lighter purple */
+  --color-accent-300: #D8B4FE;   /* Medium-light purple */
+  --color-accent-400: #C084FC;   /* Medium purple */
+  --color-accent-500: #A855F7;   /* Base purple */
+  --color-accent-600: #9333EA;   /* Darker purple */
+  --color-accent-700: #7C3AED;   /* Dark purple */
+  --color-accent-800: #6B21A8;   /* Darker purple */
+  --color-accent-900: #581C87;   /* Darkest purple */
+
+  /* Neutral Variations (Slate grays) */
+  --color-neutral-50: #F8FAFC;   /* Almost white */
+  --color-neutral-100: #F1F5F9;  /* Very light gray */
+  --color-neutral-200: #E2E8F0;  /* Light gray for borders */
+  --color-neutral-300: #CBD5E1;  /* Medium-light gray */
+  --color-neutral-400: #94A3B8;  /* Medium gray for secondary text */
+  --color-neutral-500: #64748B;  /* Base gray */
+  --color-neutral-600: #475569;  /* Darker gray */
+  --color-neutral-700: #334155;  /* Dark gray */
+  --color-neutral-800: #1E293B;  /* Darker gray */
+  --color-neutral-900: #0F172A;  /* Darkest gray */
+
+  /* Text Colors */
+  --color-text-primary: #0F172A;     /* Dark text for light backgrounds */
+  --color-text-secondary: #475569;   /* Secondary text */
+  --color-text-muted: #64748B;       /* Muted text */
+  --color-text-inverse: #FFFFFF;     /* White text for dark backgrounds */
+
+  /* Background Colors */
+  --color-bg-primary: #F0F8FF;       /* Main background (light blue) */
+  --color-bg-secondary: #FFFFFF;     /* Container backgrounds (white) */
+  --color-bg-muted: #F8FAFC;         /* Muted backgrounds */
+  --color-bg-dark: #00449B;          /* Dark background for navbar */
+  --color-bg-hero: #2E5BB8;          /* Hero/title section background (matches your design) */
+  --color-bg-gradient-start: #2E5BB8; /* Gradient start for hero sections */
+  --color-bg-gradient-end: #1E4A9F;   /* Gradient end for depth */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #F0F8FF;
+    --foreground: #171717;
+    --color-bg-primary: #F0F8FF;
+    --color-bg-secondary: #FFFFFF;
+    --color-bg-muted: #F8FAFC;
+    --color-text-primary: #171717;
+    --color-text-secondary: #475569;
+    --color-text-muted: #64748B;
   }
 }
 
@@ -37,7 +109,6 @@ body {
   overflow-x: hidden;
 }
 
-
 @utility flex-center {
-  @apply flex justify-center items-center
+  @apply flex justify-center items-center;
 }
