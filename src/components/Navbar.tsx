@@ -1,88 +1,92 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Menu } from "lucide-react";
 import useMobile from "./useMobile";
-const Navbar = () => {
-  const [isFloating, setIsFloating] = useState(false);
-  const [isMobileNav, setIsMobileNav] = useState(false);
-  const { isMobile } = useMobile();
-  console.log("isMobile", isMobile);
+import MobileMenu from "./MobileMenu";
+import { navLinks } from "@/constants";
 
-  const handleScroll = () => {
-    if (window.scrollY > 42) {
-      setIsFloating(true);
-    } else {
-      setIsFloating(false);
+const Navbar = () => {
+  const [isDropDown, setIsDropDown] = useState(true);
+  const { isMobile } = useMobile();
+
+  const handleScroll = useCallback(() => {
+    const currentScrollY = window.scrollY;
+
+    // Show when scrolling up or at top, hide when scrolling down
+    if (currentScrollY > 42) {
+      setIsDropDown(true);
+    } else if (currentScrollY < 42) {
+      setIsDropDown(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
-  const defaultNavbar = useMemo(() => {
+  const renderContent = () => {
     return (
-      <div className="flex justify-between w-full h-[42px] px-5 md:px-10 bg-primary-background">
-        <div className="relative flex-center h-full w-[175px]">
+      <>
+        <Link
+          href="/"
+          className="relative flex-center h-full w-[175px] cursor-pointer"
+        >
           <Image
             src="./Logos/LightLogos/lightClutchLogoSVG.svg"
             alt="logo"
             fill
             className="object-cover object-top w-full h-full"
           />
-        </div>
-
+        </Link>
         {isMobile ? (
-          <Menu />
+          <MobileMenu />
         ) : (
-          <div className="flex-center flex-row gap-5 md:gap-10 text-white">
-            <div className="flex-center cursor-pointer z-3">
+          <div className="flex-center flex-row text-white">
+            {navLinks.map((link) => (
               <Link
-                href="/"
-                className="text-white text-[14px] md:text-[16px] hover:text-gray-400 hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out !cursor-pointer z-2"
-                style={{
-                  cursor: "pointer",
-                }}
+                href={link.href}
+                key={link.name}
+                className="text-white text-[18px] font-medium py-3 px-5 md:px-10 rounded-lg duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center z-10 cursor-pointer"
               >
-                Home
+                {link.name}
               </Link>
-            </div>
-            <div className="flex-center cursor-pointer z-3">
-              <Link
-                href="/"
-                className="text-white text-[14px] md:text-[16px] hover:text-gray-400 hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out !cursor-pointer z-2"
-                style={{
-                  cursor: "pointer",
-                }}
-              >
-                About
-              </Link>
-            </div>
-            <div className="flex-center cursor-pointer z-3">
-              <Link
-                href="/"
-                className="text-white text-[14px] md:text-[16px] hover:text-gray-400 hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out cursor-pointer z-2"
-              >
-                Projects
-              </Link>
-            </div>
-            <div className="flex-center cursor-pointer z-3">
-              <Link
-                href="/"
-                className="text-white text-[14px] md:text-[16px] hover:text-gray-400 hover:underline hover:underline-offset-4 transition-all duration-300 ease-in-out cursor-pointer z-2"
-              >
-                Contact
-              </Link>
-            </div>
+            ))}
           </div>
         )}
-      </div>
+      </>
     );
-  }, [isMobile]);
-  return defaultNavbar;
+  };
+
+  return (
+    <>
+      {/* Background placeholder - always visible */}
+      <div className="flex w-full h-[42px] bg-primary-background-500" />
+
+      {/* Default navbar - NO ANIMATION when appearing */}
+      <div
+        className={`absolute top-0 left-0 right-0 flex w-full h-[42px] justify-between px-5 md:px-10 bg-primary-background-500 ${
+          isDropDown
+            ? "opacity-0 -translate-y-full transition-all duration-300 ease-in-out" // Animate when hiding
+            : "opacity-100 translate-y-0" // No transition when showing
+        }`}
+      >
+        {renderContent()}
+      </div>
+
+      {/* Dropdown navbar - ONLY ANIMATE when appearing */}
+      <div
+        className={`fixed top-0 left-0 right-0 z-10 flex w-full h-[42px] justify-between px-5 md:px-10 bg-primary-background-500 ${
+          isDropDown
+            ? "opacity-100 translate-y-0 transition-all duration-300 ease-in-out" // Animate when showing
+            : "-translate-y-full opacity-0 transition-all duration-100 ease-in-out" // No transition when hiding
+        }`}
+      >
+        {renderContent()}
+      </div>
+    </>
+  );
 };
 
 export default Navbar;
