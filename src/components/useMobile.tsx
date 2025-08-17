@@ -2,10 +2,11 @@
 import React, { useEffect, useState, useCallback } from "react";
 
 const useMobile = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  //const newIsMobile = window.matchMedia("(max-width: 768px)").matches;
+  const [isMobile, setIsMobile] = useState(true);
 
   const handleResize = useCallback(() => {
-    const newIsMobile = window.innerWidth < 768;
+    const newIsMobile = window.matchMedia("(max-width: 768px)").matches;
     console.log("Window width:", window.innerWidth, "isMobile:", newIsMobile);
     setIsMobile(newIsMobile);
   }, []);
