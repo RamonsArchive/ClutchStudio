@@ -53,6 +53,31 @@ const TitleSection = ({
       "characters"
     );
 
+    // Apply gradient effect immediately after SplitText creation for smoother experience
+    if (mainTitleSplits.chars) {
+      mainTitleSplits.chars.forEach((char, index) => {
+        const charElement = char as HTMLElement;
+
+        // Apply beautiful gradient styling directly to existing character
+        charElement.style.background =
+          "linear-gradient(45deg, #00D4FF, #0099FF, #00FF88, #00D4FF, #0099FF, #00FF88)";
+        charElement.style.backgroundSize = "800% 800%";
+        charElement.style.webkitBackgroundClip = "text";
+        charElement.style.backgroundClip = "text";
+        charElement.style.color = "transparent";
+        charElement.style.webkitTextFillColor = "transparent";
+
+        // Animate the gradient background position for smooth movement
+        gsap.to(charElement.style, {
+          backgroundPosition: "250% 100%",
+          duration: 15,
+          repeat: -1,
+          ease: "power2.inOut",
+          delay: index * 0.05, // Much smaller stagger for smoother flow
+        });
+      });
+    }
+
     // Handle React nodes by extracting text content for the gradient effect
     let mainTitleText = "";
     if (typeof mainTitle === "string") {
@@ -104,32 +129,6 @@ const TitleSection = ({
     const initialAnimationTL = gsap.timeline({
       onComplete: () => {
         console.log("Initial animation completed");
-
-        // Create gradient effect using GSAP instead of CSS
-        if (mainTitleSplits.chars) {
-          // Apply gradient directly to existing characters
-          mainTitleSplits.chars.forEach((char, index) => {
-            const charElement = char as HTMLElement;
-
-            // Apply beautiful gradient styling directly to existing character
-            charElement.style.background =
-              "linear-gradient(45deg, #00D4FF, #0099FF, #00FF88, #00D4FF)";
-            charElement.style.backgroundSize = "300% 300%";
-            charElement.style.webkitBackgroundClip = "text";
-            charElement.style.backgroundClip = "text";
-            charElement.style.color = "transparent";
-            charElement.style.webkitTextFillColor = "transparent";
-
-            // Animate the gradient background position for smooth movement
-            gsap.to(charElement.style, {
-              backgroundPosition: "100% 100%",
-              duration: 4,
-              repeat: -1,
-              ease: "power2.inOut",
-              delay: index * 0.05, // Subtle stagger for wave effect
-            });
-          });
-        }
 
         // Setup scroll trigger animation after initial animation completes
         const scrollAnimationTL = gsap.timeline({
