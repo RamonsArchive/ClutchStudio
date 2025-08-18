@@ -63,28 +63,16 @@ const TitleSection = ({
       "characters"
     );
 
-    // Apply gradient effect immediately after SplitText creation for smoother experience
+    // Apply premium gradient effect using CSS classes (like contact button)
     if (mainTitleSplits.chars) {
       mainTitleSplits.chars.forEach((char, index) => {
         const charElement = char as HTMLElement;
 
-        // Apply beautiful gradient styling directly to existing character
-        charElement.style.background =
-          "linear-gradient(45deg, #00D4FF, #0099FF, #00FF88, #00D4FF, #0099FF, #00FF88)";
-        charElement.style.backgroundSize = "800% 800%";
-        charElement.style.webkitBackgroundClip = "text";
-        charElement.style.backgroundClip = "text";
-        charElement.style.color = "transparent";
-        charElement.style.webkitTextFillColor = "transparent";
+        // Apply premium gradient classes for high-performance animation
+        charElement.classList.add("gradient-char");
 
-        // Animate the gradient background position for smooth movement
-        gsap.to(charElement.style, {
-          backgroundPosition: "250% 100%",
-          duration: 15,
-          repeat: -1,
-          ease: "power2.inOut",
-          delay: index * 0.05, // Much smaller stagger for smoother flow
-        });
+        // Add custom animation delay for each character
+        charElement.style.animationDelay = `${index * 0.1}s`;
       });
     }
 
