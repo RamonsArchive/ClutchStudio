@@ -48,7 +48,7 @@ const Navbar = () => {
               <Link
                 href={link.href}
                 key={link.name}
-                className="text-white text-[18px] font-medium py-3 px-5 md:px-10 rounded-lg duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center z-10 cursor-pointer"
+                className="text-white text-[18px] font-medium py-2 px-5 rounded-lg md:px-10 duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center z-10 cursor-pointer"
               >
                 {link.name}
               </Link>

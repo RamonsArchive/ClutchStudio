@@ -16,3 +16,8 @@ export const navLinks = [
         href: "/contact",
     }
 ]
+
+export const HeroData = {
+    HeroVideo: "@/HeroContent/soccerGoal.mp4",
+   
+}

@@ -24,9 +24,11 @@ const Hero = () => {
           </>
         }
         headerClassName="font-funnel-sans text-white text-[12px] xs:text-[16px] font-light italic"
-        mainTitleClassName="font-funnel-sans text-white text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-bold"
+        mainTitleClassName="font-funnel-sans text-white text-[26px] xs:text-[28px] sm:text-[32px] md:text-[40px] lg:text-[48px] font-bold"
         subTitleClassName="font-funnel-sans text-white text-[12px] xs:text-[16px] font-regular"
+        includeContactButton={true}
       />
+      <div className="flex flex-col gap-5"></div>
     </div>
   );
 };

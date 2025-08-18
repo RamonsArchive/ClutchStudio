@@ -284,3 +284,49 @@ body {
 @utility text-mobile-menu {
   @apply text-text-inverse text-[18px] font-medium py-3 px-4 rounded-lg duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center;
 }
+
+/* Contact Button Gradient Animation */
+.contact-gradient-btn {
+  position: relative;
+  background: linear-gradient(45deg, #00D4FF, #0099FF, #00FF88, #00D4FF);
+  background-size: 300% 300%;
+  animation: contactGradientShift 4s ease-in-out infinite;
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.contact-gradient-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #FF6B6B);
+  background-size: 300% 300%;
+  animation: contactGradientShift 4s ease-in-out infinite reverse;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.contact-gradient-btn:hover::before {
+  opacity: 1;
+}
+
+.contact-gradient-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+}
+
+@keyframes contactGradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
