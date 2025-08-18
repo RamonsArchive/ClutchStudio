@@ -41,6 +41,127 @@ body::-webkit-scrollbar {
   cursor: pointer !important;
 }
 
+/* Gradient animation for TitleSection */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Animated gradient text class */
+.animated-gradient-text {
+  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* Most reliable gradient text that doesn't interfere with GSAP */
+.animated-gradient-text-safe {
+  position: relative;
+  color: white; /* Keep text visible for GSAP */
+}
+
+.animated-gradient-text-safe::after {
+  content: ""; /* Start with no content */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 8s ease-in-out infinite;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0; /* Start hidden */
+  transition: opacity 0.3s ease; /* Smooth fade in */
+}
+
+
+
+/* Alternative: Use text-shadow for a gradient glow effect */
+.animated-gradient-glow {
+  color: white;
+  text-shadow: 
+    0 0 10px #00D4FF,
+    0 0 20px #0099FF,
+    0 0 30px #00FF88;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
+/* Alternative approach: Use mix-blend-mode for better effect */
+.animated-gradient-text-blend {
+  position: relative;
+  color: white;
+  mix-blend-mode: multiply;
+}
+
+.animated-gradient-text-blend::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease-in-out infinite;
+  z-index: -1;
+  mix-blend-mode: screen;
+}
+
+/* Wavy border with pronounced waves */
+.wavy-border-bottom {
+  position: relative;
+}
+
+.wavy-border-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.54,5,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%2300D4FF'%3E%3C/path%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.71,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%230099FF'%3E%3C/path%3E%3Cpath d='M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z' fill='%2300FF88'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Alternative: More pronounced zigzag wave */
+.wavy-border-bottom-zigzag::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0L50,20L100,0L150,20L200,0L250,20L300,0L350,20L400,0L450,20L500,0L550,20L600,0L650,20L700,0L750,20L800,0L850,20L900,0L950,20L1000,0L1050,20L1100,0L1150,20L1200,0L1200,120L0,120Z' fill='url(%23gradient)'%3E%3C/path%3E%3Cdefs%3E%3ClinearGradient id='gradient' x1='0%25' y1='0%25' x2='100%25' y2='0%25'%3E%3Cstop offset='0%25' style='stop-color:%2300D4FF;stop-opacity:1' /%3E%3Cstop offset='50%25' style='stop-color:%230099FF;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%2300FF88;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Alternative: Organic wave with more variation */
+.wavy-border-bottom-organic::after {
+  content: '';
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  right: 0;
+  height: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0C100,40 200,10 300,30C400,50 500,20 600,40C700,60 800,30 900,50C1000,70 1100,40 1200,60L1200,120L0,120Z' fill='%2300D4FF' opacity='0.3'%3E%3C/path%3E%3Cpath d='M0,0C150,60 250,20 350,40C450,60 550,30 650,50C750,70 850,40 950,60C1050,80 1150,50 1200,70L1200,120L0,120Z' fill='%230099FF' opacity='0.6'%3E%3C/path%3E%3Cpath d='M0,0C200,80 300,40 400,60C500,80 600,50 700,70C800,90 900,60 1000,80C1100,100 1150,70 1200,90L1200,120L0,120Z' fill='%2300FF88'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
