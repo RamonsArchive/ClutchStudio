@@ -18,6 +18,6 @@ export const navLinks = [
 ]
 
 export const HeroData = {
-    HeroVideo: "@/HeroContent/soccerGoal.mp4",
+    HeroVideo: "/HeroContent/soccerGoal.mp4",
    
 }

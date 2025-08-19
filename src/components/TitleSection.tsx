@@ -249,7 +249,7 @@ const TitleSection = ({
   return (
     <div
       id="title-container"
-      className="flex gap-10 p-5 h-[25%] w-full bg-primary-background-500 wavy-border-bottom"
+      className="flex gap-10 p-5 h-[50%] w-full bg-primary-background-500 wavy-border-bottom"
     >
       <div className="flex justify-start flex-col md:flex-row gap-5 md:gap-10 cursor-pointer md:p-5">
         <div className="flex flex-col gap-5">
@@ -270,7 +270,7 @@ const TitleSection = ({
             {mainTitle}
           </h1>
         </div>
-        <div className="flex flex-col md:flex-center gap-8 md:gap-10">
+        <div className="flex flex-col md:flex-center gap-3 xs:gap-8 md:gap-10">
           {subTitle && (
             <h2
               id="sub-title"
