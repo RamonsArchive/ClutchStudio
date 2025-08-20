@@ -180,7 +180,7 @@ const RecentProjectCard = ({
 
   const renderTextContent = () => {
     return (
-      <div className="flex flex-col w-full h-full gap-5 px-5 py-3 sm:p-10 overflow-x-hidden">
+      <div className="flex flex-col w-full h-full gap-5 px-5 py-3 sm:p-10">
         <h1
           ref={desktopTitleRef}
           className="font-funnel-sans text-white text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px] font-bold"
@@ -207,7 +207,9 @@ const RecentProjectCard = ({
         >
           {workDescription}
         </h2>
-        <VisitButton url={url} isWebsite={isWebsite} ref={desktopButtonRef} />
+        <div className="flex w-full mt-8">
+          <VisitButton url={url} isWebsite={isWebsite} ref={desktopButtonRef} />
+        </div>
       </div>
     );
   };
@@ -217,7 +219,7 @@ const RecentProjectCard = ({
       {isMobile ? (
         <div
           id="recent-project-card-mobile"
-          className="flex sm:hidden flex-col gap-3 w-full pb-5 bg-primary-background-900 overflow-x-hidden"
+          className="flex sm:hidden flex-col gap-3 w-full pb-6 bg-primary-background-900 overflow-x-hidden"
         >
           <div className="flex flex-col w-full h-[50dvh]">
             <ImageCarousel images={galleryImages} />
@@ -249,11 +251,13 @@ const RecentProjectCard = ({
             >
               {workDescription}
             </h2>
-            <VisitButton
-              url={url}
-              isWebsite={isWebsite}
-              ref={mobileButtonRef}
-            />
+            <div className="flex w-full mt-5">
+              <VisitButton
+                url={url}
+                isWebsite={isWebsite}
+                ref={mobileButtonRef}
+              />
+            </div>
           </div>
         </div>
       ) : (
