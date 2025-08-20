@@ -12,6 +12,7 @@ const VisitButton = ({
 
   return (
     <Link
+      id="visit-button"
       href={url}
       target="_blank"
       rel="noopener noreferrer"

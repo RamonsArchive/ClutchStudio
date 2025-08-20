@@ -109,7 +109,6 @@ const TitleSection = ({
               start: "top top",
               end: "bottom 30%",
               scrub: 0.8,
-              markers: true,
             },
             opacity: 0,
             yPercent: -100,
@@ -122,7 +121,6 @@ const TitleSection = ({
               start: "top top",
               end: "bottom 20%",
               scrub: 0.8,
-              markers: true,
             },
             opacity: 0,
             yPercent: -100,
@@ -134,7 +132,6 @@ const TitleSection = ({
               start: "top top", // Changed from top+100 to top-100 to start higher
               end: "bottom 20%",
               scrub: 0.8,
-              markers: true,
             },
             opacity: 0,
             yPercent: -100,
@@ -147,7 +144,6 @@ const TitleSection = ({
                 start: "top top",
                 end: "bottom 40%",
                 scrub: 0.01,
-                markers: true,
               },
               opacity: 0,
               yPercent: -100,
@@ -161,7 +157,6 @@ const TitleSection = ({
               start: "top top",
               end: "bottom 20%",
               scrub: 0.8,
-              markers: true,
             },
           });
           scrollAnimationTL.to(headerTitleSplits.words, {
@@ -186,7 +181,6 @@ const TitleSection = ({
                 start: "top top",
                 end: "bottom 40%",
                 scrub: 0.01,
-                markers: true,
               },
               opacity: 0,
               yPercent: -100,

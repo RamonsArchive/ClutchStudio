@@ -41,7 +41,6 @@ const HeroVideo = () => {
         start: "top top",
         end: "+=200vh",
         scrub: 0, // Real-time scrubbing - no delay
-        markers: true, // Remove this in production
         onUpdate: (self) => {
           const progress = self.progress;
           const videoDuration = video.duration;

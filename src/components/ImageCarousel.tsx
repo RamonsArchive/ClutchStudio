@@ -4,11 +4,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Play, Pause } from "lucide-react";
+import useMobile from "./useMobile";
 
 const ImageCarousel = ({ images }: { images: string[] }) => {
   const imageRef = useRef<HTMLImageElement[]>([]);
   const progressRef = useRef<HTMLSpanElement[]>([]);
   const dotRef = useRef<HTMLSpanElement[]>([]);
+  const interval = useRef<NodeJS.Timeout | null>(null);
+
+  const { isMobile } = useMobile();
 
   const [carousel, setCarousel] = useState({
     currentImage: 0,
@@ -22,7 +26,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   useEffect(() => {
     if (!isPlaying) return;
 
-    const interval = setInterval(() => {
+    interval.current = setInterval(() => {
       setCarousel((prev) => {
         const nextImage = prev.currentImage + 1;
         if (nextImage >= images.length) {
@@ -32,7 +36,11 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
       });
     }, 5000);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (interval.current) {
+        clearInterval(interval.current);
+      }
+    };
   }, [isPlaying, images.length]);
 
   // GSAP animation for image transitions
@@ -40,12 +48,16 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     // Animate progress bar
     if (progressRef.current[currentImage]) {
       gsap.to(progressRef.current[currentImage], {
-        width: "100%",
+        clipPath: "circle(50% at center)",
+        scale: 1,
         duration: 5,
         ease: "none",
         onComplete: () => {
           // Reset progress bar
-          gsap.set(progressRef.current[currentImage], { width: "0%" });
+          gsap.set(progressRef.current[currentImage], {
+            clipPath: "circle(0% at center)",
+            scale: 0,
+          });
         },
       });
     }
@@ -56,18 +68,40 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     setCarousel((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
   };
 
+  const resetInterval = () => {
+    if (interval.current) {
+      clearInterval(interval.current);
+    }
+    interval.current = setInterval(() => {
+      setCarousel((prev) => {
+        const nextImage = prev.currentImage + 1;
+        if (nextImage >= images.length) {
+          return { ...prev, currentImage: 0, isLastImage: false };
+        }
+        return { ...prev, currentImage: nextImage };
+      });
+    }, 5000);
+  };
+
   // Handle manual navigation
   const handleImageSelect = (index: number) => {
     setCarousel((prev) => ({ ...prev, currentImage: index }));
+    resetInterval();
   };
 
   // Reset progress bars
   useEffect(() => {
     progressRef.current.forEach((_, index) => {
       if (index === currentImage) {
-        gsap.set(progressRef.current[index], { width: "0%" });
+        gsap.set(progressRef.current[index], {
+          clipPath: "circle(0% at center)",
+          scale: 0,
+        });
       } else {
-        gsap.set(progressRef.current[index], { width: "0%" });
+        gsap.set(progressRef.current[index], {
+          clipPath: "circle(0% at center)",
+          scale: 0,
+        });
       }
     });
   }, [currentImage]);
@@ -88,7 +122,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
               className="w-full h-full flex-shrink-0"
               style={{ width: `${100 / images.length}%` }}
             >
-              <div className="w-full h-full flex-center rounded-xl overflow-hidden bg-black">
+              <div className="w-full h-full flex-center overflow-hidden bg-black relative">
                 <Image
                   src={image}
                   alt={`project image ${index + 1}`}
@@ -99,7 +133,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
                     }
                   }}
                   className="object-cover"
-                  sizes="100vw"
+                  sizes={isMobile ? "100vw" : "50vw"}
                   priority={index === 0}
                 />
               </div>
@@ -110,39 +144,57 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
       {/* Progress Dots */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex items-center space-x-3 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2">
-          {images.map((_, index) => (
-            <span
-              key={index}
-              ref={(el) => {
-                if (el) {
-                  dotRef.current[index] = el;
-                }
-              }}
-              className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
-                index === currentImage ? "bg-white" : "bg-white/40"
-              }`}
-              onClick={() => handleImageSelect(index)}
-            >
-              {/* Progress bar overlay */}
+        <div className="flex flex-row w-full max-w-md items-center gap-5">
+          <div className="flex items-center space-x-3 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2">
+            {images.map((_, index) => (
               <span
+                key={index}
                 ref={(el) => {
                   if (el) {
-                    progressRef.current[index] = el;
+                    dotRef.current[index] = el;
                   }
                 }}
-                className={`block h-full rounded-full transition-all duration-300 ${
-                  index === currentImage ? "bg-blue-400" : "bg-transparent"
+                className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 relative ${
+                  index === currentImage ? "bg-white" : "bg-white/40"
                 }`}
-                style={{ width: index === currentImage ? "0%" : "0%" }}
-              />
-            </span>
-          ))}
+                onClick={() => handleImageSelect(index)}
+              >
+                {/* Progress bar overlay - circular fill */}
+                <span
+                  ref={(el) => {
+                    if (el) {
+                      progressRef.current[index] = el;
+                    }
+                  }}
+                  className={`absolute inset-0 rounded-full transition-all duration-300 ${
+                    index === currentImage ? "bg-blue-400" : "bg-transparent"
+                  }`}
+                  style={{
+                    clipPath:
+                      index === currentImage
+                        ? "circle(0% at center)"
+                        : "circle(0% at center)",
+                    transform: "scale(0)",
+                  }}
+                />
+              </span>
+            ))}
+          </div>
+          <button
+            onClick={handlePlayPause}
+            className="w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300"
+          >
+            {isPlaying ? (
+              <Pause className="w-5 h-5 text-white" />
+            ) : (
+              <Play className="w-5 h-5 text-white" />
+            )}
+          </button>
         </div>
       </div>
 
       {/* Play/Pause Button */}
-      <div className="absolute top-4 right-4 z-20">
+      {/* <div className="absolute top-4 right-4 z-20">
         <button
           onClick={handlePlayPause}
           className="w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300"
@@ -153,7 +205,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
             <Play className="w-5 h-5 text-white" />
           )}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

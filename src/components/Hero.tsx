@@ -58,8 +58,8 @@ const Hero = () => {
         </div>
       </div>
       <div className="flex flex-col w-full gap-10">
-        {RecentProjects.map((project) => (
-          <RecentProjectCard key={project.id} project={project} />
+        {RecentProjects.map((project, index) => (
+          <RecentProjectCard key={project.id} project={project} index={index} />
         ))}
       </div>
     </div>
