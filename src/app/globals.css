@@ -382,3 +382,67 @@ body {
 .animate-fade-in {
   animation: fade-in 0.6s ease-out forwards;
 }
+
+/* Sliding text animation */
+.sliding-text-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.sliding-text-track {
+  display: flex;
+  animation: slide-left 20s linear infinite;
+  white-space: nowrap;
+  align-items: center; /* Ensure vertical alignment */
+}
+
+.sliding-text-track h2 {
+  margin-right: 40px; /* Reduced space between repeated text */
+  flex-shrink: 0;
+  line-height: 1; /* Consistent line height for alignment */
+}
+
+@keyframes slide-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-66.67%); /* Move by two-thirds to show seamless loop */
+  }
+}
+
+/* Gradient text for Recent Projects */
+.gradient-text {
+  background: linear-gradient(
+    45deg,
+    #ff6b6b,
+    #4ecdc4,
+    #45b7d1,
+    #96ceb4,
+    #feca57,
+    #ff9ff3,
+    #54a0ff,
+    #8e44ad
+  );
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: gradientFlow 6s ease-in-out infinite;
+}
+
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+}

@@ -145,8 +145,8 @@ const TitleSection = ({
               scrollTrigger: {
                 trigger: "#contact-button",
                 start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
+                end: "bottom 40%",
+                scrub: 0.01,
                 markers: true,
               },
               opacity: 0,
@@ -184,8 +184,8 @@ const TitleSection = ({
               scrollTrigger: {
                 trigger: "#contact-button",
                 start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
+                end: "bottom 40%",
+                scrub: 0.01,
                 markers: true,
               },
               opacity: 0,
@@ -232,8 +232,7 @@ const TitleSection = ({
         opacity: 1,
         yPercent: 0,
         duration: 0.8,
-        stagger: 0.03,
-        ease: "back.out(0.8)",
+        ease: "linear",
       });
     }
 
