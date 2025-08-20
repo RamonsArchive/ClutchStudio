@@ -219,7 +219,7 @@ const RecentProjectCard = ({
       {isMobile ? (
         <div
           id="recent-project-card-mobile"
-          className="flex sm:hidden flex-col gap-3 w-full pb-6 bg-primary-background-900 overflow-x-hidden"
+          className="flex flex-col gap-3 w-full pb-6 bg-primary-background-900 overflow-x-hidden"
         >
           <div className="flex flex-col w-full h-[50dvh]">
             <ImageCarousel images={galleryImages} />
@@ -263,7 +263,7 @@ const RecentProjectCard = ({
       ) : (
         <div
           id="recent-project-card-desktop"
-          className="hidden sm:flex flex-row gap-3 w-full bg-primary-background-900 overflow-x-hidden"
+          className="flex flex-row gap-3 w-full bg-primary-background-900 overflow-x-hidden"
         >
           <div className="flex flex-col w-1/2">
             {isEven ? (

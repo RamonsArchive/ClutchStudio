@@ -476,7 +476,7 @@ const TitleSection = ({
       ) : (
         <div
           id="title-container"
-          className="flex-center w-full flex-col md:flex-row gap-5 md:gap-10 cursor-pointer md:p-5"
+          className="flex-center w-full flex-col md:flex-row gap-5 md:gap-10 cursor-pointer p-10"
         >
           <div ref={mainTitleRef} className="flex flex-col gap-5">
             {mainTitle && (

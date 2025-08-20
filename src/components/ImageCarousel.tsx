@@ -107,7 +107,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   }, [currentImage]);
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full rounded-xl overflow-hidden">
       <div className="relative w-full h-full overflow-hidden">
         <div
           className="flex w-full h-full transition-transform duration-1500 ease-in-out"
