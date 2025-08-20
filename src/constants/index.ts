@@ -1,4 +1,4 @@
-import { ProjectTemplate, ProjectTypes } from "../types/GlobalTypes";
+import { ProjectTemplate } from "../types/GlobalTypes";
 
 export const navLinks = [
     {
@@ -29,17 +29,18 @@ export const GoldenEagle: ProjectTemplate = {
     projectType: "WEB_DEVELOPMENT",
     text: {
       name: "Golden Eagle Estates",
+      subName: "A do everything construction company",
       title: "Building a complete digital transformation and infrastructure for a do everything construction company, Golden Eagle Estates",
       workDescription: "Rebranded Golden Eagle Estates and shipped a responsive site with project management, simple hiring, and live testimonials—powered by a robust backend that delivers the scalability their momentum demands.",
       personalDescription: "After seeing a story I posted about another website, a friend from Golden Eagle reached out asking if I could create something similar. Having played soccer with this friend for four years and witnessing the incredible work ethic he brings to the company through the project photos he'd share, I knew I had to deliver something special. Originally, they wanted a simple gallery website to showcase their skills, but I went the extra mile and created a complete backend infrastructure to handle project tickets, job applications, and testimonials—an unexpected bonus and my way of showing gratitude for the opportunity to work with such dedicated craftsmen.",
     },
     tags: ["Web Design", "Web Development", "Web Hosting", "Business Infrastructure", "Project Management"],
     images: {
-      mainImage: "/goldeEagleSocialImageHD_1.1.2.jpg",
+      mainImage: "/GoldenEagle/goldeEagleSocialImageHD.jpg",
       galleryImages: [
-        "/overlay1.png",
-        "/overlay2.png",
-        "/goldenEagleImage4.png",
+        "/GoldenEagle/overlay1.png",
+        "/GoldenEagle/overlay2.png",
+        "/GoldenEagle/goldenEagleImage4.png",
       ]
     },
     websiteUrl: "https://goldeneagle.one",
@@ -57,3 +58,8 @@ export const RecentProjects = [
 export const Projects = [
     GoldenEagle,
 ]
+
+
+export const ProjectPageMap = {
+    "golden-eagle-estates": GoldenEagle,
+}

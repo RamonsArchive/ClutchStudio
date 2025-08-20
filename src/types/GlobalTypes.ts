@@ -165,6 +165,7 @@ export type ProjectTemplate = {
   projectType: keyof typeof ProjectTypes, // Simple filter category
   text: {
     name: string, // Client/Project name
+    subName: string, // Client/Project sub name
     title: string, // One-line description
     workDescription: string, // Technical/business focused description
     personalDescription: string, // Personal story/connection

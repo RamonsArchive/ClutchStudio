@@ -8,31 +8,33 @@ const Hero = () => {
   return (
     <section className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide">
       <div className="flex flex-col h-[calc(100vh-43px)] w-full overflow-hidden">
-        <TitleSection
-          headerTitle="Software solutions in San Diego, California "
-          mainTitle={
-            <>
-              One point from the win.{" "}
-              <span className="font-bold">
-                We design, build, and optimize—so you score first.
-              </span>
-            </>
-          }
-          subTitle={
-            <>
-              Web + ML/DS focus{" "}
-              <span className="font-bold">
-                High‑performance websites, plus machine‑learning and
-                data‑science
-              </span>{" "}
-              solutions that drive revenue.
-            </>
-          }
-          headerClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-light italic break-words"
-          mainTitleClassName="font-funnel-sans text-white text-[26px] xs:text-[28px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold break-words"
-          subTitleClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-regular break-words"
-          includeContactButton={true}
-        />
+        <div className="relative flex h-[50%] w-full">
+          <TitleSection
+            headerTitle="Software solutions in San Diego, California "
+            mainTitle={
+              <>
+                One point from the win.{" "}
+                <span className="font-bold">
+                  We design, build, and optimize—so you score first.
+                </span>
+              </>
+            }
+            subTitle={
+              <>
+                Web + ML/DS focus{" "}
+                <span className="font-bold">
+                  High‑performance websites, plus machine‑learning and
+                  data‑science
+                </span>{" "}
+                solutions that drive revenue.
+              </>
+            }
+            headerClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-light italic break-words"
+            mainTitleClassName="font-funnel-sans text-white text-[26px] xs:text-[28px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold break-words"
+            subTitleClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-regular break-words"
+            includeContactButton={true}
+          />
+        </div>
         {/* Hero Video - Infinite scroll effect */}
 
         <HeroVideo />
