@@ -285,41 +285,55 @@ body {
   @apply text-text-inverse text-[18px] font-medium py-3 px-4 rounded-lg duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center;
 }
 
+/* @utility sliding-text {
+  @apply font-funnel-sans text-white text-[42px] sm:text-[50px] md:text-[60px] lg:text-[72px] font-bold gradient-text;
+} */
+
+
+
 /* Contact Button Gradient Animation */
 .contact-gradient-btn {
   position: relative;
-  background: linear-gradient(45deg, #00D4FF, #0099FF, #00FF88, #00D4FF);
-  background-size: 300% 300%;
-  animation: contactGradientShift 4s ease-in-out infinite;
-  border: none;
-  color: white;
-  font-weight: 600;
+  background: linear-gradient(
+    45deg,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #f5576c,
+    #4facfe,
+    #00f2fe
+  );
+  background-size: 400% 400%;
+  animation: contactGradientShift 3s ease infinite;
   transition: all 0.3s ease;
-  overflow: hidden;
 }
 
 .contact-gradient-btn::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #FF6B6B);
-  background-size: 300% 300%;
-  animation: contactGradientShift 4s ease-in-out infinite reverse;
+  background: linear-gradient(
+    45deg,
+    #667eea,
+    #764ba2,
+    #f093fb,
+    #f5576c,
+    #4facfe,
+    #00f2fe
+  );
+  background-size: 400% 400%;
+  border-radius: inherit;
+  z-index: -1;
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: -1;
 }
 
 .contact-gradient-btn:hover::before {
   opacity: 1;
-}
-
-.contact-gradient-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+  animation: contactGradientShift 2s ease infinite;
 }
 
 @keyframes contactGradientShift {
@@ -328,6 +342,66 @@ body {
   }
   50% {
     background-position: 100% 50%;
+  }
+}
+
+/* Visit Button Animated Gradient */
+.visit-button-gradient {
+  position: relative;
+  background: linear-gradient(
+    45deg,
+    #e2e8f0,
+    #cbd5e0,
+    #a0aec0,
+    #4facfe,
+    #0099ff,
+    #00d4ff
+  );
+  background-size: 300% 300%;
+  animation: visitGradientFlow 15s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.visit-button-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    #f7fafc,
+    #edf2f7,
+    #e2e8f0,
+    #4facfe,
+    #0099ff,
+    #00d4ff
+  );
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.visit-button-gradient:hover::before {
+  opacity: 1;
+  animation: visitGradientFlow 10s ease-in-out infinite;
+}
+
+@keyframes visitGradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
   }
 }
 
@@ -446,3 +520,4 @@ body {
     background-position: 50% 0%;
   }
 }
+

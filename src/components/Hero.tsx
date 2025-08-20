@@ -1,10 +1,12 @@
 import TitleSection from "./TitleSection";
 import HeroVideo from "./HeroVideo";
 import React from "react";
+import RecentProjectCard from "./RecentProjectCard";
+import { RecentProjects } from "@/constants";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col h-[calc(200vh-43px)] w-full overflow-y-auto scrollbar-hide">
+    <div className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide">
       <div className="flex flex-col h-[calc(100vh-43px)] w-full overflow-hidden">
         <TitleSection
           headerTitle="Software solutions in San Diego, California "
@@ -54,6 +56,11 @@ const Hero = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="flex flex-col w-full gap-10">
+        {RecentProjects.map((project) => (
+          <RecentProjectCard key={project.id} project={project} />
+        ))}
       </div>
     </div>
   );
