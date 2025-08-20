@@ -47,6 +47,7 @@ export const GoldenEagle: ProjectTemplate = {
     githubUrl: "", // if website url is not present, use github url
     dateCompleted: "2025-08-12",
     featured: true,
+    isClient: true,
     status: "live" // live, in-progress, archived
   }
 

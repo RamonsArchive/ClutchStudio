@@ -190,11 +190,11 @@ const RecentProjectCard = ({
         <div ref={desktopTagsRef} className="flex flex-row items-center">
           {tags.slice(0, 3).map((tag, index) => (
             <div key={index} className="tag-item flex items-center">
-              <span className="font-funnel-sans text-white text-[12px] xs:text-[14px] font-extralight break-words">
+              <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/80 rounded-full border border-gray-200/50">
                 {tag}
               </span>
               {index !== tags.slice(0, 3).length - 1 && (
-                <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[16px] font-extralight mx-3 xs:mx-5 break-words">
+                <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 break-words">
                   |
                 </span>
               )}
@@ -219,7 +219,7 @@ const RecentProjectCard = ({
       {isMobile ? (
         <div
           id="recent-project-card-mobile"
-          className="flex flex-col gap-3 w-full pb-6 bg-primary-background-900 overflow-x-hidden"
+          className="flex flex-col gap-3 w-full pb-6 bg-primary-background-900 overflow-x-hidden rounded-xl"
         >
           <div className="flex flex-col w-full h-[50dvh]">
             <ImageCarousel images={galleryImages} />
@@ -234,11 +234,11 @@ const RecentProjectCard = ({
             <div ref={mobileTagsRef} className="flex flex-row items-center">
               {tags.slice(0, 3).map((tag, index) => (
                 <div key={index} className="tag-item flex items-center">
-                  <span className="font-funnel-sans text-white text-[12px] xs:text-[14px] font-extralight break-words">
+                  <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/80 rounded-full border border-gray-200/50">
                     {tag}
                   </span>
                   {index !== tags.slice(0, 3).length - 1 && (
-                    <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[16px] font-extralight mx-3 xs:mx-5 break-words">
+                    <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 break-words">
                       |
                     </span>
                   )}
@@ -263,7 +263,7 @@ const RecentProjectCard = ({
       ) : (
         <div
           id="recent-project-card-desktop"
-          className="flex flex-row gap-3 w-full bg-primary-background-900 overflow-x-hidden"
+          className="flex flex-row gap-3 w-full bg-primary-background-900 overflow-x-hidden rounded-xl"
         >
           <div className="flex flex-col w-1/2">
             {isEven ? (

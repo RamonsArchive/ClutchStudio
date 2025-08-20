@@ -59,7 +59,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full gap-10">
+      <div className="flex flex-col w-full gap-10 p-3 xs:p-5 md:p-10 rounded-xl">
         {RecentProjects.map((project, index) => (
           <RecentProjectCard key={project.id} project={project} index={index} />
         ))}

@@ -179,5 +179,6 @@ export type ProjectTemplate = {
   githubUrl: string, // GitHub repository if no live site
   dateCompleted: string, // YYYY-MM-DD format
   featured: boolean, // Show on homepage
+  isClient: boolean, // Is the client a real person?
   status: "live" | "in-progress" | "archived" // live, in-progress, archived
 }
