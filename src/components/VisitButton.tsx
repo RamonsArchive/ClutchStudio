@@ -4,15 +4,18 @@ import React from "react";
 const VisitButton = ({
   url,
   isWebsite,
+  ref,
 }: {
   url: string;
   isWebsite: boolean;
+  ref: React.RefObject<HTMLAnchorElement | null>;
 }) => {
   // Ensure URL is absolute (starts with http:// or https://)
 
   return (
     <Link
       id="visit-button"
+      ref={ref}
       href={url}
       target="_blank"
       rel="noopener noreferrer"

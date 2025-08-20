@@ -7,7 +7,6 @@ const useMobile = () => {
 
   const handleResize = useCallback(() => {
     const newIsMobile = window.matchMedia("(max-width: 768px)").matches;
-    console.log("Window width:", window.innerWidth, "isMobile:", newIsMobile);
     setIsMobile(newIsMobile);
   }, []);
 
