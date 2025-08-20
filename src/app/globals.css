@@ -289,8 +289,16 @@ body {
   @apply flex items-center;
 }
 
-/* @utility sliding-text {
-  @apply font-funnel-sans text-white text-[42px] sm:text-[50px] md:text-[60px] lg:text-[72px] font-bold gradient-text;
+/* @utility title-section-main-title {
+  @apply font-funnel-sans text-white text-[26px] xs:text-[28px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold break-words;
+}
+
+@utility title-section-header-title {
+  @apply font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-light italic break-words;
+}
+
+@utility title-section-sub-title {
+  @apply font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-regular break-words;
 } */
 
 

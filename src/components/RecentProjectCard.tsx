@@ -183,18 +183,18 @@ const RecentProjectCard = ({
       <div className="flex flex-col w-full h-full gap-5 px-5 py-3 sm:p-10">
         <h1
           ref={desktopTitleRef}
-          className="font-funnel-sans text-white text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px] font-bold"
+          className="font-funnel-sans text-white text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px] font-bold break-words"
         >
           {title}
         </h1>
         <div ref={desktopTagsRef} className="flex flex-row items-center">
           {tags.slice(0, 3).map((tag, index) => (
             <div key={index} className="tag-item flex items-center">
-              <span className="font-funnel-sans text-white text-[12px] xs:text-[14px] font-extralight">
+              <span className="font-funnel-sans text-white text-[12px] xs:text-[14px] font-extralight break-words">
                 {tag}
               </span>
               {index !== tags.slice(0, 3).length - 1 && (
-                <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[16px] font-extralight mx-3 xs:mx-5">
+                <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[16px] font-extralight mx-3 xs:mx-5 break-words">
                   |
                 </span>
               )}
@@ -203,7 +203,7 @@ const RecentProjectCard = ({
         </div>
         <h2
           ref={desktopDescriptionRef}
-          className="font-funnel-sans text-white text-[12px] xs:text-[16px] font-regular"
+          className="font-funnel-sans text-white text-[12px] xs:text-[16px] font-regular break-words"
         >
           {workDescription}
         </h2>
@@ -227,18 +227,18 @@ const RecentProjectCard = ({
           <div className="flex flex-col flex-1 w-full h-full px-5 py-3 gap-5 overflow-x-hidden">
             <h1
               ref={mobileTitleRef}
-              className="font-funnel-sans text-white text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px]  font-bold"
+              className="font-funnel-sans text-white text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px]  font-bold break-words"
             >
               {title}
             </h1>
             <div ref={mobileTagsRef} className="flex flex-row items-center">
               {tags.slice(0, 3).map((tag, index) => (
                 <div key={index} className="tag-item flex items-center">
-                  <span className="font-funnel-sans text-white text-[12px] xs:text-[14px] font-extralight">
+                  <span className="font-funnel-sans text-white text-[12px] xs:text-[14px] font-extralight break-words">
                     {tag}
                   </span>
                   {index !== tags.slice(0, 3).length - 1 && (
-                    <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[16px] font-extralight mx-3 xs:mx-5">
+                    <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[16px] font-extralight mx-3 xs:mx-5 break-words">
                       |
                     </span>
                   )}
@@ -247,7 +247,7 @@ const RecentProjectCard = ({
             </div>
             <h2
               ref={mobileDescriptionRef}
-              className="font-funnel-sans text-white text-[12px] xs:text-[16px] font-regular"
+              className="font-funnel-sans text-white text-[12px] xs:text-[16px] font-regular break-words"
             >
               {workDescription}
             </h2>

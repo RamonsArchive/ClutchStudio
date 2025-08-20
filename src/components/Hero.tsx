@@ -6,7 +6,7 @@ import { RecentProjects } from "@/constants";
 
 const Hero = () => {
   return (
-    <div className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide">
+    <section className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide">
       <div className="flex flex-col h-[calc(100vh-43px)] w-full overflow-hidden">
         <TitleSection
           headerTitle="Software solutions in San Diego, California "
@@ -28,9 +28,9 @@ const Hero = () => {
               solutions that drive revenue.
             </>
           }
-          headerClassName="font-funnel-sans text-white text-[12px] xs:text-[16px] font-light italic break-words"
+          headerClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-light italic break-words"
           mainTitleClassName="font-funnel-sans text-white text-[26px] xs:text-[28px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold break-words"
-          subTitleClassName="font-funnel-sans text-white text-[12px] xs:text-[16px] font-regular break-words"
+          subTitleClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-regular break-words"
           includeContactButton={true}
         />
         {/* Hero Video - Infinite scroll effect */}
@@ -62,7 +62,7 @@ const Hero = () => {
           <RecentProjectCard key={project.id} project={project} index={index} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

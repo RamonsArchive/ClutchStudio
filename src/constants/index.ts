@@ -53,3 +53,7 @@ export const GoldenEagle: ProjectTemplate = {
 export const RecentProjects = [
     GoldenEagle,
 ]
+
+export const Projects = [
+    GoldenEagle,
+]
