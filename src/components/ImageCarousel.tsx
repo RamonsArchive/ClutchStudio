@@ -132,7 +132,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
                       imageRef.current[index] = el;
                     }
                   }}
-                  className="object-cover"
+                  className="object-contain"
                   sizes={isMobile ? "100vw" : "50vw"}
                   priority={index === 0}
                 />

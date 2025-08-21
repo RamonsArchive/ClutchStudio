@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useMemo, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import useMobile from "./useMobile";
@@ -48,7 +48,7 @@ const Navbar = () => {
               <Link
                 href={link.href}
                 key={link.name}
-                className="text-white text-[18px] font-medium py-2 px-5 rounded-lg md:px-10 duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center z-10 cursor-pointer"
+                className="text-white text-[18px] font-medium py-2 px-5 rounded-lg md:px-10 duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center z-100 cursor-pointer"
               >
                 {link.name}
               </Link>
@@ -77,7 +77,7 @@ const Navbar = () => {
 
       {/* Dropdown navbar - ONLY ANIMATE when appearing */}
       <div
-        className={`fixed top-0 left-0 right-0 z-10 flex w-full h-[43px] justify-between px-5 md:px-10 bg-primary-background-500 ${
+        className={`fixed top-0 left-0 right-0 z-100 flex w-full h-[43px] justify-between px-5 md:px-10 bg-primary-background-500 ${
           isDropDown
             ? "opacity-100 translate-y-0 transition-all duration-300 ease-in-out" // Animate when showing
             : "-translate-y-full opacity-0 transition-all duration-100 ease-in-out" // No transition when hiding
