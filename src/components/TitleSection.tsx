@@ -399,7 +399,7 @@ const TitleSection = ({
   return (
     <div
       id="title-container"
-      className="flex p-5 gap-10 w-full h-full bg-gradient-to-b from-primary-background-500 via-blue-900 to-gray-800 wavy-border-bottom overflow-hidden"
+      className="flex p-5 gap-10 w-full h-full bg-gradient-to-b from-primary-background-900 via-black to-primary-900 wavy-border-bottom overflow-hidden"
     >
       {/* Background Icons */}
       {includeBackgroundIcons && (

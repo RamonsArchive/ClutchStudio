@@ -48,7 +48,7 @@ const Navbar = () => {
               <Link
                 href={link.href}
                 key={link.name}
-                className="text-white text-[18px] font-medium py-2 px-5 rounded-lg md:px-10 duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center z-100 cursor-pointer"
+                className="text-white text-[18px] font-medium py-2 px-5 rounded-lg md:px-10 duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center z-100 cursor-pointer"
               >
                 {link.name}
               </Link>
@@ -62,11 +62,11 @@ const Navbar = () => {
   return (
     <>
       {/* Background placeholder - always visible */}
-      <div className="flex w-full h-[43px] bg-primary-background-500" />
+      <div className="flex w-full h-[43px] bg-primary-background-900" />
 
       {/* Default navbar - NO ANIMATION when appearing */}
       <div
-        className={`absolute top-0 left-0 right-0 flex w-full h-[43px] justify-between px-5 md:px-10 bg-primary-background-500 ${
+        className={`absolute top-0 left-0 right-0 flex w-full h-[43px] justify-between px-5 md:px-10 bg-primary-background-900 ${
           isDropDown
             ? "opacity-0 -translate-y-full transition-all duration-300 ease-in-out" // Animate when hiding
             : "opacity-100 translate-y-0" // No transition when showing
@@ -77,7 +77,7 @@ const Navbar = () => {
 
       {/* Dropdown navbar - ONLY ANIMATE when appearing */}
       <div
-        className={`fixed top-0 left-0 right-0 z-100 flex w-full h-[43px] justify-between px-5 md:px-10 bg-primary-background-500 ${
+        className={`fixed top-0 left-0 right-0 z-100 flex w-full h-[43px] justify-between px-5 md:px-10 bg-primary-background-900 ${
           isDropDown
             ? "opacity-100 translate-y-0 transition-all duration-300 ease-in-out" // Animate when showing
             : "-translate-y-full opacity-0 transition-all duration-100 ease-in-out" // No transition when hiding

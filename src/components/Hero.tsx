@@ -6,7 +6,7 @@ import { RecentProjects } from "@/constants";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide">
+    <section className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide gap-5">
       <div className="flex flex-col h-[calc(100vh-43px)] w-full overflow-hidden">
         <div className="relative flex h-[50%] w-full">
           <TitleSection
@@ -59,7 +59,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full gap-10 p-3 xs:p-5 md:p-10 rounded-xl">
+      <div className="flex flex-col w-full gap-10 px-3 pb-5 xs:px-5 xs:pb-5 md:px-10 md:pb-10 rounded-xl">
         {RecentProjects.map((project, index) => (
           <RecentProjectCard key={project.id} project={project} index={index} />
         ))}

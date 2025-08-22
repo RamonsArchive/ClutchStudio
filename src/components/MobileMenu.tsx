@@ -140,13 +140,13 @@ const MobileMenu = () => {
             <div
               id="mobile-menu"
               ref={menuRef}
-              className="fixed inset-y-0 right-0 w-[70%] max-w-sm bg-primary-background-500 z-50"
+              className="fixed inset-y-0 right-0 w-[70%] max-w-sm bg-primary-background-900 z-[150]"
             >
               <div className="flex flex-col h-full">
                 {/* Close Button */}
                 <div className="flex justify-end p-5">
                   <div
-                    className="flex-center p-1 rounded-full bg-accent-300 cursor-pointer hover:bg-accent-400 transition-colors"
+                    className="flex-center p-1 rounded-full bg-primary-background-900 cursor-pointer hover:bg-primary-background-400 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <X className="w-5 h-5" color="white" />

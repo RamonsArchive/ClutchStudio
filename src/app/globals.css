@@ -282,7 +282,7 @@ body {
 }
 
 @utility text-mobile-menu {
-  @apply text-text-inverse text-[18px] font-medium py-3 px-4 rounded-lg duration-300 ease-in-out hover:bg-accent-300 transition-colors text-center;
+  @apply text-text-inverse text-[18px] font-medium py-3 px-4 rounded-lg duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center;
 }
 
 @utility tag-item {

@@ -64,3 +64,24 @@ export const Projects = [
 export const ProjectPageMap = {
     "golden-eagle-estates": GoldenEagle,
 }
+
+
+export const AboutData = {
+    id: "about",
+    text: {
+        title: "About",
+        subtitle: "Hi, my name is Ramon",
+        introduction: "I am a cat lover, gym goer, soccer player, and a software engineer. I've lived in Long Beach CA during my early childhood, until I moved to Irvine CA, before moving to Placerville CA for my high school years, and then finally moving to San Diego CA for my college years. Every city has its own unique charm, and I've been fortunate to experience them all.",
+        education: "I am a third year student at UC San Diego studying Cognitive Science with a specialization in Machine Learning and Neural Computation, minoring in Computer Science. Expected graduation: June 2027.",
+        technical_skills: {
+            frontend: "Next.js, React, TypeScript, Tailwind CSS",
+            backend: "Node.js, MySQL, Prisma, Sanity CMS",
+            cloud_and_apis: "Vercel, Oracle Cloud, Stripe, Google Maps, EasyPost, Amazon S3",
+            ml_ai: "YOLOv8, siklearn, OpenCV, Whisper, Python, Statistical Analysis",
+            tools: "Git, Auth.js, Redis, Webhook Integration",
+        }, 
+    },
+    images: ["/About/personalImage5.jpg", "/About/prettyMe.png", "/About/family.png", "/About/whisper.png"]
+    
+
+}
