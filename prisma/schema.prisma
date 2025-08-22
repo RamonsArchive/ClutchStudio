@@ -1,0 +1,48 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "./client"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+enum Role {
+    ADMIN
+    VIEWER
+}
+
+enum ServiceType {
+    WEB_DEVELOPMENT
+    DATA_SCIENCE
+    MACHINE_LEARNING
+    OTHER
+}
+
+// Add your models here
+model AuthenticatedUser {
+    id           String    @id @default(uuid())
+    username     String    @unique // Better than email for admin
+    passwordHash String    @map("password_hash")
+    role         Role      @default(VIEWER)
+    lastLogin    DateTime? @map("last_login")
+    isActive     Boolean   @default(true) @map("is_active")
+    createdAt    DateTime  @default(now()) @map("created_at")
+    updatedAt    DateTime  @updatedAt @map("updated_out")
+
+    @@map("authenticated_users")
+}
+
+model ProjectTicket {
+    id           String      @id @default(uuid())
+    firstName    String      @map("first_name")
+    lastName     String      @map("last_name")
+    email        String      @map("email")
+    phoneNumber  String      @map("phone_number")
+    service      ServiceType @map("service")
+    organization String      @map("organization")
+    message      String      @map("message")
+    createdAt    DateTime    @default(now()) @map("created_at")
+    updatedAt    DateTime    @updatedAt @map("updated_out")
+}
