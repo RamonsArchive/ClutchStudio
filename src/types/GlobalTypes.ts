@@ -1,3 +1,15 @@
+
+export type ActionState = {
+  status: "INITIAL" | "PENDING" | "SUCCESS" | "ERROR";
+  error: string | null;
+  data: unknown | null;
+};
+
+export type ContactFormData = {
+  name: string;
+  email: string;
+  message: string;
+}
 export type SplitTextType = {
     textSelectors: string[];
     type: "char" | "word" | "line";
@@ -182,3 +194,11 @@ export type ProjectTemplate = {
   isClient: boolean, // Is the client a real person?
   status: "live" | "in-progress" | "archived" // live, in-progress, archived
 }
+
+export const ServiceType ={
+  WEB_DEVELOPMENT: "Web Development",
+  DATA_SCIENCE: "Data Science",
+  AI_SOLUTIONS: "AI Solutions",
+  OTHER: "Other",
+}
+

@@ -401,6 +401,10 @@ const TitleSection = ({
       id="title-container"
       className="flex p-5 gap-10 w-full h-full bg-gradient-to-b from-primary-background-900 via-black to-primary-900 wavy-border-bottom overflow-hidden"
     >
+      {/* Additional wave layers for enhanced animation */}
+      <div className="wave-layer-1"></div>
+      <div className="wave-layer-2"></div>
+
       {/* Background Icons */}
       {includeBackgroundIcons && (
         <>

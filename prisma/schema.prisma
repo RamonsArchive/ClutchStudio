@@ -16,7 +16,7 @@ enum Role {
 enum ServiceType {
     WEB_DEVELOPMENT
     DATA_SCIENCE
-    MACHINE_LEARNING
+    AI_SOLUTIONS
     OTHER
 }
 

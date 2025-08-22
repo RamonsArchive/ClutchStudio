@@ -1,4 +1,4 @@
-import { ProjectTemplate } from "../types/GlobalTypes";
+import { ProjectTemplate, ServiceType } from "../types/GlobalTypes";
 
 export const navLinks = [
     {
@@ -83,5 +83,20 @@ export const AboutData = {
     },
     images: ["/About/personalImage5.jpg", "/About/prettyMe.png", "/About/family.png", "/About/whisper.png"]
     
+}
 
+export const ContactData = {
+    id: "contact",
+    text: {
+        title: "Contact",
+        subtitle: "It's Fourth Quarter. Crunch Time.",
+        subsubtitle: "Call a timeout—let's draw up your winning play",
+    },
+
+    services: [
+        ServiceType.WEB_DEVELOPMENT,
+        ServiceType.DATA_SCIENCE,
+        ServiceType.AI_SOLUTIONS,
+        ServiceType.OTHER,
+    ]
 }

@@ -39,7 +39,7 @@ export type Role = (typeof Role)[keyof typeof Role]
 export const ServiceType: {
   WEB_DEVELOPMENT: 'WEB_DEVELOPMENT',
   DATA_SCIENCE: 'DATA_SCIENCE',
-  MACHINE_LEARNING: 'MACHINE_LEARNING',
+  AI_SOLUTIONS: 'AI_SOLUTIONS',
   OTHER: 'OTHER'
 };
 

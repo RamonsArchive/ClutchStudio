@@ -177,7 +177,7 @@ exports.Role = exports.$Enums.Role = {
 exports.ServiceType = exports.$Enums.ServiceType = {
   WEB_DEVELOPMENT: 'WEB_DEVELOPMENT',
   DATA_SCIENCE: 'DATA_SCIENCE',
-  MACHINE_LEARNING: 'MACHINE_LEARNING',
+  AI_SOLUTIONS: 'AI_SOLUTIONS',
   OTHER: 'OTHER'
 };
 
