@@ -100,3 +100,62 @@ export const ContactData = {
         ServiceType.OTHER,
     ]
 }
+
+export const footerQuickLinks = [
+    {
+      id: "terms",
+      href: "/terms",
+      title: "Terms of Service",
+    },
+    {
+      id: "privacy",
+      href: "/privacy",
+      title: "Privacy Policy",
+    },
+    {
+      id: "admin_login",
+      href: "/admin/login",
+      title: "Admin Login",
+    },
+  ];
+
+export const footerSocials = [
+    {
+        id: "instagram",
+        path: "/Icons/instagram.svg",
+        href: "https://www.instagram.com/ramon.mnm/",
+        ariaLabel: "Follow us on Instagram",
+        title: "Instagram",
+    },
+    
+    {
+        id: "facebook",
+        path: "/Icons/facebook.svg",
+        href: "https://www.facebook.com/profile.php?id=61569189908839",
+        ariaLabel: "Follow us on Facebook",
+        title: "Facebook",
+    },
+    
+    {
+        id: "linkedin",
+        path: "/Icons/LI-In-Bug.png",
+        href: "https://www.linkedin.com/in/ramonmnm100",
+        ariaLabel: "Connect with us on LinkedIn",
+        title: "LinkedIn",
+    },
+]
+
+
+export const footerContact = [
+    {
+        id: "email",
+        value: "clutchdev.apps@gmail.com",
+        title: "Email",
+    },
+    
+    {
+        id: "phone",
+        value: "949-910-7879",
+        title: "Phone",
+    },
+]

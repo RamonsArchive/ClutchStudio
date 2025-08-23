@@ -6,7 +6,7 @@ import { RecentProjects } from "@/constants";
 
 const Hero = () => {
   return (
-    <section className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide gap-5">
+    <section className="flex flex-col w-[100dvw] overflow-y-auto scrollbar-hide gap-5 pb-15">
       <div className="flex flex-col h-[calc(100vh-43px)] w-full overflow-hidden">
         <div className="relative flex h-[50%] w-full">
           <TitleSection

@@ -11,7 +11,7 @@ const page = () => {
   const introduction = AboutData.text.introduction;
   const technicalSkills = AboutData.text.technical_skills;
   return (
-    <section className="flex flex-col w-[100dvw] h-full pb-20 gap-10">
+    <section className="flex flex-col w-[100dvw] h-full pb-15 gap-10">
       <div className="relative flex flex-col h-[calc(50dvh-43px)] w-full overflow-hidden">
         <TitleSection
           mainTitle={title}

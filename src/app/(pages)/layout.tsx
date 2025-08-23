@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import React from "react";
 import { Toaster } from "sonner";
+import Footer from "@/components/Footer";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,6 +9,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       <Navbar />
       {children}
       <Toaster richColors />
+      <Footer />
     </div>
   );
 };
