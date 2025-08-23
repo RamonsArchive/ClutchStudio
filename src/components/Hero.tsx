@@ -3,6 +3,7 @@ import HeroVideo from "./HeroVideo";
 import React from "react";
 import RecentProjectCard from "./RecentProjectCard";
 import { RecentProjects } from "@/constants";
+import CreateAdminForm from "./Admin/CreateAdminForm";
 
 const Hero = () => {
   return (

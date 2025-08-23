@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <>
       <section className="flex-center w-full bg-gradient-to-b from-accent-950 via-primary-900 to-black p-10 md:p-20">
-        <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-10 lg:gap-20 rounded-xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-3 w-full gap-10 lg:gap-15 rounded-xl mx-auto">
           <div className="flex flex-col gap-5 ">
             <div className="flex flex-col gap-5 w-full p-5 md:p-10 bg-primary-background-500/20 rounded-xl">
               <h1 className="font-funnel-sans text-white text-[32px] md:text-[38px] font-bold w-full">

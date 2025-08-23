@@ -159,3 +159,7 @@ export const footerContact = [
         title: "Phone",
     },
 ]
+
+export const AdminLoginData = {
+    title: "Admin Login",
+}

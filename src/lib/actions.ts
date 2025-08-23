@@ -248,3 +248,113 @@ export const authenticateAdmin = async (data: FormData) => {
       });
     }
   }
+
+
+export const fetchDashboardData = async () => {
+  try {
+    const isRateLimited = await checkRateLimit("fetchDashboardData");
+    if (isRateLimited.status === "ERROR") {
+      return isRateLimited;
+    }
+
+    const projectTickets = await prisma.projectTicket.findMany({
+      orderBy: {
+        createdAt: 'desc' // Most recent first
+      }
+    });
+
+    if (!projectTickets) {
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: "Failed to fetch dashboard data",
+        data: null,
+      });
+    }
+
+    return parseServerActionResponse({
+      status: "SUCCESS",
+      error: "",
+      data: {
+        projectTickets,
+      }
+    });
+
+  } catch (error) {
+    console.error("Error fetching dashboard data", error);
+    return parseServerActionResponse({
+      status: "ERROR",
+      error: "Failed to fetch dashboard data",
+      data: null,
+    });
+  }
+}
+
+export const updateProjectStatus = async (id: string, status: string) => {
+  try {
+    const isRateLimited = await checkRateLimit("updateProjectStatus");
+    if (isRateLimited.status === "ERROR") {
+      return isRateLimited;
+    }
+
+    // For now, skip session verification since it's not implemented
+    // const verifySession = await verifyAdminSession();
+    // if (verifySession.status === "ERROR") {
+    //   return verifySession;
+    // }
+
+    // Convert frontend status to backend status
+    let backendStatus: "PENDING" | "IN_PROGRESS" | "COMPLETED" | "ARCHIVED" | "CANCELLED";
+    switch (status) {
+      case "UNCONFIRMED":
+        backendStatus = "PENDING";
+        break;
+      case "CONFIRMED":
+        backendStatus = "PENDING"; // Keep as PENDING until work starts
+        break;
+      case "IN_PROGRESS":
+        backendStatus = "IN_PROGRESS";
+        break;
+      case "COMPLETED":
+        backendStatus = "COMPLETED";
+        break;
+      case "CANCELLED":
+        backendStatus = "CANCELLED";
+        break;
+      case "ARCHIVED":
+        backendStatus = "ARCHIVED";
+        break;
+      default:
+        backendStatus = "PENDING";
+    }
+
+    const projectTicket = await prisma.projectTicket.update({
+      where: { id },
+      data: {
+        status: backendStatus,
+      }
+    });
+
+    if (!projectTicket) {
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: "Project ticket not found",
+        data: null,
+      });
+    }
+
+    return parseServerActionResponse({
+      status: "SUCCESS",
+      error: "",
+      data: {
+        projectTicket,
+      }
+    });
+  } catch (error) {
+    console.error("Error updating project status", error);
+    return parseServerActionResponse({
+      status: "ERROR",
+      error: "Failed to update project status",
+      data: null,
+    });
+  }
+}

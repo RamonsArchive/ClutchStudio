@@ -24,3 +24,8 @@ export const contactFormSchema = z.object({
     message: "Message must be less than 500 characters",
   }),
 });
+
+export const loginFormSchema = z.object({
+  username: z.string().min(1, { message: "Username is required" }),
+  password: z.string().min(1, { message: "Password is required" }),
+});

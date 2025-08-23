@@ -213,3 +213,70 @@ export type FromDataType = {
   organization: string;
   message: string;
 }
+
+export type DashboardDataType = {
+  projectTickets: any[]; // Using any[] for now, can be more specific with Prisma types
+}
+
+// Project Status enum for admin interface
+export enum ProjectStatus {
+  UNCONFIRMED = "UNCONFIRMED",
+  CONFIRMED = "CONFIRMED", 
+  IN_PROGRESS = "IN_PROGRESS",
+  COMPLETED = "COMPLETED",
+  ARCHIVED = "ARCHIVED",
+  CANCELLED = "CANCELLED"
+}
+
+// Project Type enum for admin interface  
+export enum ProjectType {
+  WEB_DEVELOPMENT = "WEB_DEVELOPMENT",
+  DATA_SCIENCE = "DATA_SCIENCE",
+  AI_SOLUTIONS = "AI_SOLUTIONS",
+  OTHER = "OTHER"
+}
+
+// Status display labels
+export const PROJECT_STATUS_LABELS: Record<ProjectStatus, string> = {
+  [ProjectStatus.UNCONFIRMED]: "Unconfirmed",
+  [ProjectStatus.CONFIRMED]: "Confirmed",
+  [ProjectStatus.IN_PROGRESS]: "In Progress",
+  [ProjectStatus.COMPLETED]: "Completed",
+  [ProjectStatus.ARCHIVED]: "Archived",
+  [ProjectStatus.CANCELLED]: "Cancelled"
+};
+
+// Project type display labels
+export const PROJECT_TYPE_LABELS: Record<ProjectType, string> = {
+  [ProjectType.WEB_DEVELOPMENT]: "Web Development",
+  [ProjectType.DATA_SCIENCE]: "Data Science",
+  [ProjectType.AI_SOLUTIONS]: "AI Solutions",
+  [ProjectType.OTHER]: "Other"
+};
+
+// Conversion utilities for backend
+export const PROJECT_TYPE_VALUES: Record<string, ProjectType> = {
+  "Web Development": ProjectType.WEB_DEVELOPMENT,
+  "Data Science": ProjectType.DATA_SCIENCE,
+  "AI Solutions": ProjectType.AI_SOLUTIONS,
+  "Other": ProjectType.OTHER,
+};
+
+export const PROJECT_TYPE_VALUES_REVERSE: Record<ProjectType, string> = {
+  [ProjectType.WEB_DEVELOPMENT]: "Web Development",
+  [ProjectType.DATA_SCIENCE]: "Data Science",
+  [ProjectType.AI_SOLUTIONS]: "AI Solutions",
+  [ProjectType.OTHER]: "Other",
+};
+
+// Admin filter options
+export const projectStatusOptionsAdmin = Object.entries(PROJECT_STATUS_LABELS).map(([value, title]) => ({
+  value,
+  title
+}));
+
+export const projectTypeOptionsAdmin = Object.entries(PROJECT_TYPE_LABELS).map(([value, title]) => ({
+  value,
+  title
+}));
+
