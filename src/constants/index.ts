@@ -20,7 +20,7 @@ export const navLinks = [
 ]
 
 export const HeroData = {
-    HeroVideo: "/HeroContent/soccerGoal.mp4",
+    HeroVideo: "/Assets/HeroContent/soccerGoal.mp4",
    
 }
 
@@ -36,11 +36,11 @@ export const GoldenEagle: ProjectTemplate = {
     },
     tags: ["Web Design", "Web Development", "Web Hosting", "Business Infrastructure", "Project Management"],
     images: {
-      mainImage: "/GoldenEagle/goldeEagleSocialImageHD.jpg",
+      mainImage: "/Projects/GoldenEagle/goldeEagleSocialImageHD.jpg",
       galleryImages: [
-        "/GoldenEagle/overlay1.png",
-        "/GoldenEagle/overlay2.png",
-        "/GoldenEagle/goldenEagleImage4.png",
+        "/Projects/GoldenEagle/overlay1.png",
+        "/Projects/GoldenEagle/overlay2.png",
+        "/Projects/GoldenEagle/goldenEagleImage4.png",
       ]
     },
     websiteUrl: "https://goldeneagle.one",
@@ -81,7 +81,7 @@ export const AboutData = {
             tools: "Git, Auth.js, Redis, Webhook Integration",
         }, 
     },
-    images: ["/About/personalImage5.jpg", "/About/prettyMe.png", "/About/family.png", "/About/whisper.png"]
+    images: ["/Assets/About/personalImage5.jpg", "/Assets/About/prettyMe.png", "/Assets/About/family.png", "/Assets/About/whisper.png"]
     
 }
 
@@ -122,7 +122,7 @@ export const footerQuickLinks = [
 export const footerSocials = [
     {
         id: "instagram",
-        path: "/Icons/instagram.svg",
+        path: "/Assets/Icons/instagram.svg",
         href: "https://www.instagram.com/ramon.mnm/",
         ariaLabel: "Follow us on Instagram",
         title: "Instagram",
@@ -130,7 +130,7 @@ export const footerSocials = [
     
     {
         id: "facebook",
-        path: "/Icons/facebook.svg",
+        path: "/Assets/Icons/facebook.svg",
         href: "https://www.facebook.com/profile.php?id=61569189908839",
         ariaLabel: "Follow us on Facebook",
         title: "Facebook",
@@ -138,7 +138,7 @@ export const footerSocials = [
     
     {
         id: "linkedin",
-        path: "/Icons/LI-In-Bug.png",
+        path: "/Assets/Icons/LI-In-Bug.png",
         href: "https://www.linkedin.com/in/ramonmnm100",
         ariaLabel: "Connect with us on LinkedIn",
         title: "LinkedIn",
