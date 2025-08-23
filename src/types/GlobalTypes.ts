@@ -202,3 +202,14 @@ export const ServiceType ={
   OTHER: "Other",
 }
 
+export type ServiceStringType = keyof typeof ServiceType;
+
+export type FromDataType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  service: string;
+  organization: string;
+  message: string;
+}

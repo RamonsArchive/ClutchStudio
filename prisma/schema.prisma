@@ -20,6 +20,14 @@ enum ServiceType {
     OTHER
 }
 
+enum TicketStatus {
+    PENDING
+    IN_PROGRESS
+    COMPLETED
+    ARCHIVED
+    CANCELLED
+}
+
 // Add your models here
 model AuthenticatedUser {
     id           String    @id @default(uuid())
@@ -35,14 +43,18 @@ model AuthenticatedUser {
 }
 
 model ProjectTicket {
-    id           String      @id @default(uuid())
-    firstName    String      @map("first_name")
-    lastName     String      @map("last_name")
-    email        String      @map("email")
-    phoneNumber  String      @map("phone_number")
-    service      ServiceType @map("service")
-    organization String      @map("organization")
-    message      String      @map("message")
-    createdAt    DateTime    @default(now()) @map("created_at")
-    updatedAt    DateTime    @updatedAt @map("updated_out")
+    id           String       @id @default(uuid())
+    firstName    String       @map("first_name")
+    lastName     String       @map("last_name")
+    email        String       @map("email")
+    phoneNumber  String       @map("phone_number")
+    service      ServiceType  @map("service")
+    organization String       @map("organization")
+    message      String       @map("message")
+    createdAt    DateTime     @default(now()) @map("created_at")
+    updatedAt    DateTime     @updatedAt @map("updated_out")
+    status       TicketStatus @default(PENDING) @map("status")
+    adminNotes   String?      @map("admin_notes")
+
+    @@map("project_tickets")
 }

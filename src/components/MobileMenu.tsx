@@ -119,11 +119,11 @@ const MobileMenu = () => {
       {/* Menu Icon - Always in DOM */}
       <div
         id="menu-icon"
-        className="flex-center cursor-pointer p-2"
+        className="flex-center cursor-pointer p-2 z-50"
         ref={innerMenuRef}
         onClick={() => setIsMenuOpen(true)}
       >
-        <Menu className="w-6 h-6" color="white" />
+        <Menu className="w-6 h-6 cursor-pointer" color="white" />
       </div>
 
       {/* Portal Menu - Only render when shouldRender is true */}
@@ -140,11 +140,11 @@ const MobileMenu = () => {
             <div
               id="mobile-menu"
               ref={menuRef}
-              className="fixed inset-y-0 right-0 w-[70%] max-w-sm bg-primary-background-900 z-[150]"
+              className="fixed inset-y-0 right-0 w-[70%] max-w-sm bg-gradient-to-b from-primary-900 via-black to-accent-950 z-[150]"
             >
               <div className="flex flex-col h-full">
                 {/* Close Button */}
-                <div className="flex justify-end p-5">
+                <div className="flex justify-end p-5 ">
                   <div
                     className="flex-center p-1 rounded-full bg-primary-background-900 cursor-pointer hover:bg-primary-background-400 transition-colors"
                     onClick={() => setIsMenuOpen(false)}
@@ -154,7 +154,7 @@ const MobileMenu = () => {
                 </div>
 
                 {/* Navigation Links */}
-                <div className="flex-1 items-center flex-col gap-8 px-5">
+                <div className="flex-1 items-center flex-col gap-8">
                   <div className="flex flex-col gap-6 w-full">
                     {navLinks.map((link) => (
                       <Link

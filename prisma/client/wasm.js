@@ -141,7 +141,9 @@ exports.Prisma.ProjectTicketScalarFieldEnum = {
   organization: 'organization',
   message: 'message',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  status: 'status',
+  adminNotes: 'adminNotes'
 };
 
 exports.Prisma.SortOrder = {
@@ -167,7 +169,8 @@ exports.Prisma.ProjectTicketOrderByRelevanceFieldEnum = {
   email: 'email',
   phoneNumber: 'phoneNumber',
   organization: 'organization',
-  message: 'message'
+  message: 'message',
+  adminNotes: 'adminNotes'
 };
 exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN',
@@ -179,6 +182,14 @@ exports.ServiceType = exports.$Enums.ServiceType = {
   DATA_SCIENCE: 'DATA_SCIENCE',
   AI_SOLUTIONS: 'AI_SOLUTIONS',
   OTHER: 'OTHER'
+};
+
+exports.TicketStatus = exports.$Enums.TicketStatus = {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+  CANCELLED: 'CANCELLED'
 };
 
 exports.Prisma.ModelName = {

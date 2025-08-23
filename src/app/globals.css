@@ -113,6 +113,7 @@ body::-webkit-scrollbar {
   min-height: 48px;
   width: 100%;
   transition: all 0.2s ease;
+  opacity: 0;
 }
 
 .form-input:focus {
@@ -241,6 +242,62 @@ body::-webkit-scrollbar {
   75% { background-position: 100% 50%; }
 }
 
+/* Animated gradient button with multiple colors */
+.animated-gradient-button {
+  position: relative;
+  background: linear-gradient(
+    45deg,
+    #059669,  /* Deep emerald */
+    #10B981,  /* Medium emerald */
+    #34D399,  /* Bright green */
+    #6EE7B7,  /* Light mint */
+    #10B981,  /* Medium emerald */
+    #059669   /* Deep emerald */
+  );
+  background-size: 400% 400%;
+  animation: buttonGradientShift 3s ease infinite;
+  color: white;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
+  transition: all 0.3s ease;
+}
+
+.animated-gradient-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(5, 150, 105, 0.6);
+}
+
+.animated-gradient-button:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4) !important;
+}
+
+.animated-gradient-button:disabled {
+  opacity: 0.6 !important;
+  animation: none !important;
+  transform: none !important;
+  cursor: not-allowed !important;
+}
+
+@keyframes buttonGradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 /* Alternative: More pronounced zigzag wave */
 .wavy-border-bottom-zigzag::after {
   content: '';
@@ -332,6 +389,7 @@ body::-webkit-scrollbar {
   --color-accent-700: #7C3AED;   /* Dark purple */
   --color-accent-800: #6B21A8;   /* Darker purple */
   --color-accent-900: #581C87;   /* Darkest purple */
+  --color-accent-950: #3E1B5C;   /* Darkest purple - deeper shade */
 
   /* Neutral Variations (Slate grays) */
   --color-neutral-50: #F8FAFC;   /* Almost white */
@@ -387,7 +445,7 @@ body {
 }
 
 @utility text-mobile-menu {
-  @apply text-text-inverse text-[18px] font-medium py-3 px-4 rounded-lg duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center;
+  @apply text-text-inverse text-[18px] font-medium py-3 px-4 duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center;
 }
 
 @utility tag-item {

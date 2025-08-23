@@ -45,6 +45,17 @@ export const ServiceType: {
 
 export type ServiceType = (typeof ServiceType)[keyof typeof ServiceType]
 
+
+export const TicketStatus: {
+  PENDING: 'PENDING',
+  IN_PROGRESS: 'IN_PROGRESS',
+  COMPLETED: 'COMPLETED',
+  ARCHIVED: 'ARCHIVED',
+  CANCELLED: 'CANCELLED'
+};
+
+export type TicketStatus = (typeof TicketStatus)[keyof typeof TicketStatus]
+
 }
 
 export type Role = $Enums.Role
@@ -54,6 +65,10 @@ export const Role: typeof $Enums.Role
 export type ServiceType = $Enums.ServiceType
 
 export const ServiceType: typeof $Enums.ServiceType
+
+export type TicketStatus = $Enums.TicketStatus
+
+export const TicketStatus: typeof $Enums.TicketStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -1898,6 +1913,8 @@ export namespace Prisma {
     message: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    status: $Enums.TicketStatus | null
+    adminNotes: string | null
   }
 
   export type ProjectTicketMaxAggregateOutputType = {
@@ -1911,6 +1928,8 @@ export namespace Prisma {
     message: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    status: $Enums.TicketStatus | null
+    adminNotes: string | null
   }
 
   export type ProjectTicketCountAggregateOutputType = {
@@ -1924,6 +1943,8 @@ export namespace Prisma {
     message: number
     createdAt: number
     updatedAt: number
+    status: number
+    adminNotes: number
     _all: number
   }
 
@@ -1939,6 +1960,8 @@ export namespace Prisma {
     message?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
+    adminNotes?: true
   }
 
   export type ProjectTicketMaxAggregateInputType = {
@@ -1952,6 +1975,8 @@ export namespace Prisma {
     message?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
+    adminNotes?: true
   }
 
   export type ProjectTicketCountAggregateInputType = {
@@ -1965,6 +1990,8 @@ export namespace Prisma {
     message?: true
     createdAt?: true
     updatedAt?: true
+    status?: true
+    adminNotes?: true
     _all?: true
   }
 
@@ -2051,6 +2078,8 @@ export namespace Prisma {
     message: string
     createdAt: Date
     updatedAt: Date
+    status: $Enums.TicketStatus
+    adminNotes: string | null
     _count: ProjectTicketCountAggregateOutputType | null
     _min: ProjectTicketMinAggregateOutputType | null
     _max: ProjectTicketMaxAggregateOutputType | null
@@ -2081,6 +2110,8 @@ export namespace Prisma {
     message?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    status?: boolean
+    adminNotes?: boolean
   }, ExtArgs["result"]["projectTicket"]>
 
 
@@ -2096,9 +2127,11 @@ export namespace Prisma {
     message?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    status?: boolean
+    adminNotes?: boolean
   }
 
-  export type ProjectTicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phoneNumber" | "service" | "organization" | "message" | "createdAt" | "updatedAt", ExtArgs["result"]["projectTicket"]>
+  export type ProjectTicketOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "phoneNumber" | "service" | "organization" | "message" | "createdAt" | "updatedAt" | "status" | "adminNotes", ExtArgs["result"]["projectTicket"]>
 
   export type $ProjectTicketPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "ProjectTicket"
@@ -2114,6 +2147,8 @@ export namespace Prisma {
       message: string
       createdAt: Date
       updatedAt: Date
+      status: $Enums.TicketStatus
+      adminNotes: string | null
     }, ExtArgs["result"]["projectTicket"]>
     composites: {}
   }
@@ -2493,6 +2528,8 @@ export namespace Prisma {
     readonly message: FieldRef<"ProjectTicket", 'String'>
     readonly createdAt: FieldRef<"ProjectTicket", 'DateTime'>
     readonly updatedAt: FieldRef<"ProjectTicket", 'DateTime'>
+    readonly status: FieldRef<"ProjectTicket", 'TicketStatus'>
+    readonly adminNotes: FieldRef<"ProjectTicket", 'String'>
   }
     
 
@@ -2852,7 +2889,9 @@ export namespace Prisma {
     organization: 'organization',
     message: 'message',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    status: 'status',
+    adminNotes: 'adminNotes'
   };
 
   export type ProjectTicketScalarFieldEnum = (typeof ProjectTicketScalarFieldEnum)[keyof typeof ProjectTicketScalarFieldEnum]
@@ -2890,7 +2929,8 @@ export namespace Prisma {
     email: 'email',
     phoneNumber: 'phoneNumber',
     organization: 'organization',
-    message: 'message'
+    message: 'message',
+    adminNotes: 'adminNotes'
   };
 
   export type ProjectTicketOrderByRelevanceFieldEnum = (typeof ProjectTicketOrderByRelevanceFieldEnum)[keyof typeof ProjectTicketOrderByRelevanceFieldEnum]
@@ -2933,6 +2973,13 @@ export namespace Prisma {
    * Reference to a field of type 'ServiceType'
    */
   export type EnumServiceTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ServiceType'>
+    
+
+
+  /**
+   * Reference to a field of type 'TicketStatus'
+   */
+  export type EnumTicketStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TicketStatus'>
     
 
 
@@ -3028,6 +3075,8 @@ export namespace Prisma {
     message?: StringFilter<"ProjectTicket"> | string
     createdAt?: DateTimeFilter<"ProjectTicket"> | Date | string
     updatedAt?: DateTimeFilter<"ProjectTicket"> | Date | string
+    status?: EnumTicketStatusFilter<"ProjectTicket"> | $Enums.TicketStatus
+    adminNotes?: StringNullableFilter<"ProjectTicket"> | string | null
   }
 
   export type ProjectTicketOrderByWithRelationInput = {
@@ -3041,6 +3090,8 @@ export namespace Prisma {
     message?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrderInput | SortOrder
     _relevance?: ProjectTicketOrderByRelevanceInput
   }
 
@@ -3058,6 +3109,8 @@ export namespace Prisma {
     message?: StringFilter<"ProjectTicket"> | string
     createdAt?: DateTimeFilter<"ProjectTicket"> | Date | string
     updatedAt?: DateTimeFilter<"ProjectTicket"> | Date | string
+    status?: EnumTicketStatusFilter<"ProjectTicket"> | $Enums.TicketStatus
+    adminNotes?: StringNullableFilter<"ProjectTicket"> | string | null
   }, "id">
 
   export type ProjectTicketOrderByWithAggregationInput = {
@@ -3071,6 +3124,8 @@ export namespace Prisma {
     message?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrderInput | SortOrder
     _count?: ProjectTicketCountOrderByAggregateInput
     _max?: ProjectTicketMaxOrderByAggregateInput
     _min?: ProjectTicketMinOrderByAggregateInput
@@ -3090,6 +3145,8 @@ export namespace Prisma {
     message?: StringWithAggregatesFilter<"ProjectTicket"> | string
     createdAt?: DateTimeWithAggregatesFilter<"ProjectTicket"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"ProjectTicket"> | Date | string
+    status?: EnumTicketStatusWithAggregatesFilter<"ProjectTicket"> | $Enums.TicketStatus
+    adminNotes?: StringNullableWithAggregatesFilter<"ProjectTicket"> | string | null
   }
 
   export type AuthenticatedUserCreateInput = {
@@ -3180,6 +3237,8 @@ export namespace Prisma {
     message: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.TicketStatus
+    adminNotes?: string | null
   }
 
   export type ProjectTicketUncheckedCreateInput = {
@@ -3193,6 +3252,8 @@ export namespace Prisma {
     message: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.TicketStatus
+    adminNotes?: string | null
   }
 
   export type ProjectTicketUpdateInput = {
@@ -3206,6 +3267,8 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectTicketUncheckedUpdateInput = {
@@ -3219,6 +3282,8 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectTicketCreateManyInput = {
@@ -3232,6 +3297,8 @@ export namespace Prisma {
     message: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    status?: $Enums.TicketStatus
+    adminNotes?: string | null
   }
 
   export type ProjectTicketUpdateManyMutationInput = {
@@ -3245,6 +3312,8 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ProjectTicketUncheckedUpdateManyInput = {
@@ -3258,6 +3327,8 @@ export namespace Prisma {
     message?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    status?: EnumTicketStatusFieldUpdateOperationsInput | $Enums.TicketStatus
+    adminNotes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3424,6 +3495,28 @@ export namespace Prisma {
     not?: NestedEnumServiceTypeFilter<$PrismaModel> | $Enums.ServiceType
   }
 
+  export type EnumTicketStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketStatus | EnumTicketStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketStatus[]
+    notIn?: $Enums.TicketStatus[]
+    not?: NestedEnumTicketStatusFilter<$PrismaModel> | $Enums.TicketStatus
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type ProjectTicketOrderByRelevanceInput = {
     fields: ProjectTicketOrderByRelevanceFieldEnum | ProjectTicketOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -3441,6 +3534,8 @@ export namespace Prisma {
     message?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
   }
 
   export type ProjectTicketMaxOrderByAggregateInput = {
@@ -3454,6 +3549,8 @@ export namespace Prisma {
     message?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
   }
 
   export type ProjectTicketMinOrderByAggregateInput = {
@@ -3467,6 +3564,8 @@ export namespace Prisma {
     message?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    status?: SortOrder
+    adminNotes?: SortOrder
   }
 
   export type EnumServiceTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3477,6 +3576,34 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumServiceTypeFilter<$PrismaModel>
     _max?: NestedEnumServiceTypeFilter<$PrismaModel>
+  }
+
+  export type EnumTicketStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketStatus | EnumTicketStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketStatus[]
+    notIn?: $Enums.TicketStatus[]
+    not?: NestedEnumTicketStatusWithAggregatesFilter<$PrismaModel> | $Enums.TicketStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTicketStatusFilter<$PrismaModel>
+    _max?: NestedEnumTicketStatusFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -3501,6 +3628,14 @@ export namespace Prisma {
 
   export type EnumServiceTypeFieldUpdateOperationsInput = {
     set?: $Enums.ServiceType
+  }
+
+  export type EnumTicketStatusFieldUpdateOperationsInput = {
+    set?: $Enums.TicketStatus
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3645,6 +3780,28 @@ export namespace Prisma {
     not?: NestedEnumServiceTypeFilter<$PrismaModel> | $Enums.ServiceType
   }
 
+  export type NestedEnumTicketStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketStatus | EnumTicketStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketStatus[]
+    notIn?: $Enums.TicketStatus[]
+    not?: NestedEnumTicketStatusFilter<$PrismaModel> | $Enums.TicketStatus
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedEnumServiceTypeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ServiceType | EnumServiceTypeFieldRefInput<$PrismaModel>
     in?: $Enums.ServiceType[]
@@ -3653,6 +3810,34 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumServiceTypeFilter<$PrismaModel>
     _max?: NestedEnumServiceTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTicketStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TicketStatus | EnumTicketStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TicketStatus[]
+    notIn?: $Enums.TicketStatus[]
+    not?: NestedEnumTicketStatusWithAggregatesFilter<$PrismaModel> | $Enums.TicketStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTicketStatusFilter<$PrismaModel>
+    _max?: NestedEnumTicketStatusFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | null
+    notIn?: string[] | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    search?: string
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
 

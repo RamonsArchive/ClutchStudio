@@ -37,7 +37,7 @@ const Navbar = () => {
             src="./Logos/LightLogos/lightClutchLogoSVG.svg"
             alt="logo"
             fill
-            className="object-cover object-top w-full h-full"
+            className="object-cover object-top w-full h-full cursor-pointer"
           />
         </Link>
         {isMobile ? (
@@ -48,7 +48,7 @@ const Navbar = () => {
               <Link
                 href={link.href}
                 key={link.name}
-                className="text-white text-[18px] font-medium py-2 px-5 rounded-lg md:px-10 duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center z-100 cursor-pointer"
+                className="text-white text-[18px] font-medium py-2 px-5 md:px-10 duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center z-100 cursor-pointer"
               >
                 {link.name}
               </Link>

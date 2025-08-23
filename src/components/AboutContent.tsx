@@ -255,7 +255,7 @@ const AboutContent = ({
           ))}
         </div>
       </div>
-      <div className="flex flex-col gap-10 w-full bg-primary-background-900 rounded-xl p-5 shadow-xl">
+      <div className="flex flex-col gap-10 w-full bg-gradient-to-b from-primary-900 via-black to-accent-950 rounded-xl p-5 md:p-10 shadow-xl">
         <h1
           ref={subtitleRef}
           className="font-funnel-sans text-white text-[24px] xs:text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-extrabold break-words"
