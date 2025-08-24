@@ -76,26 +76,26 @@ const TitleSection = ({
 
     if (headerTitleSplits?.words) {
       gsap.set(headerTitleSplits.words, {
-        opacity: 0,
+        visibility: "hidden",
         yPercent: -100,
       });
     }
 
     if (subTitleSplits?.words) {
       gsap.set(subTitleSplits.words, {
-        opacity: 0,
+        visibility: "hidden",
         yPercent: -100,
       });
     }
 
     gsap.set(mainTitleSplits.chars, {
-      opacity: 0,
+      visibility: "hidden",
       yPercent: -100,
     });
 
     if (contactButtonElm) {
       gsap.set(contactButtonElm, {
-        opacity: 0,
+        visibility: "hidden",
         yPercent: -100,
       });
     }
@@ -167,8 +167,8 @@ const TitleSection = ({
               },
               opacity: 0,
               yPercent: -100,
-              stagger: 0.01,
               xPercent: -50,
+              stagger: 0.01,
             });
             gsap.to("#clutch-fist-light-2", {
               scrollTrigger: {
@@ -201,7 +201,7 @@ const TitleSection = ({
                 end: "bottom 20%",
                 scrub: 0.8,
               },
-              opacity: 0,
+              visibility: "hidden",
               yPercent: -100,
               xPercent: 50,
               stagger: 0.01,
@@ -231,14 +231,14 @@ const TitleSection = ({
 
           if (headerTitleSplits?.words) {
             scrollAnimationTL.to(headerTitleSplits.words, {
-              opacity: 0,
+              visibility: "hidden",
               yPercent: -100,
               stagger: 0.01,
             });
           }
 
           scrollAnimationTL.to(mainTitleSplits.chars, {
-            opacity: 0,
+            visibility: "hidden",
             yPercent: -100,
             stagger: 0.01,
           });
@@ -270,7 +270,7 @@ const TitleSection = ({
                 end: "bottom 20%",
                 scrub: 0.8,
               },
-              opacity: 0,
+              visibility: "hidden",
               yPercent: -100,
               xPercent: -50,
               stagger: 0.01,
@@ -331,7 +331,7 @@ const TitleSection = ({
     // Initial entrance animation
     initialAnimationTL
       .to(headerTitleSplits?.words || [], {
-        opacity: 1,
+        visibility: "visible",
         yPercent: 0,
         duration: 0.8,
         stagger: 0.03,
@@ -340,7 +340,7 @@ const TitleSection = ({
       .to(
         mainTitleSplits.chars,
         {
-          opacity: 1,
+          visibility: "visible",
           yPercent: 0,
           duration: 1,
           stagger: 0.04,
@@ -351,7 +351,7 @@ const TitleSection = ({
       .to(
         subTitleSplits?.words || [],
         {
-          opacity: 1,
+          visibility: "visible",
           yPercent: 0,
           duration: 0.8,
           stagger: 0.02,
@@ -361,7 +361,7 @@ const TitleSection = ({
       );
     if (contactButtonElm) {
       initialAnimationTL.to(contactButtonElm, {
-        opacity: 1,
+        visibility: "visible",
         yPercent: 0,
         duration: 0.8,
         ease: "linear",
@@ -432,7 +432,7 @@ const TitleSection = ({
               <h3
                 id="header-title"
                 ref={headerTitleRef}
-                className={`${headerClassName}`}
+                className={`${headerClassName} invisible`}
               >
                 {headerTitle}
               </h3>
@@ -440,7 +440,7 @@ const TitleSection = ({
             <h1
               id="main-title"
               ref={mainTitleRef}
-              className={`${mainTitleClassName}`}
+              className={`${mainTitleClassName} invisible`}
             >
               {mainTitle}
             </h1>
@@ -450,12 +450,12 @@ const TitleSection = ({
               <h2
                 id="sub-title"
                 ref={subTitleRef}
-                className={`${subTitleClassName}`}
+                className={`${subTitleClassName} invisible`}
               >
                 {subTitle}
               </h2>
             )}
-            {includeContactButton && <ContactButton />}
+            {includeContactButton && <ContactButton className="invisible" />}
           </div>
         </div>
       ) : (
@@ -465,7 +465,7 @@ const TitleSection = ({
         >
           <div ref={mainTitleRef} className="flex flex-col gap-5">
             {mainTitle && (
-              <h1 className={`${mainTitleClassName}`}>{mainTitle}</h1>
+              <h1 className={`${mainTitleClassName} invisible`}>{mainTitle}</h1>
             )}
           </div>
         </div>
