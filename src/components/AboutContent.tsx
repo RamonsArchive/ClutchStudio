@@ -66,7 +66,7 @@ const AboutContent = ({
     });
 
     gsap.set(contactButtonRef.current, {
-      opacity: 0,
+      visibility: "visible",
       yPercent: -100,
     });
 
@@ -306,7 +306,10 @@ const AboutContent = ({
               {Object.entries(technicalSkills).map(([key, value]) => (
                 <div key={key} className="flex flex-col gap-2">
                   <li className="font-funnel-sans text-white text-[14px] sm:text-[16px] break-words font-regular">
-                    <span className="font-bold underline">{key}:</span> {value}
+                    <span className="font-bold text-decoration-underline">
+                      {key}:
+                    </span>{" "}
+                    {value}
                   </li>
                 </div>
               ))}
