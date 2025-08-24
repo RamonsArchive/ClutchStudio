@@ -33,16 +33,18 @@ export const GoldenEagle: ProjectTemplate = {
       name: "Golden Eagle Estates",
       subName: "A do everything construction company",
       title: "Building a complete digital transformation and infrastructure for a do everything construction company, Golden Eagle Estates",
-      workDescription: "Rebranded Golden Eagle Estates and shipped a responsive site with project management, simple hiring, and live testimonials—powered by a robust backend that delivers the scalability their momentum demands.",
-      personalDescription: "After seeing a story I posted about another website, a friend from Golden Eagle reached out asking if I could create something similar. Having played soccer with this friend for four years and witnessing the incredible work ethic he brings to the company through the project photos he'd share, I knew I had to deliver something special. Originally, they wanted a simple gallery website to showcase their skills, but I went the extra mile and created a complete backend infrastructure to handle project tickets, job applications, and testimonials—an unexpected bonus and my way of showing gratitude for the opportunity to work with such dedicated craftsmen.",
+      workDescription: "I built a comprehensive, full-stack business platform for Golden Eagle Construction & Remodeling using Next.js 15, React 19, and TypeScript. The project includes a complete admin dashboard for project management, customer inquiry handling, and content management, all powered by a robust MySQL database with Prisma ORM. I implemented advanced features like AWS S3 integration for media storage, rate limiting with Upstash Redis, JWT authentication for secure admin access, and a sophisticated project ticket system that tracks construction projects from initial inquiry to completion. The site features responsive design with GSAP animations, smooth scrolling with Lenis, and comprehensive SEO optimization. I also built custom server actions for form handling, integrated Sentry for error monitoring, and deployed everything on Vercel with automatic CI/CD.",
+      personalDescription: "After seeing a story I posted about another website, a friend from Golden Eagle reached out asking if I could create something similar. Having played soccer with this friend for four years and witnessing the incredible work ethic he brings to the company through the project photos he'd share, I knew I had to deliver something special. Originally, they wanted a simple gallery website to showcase their skills, but I went the extra mile and created a complete backend infrastructure that transformed their entire business operations. I built this massive admin dashboard that handles everything from project tickets and job applications to testimonials and content management - it's basically a full business management system disguised as a website. The most challenging part was designing the database schema to handle all their different services (bathroom remodels, kitchen remodels, custom homes, etc.) and building the admin interface that their team could actually use without getting overwhelmed. I integrated AWS S3 for all their project photos, built a sophisticated project tracking system, and added all these enterprise-level features like rate limiting and error monitoring. It's crazy to think this started as a simple request for a gallery site and turned into a complete digital transformation of their business infrastructure. The best part was seeing how excited they were when I showed them everything it could do - it's one thing to build a website, but building something that actually makes running a business easier is incredibly rewarding.",
     },
-    tags: ["Web Design", "Web Development", "Web Hosting", "Business Infrastructure", "Project Management"],
+    tags: ["Web Design", "Web Development", "Full-Stack Development", "Next.js 15", "React 19", "TypeScript", "MySQL", "Prisma ORM", "AWS S3", "Admin Dashboard", "Business Infrastructure", "Project Management", "JWT Authentication", "Rate Limiting", "GSAP Animations"],
     images: {
-      mainImage: "/Projects/GoldenEagle/goldeEagleSocialImageHD.jpg",
+      mainImage: "/Projects/GoldenEagle/goldenEagleImage.jpg",
       galleryImages: [
-        "/Projects/GoldenEagle/overlay1.png",
-        "/Projects/GoldenEagle/overlay2.png",
+        "/Projects/GoldenEagle/goldenEagleImage1.png",
+        "/Projects/GoldenEagle/goldenEagleImage2.png",
+        "/Projects/GoldenEagle/goldenEagleImage3.png",
         "/Projects/GoldenEagle/goldenEagleImage4.png",
+        "/Projects/GoldenEagle/goldenEagleImage5.png",
       ]
     },
     websiteUrl: "https://goldeneagle.one",
@@ -98,7 +100,7 @@ export const YoloV8: ProjectTemplate = {
     },
     tags: ["AI", "Object Detection", "YoloV8", "Python", "OpenCV"],
     images: {
-        mainImage: "/Projects/YoloV8/SocialMedia/yoloV8Image.jpg",
+        mainImage: "/Projects/YoloV8/SocialMedia/yoloV8Image2.jpg",
         galleryImages: [
             "/Projects/YoloV8/yoloImage1.png",
             "/Projects/YoloV8/yoloImage2.png",
@@ -145,21 +147,121 @@ export const CorporateVsPodcast: ProjectTemplate = {
     status: "live" // live, in-progress, archived
 }
 
+export const Whisper: ProjectTemplate = {
+    id: "whisper",
+    projectType: "AI_SOLUTIONS",
+    text: {
+        name: "Whisper",
+        subName: "A voice assistant that can transcribe audio to text",
+        title: "Trained a custom Whisper model to transcribe audio to text",
+        workDescription: "I implemented a streamlined audio transcription system using OpenAI's open-source Whisper model, building a complete pipeline that processes audio files and generates both full text transcripts and timestamped CSV outputs. The project uses the 'turbo' model for optimal speed and accuracy, automatically handles audio format detection, and creates structured CSV outputs with start/end times and transcribed text for easy data manipulation. I built the system with clean, modular functions for storing full transcripts and segment data, implemented proper file path handling for cross-platform compatibility, and created a simple but effective workflow that takes audio input and produces both human-readable transcripts and machine-processable CSV data.",
+        personalDescription: "I wanted to jumpstart my AI journey with a practical project that would teach me about audio processing and natural language understanding. Rather than just using pre-built tools, I decided to build a complete transcription pipeline from the ground up using OpenAI's Whisper model. The project became this fascinating exploration of audio processing, where I learned about the 'turbo' model's capabilities and built a clean, modular system for handling audio files. What I found most rewarding was creating the timestamped CSV output system - it wasn't just about transcribing audio to text, but about making that data useful for further analysis, subtitle generation, and research purposes. I focused on building clean, maintainable code with proper file path handling and modular functions, which taught me that even with powerful pre-trained models like Whisper, there's still so much value in building the infrastructure around them to make them truly useful for real-world applications.",
+    },
+    tags: ["AI", "Audio Processing", "Natural Language Processing", "Python", "OpenAI Whisper", "Data Analysis", "CSV Processing"],
+    images: {
+        mainImage: "/Projects/Whisper/SocialMedia/whisperImage.jpg",
+        galleryImages: ["/Projects/Whisper/whisperImage1.png", "/Projects/Whisper/whisperImage2.png" ]
+    },
+    websiteUrl: "",
+    githubUrl: "https://github.com/RamonsArchive/Whisper", // if website url is not present, use github url
+    dateCompleted: "2025-06-10",
+    featured: true,
+    isClient: false,
+    isWebsite: false,
+    status: "live" // live, in-progress, archived
+}
+
+export const NBA_Analysis_Hackathon: ProjectTemplate = {
+    id: "nba-analysis-hackathon",
+    projectType: "DATA_SCIENCE",
+    text: {
+        name: "NBA Analysis Hackathon",
+        subName: "Analyzing NBA player performance data",
+        title: "Built a comprehensive NBA player recommendation system and interactive guessing game with 99% accuracy",
+        workDescription: "I developed a full-stack Next.js web application that combines NBA player data analysis with interactive gaming features. The project includes a smart player recommendation system that filters players by budget, height, age, and position using weighted scoring algorithms, and an AI-powered guessing game that asks intelligent questions to identify players with high accuracy. I integrated multiple data sources including NBA API for player statistics and salary databases, implemented real-time data processing with CSV parsing and validation, and built a modern UI with Tailwind CSS featuring responsive design, interactive elements, and beautiful data visualizations.",
+        personalDescription: "My first hackathon experience was incredibly exciting! When we found out the theme was popular culture, my team immediately knew we wanted to do something with the NBA. What started as a simple data analysis project quickly evolved into a comprehensive web application that I'm really proud of. I handled the web development side while my teammates focused on Python data processing, and we just clicked really well - each of us brought something different to the table and we learned a ton from each other. The most rewarding part was building the guessing game algorithm - seeing it correctly identify players with 99% accuracy after just a few strategic questions was incredibly satisfying. We worked through the night for 24 hours straight, combining NBA API data with salary information, implementing smart filtering algorithms, and creating a beautiful, responsive interface. It was a perfect example of how different technical backgrounds can come together to create something really special in a short timeframe.",
+    },
+    tags: ["Full-Stack Development", "Next.js", "React", "TypeScript", "Data Science", "NBA Analytics", "Interactive Gaming", "Tailwind CSS"],
+    images: {
+        mainImage: "/Projects/NBA_Analysis_Hackathon/SocialMedia/hackathon1Image.jpg",
+        galleryImages: ["/Projects/NBA_Analysis_Hackathon/hackathon1Image1.png", "/Projects/NBA_Analysis_Hackathon/hackathon1Image2.png", "/Projects/NBA_Analysis_Hackathon/hackathon1Image3.png", "/Projects/NBA_Analysis_Hackathon/hackathon1Image4.png"]
+    },
+    websiteUrl: "",
+    githubUrl: "https://github.com/YihsuanKuo/DSC-Wizzrad", // if website url is not present, use github url
+    dateCompleted: "2025-06-10",
+    featured: true,
+    isClient: false,
+    isWebsite: false,
+    status: "live" // live, in-progress, archived
+}
+
+export const DSGN1_Text_Analysis: ProjectTemplate = {
+    id: "dsgn1-text-analysis",
+    projectType: "DATA_SCIENCE",
+    text: {
+        name: "DSGN1 Text Analysis",
+        subName: "Analyzing survey data using text analysis",
+        title: "Analyzing survey data about bathroom stall doors from the DSGN1 course at UCSD",
+        workDescription: "I built a comprehensive text analysis pipeline to analyze survey responses about bathroom stall door experiences. Using Python, Pandas, and advanced regex pattern matching, I processed raw survey data to extract insights about privacy concerns, door swing preferences, lock security issues, and gender-based emotional responses. The analysis included sentiment analysis, keyword frequency counting, and pattern recognition to identify common design problems. I created interactive visualizations using Matplotlib and Seaborn to present findings about gap-related privacy issues, door swing direction preferences, and security concerns in an easily digestible format.",
+        personalDescription: "This was part of a group project for my DSGN1 course at UCSD where we wanted to understand how people actually experience bathroom stall doors - whether they're intuitive, offer enough privacy, and are easy to use. The goal was to analyze bathroom stall doors using design principles like signifiers, affordances, gulf of execution, gulf of evaluation, feedback, mental models, and mapping. But to really understand people's opinions and identify the deficits in these design principles, we needed to analyze the survey text and create visualizations so the findings could be easily understood and applied. I handled all the data processing and analysis side, building this comprehensive pipeline that could handle messy survey responses and extract meaningful insights. The most interesting part was developing the regex patterns to detect door swing preferences and sentiment - seeing how people actually feel about these everyday design elements was really eye-opening. To see the full report with all the visualizations and detailed findings, just message me. You can also check out the code and see the raw survey data for yourself.",
+    },
+    tags: ["Data Science", "Text Analysis", "Python", "Pandas", "Regex", "Sentiment Analysis", "Data Visualization", "Survey Analysis", "Design Research"],
+    images: {
+        mainImage: "/Projects/DSGN1TextAnalysis/SocialMedia/DSGN1TAImage.jpg",
+        galleryImages: ["/Projects/DSGN1TextAnalysis/DSGN1TAImage1.png", "/Projects/DSGN1TextAnalysis/DSGN1TAImage2.png", "/Projects/DSGN1TextAnalysis/DSGN1TAImage3.png"]
+    },
+    websiteUrl: "",
+    githubUrl: "https://github.com/RamonsArchive/DSGN1_Text_Analysis", // if website url is not present, use github url
+    dateCompleted: "2025-06-10",
+    featured: true,
+    isClient: false,
+    isWebsite: false,
+    status: "live" // live, in-progress, archived
+}
+
+export const TheStu: ProjectTemplate = {
+    id: "the-stu",
+    projectType: "WEB_DEVELOPMENT",
+    text: {
+        name: "The Stu",
+        subName: "Building a music player with an aesthetic UI",
+        title: "Building a music player with an aesthetic UI using just JavaScript, HTML, and CSS",
+        workDescription: "I built a fully functional music player with a clean, aesthetic UI as my very first web development project. Using vanilla JavaScript, HTML, and CSS, I created a complete audio streaming platform with play/pause controls, volume management, playlist navigation, and a dynamic song library system. The project features a responsive design with album artwork display, progress bars, and an intuitive user interface that demonstrates early web development skills and understanding of DOM manipulation.",
+        personalDescription: "Right after high school graduation, I wanted to learn how to code websites knowing I would take multiple computer science courses during my college years. To prepare myself, I dove into the foundational basics of CSS, HTML, and JavaScript to build my very first website. Although it's not perfect and features a sample playlist of New York Drill artists that I'm not necessarily a fan of looking back at, it does demonstrate how far I've come and reminds me that Stack Overflow is a programmer's best friend. This project taught me so much about web development fundamentals - from DOM manipulation and event handling to audio API integration and responsive design. It's amazing to see how much I've grown since then, and it's a perfect reminder that everyone starts somewhere. The most rewarding part was getting the audio controls working properly and seeing my first website actually function as intended!",
+    },
+    tags: ["Web Development", "JavaScript", "HTML", "CSS", "Audio API", "DOM Manipulation", "Music Player", "First Project"],
+    images: {
+        mainImage: "/Projects/TheStu/SocialMedia/theStuImage.jpg",
+        galleryImages: ["/Projects/TheStu/theStuImage1.png", "/Projects/TheStu/theStuImage2.png", "/Projects/TheStu/theStuImage3.png"]
+    },
+    websiteUrl: "",
+    githubUrl: "https://github.com/RamonsArchive/TheStudio", // if website url is not present, use github url
+    dateCompleted: "2025-06-10",
+    featured: true,
+    isClient: false,
+    isWebsite: false,
+    status: "live" // live, in-progress, archived
+}
+
 
 // recent projects in hero section
 export const RecentProjects = [
     GoldenEagle,
     YoloV8,
-    CorporateVsPodcast,
     Relay,
+    CorporateVsPodcast,
 ]
 
 // all projects
 export const Projects = [
     GoldenEagle,
     YoloV8,
-    CorporateVsPodcast,
     Relay,
+    CorporateVsPodcast,
+    Whisper,
+    NBA_Analysis_Hackathon,
+    DSGN1_Text_Analysis,
+    TheStu,
 ]
 
 
@@ -169,6 +271,10 @@ export const ProjectPageMap = {
     "relay": Relay,
     "yolo-v8": YoloV8,
     "corporate-vs-podcast": CorporateVsPodcast,
+    "whisper": Whisper,
+    "nba-analysis-hackathon": NBA_Analysis_Hackathon,
+    "dsgn1-text-analysis": DSGN1_Text_Analysis,
+    "the-stu": TheStu,
 }
 
 
