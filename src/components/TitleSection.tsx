@@ -118,20 +118,17 @@ const TitleSection = ({
             });
           }
 
-          gsap
-            .timeline({
-              scrollTrigger: {
-                trigger: "#main-title",
-                start: "top top",
-                end: "bottom 10%",
-                scrub: 1.2,
-              },
-            })
-            .to(mainTitleSplits.chars, {
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.02,
-            });
+          gsap.to(mainTitleSplits.chars, {
+            scrollTrigger: {
+              trigger: "#main-title",
+              start: "top top",
+              end: "bottom 20%",
+              scrub: 1.2,
+            },
+            opacity: 0,
+            yPercent: -100,
+            stagger: 0.02,
+          });
 
           if (subTitleSplits?.words) {
             gsap

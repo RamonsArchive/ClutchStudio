@@ -234,14 +234,20 @@ const RecentProjectCard = ({
             >
               {title}
             </h1>
-            <div ref={mobileTagsRef} className="flex flex-row items-center">
+            <div
+              ref={mobileTagsRef}
+              className="flex flex-row items-center overflow-x-auto scrollbar-hide min-w-0 flex-shrink-0"
+            >
               {tags.slice(0, 3).map((tag, index) => (
-                <div key={index} className="tag-item flex items-center">
-                  <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/80 rounded-full border border-gray-200/50">
+                <div
+                  key={index}
+                  className="tag-item flex items-center flex-shrink-0"
+                >
+                  <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/80 rounded-full border border-gray-200/50 whitespace-nowrap">
                     {tag}
                   </span>
                   {index !== tags.slice(0, 3).length - 1 && (
-                    <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 break-words">
+                    <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 break-words flex-shrink-0">
                       |
                     </span>
                   )}

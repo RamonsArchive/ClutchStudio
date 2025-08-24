@@ -20,6 +20,26 @@ html {
   user-select: auto;
 }
 
+/* Global scrollbar hiding for all elements */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Specific scrollbar hiding for common elements */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+div::-webkit-scrollbar,
+section::-webkit-scrollbar,
+main::-webkit-scrollbar,
+aside::-webkit-scrollbar {
+  display: none;
+}
+
 /* Add to globals.css - Chrome/Webkit specific */
 .cursor-pointer {
   cursor: pointer !important;
