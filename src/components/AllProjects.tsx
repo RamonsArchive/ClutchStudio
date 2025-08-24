@@ -4,6 +4,7 @@ import { ProjectTemplate } from "@/types/GlobalTypes";
 import ProjectDisplayCard from "./ProjectDisplayCard";
 import { ProjectType } from "@/types/GlobalTypes";
 import { ChevronDown, X, Filter } from "lucide-react";
+import ProjectGrid from "./ProjectGrid";
 
 const AllProjects = ({ projects }: { projects: ProjectTemplate[] }) => {
   const [selectedServiceType, setSelectedServiceType] = useState<string>("ALL");
@@ -192,32 +193,10 @@ const AllProjects = ({ projects }: { projects: ProjectTemplate[] }) => {
         </div>
 
         {/* Projects Grid */}
-        {filteredProjects.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredProjects.map((project) => (
-              <ProjectDisplayCard key={project.id} project={project} />
-            ))}
-          </div>
-        ) : (
-          /* No Projects Found State */
-          <div className="text-center py-16">
-            <div className="w-24 h-24 mx-auto mb-6 bg-[#E2E8F0] rounded-full flex items-center justify-center">
-              <Filter className="w-12 h-12 text-[#64748B]" />
-            </div>
-            <h3 className="text-xl font-semibold text-[#475569] mb-2">
-              No projects found
-            </h3>
-            <p className="text-[#64748B] mb-6">
-              Try adjusting your filters or browse all projects
-            </p>
-            <button
-              onClick={clearFilters}
-              className="px-6 py-3 bg-[#008E1A] text-white rounded-xl hover:bg-[#007A17] transition-colors duration-200 font-medium"
-            >
-              Show All Projects
-            </button>
-          </div>
-        )}
+        <ProjectGrid
+          filteredProjects={filteredProjects}
+          clearFilters={clearFilters}
+        />
 
         {/* Results Summary */}
         <div className="mt-12 text-center text-gray-600">

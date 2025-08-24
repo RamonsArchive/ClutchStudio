@@ -3,7 +3,13 @@ import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
-const ProjectDisplayCard = ({ project }: { project: ProjectTemplate }) => {
+const ProjectDisplayCard = ({
+  project,
+  "data-project-index": dataProjectIndex,
+}: {
+  project: ProjectTemplate;
+  "data-project-index"?: number;
+}) => {
   const mainImage = project.images.mainImage;
   const id = project.id;
   const name = project.text.name;
@@ -13,6 +19,7 @@ const ProjectDisplayCard = ({ project }: { project: ProjectTemplate }) => {
     <Link
       href={`/projects/${id}`}
       className="group relative flex-center w-full h-full border-1 border-white/50 rounded-lg overflow-hidden"
+      data-project-index={dataProjectIndex}
     >
       <Image
         src={mainImage}
