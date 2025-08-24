@@ -292,8 +292,8 @@ export const AboutData = {
             ml_ai: "YOLOv8, siklearn, OpenCV, Whisper, Python, Statistical Analysis",
             tools: "Git, Auth.js, Redis, Webhook Integration",
         }, 
-    },
-    images: ["/Assets/About/personalImage5.jpg", "/Assets/About/prettyMe.png", "/Assets/About/family.png", "/Assets/About/whisper.png"]
+    }, 
+    images: ["/Assets/About/PersonalImage5.JPG", "/Assets/About/prettyMe.png", "/Assets/About/family.png", "/Assets/About/whisper.png"]
     
 }
 
