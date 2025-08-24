@@ -25,7 +25,7 @@ const page = async () => {
           className="relative flex w-full flex-row flex-center max-w-[80%] md:max-w-[60%]"
         >
           <Image
-            src="/Logos/webClutch1SVG.svg"
+            src="/Assets/Logos/webClutch1SVG.svg"
             alt="logo"
             width={100}
             height={100}

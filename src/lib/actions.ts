@@ -5,7 +5,7 @@ import { contactFormSchema } from "./validation";
 import { checkRateLimit } from "./rateLimiter";
 import { prisma } from "./prisma";
 import { FromDataType, ServiceStringType } from "@/types/GlobalTypes";
-import { Role } from "../../prisma/client";
+import { Role } from "@prisma/client";
 import { cookies } from "next/headers";
 import { SignJWT } from "jose";
 import bcrypt from "bcryptjs";

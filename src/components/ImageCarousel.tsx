@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Play, Pause } from "lucide-react";
-import useMobile from "./useMobile";
 
 const ImageCarousel = ({ images }: { images: string[] }) => {
   const imageRef = useRef<HTMLImageElement[]>([]);
@@ -12,15 +11,20 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const dotRef = useRef<HTMLSpanElement[]>([]);
   const interval = useRef<NodeJS.Timeout | null>(null);
 
-  const { isMobile } = useMobile();
-
   const [carousel, setCarousel] = useState({
     currentImage: 0,
     isPlaying: true,
     isLastImage: false,
   });
 
+  const [mobile, setMobile] = useState(false);
+
   const { currentImage, isPlaying, isLastImage } = carousel;
+
+  useEffect(() => {
+    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    setMobile(isMobile);
+  }, []);
 
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
@@ -133,7 +137,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
                     }
                   }}
                   className="object-contain"
-                  sizes={isMobile ? "100vw" : "50vw"}
+                  sizes={mobile ? "80vw" : "40vw"}
                   priority={index === 0}
                 />
               </div>
@@ -192,20 +196,6 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
           </button>
         </div>
       </div>
-
-      {/* Play/Pause Button */}
-      {/* <div className="absolute top-4 right-4 z-20">
-        <button
-          onClick={handlePlayPause}
-          className="w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300"
-        >
-          {isPlaying ? (
-            <Pause className="w-5 h-5 text-white" />
-          ) : (
-            <Play className="w-5 h-5 text-white" />
-          )}
-        </button>
-      </div> */}
     </div>
   );
 };

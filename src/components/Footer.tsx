@@ -28,6 +28,7 @@ const Footer = () => {
                         src={social.path}
                         fill
                         alt=""
+                        sizes="10vw"
                         className="object-contain filter brightness-0 invert"
                       />
                     </div>
