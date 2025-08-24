@@ -14,6 +14,7 @@ const ContactPage = () => {
           mainTitle={title}
           mainTitleClassName="font-funnel-sans text-white text-[58px] xs:text-[68px] sm:text-[78px] md:text-[84px] lg:text-[100px] font-bold break-words"
           includeBackgroundIcons={true}
+          useCharsForMainTitle={true}
         />
       </div>
       <div className="flex flex-col w-full p-5 md:p-10">

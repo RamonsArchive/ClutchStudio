@@ -817,13 +817,49 @@ body {
   );
 }
 
-/* Gradient text class for main title */
+/* Enhanced gradient text class for main title - matching button quality */
 .gradient-text {
-  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
-  background-size: 200% 200%;
+  background: linear-gradient(
+    135deg,
+    #00D4FF 0%,
+    #0099FF 25%,
+    #00FF88 50%,
+    #00D4FF 75%,
+    #0099FF 100%
+  );
+  background-size: 300% 300%;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  animation: gradientShift 8s ease-in-out infinite;
+  animation: enhancedGradientShift 6s ease-in-out infinite;
+  position: relative;
+  filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.3));
+}
+
+/* Enhanced gradient animation */
+@keyframes enhancedGradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 100% 50%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hover effect for gradient text */
+.gradient-text:hover {
+  animation-duration: 3s;
+  filter: drop-shadow(0 0 12px rgba(0, 212, 255, 0.5));
+  transform: scale(1.02);
+  transition: all 0.3s ease;
 }
 

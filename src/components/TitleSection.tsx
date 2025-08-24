@@ -18,6 +18,7 @@ const TitleSection = ({
   subTitleClassName,
   includeContactButton = false,
   includeBackgroundIcons = false,
+  useCharsForMainTitle = false, // New parameter to control main title split type
 }: {
   headerTitle?: React.ReactNode;
   mainTitle: React.ReactNode;
@@ -27,6 +28,7 @@ const TitleSection = ({
   subTitleClassName?: string;
   includeContactButton?: boolean;
   includeBackgroundIcons?: boolean;
+  useCharsForMainTitle?: boolean; // New parameter type
 }) => {
   const headerTitleRef = useRef<HTMLHeadingElement>(null);
   const mainTitleRef = useRef<HTMLHeadingElement>(null);
@@ -53,7 +55,7 @@ const TitleSection = ({
       : null;
 
     const mainTitleSplits = SplitText.create(mainTitleElm, {
-      type: "words", // Changed from "chars" for better performance
+      type: useCharsForMainTitle ? "chars" : "words", // Use chars only if boolean is true
     });
 
     const subTitleSplits = isSubTitle
@@ -63,21 +65,27 @@ const TitleSection = ({
       : null;
 
     // Apply premium gradient effect using CSS classes (like contact button)
-    if (mainTitleSplits.words) {
-      // Changed from .chars to .words
-      mainTitleSplits.words.forEach((word, index) => {
-        const wordElement = word as HTMLElement;
+    if (mainTitleSplits.words || mainTitleSplits.chars) {
+      const elements = useCharsForMainTitle
+        ? mainTitleSplits.chars
+        : mainTitleSplits.words;
+      if (elements) {
+        elements.forEach((element, index) => {
+          const textElement = element as HTMLElement;
 
-        // Apply premium gradient classes for high-performance animation
-        wordElement.classList.add("gradient-text"); // Changed from gradient-char to gradient-text
-      });
+          // Apply premium gradient classes for high-performance animation
+          textElement.classList.add("gradient-text");
+        });
+      }
     }
 
     // Set initial state for all characters - batch operations
     const allElements = [
       ...(headerTitleSplits?.words || []),
       ...(subTitleSplits?.words || []),
-      ...mainTitleSplits.words, // Changed from .chars to .words
+      ...(useCharsForMainTitle
+        ? mainTitleSplits.chars || []
+        : mainTitleSplits.words || []),
     ];
 
     gsap.set(allElements, {
@@ -118,18 +126,16 @@ const TitleSection = ({
             });
           }
 
-          gsap.to(mainTitleSplits.words, {
-            // Changed from .chars to .words
-            scrollTrigger: {
-              trigger: "#main-title",
-              start: "top top",
-              end: "bottom 20%",
-              scrub: 1.2,
-            },
-            opacity: 0,
-            yPercent: -100,
-            stagger: 0.02,
-          });
+          desktopScrollTL.to(
+            useCharsForMainTitle
+              ? mainTitleSplits.chars || []
+              : mainTitleSplits.words || [],
+            {
+              opacity: 0,
+              yPercent: -100,
+              stagger: 0.02,
+            }
+          );
 
           if (subTitleSplits?.words) {
             gsap
@@ -150,13 +156,7 @@ const TitleSection = ({
 
           // Separate trigger for contact button (less frequent updates)
           if (contactButtonElm) {
-            gsap.to(contactButtonElm, {
-              scrollTrigger: {
-                trigger: "#contact-button",
-                start: "top top",
-                end: "bottom 40%",
-                scrub: 1.5,
-              },
+            desktopScrollTL.to(contactButtonElm, {
               opacity: 0,
               yPercent: -100,
             });
@@ -211,12 +211,16 @@ const TitleSection = ({
             });
           }
 
-          mobileScrollTL.to(mainTitleSplits.words, {
-            // Changed from .chars to .words
-            opacity: 0,
-            yPercent: -100,
-            stagger: 0.02,
-          });
+          mobileScrollTL.to(
+            useCharsForMainTitle
+              ? mainTitleSplits.chars || []
+              : mainTitleSplits.words || [],
+            {
+              opacity: 0,
+              yPercent: -100,
+              stagger: 0.02,
+            }
+          );
 
           if (subTitleSplits?.words) {
             mobileScrollTL.to(subTitleSplits.words, {
@@ -227,13 +231,7 @@ const TitleSection = ({
           }
 
           if (contactButtonElm) {
-            gsap.to(contactButtonElm, {
-              scrollTrigger: {
-                trigger: "#contact-button",
-                start: "top top",
-                end: "bottom 40%",
-                scrub: 1.5,
-              },
+            mobileScrollTL.to(contactButtonElm, {
               opacity: 0,
               yPercent: -100,
             });
@@ -280,7 +278,9 @@ const TitleSection = ({
         ease: "back.out(0.8)",
       })
       .to(
-        mainTitleSplits.words, // Changed from .chars to .words
+        useCharsForMainTitle
+          ? mainTitleSplits.chars || []
+          : mainTitleSplits.words || [],
         {
           visibility: "visible",
           yPercent: 0,
