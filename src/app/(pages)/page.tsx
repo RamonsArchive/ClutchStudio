@@ -1,8 +1,9 @@
 import TitleSection from "@/components/TitleSection";
 import HeroVideo from "@/components/HeroVideo";
-import React from "react";
+import React, { Suspense } from "react";
 import RecentProjectCard from "@/components/RecentProjectCard";
 import { RecentProjects } from "@/constants";
+import RecentProjectCardSkeleton from "@/components/RecentProjectCardSkeleton";
 
 export default function Home() {
   return (
@@ -61,7 +62,16 @@ export default function Home() {
       </div>
       <div className="flex flex-col w-full gap-15 px-3 pb-5 xs:px-5 xs:pb-5 md:px-10 md:pb-10 rounded-xl">
         {RecentProjects.map((project, index) => (
-          <RecentProjectCard key={project.id} project={project} index={index} />
+          <Suspense
+            key={project.id}
+            fallback={<RecentProjectCardSkeleton index={index} />}
+          >
+            <RecentProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+            />
+          </Suspense>
         ))}
       </div>
     </section>

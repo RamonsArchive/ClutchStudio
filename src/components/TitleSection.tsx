@@ -53,7 +53,7 @@ const TitleSection = ({
       : null;
 
     const mainTitleSplits = SplitText.create(mainTitleElm, {
-      type: "chars",
+      type: "words", // Changed from "chars" for better performance
     });
 
     const subTitleSplits = isSubTitle
@@ -63,15 +63,13 @@ const TitleSection = ({
       : null;
 
     // Apply premium gradient effect using CSS classes (like contact button)
-    if (mainTitleSplits.chars) {
-      mainTitleSplits.chars.forEach((char, index) => {
-        const charElement = char as HTMLElement;
+    if (mainTitleSplits.words) {
+      // Changed from .chars to .words
+      mainTitleSplits.words.forEach((word, index) => {
+        const wordElement = word as HTMLElement;
 
         // Apply premium gradient classes for high-performance animation
-        charElement.classList.add("gradient-char");
-
-        // Add custom animation delay for each character
-        charElement.style.animationDelay = `${index * 0.1}s`;
+        wordElement.classList.add("gradient-text"); // Changed from gradient-char to gradient-text
       });
     }
 
@@ -79,7 +77,7 @@ const TitleSection = ({
     const allElements = [
       ...(headerTitleSplits?.words || []),
       ...(subTitleSplits?.words || []),
-      ...mainTitleSplits.chars,
+      ...mainTitleSplits.words, // Changed from .chars to .words
     ];
 
     gsap.set(allElements, {
@@ -90,6 +88,7 @@ const TitleSection = ({
     if (contactButtonElm) {
       gsap.set(contactButtonElm, {
         visibility: "hidden",
+        opacity: 0,
         yPercent: -100,
       });
     }
@@ -119,7 +118,8 @@ const TitleSection = ({
             });
           }
 
-          gsap.to(mainTitleSplits.chars, {
+          gsap.to(mainTitleSplits.words, {
+            // Changed from .chars to .words
             scrollTrigger: {
               trigger: "#main-title",
               start: "top top",
@@ -211,7 +211,8 @@ const TitleSection = ({
             });
           }
 
-          mobileScrollTL.to(mainTitleSplits.chars, {
+          mobileScrollTL.to(mainTitleSplits.words, {
+            // Changed from .chars to .words
             opacity: 0,
             yPercent: -100,
             stagger: 0.02,
@@ -279,7 +280,7 @@ const TitleSection = ({
         ease: "back.out(0.8)",
       })
       .to(
-        mainTitleSplits.chars,
+        mainTitleSplits.words, // Changed from .chars to .words
         {
           visibility: "visible",
           yPercent: 0,
@@ -303,6 +304,7 @@ const TitleSection = ({
     if (contactButtonElm) {
       initialAnimationTL.to(contactButtonElm, {
         visibility: "visible",
+        opacity: 1,
         yPercent: 0,
         duration: 0.8,
         ease: "linear",

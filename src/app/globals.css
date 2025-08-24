@@ -796,3 +796,34 @@ body {
   }
 }
 
+/* Shimmer effect for skeleton components */
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.shimmer-effect {
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite linear;
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+}
+
+/* Gradient text class for main title */
+.gradient-text {
+  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientShift 8s ease-in-out infinite;
+}
+
