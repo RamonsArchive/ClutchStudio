@@ -3,6 +3,7 @@ import Image from "next/image";
 import AdminDashboard from "@/components/AdminDashboard";
 import { fetchDashboardData } from "@/lib/actions";
 import Link from "next/link";
+import { DashboardDataType } from "@/types/GlobalTypes";
 
 const page = async () => {
   // fetch all projectTickets only
@@ -40,7 +41,7 @@ const page = async () => {
           </p>
         </div>
       </div>
-      <AdminDashboard dashboardData={dashboardData.data} />
+      <AdminDashboard dashboardData={dashboardData.data as DashboardDataType} />
     </div>
   );
 };

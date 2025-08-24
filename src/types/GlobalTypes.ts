@@ -194,8 +194,23 @@ export type FromDataType = {
   message: string;
 }
 
+export type ProjectTicketType = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  organization: string;
+  message: string;
+  service: ServiceStringType;
+  status: ProjectStatus;
+  adminNotes: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export type DashboardDataType = {
-  projectTickets: any[]; // Using any[] for now, can be more specific with Prisma types
+  projectTickets: ProjectTicketType[];
 }
 
 // Project Status enum for admin interface

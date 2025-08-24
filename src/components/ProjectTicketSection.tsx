@@ -1,7 +1,10 @@
 "use client";
 import React, { useMemo } from "react";
-import { ProjectTicket } from "@prisma/client";
-import { ProjectStatus, ProjectType } from "@/types/GlobalTypes";
+import {
+  ProjectStatus,
+  ProjectType,
+  ProjectTicketType,
+} from "@/types/GlobalTypes";
 import ProjectTicketCard from "./ProjectTicketCard";
 import { useEffect, useState, useRef } from "react";
 import {
@@ -22,7 +25,7 @@ interface ProjectTypeModified {
 const ProjectTicketSection = ({
   projectTickets,
 }: {
-  projectTickets: ProjectTicket[];
+  projectTickets: ProjectTicketType[];
 }) => {
   const outerStatusRef = useRef<HTMLDivElement>(null);
   const innerStatusRef = useRef<HTMLDivElement>(null);
@@ -45,21 +48,10 @@ const ProjectTicketSection = ({
     { value: ProjectStatus.IN_PROGRESS, title: "In Progress" },
   ];
 
-  const tickets = useMemo<ProjectTicket[]>(() => {
+  const tickets = useMemo<ProjectTicketType[]>(() => {
     return projectTickets.filter((ticket) => {
-      // Convert backend status to frontend status for filtering
-      const frontendStatus =
-        ticket.status === "PENDING"
-          ? ProjectStatus.UNCONFIRMED
-          : ticket.status === "IN_PROGRESS"
-          ? ProjectStatus.IN_PROGRESS
-          : ticket.status === "COMPLETED"
-          ? ProjectStatus.COMPLETED
-          : ticket.status === "ARCHIVED"
-          ? ProjectStatus.ARCHIVED
-          : ticket.status === "CANCELLED"
-          ? ProjectStatus.CANCELLED
-          : ProjectStatus.UNCONFIRMED;
+      // Status is already in frontend format
+      const frontendStatus = ticket.status;
 
       // Convert backend service to frontend project type for filtering
       const frontendProjectType =

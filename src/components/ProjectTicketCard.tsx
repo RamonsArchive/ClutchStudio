@@ -1,37 +1,24 @@
 "use client";
 import React, { useState } from "react";
-import { ProjectTicket } from "@prisma/client";
 import {
   ProjectStatus,
   PROJECT_STATUS_LABELS,
   PROJECT_TYPE_LABELS,
+  ProjectTicketType,
 } from "@/types/GlobalTypes";
 import { updateProjectStatus } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 interface Props {
-  projectTicket: ProjectTicket;
+  projectTicket: ProjectTicketType;
 }
 
 const ProjectTicketCard = ({ projectTicket }: Props) => {
   const router = useRouter();
   const [projectStatus, setProjectStatus] = useState<ProjectStatus>(() => {
-    // Convert backend status to frontend status for initial state
-    switch (projectTicket.status) {
-      case "PENDING":
-        return ProjectStatus.UNCONFIRMED;
-      case "IN_PROGRESS":
-        return ProjectStatus.IN_PROGRESS;
-      case "COMPLETED":
-        return ProjectStatus.COMPLETED;
-      case "ARCHIVED":
-        return ProjectStatus.ARCHIVED;
-      case "CANCELLED":
-        return ProjectStatus.CANCELLED;
-      default:
-        return ProjectStatus.UNCONFIRMED;
-    }
+    // Status is already in frontend format
+    return projectTicket.status;
   });
 
   const getServiceDisplay = (service: string) => {

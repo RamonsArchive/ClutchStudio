@@ -252,6 +252,19 @@ export const fetchDashboardData = async () => {
     const projectTickets = await prisma.projectTicket.findMany({
       orderBy: {
         createdAt: 'desc' // Most recent first
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        phoneNumber: true,
+        organization: true,
+        message: true,
+        service: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
       }
     });
 
