@@ -100,7 +100,6 @@ const RecentProjectCard = ({
         start: "top bottom",
         end: "bottom 95%",
         scrub: 1,
-        markers: true,
       },
     });
 
@@ -118,7 +117,6 @@ const RecentProjectCard = ({
         start: "top bottom",
         end: "bottom 95%",
         scrub: 1,
-        markers: true,
       },
     });
 
@@ -134,7 +132,6 @@ const RecentProjectCard = ({
         start: "top bottom",
         end: "bottom 95%",
         scrub: 1,
-        markers: true,
       },
     });
 
@@ -149,7 +146,6 @@ const RecentProjectCard = ({
         start: "top bottom",
         end: "bottom 95%",
         scrub: 1,
-        markers: true,
       },
     });
 
@@ -166,7 +162,6 @@ const RecentProjectCard = ({
         start: "top bottom",
         end: "bottom 95%",
         scrub: 1,
-        markers: true,
       },
     });
 

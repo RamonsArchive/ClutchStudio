@@ -249,7 +249,6 @@ export const RecentProjects = [
     GoldenEagle,
     YoloV8,
     Relay,
-    CorporateVsPodcast,
 ]
 
 // all projects
