@@ -5,6 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import ContactButton from "./ContactButton";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -337,34 +338,44 @@ const TitleSection = ({
         <>
           <div className="absolute inset-0 pointer-events-none">
             {/* Scattered light icons */}
-            <img
+            <Image
               id="clutch-fist-light-1"
               src="/Assets/Logos/clutchFistLight.svg"
               alt=""
+              width={64}
+              height={64}
               className="absolute top-10 left-10 w-16 h-16 opacity-10 rotate-12"
             />
-            <img
+            <Image
               id="clutch-fist-light-2"
               src="/Assets/Logos/clutchFistLight.svg"
               alt=""
+              width={48}
+              height={48}
               className="absolute top-20 right-20 w-12 h-12 opacity-15 -rotate-6"
             />
-            <img
+            <Image
               id="clutch-fist-light-3"
               src="/Assets/Logos/clutchFistLight.svg"
               alt=""
+              width={80}
+              height={80}
               className="absolute bottom-20 left-1/4 w-20 h-20 opacity-10 rotate-45"
             />
-            <img
+            <Image
               id="clutch-fist-light-4"
               src="/Assets/Logos/clutchFistLight.svg"
               alt=""
+              width={56}
+              height={56}
               className="absolute top-1/3 right-1/3 w-14 h-14 opacity-12 -rotate-12"
             />
-            <img
+            <Image
               id="clutch-fist-light-5"
               src="/Assets/Logos/clutchFistLight.svg"
               alt=""
+              width={72}
+              height={72}
               className="absolute bottom-10 right-10 w-18 h-18 opacity-6 rotate-30"
             />
           </div>
