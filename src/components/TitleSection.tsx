@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -30,6 +30,7 @@ const TitleSection = ({
   const headerTitleRef = useRef<HTMLHeadingElement>(null);
   const mainTitleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLHeadingElement>(null);
+
   useGSAP(() => {
     // Create SplitText instances
     const headerTitleElm = headerTitleRef.current;
@@ -98,40 +99,55 @@ const TitleSection = ({
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
         if (!isMobile) {
-          // Single consolidated ScrollTrigger for all text elements
-          const textScrollTrigger = {
-            trigger: "#title-container",
-            start: "top top",
-            end: "bottom 20%",
-            scrub: 1.2, // Increased for smoother performance
-          };
-
-          // Batch all text animations into one timeline for better performance
-          const scrollAnimationTL = gsap.timeline({
-            scrollTrigger: textScrollTrigger,
+          // Single consolidated ScrollTrigger for all text elements (same as mobile)
+          const desktopScrollTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: "#title-container",
+              start: "top top",
+              end: "bottom 1%",
+              scrub: 1.2,
+            },
           });
 
           // Add all text animations to the same timeline
           if (headerTitleSplits?.words) {
-            scrollAnimationTL.to(headerTitleSplits.words, {
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.02, // Reduced stagger for smoother performance
-            });
-          }
-
-          scrollAnimationTL.to(mainTitleSplits.chars, {
-            opacity: 0,
-            yPercent: -100,
-            stagger: 0.02,
-          });
-
-          if (subTitleSplits?.words) {
-            scrollAnimationTL.to(subTitleSplits.words, {
+            desktopScrollTL.to(headerTitleSplits.words, {
               opacity: 0,
               yPercent: -100,
               stagger: 0.02,
             });
+          }
+
+          gsap
+            .timeline({
+              scrollTrigger: {
+                trigger: "#main-title",
+                start: "top top",
+                end: "bottom 10%",
+                scrub: 1.2,
+              },
+            })
+            .to(mainTitleSplits.chars, {
+              opacity: 0,
+              yPercent: -100,
+              stagger: 0.02,
+            });
+
+          if (subTitleSplits?.words) {
+            gsap
+              .timeline({
+                scrollTrigger: {
+                  trigger: "#sub-title",
+                  start: "top top",
+                  end: "bottom 10%",
+                  scrub: 1.2,
+                },
+              })
+              .to(subTitleSplits.words, {
+                opacity: 0,
+                yPercent: -100,
+                stagger: 0.02,
+              });
           }
 
           // Separate trigger for contact button (less frequent updates)
@@ -141,7 +157,7 @@ const TitleSection = ({
                 trigger: "#contact-button",
                 start: "top top",
                 end: "bottom 40%",
-                scrub: 1.5, // Slower scrub for better performance
+                scrub: 1.5,
               },
               opacity: 0,
               yPercent: -100,
@@ -161,7 +177,6 @@ const TitleSection = ({
               scrollTrigger: iconsScrollTrigger,
             });
 
-            // Batch all icon animations
             iconsTL
               .to("#clutch-fist-light-1, #clutch-fist-light-3", {
                 opacity: 0,
@@ -389,7 +404,7 @@ const TitleSection = ({
                 {subTitle}
               </h2>
             )}
-            {includeContactButton && <ContactButton className="invisible" />}
+            {includeContactButton && <ContactButton />}
           </div>
         </div>
       ) : (
