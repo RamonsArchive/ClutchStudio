@@ -15,7 +15,7 @@ const ProjectDetailsCard = ({ data }: { data: ProjectTemplate }) => {
   const isClient = data.isClient;
   const tags = data.tags;
   const url = data.websiteUrl ? data.websiteUrl : data.githubUrl;
-  const isWebsite = url ? true : false;
+  const isWebsite = data.isWebsite;
   const visitButtonRef = useRef<HTMLAnchorElement>(null);
   const clientRef = useRef<HTMLDivElement>(null);
   const clientNameRef = useRef<HTMLHeadingElement>(null);

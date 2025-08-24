@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ImageCarousel from "./ImageCarousel";
 import { ProjectTemplate } from "@/types/GlobalTypes";
 import VisitButton from "./VisitButton";
+import ViewProjectButton from "./ViewProjectButton";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
@@ -30,11 +31,13 @@ const RecentProjectCard = ({
   const mobileDescriptionRef = useRef<HTMLHeadingElement>(null);
   const mobileTagsRef = useRef<HTMLDivElement>(null);
   const mobileButtonRef = useRef<HTMLAnchorElement>(null);
+  const mobileViewProjectButtonRef = useRef<HTMLAnchorElement>(null);
 
   const desktopTitleRef = useRef<HTMLHeadingElement>(null);
   const desktopDescriptionRef = useRef<HTMLHeadingElement>(null);
   const desktopTagsRef = useRef<HTMLDivElement>(null);
   const desktopButtonRef = useRef<HTMLAnchorElement>(null);
+  const desktopViewProjectButtonRef = useRef<HTMLAnchorElement>(null);
 
   const [isMobile, setIsMobile] = useState(false);
 
@@ -61,28 +64,39 @@ const RecentProjectCard = ({
     const buttonRef = isMobile
       ? mobileButtonRef.current
       : desktopButtonRef.current;
+    const viewProjectButtonRef = isMobile
+      ? mobileViewProjectButtonRef.current
+      : desktopViewProjectButtonRef.current;
 
     console.log("Current refs:", {
       titleRef,
       descriptionRef,
       tagsRef,
       buttonRef,
+      viewProjectButtonRef,
       isMobile,
     });
 
-    if (!titleRef || !descriptionRef || !tagsRef || !buttonRef) {
+    if (
+      !titleRef ||
+      !descriptionRef ||
+      !tagsRef ||
+      !buttonRef ||
+      !viewProjectButtonRef
+    ) {
       console.error("RecentProjectCard: One or more elements not found", {
         title: !!titleRef,
         description: !!descriptionRef,
         tags: !!tagsRef,
         button: !!buttonRef,
+        viewProjectButton: !!viewProjectButtonRef,
         isMobile,
       });
       return;
     }
 
     const titleSplits = SplitText.create(titleRef, {
-      type: "chars",
+      type: "words",
     });
 
     const descriptionSplits = SplitText.create(descriptionRef, {
@@ -91,23 +105,8 @@ const RecentProjectCard = ({
 
     const tagSplit = SplitText.create(tagsRef, { type: "chars" });
 
-    const trigger = isMobile
-      ? "#recent-project-card-mobile"
-      : "#recent-project-card-desktop";
-
-    // const tl = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: trigger,
-    //     start: "top bottom",
-    //     end: "bottom 40%",
-    //     scrub: 1,
-    //     markers: false,
-    //     toggleActions: "play none none reverse",
-    //   },
-    // });
-
     // Animate title characters
-    gsap.from(titleSplits.chars, {
+    gsap.from(titleSplits.words, {
       opacity: 0,
       yPercent: -100,
       stagger: 0.025,
@@ -171,6 +170,23 @@ const RecentProjectCard = ({
       },
     });
 
+    // Animate ViewProjectButton
+    gsap.from(viewProjectButtonRef, {
+      opacity: 0,
+      yPercent: -100,
+      ease: "power2.inOut",
+      duration: 0.8,
+      scrollTrigger: {
+        trigger: isMobile
+          ? mobileViewProjectButtonRef.current
+          : desktopViewProjectButtonRef.current,
+        start: "top bottom",
+        end: "bottom 95%",
+        scrub: 1,
+        markers: true,
+      },
+    });
+
     // Cleanup function
     return () => {
       // Kill ScrollTrigger to prevent memory leaks
@@ -207,8 +223,12 @@ const RecentProjectCard = ({
         >
           {workDescription}
         </h2>
-        <div className="flex w-full mt-8">
+        <div className="flex w-full mt-8 flex-row gap-3 md:gap-5">
           <VisitButton url={url} isWebsite={isWebsite} ref={desktopButtonRef} />
+          <ViewProjectButton
+            href={`/projects/${project.id}`}
+            ref={desktopViewProjectButtonRef}
+          />
         </div>
       </div>
     );
@@ -251,11 +271,15 @@ const RecentProjectCard = ({
             >
               {workDescription}
             </h2>
-            <div className="flex w-full mt-5">
+            <div className="flex w-full mt-5 flex-row gap-3">
               <VisitButton
                 url={url}
                 isWebsite={isWebsite}
                 ref={mobileButtonRef}
+              />
+              <ViewProjectButton
+                href={`/projects/${project.id}`}
+                ref={mobileViewProjectButtonRef}
               />
             </div>
           </div>

@@ -15,7 +15,7 @@ const ContactButton = ({
       ref={ref}
       className="contact-gradient-btn px-6 py-3 rounded-lg cursor-pointer text-center w-full max-w-xl font-funnel-sans text-white text-[12px] xs:text-[16px] font-medium"
     >
-      Contact Us
+      Let's Connect
     </Link>
   );
 };

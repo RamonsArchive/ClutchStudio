@@ -192,6 +192,7 @@ export type ProjectTemplate = {
   dateCompleted: string, // YYYY-MM-DD format
   featured: boolean, // Show on homepage
   isClient: boolean, // Is the client a real person?
+  isWebsite: boolean, // Is the project a website?
   status: "live" | "in-progress" | "archived" // live, in-progress, archived
 }
 

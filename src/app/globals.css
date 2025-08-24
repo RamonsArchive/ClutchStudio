@@ -580,6 +580,66 @@ body {
   }
 }
 
+/* View Project Button Animated Gradient */
+.view-project-button-gradient {
+  position: relative;
+  background: linear-gradient(
+    45deg,
+    #22c55e,
+    #16a34a,
+    #15803d,
+    #166534,
+    #14532d,
+    #00e676
+  );
+  background-size: 300% 300%;
+  animation: viewProjectGradientFlow 15s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+.view-project-button-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    #dcfce7,
+    #bbf7d0,
+    #86efac,
+    #4ade80,
+    #22c55e,
+    #00e676
+  );
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.view-project-button-gradient:hover::before {
+  opacity: 1;
+  animation: viewProjectGradientFlow 10s ease-in-out infinite;
+}
+
+@keyframes viewProjectGradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 100%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 0%;
+  }
+}
+
 /* TitleSection.css - Add this to your global CSS or create as CSS module */
 
 /* High-performance gradient animation for main title */
