@@ -73,6 +73,8 @@ const Footer = () => {
                   <Link
                     key={link.id}
                     href={link.href}
+                    target={link.target}
+                    rel={link.rel}
                     className="text-white text-[16px] md:text-[18px] font-medium hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out cursor-pointer"
                   >
                     {link.title}

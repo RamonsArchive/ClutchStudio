@@ -315,19 +315,32 @@ export const ContactData = {
 
 export const footerQuickLinks = [
     {
+        id: "github",
+        href: "https://github.com/RamonsArchive",
+        title: "GitHub",
+        target: "_blank",
+        rel: "noopener noreferrer",
+    },
+    {
       id: "terms",
       href: "/terms",
       title: "Terms of Service",
+      target: undefined,
+      rel: undefined,
     },
     {
       id: "privacy",
       href: "/privacy",
       title: "Privacy Policy",
-    },
+      target: undefined,
+      rel: undefined,
+    },  
     {
       id: "admin_login",
       href: "/admin/login",
       title: "Admin Login",
+      target: undefined,
+      rel: undefined,
     },
   ];
 
@@ -375,3 +388,110 @@ export const footerContact = [
 export const AdminLoginData = {
     title: "Admin Login",
 }
+
+
+export const TermsOfService = [
+  {
+    id: 1,
+    title: "Acceptance of Terms",
+    content: "By accessing or using this portfolio website, you agree to these Terms of Service. If you don't agree, please don't use the site."
+  },
+  {
+    id: 2,
+    title: "What This Site Is",
+    content: "This is my personal portfolio website showcasing my software development, web development, data science, and AI projects. It's designed to help potential clients and employers learn about my work and get in touch."
+  },
+  {
+    id: 3,
+    title: "Contacting Me",
+    content: "You can reach out through the contact form for project inquiries, collaboration opportunities, or just to say hello. I'll do my best to respond to all messages within a reasonable time."
+  },
+  {
+    id: 4,
+    title: "Portfolio Content",
+    content: "All projects, code samples, and work examples shown here are my own creations unless otherwise noted. Feel free to explore and get inspired, but please respect my intellectual property."
+  },
+  {
+    id: 5,
+    title: "What You Can't Do",
+    content: "Please don't try to hack the site, send spam, upload malicious files, or use the contact form for inappropriate purposes. Just be respectful and professional."
+  },
+  {
+    id: 6,
+    title: "Privacy",
+    content: "I only collect the information you choose to share when contacting me. I won't sell your data or use it for anything other than responding to your message. Your privacy matters to me."
+  },
+  {
+    id: 7,
+    title: "No Guarantees",
+    content: "While I'm passionate about delivering quality work, contacting me doesn't guarantee I'll take on your project. I'll evaluate each opportunity based on my availability, skills, and interest."
+  },
+  {
+    id: 8,
+    title: "My Liability",
+    content: "I'm not liable for any damages or issues that might arise from using this website. This site is provided as-is for informational and contact purposes only. Any actual work would be covered by separate agreements."
+  },
+  {
+    id: 9,
+    title: "Site Availability",
+    content: "I try to keep the site running smoothly, but sometimes things break or I need to update it. I can't guarantee it'll always be available 24/7."
+  },
+  {
+    id: 10,
+    title: "Changes to Terms",
+    content: "I might update these terms occasionally. If I make significant changes, I'll try to let you know. Using the site after changes means you accept the new terms."
+  },
+  {
+    id: 11,
+    title: "Contact Me",
+    content: "Questions about these terms? Just reach out at clutchdev.apps@gmail.com. I'm happy to clarify anything!"
+  }
+];
+
+export const PrivacyPolicy = [
+  {
+    id: 1,
+    title: "Information I Collect",
+    content: "I only collect the information you choose to share when contacting me through the contact form. This typically includes your name, email address, and any project details or messages you send. I don't collect any information automatically or track your browsing behavior."
+  },
+  {
+    id: 2,
+    title: "How I Use Your Information",
+    content: "I use your contact information solely to respond to your inquiries about potential projects, collaboration opportunities, or general questions. I don't use it for marketing, selling, or sharing with third parties. Your information is only used to communicate back with you."
+  },
+  {
+    id: 3,
+    title: "Information Sharing",
+    content: "I don't sell, trade, or share your personal information with anyone. Your contact details stay private and are only used for our direct communication. I don't have any third-party services that would access your information."
+  },
+  {
+    id: 4,
+    title: "Data Protection",
+    content: "I take your privacy seriously and implement basic security measures to protect your information. However, since this is a portfolio site, I recommend not sharing sensitive or confidential information through the contact form."
+  },
+  {
+    id: 5,
+    title: "Your Privacy Rights",
+    content: "You can ask me to delete any information you've shared, or request to see what I have stored. Since I only keep basic contact details, there's not much to manage, but I'm happy to help with any privacy concerns."
+  },
+  {
+    id: 6,
+    title: "Data Retention",
+    content: "I keep your contact information only as long as needed to respond to your inquiry and follow up if necessary. If you don't hear back from me or the conversation ends, I'll delete your information within a reasonable time."
+  },
+  {
+    id: 7,
+    title: "Cookies and Tracking",
+    content: "This site doesn't use cookies or tracking technologies. I don't monitor your visits or collect analytics data. It's a simple portfolio site designed to showcase my work and provide a way for you to get in touch."
+  },
+  {
+    id: 8,
+    title: "Policy Updates",
+    content: "If I make any changes to this privacy policy, I'll update the date at the top. Since this is a personal portfolio site, changes are unlikely, but I'll keep you informed if anything important changes."
+  },
+  {
+    id: 9,
+    title: "Contact Me",
+    content: "Questions about your privacy or this policy? Just reach out at clutchdev.apps@gmail.com. I'm committed to being transparent about how I handle your information."
+  }
+];

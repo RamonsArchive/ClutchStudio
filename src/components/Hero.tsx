@@ -21,12 +21,12 @@ const Hero = () => {
             }
             subTitle={
               <>
-                Web + ML/DS focus{" "}
                 <span className="font-bold">
                   High‑performance websites, plus machine‑learning and
                   data‑science
                 </span>{" "}
-                solutions that drive revenue.
+                solutions that deliver{" "}
+                <span className="font-bold">exceptional results</span>.
               </>
             }
             headerClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-light italic break-words"
