@@ -22,9 +22,9 @@ const ProjectGrid = ({
     const projectAnimationTL = gsap.timeline({
       scrollTrigger: {
         trigger: "#projects-grid", // We'll add this ID to the grid container
-        start: "top 99%",
-        end: "top 50%",
-        scrub: 1,
+        start: "top 95%",
+        end: "top 30%",
+        scrub: 1.5,
       },
     });
 

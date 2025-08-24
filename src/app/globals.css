@@ -136,6 +136,26 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
+/* Specific styles for select elements to prevent collapse */
+select.form-input {
+  opacity: 1; /* Make select visible */
+  appearance: none; /* Remove default browser styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px; /* Space for dropdown arrow */
+  cursor: pointer;
+}
+
+/* Ensure select maintains proper dimensions */
+select.form-input:focus {
+  box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.3);
+  opacity: 1;
+}
+
 .form-input:focus {
   box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.3);
 }
