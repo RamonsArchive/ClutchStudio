@@ -29,9 +29,9 @@ const Hero = () => {
                 <span className="font-bold">exceptional results</span>.
               </>
             }
-            headerClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-light italic break-words"
-            mainTitleClassName="font-funnel-sans text-white text-[26px] xs:text-[28px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold break-words"
-            subTitleClassName="font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-regular break-words"
+            headerClassName="font-funnel-sans text-white text-[12px] md:text-[16px] font-light italic break-words"
+            mainTitleClassName="font-funnel-sans text-white text-[26px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold break-words"
+            subTitleClassName="font-funnel-sans text-white text-[12px] md:text-[16px] font-regular break-words"
             includeContactButton={true}
           />
         </div>

@@ -43,6 +43,7 @@ const TitleSection = ({
     const isHeaderTitle = headerTitleElm ? true : false;
     const isSubTitle = subTitleElm ? true : false;
 
+    // Batch SplitText creation for better performance
     const headerTitleSplits = isHeaderTitle
       ? SplitText.create(headerTitleElm, {
           type: "words",
@@ -52,6 +53,12 @@ const TitleSection = ({
     const mainTitleSplits = SplitText.create(mainTitleElm, {
       type: "chars",
     });
+
+    const subTitleSplits = isSubTitle
+      ? SplitText.create(subTitleElm, {
+          type: "words",
+        })
+      : null;
 
     // Apply premium gradient effect using CSS classes (like contact button)
     if (mainTitleSplits.chars) {
@@ -66,29 +73,14 @@ const TitleSection = ({
       });
     }
 
-    const subTitleSplits = isSubTitle
-      ? SplitText.create(subTitleElm, {
-          type: "words",
-        })
-      : null;
+    // Set initial state for all characters - batch operations
+    const allElements = [
+      ...(headerTitleSplits?.words || []),
+      ...(subTitleSplits?.words || []),
+      ...mainTitleSplits.chars,
+    ];
 
-    // Set initial state for all characters
-
-    if (headerTitleSplits?.words) {
-      gsap.set(headerTitleSplits.words, {
-        visibility: "hidden",
-        yPercent: -100,
-      });
-    }
-
-    if (subTitleSplits?.words) {
-      gsap.set(subTitleSplits.words, {
-        visibility: "hidden",
-        yPercent: -100,
-      });
-    }
-
-    gsap.set(mainTitleSplits.chars, {
+    gsap.set(allElements, {
       visibility: "hidden",
       yPercent: -100,
     });
@@ -106,223 +98,159 @@ const TitleSection = ({
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
         if (!isMobile) {
-          if (headerTitleSplits?.words) {
-            gsap.to(headerTitleSplits.words, {
-              scrollTrigger: {
-                trigger: "#header-title",
-                start: "top top",
-                end: "bottom 30%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.01,
-            });
-          }
+          // Single consolidated ScrollTrigger for all text elements
+          const textScrollTrigger = {
+            trigger: "#title-container",
+            start: "top top",
+            end: "bottom 20%",
+            scrub: 1.2, // Increased for smoother performance
+          };
 
-          gsap.to(mainTitleSplits.chars, {
-            scrollTrigger: {
-              trigger: "#main-title",
-              start: "top top",
-              end: "bottom 20%",
-              scrub: 0.8,
-            },
-            opacity: 0,
-            yPercent: -100,
-            stagger: 0.01,
-          });
-
-          if (subTitleSplits?.words) {
-            gsap.to(subTitleSplits.words, {
-              scrollTrigger: {
-                trigger: "#sub-title",
-                start: "top top", // Changed from top+100 to top-100 to start higher
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.01,
-            });
-          }
-          if (contactButtonElm) {
-            gsap.to(contactButtonElm, {
-              scrollTrigger: {
-                trigger: "#contact-button",
-                start: "top top",
-                end: "bottom 40%",
-                scrub: 0.01,
-              },
-              opacity: 0,
-              yPercent: -100,
-            });
-          }
-          if (includeBackgroundIcons) {
-            gsap.to("#clutch-fist-light-1", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-1",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              xPercent: -50,
-              stagger: 0.01,
-            });
-            gsap.to("#clutch-fist-light-2", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-2",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              xPercent: 50,
-              stagger: 0.01,
-            });
-            gsap.to("#clutch-fist-light-3", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-3",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              xPercent: -50,
-              stagger: 0.01,
-            });
-            gsap.to("#clutch-fist-light-4", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-4",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              visibility: "hidden",
-              yPercent: -100,
-              xPercent: 50,
-              stagger: 0.01,
-            });
-            gsap.to("#clutch-fist-light-5", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-5",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              xPercent: 50,
-              stagger: 0.01,
-            });
-          }
-        } else {
+          // Batch all text animations into one timeline for better performance
           const scrollAnimationTL = gsap.timeline({
-            scrollTrigger: {
-              trigger: "#title-container",
-              start: "top top",
-              end: "bottom 20%",
-              scrub: 0.8,
-            },
+            scrollTrigger: textScrollTrigger,
           });
 
+          // Add all text animations to the same timeline
           if (headerTitleSplits?.words) {
             scrollAnimationTL.to(headerTitleSplits.words, {
-              visibility: "hidden",
+              opacity: 0,
               yPercent: -100,
-              stagger: 0.01,
+              stagger: 0.02, // Reduced stagger for smoother performance
             });
           }
 
           scrollAnimationTL.to(mainTitleSplits.chars, {
-            visibility: "hidden",
+            opacity: 0,
             yPercent: -100,
-            stagger: 0.01,
+            stagger: 0.02,
           });
 
           if (subTitleSplits?.words) {
             scrollAnimationTL.to(subTitleSplits.words, {
               opacity: 0,
               yPercent: -100,
-              stagger: 0.01,
+              stagger: 0.02,
             });
           }
+
+          // Separate trigger for contact button (less frequent updates)
           if (contactButtonElm) {
             gsap.to(contactButtonElm, {
               scrollTrigger: {
                 trigger: "#contact-button",
                 start: "top top",
                 end: "bottom 40%",
-                scrub: 0.01,
+                scrub: 1.5, // Slower scrub for better performance
               },
               opacity: 0,
               yPercent: -100,
             });
           }
+
+          // Consolidated background icons animation
           if (includeBackgroundIcons) {
-            gsap.to("#clutch-fist-light-1", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-1",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              visibility: "hidden",
-              yPercent: -100,
-              xPercent: -50,
-              stagger: 0.01,
+            const iconsScrollTrigger = {
+              trigger: "#title-container",
+              start: "top top",
+              end: "bottom 20%",
+              scrub: 1.2,
+            };
+
+            const iconsTL = gsap.timeline({
+              scrollTrigger: iconsScrollTrigger,
             });
-            gsap.to("#clutch-fist-light-2", {
+
+            // Batch all icon animations
+            iconsTL
+              .to("#clutch-fist-light-1, #clutch-fist-light-3", {
+                opacity: 0,
+                yPercent: -100,
+                xPercent: -50,
+                stagger: 0.1,
+              })
+              .to(
+                "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5",
+                {
+                  opacity: 0,
+                  yPercent: -100,
+                  xPercent: 50,
+                  stagger: 0.1,
+                }
+              );
+          }
+        } else {
+          // Mobile optimization - single timeline for all animations
+          const mobileScrollTL = gsap.timeline({
+            scrollTrigger: {
+              trigger: "#title-container",
+              start: "top top",
+              end: "bottom 20%",
+              scrub: 1.2,
+            },
+          });
+
+          if (headerTitleSplits?.words) {
+            mobileScrollTL.to(headerTitleSplits.words, {
+              opacity: 0,
+              yPercent: -100,
+              stagger: 0.02,
+            });
+          }
+
+          mobileScrollTL.to(mainTitleSplits.chars, {
+            opacity: 0,
+            yPercent: -100,
+            stagger: 0.02,
+          });
+
+          if (subTitleSplits?.words) {
+            mobileScrollTL.to(subTitleSplits.words, {
+              opacity: 0,
+              yPercent: -100,
+              stagger: 0.02,
+            });
+          }
+
+          if (contactButtonElm) {
+            gsap.to(contactButtonElm, {
               scrollTrigger: {
-                trigger: "#clutch-fist-light-2",
+                trigger: "#contact-button",
                 start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
+                end: "bottom 40%",
+                scrub: 1.5,
               },
               opacity: 0,
               yPercent: -100,
-              xPercent: 50,
-              stagger: 0.01,
             });
-            gsap.to("#clutch-fist-light-3", {
+          }
+
+          if (includeBackgroundIcons) {
+            const mobileIconsTL = gsap.timeline({
               scrollTrigger: {
-                trigger: "#clutch-fist-light-3",
+                trigger: "#title-container",
                 start: "top top",
                 end: "bottom 20%",
-                scrub: 0.8,
+                scrub: 1.2,
               },
-              opacity: 0,
-              yPercent: -100,
-              xPercent: -50,
-              stagger: 0.01,
             });
-            gsap.to("#clutch-fist-light-4", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-4",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              xPercent: 50,
-              stagger: 0.01,
-            });
-            gsap.to("#clutch-fist-light-5", {
-              scrollTrigger: {
-                trigger: "#clutch-fist-light-5",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 0.8,
-              },
-              opacity: 0,
-              yPercent: -100,
-              xPercent: 50,
-              stagger: 0.01,
-            });
+
+            mobileIconsTL
+              .to("#clutch-fist-light-1, #clutch-fist-light-3", {
+                opacity: 0,
+                yPercent: -100,
+                xPercent: -50,
+                stagger: 0.1,
+              })
+              .to(
+                "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5",
+                {
+                  opacity: 0,
+                  yPercent: -100,
+                  xPercent: 50,
+                  stagger: 0.1,
+                }
+              );
           }
         }
       },
@@ -371,9 +299,15 @@ const TitleSection = ({
     return () => {
       initialAnimationTL.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      mainTitleSplits.revert();
+
+      // Properly revert SplitText instances
+      if (mainTitleSplits) mainTitleSplits.revert();
       if (subTitleSplits) subTitleSplits.revert();
       if (headerTitleSplits) headerTitleSplits.revert();
+
+      // Clear any remaining GSAP instances
+      gsap.killTweensOf(allElements);
+      if (contactButtonElm) gsap.killTweensOf(contactButtonElm);
     };
   }, [headerTitle, mainTitle, subTitle]);
 
