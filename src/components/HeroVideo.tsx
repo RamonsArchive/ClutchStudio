@@ -67,7 +67,7 @@ const HeroVideo = () => {
         onEnter: () => {
           // Start playing when entering the trigger zone
           video.play().catch(() => {
-            console.log("Video autoplay blocked, will play on scroll");
+            // Video autoplay blocked, will play on scroll
           });
         },
         onLeave: () => {
@@ -77,7 +77,7 @@ const HeroVideo = () => {
         onEnterBack: () => {
           // Resume playing when scrolling back up
           video.play().catch(() => {
-            console.log("Video autoplay blocked, will play on scroll");
+            // Video autoplay blocked, will play on scroll
           });
         },
         onLeaveBack: () => {
@@ -133,7 +133,7 @@ const HeroVideo = () => {
         className="absolute inset-0 w-full h-full object-cover"
         onLoadedMetadata={() => {
           // Ensure video is ready for scrubbing
-          console.log("Video loaded and ready");
+          // console.log("Video loaded and ready");
         }}
       />
       {/* Optional overlay for better text readability if needed */}

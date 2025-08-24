@@ -20,23 +20,16 @@ const requireAdmin = async (request: NextRequest, response: NextResponse) => {
       !request.nextUrl.pathname.startsWith('/admin/login')) {
     
     const token = request.cookies.get('admin_session')?.value;
-    console.log("Token:", token);
     
     if (!token) {
-      console.log("no token, redirecting to /admin/login");
       return NextResponse.redirect(new URL('/admin/login', request.url));
     }
 
-    console.log("token is present, verifying token with jose");
-    
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
       const { payload } = await jwtVerify(token, secret);
-      console.log("Jose decoded:", payload);
-      console.log("token is valid, returning response");
       return response;
     } catch (error) {
-      console.log("Jose verify error:", error);
       const redirectResponse = NextResponse.redirect(new URL('/admin/login', request.url));
       redirectResponse.cookies.delete('admin_session');
       return redirectResponse;

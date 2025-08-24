@@ -161,8 +161,6 @@ export const authenticateAdmin = async (data: FormData) => {
       }
   
       const { username, password } = Object.fromEntries(data.entries()) as Record<string, string>;
-      console.log("Username: ", username);
-      console.log("Password: ", password);
   
       if (!username || !password) {
         return parseServerActionResponse({
@@ -182,7 +180,6 @@ export const authenticateAdmin = async (data: FormData) => {
           passwordHash: true,
         }
       });
-      console.log("existingUser in authenticateAdmin", existingUser);
   
       if (!existingUser) {
         return parseServerActionResponse({
@@ -193,7 +190,6 @@ export const authenticateAdmin = async (data: FormData) => {
       }
   
       const isValidPassword = await bcrypt.compare(password, existingUser.passwordHash);
-      console.log("isValidPassword in authenticateAdmin", isValidPassword);
       if (!isValidPassword) {
         return parseServerActionResponse({
           status: "ERROR",
@@ -208,7 +204,6 @@ export const authenticateAdmin = async (data: FormData) => {
           lastLogin: new Date(),
         }
       });
-      console.log("updatedUser in authenticateAdmin", updatedUser);
   
       if (isValidPassword) {
         const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
@@ -216,9 +211,6 @@ export const authenticateAdmin = async (data: FormData) => {
           .setProtectedHeader({ alg: 'HS256' })
           .setExpirationTime('8h')
           .sign(secret);
-  
-        console.log("token in authenticateAdmin", token);
-        console.log("token in authenticateAdmin", token);
   
         (await cookies()).set('admin_session', token, {
           httpOnly: true,

@@ -284,7 +284,6 @@ const CreateAdminForm = () => {
       const formObject = formDataToObject(formData);
 
       await adminFormSchema.parseAsync(formObject);
-      console.log(formObject);
 
       const result = await createAdminUser(formData);
 
@@ -321,7 +320,6 @@ const CreateAdminForm = () => {
           string,
           string[]
         >;
-        console.log(fieldErrors);
         const formattedErrors: Record<string, string> = {};
         Object.keys(fieldErrors).forEach((key) => {
           formattedErrors[key] = fieldErrors[key]?.[0] || "";

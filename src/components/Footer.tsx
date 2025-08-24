@@ -42,7 +42,7 @@ const Footer = () => {
           <div className="flex flex-col gap-5 p-5 md:p-10 bg-primary-background-500/20 rounded-xl">
             <div className="flex flex-col gap-5">
               <h1 className="font-funnel-sans text-white text-[32px] md:text-[38px] font-bold w-full">
-                Let's Connect
+                Let&apos;s Connect
               </h1>
               <div className="flex flex-col gap-3 break-words">
                 {footerContact.map((contact) => (

@@ -1,8 +1,6 @@
 import React from "react";
 import { Projects } from "@/constants";
 import TitleSection from "@/components/TitleSection";
-import RecentProjectCard from "@/components/RecentProjectCard";
-import ProjectDisplayCard from "@/components/ProjectDisplayCard";
 import AllProjects from "@/components/AllProjects";
 
 const page = () => {

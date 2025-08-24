@@ -28,8 +28,6 @@ const AdminFilters = ({
   innerRef,
   resetFilters,
 }: Props) => {
-  console.log("selectedFilters", selectedFilters);
-  console.log("options", options);
   return (
     <div className="flex flex-col gap-5 p-5 bg-secondary-800/50 rounded-xl">
       <div className="flex flex-row gap-2 items-center">
@@ -52,7 +50,6 @@ const AdminFilters = ({
               }
               options={options[index] || []}
               isOpen={isOpen[index] || false}
-              selectedFilters={selectedFilters[index]}
             />
           ))}
         </div>

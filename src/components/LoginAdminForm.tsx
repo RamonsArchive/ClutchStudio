@@ -230,7 +230,6 @@ const LoginAdminForm = () => {
       const formObject = formDataToObject(formData);
 
       await loginFormSchema.parseAsync(formObject);
-      console.log(formObject);
 
       const result = await authenticateAdmin(formData);
 
@@ -266,7 +265,6 @@ const LoginAdminForm = () => {
           string,
           string[]
         >;
-        console.log(fieldErrors);
         const formattedErrors: Record<string, string> = {};
         Object.keys(fieldErrors).forEach((key) => {
           formattedErrors[key] = fieldErrors[key]?.[0] || "";

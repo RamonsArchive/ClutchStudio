@@ -488,7 +488,6 @@ const ContactForm = ({
       formObject.phoneNumber = cleanNumber;
 
       await contactFormSchema.parseAsync(formObject);
-      console.log(formObject);
 
       const result = await writeProjectTickt(formObject as FromDataType);
 
@@ -527,7 +526,6 @@ const ContactForm = ({
           string,
           string[]
         >;
-        console.log(fieldErrors);
         const formattedErrors: Record<string, string> = {};
         Object.keys(fieldErrors).forEach((key) => {
           formattedErrors[key] = fieldErrors[key]?.[0] || "";
@@ -555,7 +553,7 @@ const ContactForm = ({
     }
   };
 
-  const [state, formAction, isPending] = useActionState(submitForm, {
+  const [, formAction, isPending] = useActionState(submitForm, {
     status: "INITIAL",
     error: "",
     data: null,

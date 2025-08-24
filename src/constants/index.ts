@@ -234,8 +234,8 @@ export const TheStu: ProjectTemplate = {
         mainImage: "/Projects/TheStu/SocialMedia/theStuImage.jpg",
         galleryImages: ["/Projects/TheStu/theStuImage1.png", "/Projects/TheStu/theStuImage2.png", "/Projects/TheStu/theStuImage3.png"]
     },
-    websiteUrl: "",
-    githubUrl: "https://github.com/RamonsArchive/TheStudio", // if website url is not present, use github url
+    websiteUrl: "https://thestu.one",
+    githubUrl: "", // if website url is not present, use github url
     dateCompleted: "2025-06-10",
     featured: true,
     isClient: false,

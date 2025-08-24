@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import ContactButton from "./ContactButton";
-//import useMobile from "@/components/useMobile";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -31,8 +30,6 @@ const TitleSection = ({
   const headerTitleRef = useRef<HTMLHeadingElement>(null);
   const mainTitleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLHeadingElement>(null);
-  //const { isMobile } = useMobile();
-  //console.log("isMobile in title section", isMobile);
   useGSAP(() => {
     // Create SplitText instances
     const headerTitleElm = headerTitleRef.current;
@@ -42,17 +39,9 @@ const TitleSection = ({
     if (includeContactButton) {
       contactButtonElm = document.getElementById("contact-button");
     }
-    console.log("headerTitleElm", headerTitleElm);
-    console.log("mainTitleElm", mainTitleElm);
-    console.log("subTitleElm", subTitleElm);
 
     const isHeaderTitle = headerTitleElm ? true : false;
     const isSubTitle = subTitleElm ? true : false;
-
-    // if (!headerTitleElm || !mainTitleElm || !subTitleElm) {
-    //   console.log("TitleSection: One or more title elements not found");
-    //   return;
-    // }
 
     const headerTitleSplits = isHeaderTitle
       ? SplitText.create(headerTitleElm, {
@@ -63,12 +52,6 @@ const TitleSection = ({
     const mainTitleSplits = SplitText.create(mainTitleElm, {
       type: "chars",
     });
-
-    console.log(
-      "Main title splits created:",
-      mainTitleSplits.chars?.length,
-      "characters"
-    );
 
     // Apply premium gradient effect using CSS classes (like contact button)
     if (mainTitleSplits.chars) {
@@ -123,7 +106,6 @@ const TitleSection = ({
         const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
         if (!isMobile) {
-          console.log("isMobile is false anaimting as such");
           if (headerTitleSplits?.words) {
             gsap.to(headerTitleSplits.words, {
               scrollTrigger: {
@@ -238,7 +220,6 @@ const TitleSection = ({
             });
           }
         } else {
-          console.log("isMobile is true anaimting as such");
           const scrollAnimationTL = gsap.timeline({
             scrollTrigger: {
               trigger: "#title-container",

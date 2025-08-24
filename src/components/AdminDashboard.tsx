@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { DashboardDataType } from "@/types/GlobalTypes";
 import ProjectTicketSection from "./ProjectTicketSection";
 
@@ -8,11 +8,6 @@ const AdminDashboard = ({
 }: {
   dashboardData: DashboardDataType;
 }) => {
-  const [mode] = useState<"projectTickets">("projectTickets");
-
-  console.log(mode);
-  console.log(dashboardData);
-
   return (
     <div className="flex flex-col w-full h-full gap-5 md:gap-20">
       <div className="flex flex-col md:flex-row w-full h-full gap-5">

@@ -68,15 +68,6 @@ const RecentProjectCard = ({
       ? mobileViewProjectButtonRef.current
       : desktopViewProjectButtonRef.current;
 
-    console.log("Current refs:", {
-      titleRef,
-      descriptionRef,
-      tagsRef,
-      buttonRef,
-      viewProjectButtonRef,
-      isMobile,
-    });
-
     if (
       !titleRef ||
       !descriptionRef ||
@@ -84,14 +75,6 @@ const RecentProjectCard = ({
       !buttonRef ||
       !viewProjectButtonRef
     ) {
-      console.error("RecentProjectCard: One or more elements not found", {
-        title: !!titleRef,
-        description: !!descriptionRef,
-        tags: !!tagsRef,
-        button: !!buttonRef,
-        viewProjectButton: !!viewProjectButtonRef,
-        isMobile,
-      });
       return;
     }
 

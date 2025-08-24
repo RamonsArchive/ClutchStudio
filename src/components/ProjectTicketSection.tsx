@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo } from "react";
-import { ProjectTicket, TicketStatus, ServiceType } from "@prisma/client";
+import { ProjectTicket } from "@prisma/client";
 import { ProjectStatus, ProjectType } from "@/types/GlobalTypes";
 import ProjectTicketCard from "./ProjectTicketCard";
 import { useEffect, useState, useRef } from "react";

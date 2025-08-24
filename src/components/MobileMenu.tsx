@@ -1,11 +1,10 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { navLinks } from "@/constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { createPortal } from "react-dom";
-import { createSplitTextAnimation } from "@/lib/utils";
 import SplitText from "gsap/SplitText";
 
 gsap.registerPlugin(SplitText);
@@ -59,8 +58,6 @@ const MobileMenu = () => {
 
   // Handle open/close state changes
   useGSAP(() => {
-    console.log("isMenuOpen changed to:", isMenuOpen);
-
     if (isMenuOpen) {
       // Opening the menu
       setShouldRender(true);
@@ -68,7 +65,6 @@ const MobileMenu = () => {
       document.addEventListener("touchstart", handleClickOutside);
     } else if (shouldRender) {
       // Closing the menu (only if it was previously rendered)
-      console.log("animating text out and menu out");
 
       const tl = gsap.timeline({
         onComplete: () => {

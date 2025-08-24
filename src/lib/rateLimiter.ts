@@ -34,7 +34,6 @@ export const getClientId = async () => {
     const ip = headersList.get("x-forwarded-for") || headersList.get("x-real-ip");
     const userAgent = headersList.get("user-agent");
     const acceptLanguage = headersList.get("accept-language");
-    console.log(headersList.get("cookie"));
     return `ip:${crypto.createHash("sha256")
       .update(`${ip}-${userAgent}-${acceptLanguage}`)
       .digest("hex")}`;

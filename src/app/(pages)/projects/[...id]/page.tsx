@@ -8,7 +8,6 @@ import React from "react";
 const ProjectPage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const data = ProjectPageMap[id as keyof typeof ProjectPageMap];
-  console.log(data);
 
   const images = data?.images?.galleryImages;
 

@@ -13,7 +13,6 @@ interface Props {
   updateFilters: (value: string, title: string) => void;
   options: FilterOption[];
   isOpen: boolean;
-  selectedFilters: FilterOption[];
 }
 
 const DropDownMenu = ({
@@ -23,7 +22,6 @@ const DropDownMenu = ({
   updateFilters,
   options,
   isOpen,
-  selectedFilters,
 }: Props) => {
   return (
     <div className="relative" ref={outerRef}>
