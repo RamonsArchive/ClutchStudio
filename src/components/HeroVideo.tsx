@@ -46,7 +46,7 @@ const HeroVideo = () => {
           const videoDuration = video.duration;
 
           // Check if we're past the 0.5 second mark for the goal moment
-          if (video.currentTime >= 0.5 && !hasScoredGoal) {
+          if (video.currentTime >= 0.3 && !hasScoredGoal) {
             setHasScoredGoal(true);
           }
 
