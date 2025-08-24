@@ -24,6 +24,8 @@ export const HeroData = {
    
 }
 
+
+// projects
 export const GoldenEagle: ProjectTemplate = {
     id: "golden-eagle-estates",
     projectType: "WEB_DEVELOPMENT",
@@ -51,18 +53,55 @@ export const GoldenEagle: ProjectTemplate = {
     status: "live" // live, in-progress, archived
   }
 
+export const Relay: ProjectTemplate ={
+    id: "relay",
+    projectType: "WEB_DEVELOPMENT",
+    text: {
+        name: "Relay",
+        subName: "An e-commerce platform for the 21st century",
+        title: "Developed a modern full-stack e-commerce platform to meet the evolving needs of contemporary online businesses",
+        workDescription: "I expanded my knowledge of e-commerce platforms by creating a modern, scalable solution that prioritizes ease of use and maintainability. I leveraged cutting-edge tools and deepened my understanding of API integration and best practices to implement a robust payment system, accurate shipping estimates, and efficient database storage via Sanity CMS. Additionally, I utilized Next.js, Tailwind CSS, and Shadcn UI to craft a modern, responsive, and intuitive user interface that delivers an exceptional shopping experience.",
+        personalDescription: "As a personal project, I set out to create a modern e-commerce platform that would be both user-friendly and maintainable, while pushing me to explore and master new technologies, frameworks, and libraries. My goal was to build something that not only met current industry standards but also incorporated innovative approaches that would set it apart. This project became a journey of continuous learning and technical growth, allowing me to experiment with emerging web technologies and best practices in modern web development.",
+    },
+    tags: ["Web Design", "Web Development", "Web Hosting", "Business Infrastructure", "Project Management"],
+    images: {
+        mainImage: "/Projects/Relay/SocialMedia/relaySocialPostImage.jpg",
+        galleryImages: [
+            "/Projects/Relay/relayImage1.png",
+            "/Projects/Relay/relayImage6.png",
+            "/Projects/Relay/relayImage7.png",
+            "/Projects/Relay/relayImage2.png",
+            "/Projects/Relay/relayImage3.png",
+            "/Projects/Relay/relayImage4.png",
+            "/Projects/Relay/relayImage5.png",
+        ]
+    },
+    websiteUrl: "https://relay-liart.vercel.app",
+    githubUrl: "", // if website url is not present, use github url
+    dateCompleted: "2025-06-23",
+    featured: true,
+    isClient: true,
+    status: "live" // live, in-progress, archived
+}
 
+
+// recent projects in hero section
 export const RecentProjects = [
     GoldenEagle,
+    Relay,
 ]
 
+// all projects
 export const Projects = [
     GoldenEagle,
+    Relay,
 ]
 
 
+// project page map
 export const ProjectPageMap = {
     "golden-eagle-estates": GoldenEagle,
+    "relay": Relay,
 }
 
 

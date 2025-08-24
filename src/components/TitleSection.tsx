@@ -412,31 +412,31 @@ const TitleSection = ({
             {/* Scattered light icons */}
             <img
               id="clutch-fist-light-1"
-              src="/Logos/clutchFistLight.svg"
+              src="/Assets/Logos/clutchFistLight.svg"
               alt=""
               className="absolute top-10 left-10 w-16 h-16 opacity-10 rotate-12"
             />
             <img
               id="clutch-fist-light-2"
-              src="/Logos/clutchFistLight.svg"
+              src="/Assets/Logos/clutchFistLight.svg"
               alt=""
               className="absolute top-20 right-20 w-12 h-12 opacity-15 -rotate-6"
             />
             <img
               id="clutch-fist-light-3"
-              src="/Logos/clutchFistLight.svg"
+              src="/Assets/Logos/clutchFistLight.svg"
               alt=""
-              className="absolute bottom-20 left-1/4 w-20 h-20 opacity-8 rotate-45"
+              className="absolute bottom-20 left-1/4 w-20 h-20 opacity-10 rotate-45"
             />
             <img
               id="clutch-fist-light-4"
-              src="/Logos/clutchFistLight.svg"
+              src="/Assets/Logos/clutchFistLight.svg"
               alt=""
               className="absolute top-1/3 right-1/3 w-14 h-14 opacity-12 -rotate-12"
             />
             <img
               id="clutch-fist-light-5"
-              src="/Logos/clutchFistLight.svg"
+              src="/Assets/Logos/clutchFistLight.svg"
               alt=""
               className="absolute bottom-10 right-10 w-18 h-18 opacity-6 rotate-30"
             />
