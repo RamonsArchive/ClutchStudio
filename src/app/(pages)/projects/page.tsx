@@ -3,6 +3,7 @@ import { Projects } from "@/constants";
 import TitleSection from "@/components/TitleSection";
 import RecentProjectCard from "@/components/RecentProjectCard";
 import ProjectDisplayCard from "@/components/ProjectDisplayCard";
+import AllProjects from "@/components/AllProjects";
 
 const page = () => {
   return (
@@ -18,11 +19,7 @@ const page = () => {
           includeBackgroundIcons={true}
         />
       </div>
-      <div className="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 md:gap-10 p-3 md:p-10">
-        {Projects.map((project, index) => (
-          <ProjectDisplayCard key={index} project={project} />
-        ))}
-      </div>
+      <AllProjects projects={Projects} />
     </section>
   );
 };
