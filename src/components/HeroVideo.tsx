@@ -115,7 +115,7 @@ const HeroVideo = () => {
         >
           <div className="bg-black/80 backdrop-blur-sm rounded-lg px-4 sm:px-6 py-2 sm:py-4 border border-white/20">
             <h2 className="text-white text-center text-[14px] sm:text-[16px] md:text-[20px] font-bold">
-              This is your moment! ☄️ 🤘
+              This is your moment! 🚀 ⚡
             </h2>
             <p className="text-white/90 text-center text-[12px] sm:text-[14x] md:text-[16px] mt-2">
               Team up with Clutch and make it happen
