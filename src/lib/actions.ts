@@ -9,6 +9,7 @@ import { Role } from "@prisma/client";
 import { cookies } from "next/headers";
 import { SignJWT } from "jose";
 import bcrypt from "bcryptjs";
+import { sendProjectTicketEmail } from "./ProjectTicketEmail";
 
 export const writeProjectTickt = async (formObject: FromDataType) => {
     try {
@@ -61,6 +62,26 @@ export const writeProjectTickt = async (formObject: FromDataType) => {
             data: null,
         });
       }
+
+      const emailResult = await sendProjectTicketEmail(
+        result.id, // projectId
+        result.id, // ticketId (using the same ID for now)
+        result.firstName,
+        result.lastName,
+        result.email,
+        result.phoneNumber,
+        result.service,
+        result.organization,
+        result.message
+      );
+
+      console.log('Email result:', emailResult);
+
+      if (!emailResult.success) {
+        console.error('Failed to send email:', emailResult.error);
+        // Still return success for the ticket creation, but log the email failure
+      }
+      console.log('Email sent successfully:', emailResult.messageId);
 
       return parseServerActionResponse({
         status: "SUCCESS",
