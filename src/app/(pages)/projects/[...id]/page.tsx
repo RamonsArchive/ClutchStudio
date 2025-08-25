@@ -24,7 +24,7 @@ const ProjectPage = async ({ params }: { params: Promise<{ id: string }> }) => {
           includeBackgroundIcons={true}
         />
       </div>
-      <div className="flex flex-col gap-10 md:gap-15 rounded-xl md:p-10 p-5 w-full">
+      <div className="flex flex-col gap-10 md:gap-15 rounded-xl md:p-10 p-3 w-full">
         <div className="flex w-full h-[80vh]">
           <ImageCarousel images={images} />
         </div>

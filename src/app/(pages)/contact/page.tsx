@@ -17,7 +17,7 @@ const ContactPage = () => {
           useCharsForMainTitle={true}
         />
       </div>
-      <div className="flex flex-col w-full p-5 md:p-10">
+      <div className="flex flex-col w-full p-3 md:p-10">
         <ContactForm
           subtitle={subtitle}
           subsubtitle={subsubtitle}
