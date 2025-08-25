@@ -235,7 +235,7 @@ const AboutContent = ({
   ]);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-5 md:gap-10 w-full p-3 rounded-xl md:p-5">
+    <div className="flex flex-col lg:flex-row gap-5 w-full p-3 rounded-xl md:p-5">
       <div className="flex justify-start w-full h-fit">
         <div className=" grid grid-cols-2 gap-3 md:gap-5">
           {images.map((image, index) => (
