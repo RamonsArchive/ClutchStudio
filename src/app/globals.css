@@ -8,6 +8,14 @@
 html {
   scroll-behavior: smooth;
   scrollbar-width: none;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 /* Webkit-specific pointer events */
