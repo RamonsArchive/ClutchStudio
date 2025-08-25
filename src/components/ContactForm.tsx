@@ -167,208 +167,88 @@ const ContactForm = ({
       );
 
       // create scroll trigger and animation for subtitles
-      gsap.to(subtitleSplit.words, {
-        scrollTrigger: {
-          trigger: subtitleRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
+      // Use single container trigger for all text elements
+      const allTextElements = [
+        ...subtitleSplit.words,
+        ...subsubtitleSplit.words,
+      ];
 
-      gsap.to(subsubtitleSplit.words, {
+      gsap.to(allTextElements, {
         scrollTrigger: {
-          trigger: subsubtitleRef.current,
+          trigger: "#contact-form",
           start: "top 90%",
-          end: "bottom bottom",
+          end: "top 30%",
           scrub: 1,
         },
         opacity: 1,
         yPercent: 0,
+        stagger: 0.03, // Small stagger for smooth sequence
       });
 
       // create scroll trigger and animation for labels
-      gsap.to(firstNameLabelSplit.words, {
-        scrollTrigger: {
-          trigger: firstNameLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
+      // Use single container trigger for all labels to avoid conflicts
+      const allLabels = [
+        ...firstNameLabelSplit.words,
+        ...lastNameLabelSplit.words,
+        ...emailLabelSplit.words,
+        ...phoneNumberLabelSplit.words,
+        ...serviceLabelSplit.words,
+        ...organizationLabelSplit.words,
+        ...messageLabelSplit.words,
+      ];
 
-      gsap.to(lastNameLabelSplit.words, {
+      gsap.to(allLabels, {
         scrollTrigger: {
-          trigger: lastNameLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
+          trigger: "#contact-form",
+          start: "top 85%",
+          end: "top 25%",
           scrub: 1,
         },
         opacity: 1,
         yPercent: 0,
-      });
-
-      gsap.to(emailLabelSplit.words, {
-        scrollTrigger: {
-          trigger: emailLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      gsap.to(phoneNumberLabelSplit.words, {
-        scrollTrigger: {
-          trigger: phoneNumberLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      gsap.to(serviceLabelSplit.words, {
-        scrollTrigger: {
-          trigger: serviceLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      gsap.to(organizationLabelSplit.words, {
-        scrollTrigger: {
-          trigger: organizationLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      gsap.to(messageLabelSplit.words, {
-        scrollTrigger: {
-          trigger: messageLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
+        stagger: 0.02, // Small stagger for smooth sequence
       });
 
       // create scroll trigger and animation for inputs
-      // firstName and lastName are handled above with custom triggers
+      // Use single container trigger for all inputs to avoid conflicts
+      const allInputs = [
+        firstNameRef.current,
+        lastNameRef.current,
+        emailRef.current,
+        phoneNumberRef.current,
+        serviceRef.current,
+        organizationRef.current,
+        messageRef.current,
+      ];
 
-      gsap.to(firstNameRef.current, {
+      gsap.to(allInputs, {
         scrollTrigger: {
-          trigger: firstNameRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
+          trigger: "#contact-form",
+          start: "top 80%",
+          end: "top 20%",
           scrub: 1,
         },
         opacity: 1,
         yPercent: 0,
+        stagger: 0.05, // Small stagger for smooth sequence
       });
 
-      gsap.to(lastNameRef.current, {
-        scrollTrigger: {
-          trigger: lastNameRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
+      // create scroll trigger and animation for accent divider and submit button
+      const remainingElements = [
+        accentDividerRef.current,
+        submitButtonRef.current,
+      ];
 
-      gsap.to(emailRef.current, {
+      gsap.to(remainingElements, {
         scrollTrigger: {
-          trigger: emailRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
+          trigger: "#contact-form",
+          start: "top 75%",
+          end: "top 15%",
           scrub: 1,
         },
         opacity: 1,
         yPercent: 0,
-      });
-
-      gsap.to(phoneNumberRef.current, {
-        scrollTrigger: {
-          trigger: phoneNumberRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      gsap.to(serviceRef.current, {
-        scrollTrigger: {
-          trigger: serviceRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      gsap.to(organizationRef.current, {
-        scrollTrigger: {
-          trigger: organizationRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      gsap.to(messageRef.current, {
-        scrollTrigger: {
-          trigger: messageRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      // create scroll trigger and animation for accent divider
-      gsap.to(accentDividerRef.current, {
-        scrollTrigger: {
-          trigger: accentDividerRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-      });
-
-      // create scroll trigger and animation for submit button
-      gsap.to(submitButtonRef.current, {
-        scrollTrigger: {
-          trigger: submitButtonRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
+        stagger: 0.1, // Slightly more stagger for visual separation
       });
 
       return () => {
