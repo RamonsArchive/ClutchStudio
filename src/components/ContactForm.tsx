@@ -461,7 +461,15 @@ const ContactForm = ({
       messageLabelSplit.revert();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  });
+  }, [
+    firstNameLabelRef.current,
+    lastNameLabelRef.current,
+    emailLabelRef.current,
+    phoneNumberLabelRef.current,
+    serviceLabelRef.current,
+    organizationLabelRef.current,
+    messageLabelRef.current,
+  ]);
 
   const resetForm = () => {
     setStoreFormData({

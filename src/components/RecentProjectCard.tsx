@@ -83,7 +83,7 @@ const RecentProjectCard = ({
     });
 
     const descriptionSplits = SplitText.create(descriptionRef, {
-      type: "words",
+      type: "lines",
     });
 
     const tagSplit = SplitText.create(tagsRef, { type: "chars" });
@@ -104,7 +104,7 @@ const RecentProjectCard = ({
     });
 
     // Animate description words
-    gsap.from(descriptionSplits.words, {
+    gsap.from(descriptionSplits.lines, {
       opacity: 0,
       yPercent: -100,
       stagger: 0.025,
