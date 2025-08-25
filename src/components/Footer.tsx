@@ -20,7 +20,7 @@ const Footer = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 hover:opacity-75 transition-opacity cursor-pointer"
+                    className="group flex items-center gap-2 cursor-pointer w-fit hover:opacity-50 active:opacity-50 transition-opacity duration-300 ease-in-out"
                     aria-label={`Follow us on ${social.title}`}
                   >
                     <div className="relative w-6 h-6 sm:w-7 sm:h-7">
@@ -29,10 +29,10 @@ const Footer = () => {
                         fill
                         alt=""
                         sizes="10vw"
-                        className="object-contain filter brightness-0 invert"
+                        className="object-contain filter brightness-0 invert cursor-pointer hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out "
                       />
                     </div>
-                    <span className="hidden text-[16px] md:text-[18px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors">
+                    <span className="hidden text-[16px] md:text-[18px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors cursor-pointer">
                       {social.title}
                     </span>
                   </Link>
@@ -54,7 +54,7 @@ const Footer = () => {
                     <h2 className="font-funnel-sans text-white text-[14px] md:text-[16px] font-light">
                       {contact.title}:
                     </h2>
-                    <p className="font-funnel-sans text-[16px] md:text-[18px] font-medium text-white hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out break-words">
+                    <p className="font-funnel-sans text-[16px] md:text-[18px] font-medium text-white hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out break-words cursor-pointer w-fit">
                       {contact.value}
                     </p>
                   </div>
@@ -75,7 +75,7 @@ const Footer = () => {
                     href={link.href}
                     target={link.target}
                     rel={link.rel}
-                    className="text-white text-[16px] md:text-[18px] font-medium hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out cursor-pointer"
+                    className="text-white text-[16px] md:text-[18px] font-medium hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out cursor-pointer w-fit"
                   >
                     {link.title}
                   </Link>

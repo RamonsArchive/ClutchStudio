@@ -1,6 +1,7 @@
+"use client";
 import { ProjectTemplate } from "@/types/GlobalTypes";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 
 const ProjectDisplayCard = ({
@@ -10,16 +11,30 @@ const ProjectDisplayCard = ({
   project: ProjectTemplate;
   "data-project-index"?: number;
 }) => {
+  const [isTouched, setIsTouched] = useState(false);
   const mainImage = project.images.mainImage;
   const id = project.id;
   const name = project.text.name;
   const subName = project.text.subName;
+
+  const handleTouchStart = () => {
+    setIsTouched(true);
+  };
+
+  const handleTouchEnd = () => {
+    // Keep content visible for a moment after touch
+    setTimeout(() => {
+      setIsTouched(false);
+    }, 2000);
+  };
 
   return (
     <Link
       href={`/projects/${id}`}
       className="group relative flex-center w-full h-full border-1 border-white/50 rounded-lg overflow-hidden"
       data-project-index={dataProjectIndex}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       <Image
         src={mainImage}
@@ -28,7 +43,11 @@ const ProjectDisplayCard = ({
         height={500}
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 w-full h-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out flex items-end p-5">
+      <div
+        className={`absolute inset-0 w-full h-full bg-black/50 transition-opacity duration-300 ease-in-out flex items-end p-5 ${
+          isTouched ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+        }`}
+      >
         <div className="flex flex-col gap-2">
           <h2 className="text-white text-[18px] xs:text-[20px] sm:text-[24px] md:text-[28px] lg:text-[32px] font-bold">
             {name}
