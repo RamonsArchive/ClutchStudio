@@ -34,7 +34,7 @@ const Navbar = () => {
           className="relative flex-center h-full w-[175px] cursor-pointer"
         >
           <Image
-            src="/Assets/Logos/LightLogos/lightClutchLogoSVG.svg"
+            src="/Assets/Logos/LightLogos/lightLogoLightFistDesktop.svg"
             alt="logo"
             fill
             className="object-cover object-top w-full h-full cursor-pointer"
