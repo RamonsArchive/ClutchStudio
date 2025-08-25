@@ -404,7 +404,7 @@ const TitleSection = ({
               {mainTitle}
             </h1>
           </div>
-          <div className="flex flex-col md:flex-center gap-3 xs:gap-8 md:gap-10">
+          <div className="flex flex-col md:flex-center gap-2 xs:gap-8 md:gap-10">
             {subTitle && (
               <h2
                 id="sub-title"
