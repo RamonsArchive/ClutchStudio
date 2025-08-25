@@ -25,7 +25,7 @@ const ProjectDisplayCard = ({
     // Keep content visible for a moment after touch
     setTimeout(() => {
       setIsTouched(false);
-    }, 2000);
+    }, 3000);
   };
 
   return (
