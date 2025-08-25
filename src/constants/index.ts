@@ -347,7 +347,7 @@ export const footerSocials = [
     {
         id: "instagram",
         path: "/Assets/Icons/instagram.svg",
-        href: "https://www.instagram.com/ramon.mnm/",
+        href: "https://www.instagram.com/clutchdev_studio",
         ariaLabel: "Follow us on Instagram",
         title: "Instagram",
     },
