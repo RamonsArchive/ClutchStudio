@@ -633,12 +633,12 @@ body {
   position: relative;
   background: linear-gradient(
     45deg,
-    #22c55e,
-    #16a34a,
-    #15803d,
-    #166534,
-    #14532d,
-    #00e676
+    #e2e8f0,
+    #cbd5e0,
+    #a0aec0,
+    #86efac,
+    #4ade80,
+    #22c55e
   );
   background-size: 300% 300%;
   animation: viewProjectGradientFlow 15s ease-in-out infinite;
@@ -654,12 +654,12 @@ body {
   bottom: 0;
   background: linear-gradient(
     45deg,
+    #f8fafc,
+    #f1f5f9,
+    #e2e8f0,
     #dcfce7,
     #bbf7d0,
-    #86efac,
-    #4ade80,
-    #22c55e,
-    #00e676
+    #86efac
   );
   background-size: 300% 300%;
   border-radius: inherit;

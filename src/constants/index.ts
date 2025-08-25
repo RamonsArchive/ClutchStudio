@@ -121,7 +121,7 @@ export const CorporateVsPodcast: ProjectTemplate = {
     id: "corporate-vs-podcast",
     projectType: "DATA_SCIENCE",
     text: {
-        name: "Corporate vs Podcast Viewership Analysis",
+        name: "Corporate vs Podcast",
         subName: "Comparing corporate vs podcast viewership from 2020 to 2024",
         title: "Analyzed corporate vs podcast viewership from 2020 to 2024 to determine whether a decrease in corporate viewership coincides with an increase in podcast viewership",
         workDescription: "As part of a group project for my Data Science class at UCSD, I led the development of a comprehensive data pipeline to analyze corporate media vs. political podcast viewership from 2020-2024. I built three main systems: 1) A Selenium-based web scraper for Variety.com to extract corporate media viewership data, 2) A Wayback Machine API integration to gather Spotify podcast rankings from 2021-2024, and 3) A YouTube Data API pipeline with intelligent caching to fetch podcast viewership metrics. The project involved processing 1,040 observations across multiple data treatments, implementing outlier detection using IQR, Modified Z-Score, and Z-Score methods, and conducting comprehensive statistical analysis including ANOVA, Kruskal-Wallis tests, and effect size calculations. I handled significant technical challenges including API rate limiting, data standardization, and creating algorithms to filter valid podcasts with consistent yearly data.",
@@ -175,7 +175,7 @@ export const NBA_Analysis_Hackathon: ProjectTemplate = {
     id: "nba-analysis-hackathon",
     projectType: "DATA_SCIENCE",
     text: {
-        name: "NBA Analysis Hackathon",
+        name: "NBA Analysis",
         subName: "Analyzing NBA player performance data",
         title: "Built a comprehensive NBA player recommendation system and interactive guessing game with 99% accuracy",
         workDescription: "I developed a full-stack Next.js web application that combines NBA player data analysis with interactive gaming features. The project includes a smart player recommendation system that filters players by budget, height, age, and position using weighted scoring algorithms, and an AI-powered guessing game that asks intelligent questions to identify players with high accuracy. I integrated multiple data sources including NBA API for player statistics and salary databases, implemented real-time data processing with CSV parsing and validation, and built a modern UI with Tailwind CSS featuring responsive design, interactive elements, and beautiful data visualizations.",
@@ -199,7 +199,7 @@ export const DSGN1_Text_Analysis: ProjectTemplate = {
     id: "dsgn1-text-analysis",
     projectType: "DATA_SCIENCE",
     text: {
-        name: "DSGN1 Text Analysis",
+        name: "Text Analysis",
         subName: "Analyzing survey data using text analysis",
         title: "Analyzing survey data about bathroom stall doors from the DSGN1 course at UCSD",
         workDescription: "I built a comprehensive text analysis pipeline to analyze survey responses about bathroom stall door experiences. Using Python, Pandas, and advanced regex pattern matching, I processed raw survey data to extract insights about privacy concerns, door swing preferences, lock security issues, and gender-based emotional responses. The analysis included sentiment analysis, keyword frequency counting, and pattern recognition to identify common design problems. I created interactive visualizations using Matplotlib and Seaborn to present findings about gap-related privacy issues, door swing direction preferences, and security concerns in an easily digestible format.",
