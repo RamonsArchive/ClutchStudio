@@ -60,7 +60,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col w-full gap-15 px-3 pb-5 md:px-10 md:pb-10 rounded-xl">
+      <div className="flex flex-col w-full gap-5 px-3 pb-5 md:px-5 md:pb-5 rounded-xl">
         {RecentProjects.map((project, index) => (
           <Suspense
             key={project.id}

@@ -87,7 +87,7 @@ const AllProjects = ({ projects }: { projects: ProjectTemplate[] }) => {
   const hasActiveFilters = selectedServiceType !== "ALL";
 
   return (
-    <div className="w-full h-full py-10 px-3 sm:px-6 lg:px-8">
+    <div className="w-full h-full py-10 px-3 md:px-5">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-12">
