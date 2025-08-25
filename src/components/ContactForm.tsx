@@ -72,290 +72,319 @@ const ContactForm = ({
   }>({});
 
   useGSAP(() => {
-    // get the split text elements
-
-    // title splits
-    const subtitleSplit = new SplitText(subtitleRef.current, {
-      type: "words",
-    });
-    const subsubtitleSplit = new SplitText(subsubtitleRef.current, {
-      type: "words",
-    });
-
-    // label splits
-    const firstNameLabelSplit = new SplitText(firstNameLabelRef.current, {
-      type: "words",
-    });
-    const lastNameLabelSplit = new SplitText(lastNameLabelRef.current, {
-      type: "words",
-    });
-    const emailLabelSplit = new SplitText(emailLabelRef.current, {
-      type: "words",
-    });
-    const phoneNumberLabelSplit = new SplitText(phoneNumberLabelRef.current, {
-      type: "words",
-    });
-    const serviceLabelSplit = new SplitText(serviceLabelRef.current, {
-      type: "words",
-    });
-    const organizationLabelSplit = new SplitText(organizationLabelRef.current, {
-      type: "words",
-    });
-    const messageLabelSplit = new SplitText(messageLabelRef.current, {
-      type: "words",
-    });
-
-    gsap.set(
-      [
-        ...subtitleSplit.words,
-        ...subsubtitleSplit.words,
-        ...firstNameLabelSplit.words,
-        ...lastNameLabelSplit.words,
-        ...emailLabelSplit.words,
-        ...phoneNumberLabelSplit.words,
-        ...serviceLabelSplit.words,
-        ...organizationLabelSplit.words,
-        ...messageLabelSplit.words,
-      ],
-      {
-        opacity: 0,
-        yPercent: 100,
+    // Add a small delay for Vercel deployment stability
+    const initAnimations = () => {
+      // Check if all refs are available before proceeding
+      if (
+        !subtitleRef.current ||
+        !subsubtitleRef.current ||
+        !firstNameLabelRef.current ||
+        !lastNameLabelRef.current ||
+        !firstNameRef.current ||
+        !lastNameRef.current ||
+        !emailRef.current ||
+        !phoneNumberLabelRef.current ||
+        !serviceLabelRef.current ||
+        !organizationLabelRef.current ||
+        !messageLabelRef.current ||
+        !accentDividerRef.current ||
+        !submitButtonRef.current
+      ) {
+        setTimeout(initAnimations, 100);
+        return;
       }
-    );
 
-    gsap.set(
-      [
-        firstNameRef.current,
-        lastNameRef.current,
-        emailRef.current,
-        phoneNumberRef.current,
-        serviceRef.current,
-        organizationRef.current,
-        messageRef.current,
-        accentDividerRef.current,
-        submitButtonRef.current,
-      ],
-      {
-        opacity: 0,
-        yPercent: 100,
-      }
-    );
+      // get the split text elements
 
-    // create scroll trigger and animation for subtitles
-    gsap.to(subtitleSplit.words, {
-      scrollTrigger: {
-        trigger: subtitleRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      // title splits
+      const subtitleSplit = new SplitText(subtitleRef.current, {
+        type: "words",
+      });
+      const subsubtitleSplit = new SplitText(subsubtitleRef.current, {
+        type: "words",
+      });
 
-    gsap.to(subsubtitleSplit.words, {
-      scrollTrigger: {
-        trigger: subsubtitleRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      // label splits
+      const firstNameLabelSplit = new SplitText(firstNameLabelRef.current, {
+        type: "words",
+      });
+      const lastNameLabelSplit = new SplitText(lastNameLabelRef.current, {
+        type: "words",
+      });
+      const emailLabelSplit = new SplitText(emailLabelRef.current, {
+        type: "words",
+      });
+      const phoneNumberLabelSplit = new SplitText(phoneNumberLabelRef.current, {
+        type: "words",
+      });
+      const serviceLabelSplit = new SplitText(serviceLabelRef.current, {
+        type: "words",
+      });
+      const organizationLabelSplit = new SplitText(
+        organizationLabelRef.current,
+        {
+          type: "words",
+        }
+      );
+      const messageLabelSplit = new SplitText(messageLabelRef.current, {
+        type: "words",
+      });
 
-    // create scroll trigger and animation for labels
-    gsap.to(firstNameLabelSplit.words, {
-      scrollTrigger: {
-        trigger: firstNameLabelRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.set(
+        [
+          ...subtitleSplit.words,
+          ...subsubtitleSplit.words,
+          ...firstNameLabelSplit.words,
+          ...lastNameLabelSplit.words,
+          ...emailLabelSplit.words,
+          ...phoneNumberLabelSplit.words,
+          ...serviceLabelSplit.words,
+          ...organizationLabelSplit.words,
+          ...messageLabelSplit.words,
+        ],
+        {
+          opacity: 0,
+          yPercent: 100,
+        }
+      );
 
-    gsap.to(lastNameLabelSplit.words, {
-      scrollTrigger: {
-        trigger: lastNameLabelRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.set(
+        [
+          firstNameRef.current,
+          lastNameRef.current,
+          emailRef.current,
+          phoneNumberRef.current,
+          serviceRef.current,
+          organizationRef.current,
+          messageRef.current,
+          accentDividerRef.current,
+          submitButtonRef.current,
+        ],
+        {
+          opacity: 0,
+          yPercent: 100,
+        }
+      );
 
-    gsap.to(emailLabelSplit.words, {
-      scrollTrigger: {
-        trigger: emailLabelRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      // create scroll trigger and animation for subtitles
+      gsap.to(subtitleSplit.words, {
+        scrollTrigger: {
+          trigger: subtitleRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(phoneNumberLabelSplit.words, {
-      scrollTrigger: {
-        trigger: phoneNumberLabelRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(subsubtitleSplit.words, {
+        scrollTrigger: {
+          trigger: subsubtitleRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(serviceLabelSplit.words, {
-      scrollTrigger: {
-        trigger: serviceLabelRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      // create scroll trigger and animation for labels
+      gsap.to(firstNameLabelSplit.words, {
+        scrollTrigger: {
+          trigger: firstNameLabelRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(organizationLabelSplit.words, {
-      scrollTrigger: {
-        trigger: organizationLabelRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(lastNameLabelSplit.words, {
+        scrollTrigger: {
+          trigger: lastNameLabelRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(messageLabelSplit.words, {
-      scrollTrigger: {
-        trigger: messageLabelRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(emailLabelSplit.words, {
+        scrollTrigger: {
+          trigger: emailLabelRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    // create scroll trigger and animation for inputs
-    gsap.to(firstNameRef.current, {
-      scrollTrigger: {
-        trigger: firstNameRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(phoneNumberLabelSplit.words, {
+        scrollTrigger: {
+          trigger: phoneNumberLabelRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(lastNameRef.current, {
-      scrollTrigger: {
-        trigger: lastNameRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(serviceLabelSplit.words, {
+        scrollTrigger: {
+          trigger: serviceLabelRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(emailRef.current, {
-      scrollTrigger: {
-        trigger: emailRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(organizationLabelSplit.words, {
+        scrollTrigger: {
+          trigger: organizationLabelRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(phoneNumberRef.current, {
-      scrollTrigger: {
-        trigger: phoneNumberRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(messageLabelSplit.words, {
+        scrollTrigger: {
+          trigger: messageLabelRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(serviceRef.current, {
-      scrollTrigger: {
-        trigger: serviceRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      // create scroll trigger and animation for inputs
+      // firstName and lastName are handled above with custom triggers
 
-    gsap.to(organizationRef.current, {
-      scrollTrigger: {
-        trigger: organizationRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(firstNameRef.current, {
+        scrollTrigger: {
+          trigger: firstNameRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    gsap.to(messageRef.current, {
-      scrollTrigger: {
-        trigger: messageRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(lastNameRef.current, {
+        scrollTrigger: {
+          trigger: lastNameRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    // create scroll trigger and animation for accent divider
-    gsap.to(accentDividerRef.current, {
-      scrollTrigger: {
-        trigger: accentDividerRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(emailRef.current, {
+        scrollTrigger: {
+          trigger: emailRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    // create scroll trigger and animation for submit button
-    gsap.to(submitButtonRef.current, {
-      scrollTrigger: {
-        trigger: submitButtonRef.current,
-        start: "top 90%",
-        end: "bottom bottom",
-        scrub: 1,
-      },
-      opacity: 1,
-      yPercent: 0,
-    });
+      gsap.to(phoneNumberRef.current, {
+        scrollTrigger: {
+          trigger: phoneNumberRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
 
-    return () => {
-      subtitleSplit.revert();
-      subsubtitleSplit.revert();
-      firstNameLabelSplit.revert();
-      lastNameLabelSplit.revert();
-      emailLabelSplit.revert();
-      phoneNumberLabelSplit.revert();
-      serviceLabelSplit.revert();
-      organizationLabelSplit.revert();
-      messageLabelSplit.revert();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      gsap.to(serviceRef.current, {
+        scrollTrigger: {
+          trigger: serviceRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
+
+      gsap.to(organizationRef.current, {
+        scrollTrigger: {
+          trigger: organizationRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
+
+      gsap.to(messageRef.current, {
+        scrollTrigger: {
+          trigger: messageRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
+
+      // create scroll trigger and animation for accent divider
+      gsap.to(accentDividerRef.current, {
+        scrollTrigger: {
+          trigger: accentDividerRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
+
+      // create scroll trigger and animation for submit button
+      gsap.to(submitButtonRef.current, {
+        scrollTrigger: {
+          trigger: submitButtonRef.current,
+          start: "top 90%",
+          end: "bottom bottom",
+          scrub: 1,
+        },
+        opacity: 1,
+        yPercent: 0,
+      });
+
+      return () => {
+        subtitleSplit.revert();
+        subsubtitleSplit.revert();
+        firstNameLabelSplit.revert();
+        lastNameLabelSplit.revert();
+        emailLabelSplit.revert();
+        phoneNumberLabelSplit.revert();
+        serviceLabelSplit.revert();
+        organizationLabelSplit.revert();
+        messageLabelSplit.revert();
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      };
     };
+    initAnimations();
   }, [
     firstNameLabelRef.current,
     lastNameLabelRef.current,
@@ -497,7 +526,11 @@ const ContactForm = ({
           rounded-full shadow-sm"
       />
       <div className="flex flex-col gap-5">
-        <Form action={formAction} className="flex flex-col gap-10 md:gap-20">
+        <Form
+          action={formAction}
+          className="flex flex-col gap-10 md:gap-20"
+          id="contact-form"
+        >
           <div className="flex flex-col gap-5 md:gap-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
               <div className="flex flex-col gap-2">
