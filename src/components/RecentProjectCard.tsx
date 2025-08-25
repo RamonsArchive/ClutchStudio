@@ -184,7 +184,7 @@ const RecentProjectCard = ({
         <div ref={desktopTagsRef} className="flex flex-row items-center">
           {tags.slice(0, 3).map((tag, index) => (
             <div key={index} className="tag-item flex items-center">
-              <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/80 rounded-full border border-gray-200/50">
+              <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/90 rounded-full border border-gray-200/50">
                 {tag}
               </span>
               {index !== tags.slice(0, 3).length - 1 && (
@@ -238,7 +238,7 @@ const RecentProjectCard = ({
                   key={index}
                   className="tag-item flex items-center flex-shrink-0"
                 >
-                  <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/80 rounded-full border border-gray-200/50 whitespace-nowrap">
+                  <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/90 rounded-full border border-gray-200/50 whitespace-nowrap">
                     {tag}
                   </span>
                   {index !== tags.slice(0, 3).length - 1 && (
