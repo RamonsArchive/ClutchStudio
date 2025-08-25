@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import React from "react";
 import { Toaster } from "sonner";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -10,6 +11,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       {children}
       <Toaster richColors />
       <Footer />
+      <Analytics />
     </div>
   );
 };
