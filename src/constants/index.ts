@@ -232,7 +232,7 @@ export const TheStu: ProjectTemplate = {
     tags: ["Web Development", "JavaScript", "HTML", "CSS", "Audio API", "DOM Manipulation", "Music Player", "First Project"],
     images: {
         mainImage: "/Projects/TheStu/SocialMedia/theStuImage.jpg",
-        galleryImages: ["/Projects/TheStu/theStuImage1.png", "/Projects/TheStu/theStuImage2.png", "/Projects/TheStu/theStuImage3.png"]
+        galleryImages: ["/Projects/TheStu/theStuImage1.png", "/Projects/TheStu/theStuImage2.png"]
     },
     websiteUrl: "https://thestu.one",
     githubUrl: "", // if website url is not present, use github url
