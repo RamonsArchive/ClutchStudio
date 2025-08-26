@@ -67,6 +67,7 @@ const AboutContent = ({
 
     gsap.set(contactButtonRef.current, {
       visibility: "visible",
+      opacity: 0,
       yPercent: -100,
     });
 
