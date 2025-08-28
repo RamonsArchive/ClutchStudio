@@ -21,6 +21,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const [mobile, setMobile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
+  const [startY, setStartY] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
 
@@ -28,20 +29,20 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
   // Throttle function for smooth performance
   const throttle = useCallback(
-    (func: (clientX: number) => void, delay: number) => {
+    (func: (clientX: number, clientY: number) => void, delay: number) => {
       let timeoutId: NodeJS.Timeout;
       let lastExecTime = 0;
 
-      return function (clientX: number) {
+      return function (clientX: number, clientY: number) {
         const currentTime = Date.now();
 
         if (currentTime - lastExecTime > delay) {
-          func(clientX);
+          func(clientX, clientY);
           lastExecTime = currentTime;
         } else {
           clearTimeout(timeoutId);
           timeoutId = setTimeout(() => {
-            func(clientX);
+            func(clientX, clientY);
             lastExecTime = currentTime;
           }, delay - (currentTime - lastExecTime));
         }
@@ -137,9 +138,10 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   };
 
   // Touch/Mouse event handlers with throttling
-  const handleStart = useCallback((clientX: number) => {
+  const handleStart = useCallback((clientX: number, clientY: number) => {
     setIsDragging(true);
     setStartX(clientX);
+    setStartY(clientY);
     setCurrentX(clientX);
     setDragOffset(0);
 
@@ -150,19 +152,39 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   }, []);
 
   const handleMove = useCallback(
-    throttle((clientX: number) => {
+    throttle((clientX: number, clientY: number) => {
       if (!isDragging) return;
 
       const deltaX = clientX - startX;
+      const deltaY = clientY - startY;
+
+      // Buffer zone: only allow horizontal swipes if movement is clearly horizontal
+      const minHorizontalMovement = 20; // 20px minimum horizontal movement
+      const maxVerticalMovement = 30; // 30px maximum vertical movement allowed
+
+      if (
+        Math.abs(deltaX) < minHorizontalMovement ||
+        Math.abs(deltaY) > maxVerticalMovement
+      ) {
+        return; // Don't process as horizontal swipe
+      }
+
       const containerWidth = containerRef.current?.offsetWidth || 0;
       const imageWidth = containerWidth / images.length;
 
+      // Limit drag distance to prevent over-scrolling
+      const maxDragDistance = imageWidth * 0.8; // 80% of image width max
+      const clampedDeltaX = Math.max(
+        -maxDragDistance,
+        Math.min(maxDragDistance, deltaX)
+      );
+
       // Calculate drag offset as percentage
-      const offsetPercent = (deltaX / imageWidth) * 100;
+      const offsetPercent = (clampedDeltaX / imageWidth) * 100;
       setDragOffset(offsetPercent);
       setCurrentX(clientX);
     }, 16),
-    [isDragging, startX, images.length]
+    [isDragging, startX, startY, images.length]
   );
 
   const handleEnd = useCallback(() => {
@@ -224,12 +246,12 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   // Mouse events for desktop
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();
-    handleStart(e.clientX);
+    handleStart(e.clientX, e.clientY);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging) {
-      handleMove(e.clientX);
+      handleMove(e.clientX, e.clientY);
     }
   };
 
@@ -240,13 +262,13 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   // Touch events for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
     const touch = e.touches[0];
-    handleStart(touch.clientX);
+    handleStart(touch.clientX, touch.clientY);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      handleMove(touch.clientX);
+      handleMove(touch.clientX, touch.clientY);
     }
   };
 
