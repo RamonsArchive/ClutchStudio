@@ -27,25 +27,28 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const { currentImage, isPlaying, isLastImage } = carousel;
 
   // Throttle function for smooth performance
-  const throttle = useCallback((func: Function, delay: number) => {
-    let timeoutId: NodeJS.Timeout;
-    let lastExecTime = 0;
+  const throttle = useCallback(
+    (func: (clientX: number) => void, delay: number) => {
+      let timeoutId: NodeJS.Timeout;
+      let lastExecTime = 0;
 
-    return function (this: any, ...args: any[]) {
-      const currentTime = Date.now();
+      return function (clientX: number) {
+        const currentTime = Date.now();
 
-      if (currentTime - lastExecTime > delay) {
-        func.apply(this, args);
-        lastExecTime = currentTime;
-      } else {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-          func.apply(this, args);
+        if (currentTime - lastExecTime > delay) {
+          func(clientX);
           lastExecTime = currentTime;
-        }, delay - (currentTime - lastExecTime));
-      }
-    };
-  }, []);
+        } else {
+          clearTimeout(timeoutId);
+          timeoutId = setTimeout(() => {
+            func(clientX);
+            lastExecTime = currentTime;
+          }, delay - (currentTime - lastExecTime));
+        }
+      };
+    },
+    []
+  );
 
   useEffect(() => {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
