@@ -1,5 +1,11 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -44,8 +50,8 @@ const TitleSection = ({
       contactButtonElm = document.getElementById("contact-button");
     }
 
-    const isHeaderTitle = headerTitleElm ? true : false;
-    const isSubTitle = subTitleElm ? true : false;
+    const isHeaderTitle = !!headerTitleElm;
+    const isSubTitle = !!subTitleElm;
 
     // Batch SplitText creation for better performance
     const headerTitleSplits = isHeaderTitle

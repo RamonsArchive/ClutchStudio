@@ -1,5 +1,11 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+} from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -18,13 +24,42 @@ const RecentProjectCard = ({
   project: ProjectTemplate;
   index: number;
 }) => {
-  const { name, title, workDescription, personalDescription } = project.text;
-  const { websiteUrl, githubUrl } = project;
-  const url = websiteUrl ? websiteUrl : githubUrl;
-  const isWebsite = websiteUrl ? true : false;
-  const { galleryImages } = project.images;
-  const tags = project.tags;
-  const isEven = index % 2 === 0;
+  // Memoize expensive calculations and derived values
+  const { url, isWebsite, isEven } = useMemo(
+    () => ({
+      url: project.websiteUrl ? project.websiteUrl : project.githubUrl,
+      isWebsite: !!project.websiteUrl,
+      isEven: index % 2 === 0,
+    }),
+    [project.websiteUrl, project.githubUrl, index]
+  );
+
+  const { title, workDescription, tags, galleryImages } = useMemo(
+    () => ({
+      title: project.text.title,
+      workDescription: project.text.workDescription,
+      tags: project.tags,
+      galleryImages: project.images.galleryImages,
+    }),
+    [
+      project.text.title,
+      project.text.workDescription,
+      project.tags,
+      project.images.galleryImages,
+    ]
+  );
+
+  // Memoized animation configs to prevent recreation
+  const animationConfig = useMemo(
+    () => ({
+      opacity: 0,
+      yPercent: -100,
+      stagger: 0.025,
+      ease: "power2.inOut",
+      duration: 0.8,
+    }),
+    []
+  );
 
   // Separate refs for mobile and desktop to avoid conflicts
   const mobileTitleRef = useRef<HTMLHeadingElement>(null);
@@ -41,12 +76,13 @@ const RecentProjectCard = ({
 
   const [isMobile, setIsMobile] = useState(false);
 
-  // Use useEffect to prevent hydration errors
+  // Use useEffect to prevent hydration errors - memoized media query
   useEffect(() => {
-    setIsMobile(window.matchMedia("(max-width: 768px)").matches);
-
     const mediaQuery = window.matchMedia("(max-width: 768px)");
+    setIsMobile(mediaQuery.matches);
+
     const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+
     mediaQuery.addEventListener("change", handleChange);
 
     return () => mediaQuery.removeEventListener("change", handleChange);
@@ -78,6 +114,15 @@ const RecentProjectCard = ({
       return;
     }
 
+    // Animation configs - defined as regular objects since we can't use hooks here
+    const animationConfig = {
+      opacity: 0,
+      yPercent: -100,
+      stagger: 0.025,
+      ease: "power2.inOut",
+      duration: 0.8,
+    };
+
     const titleSplits = SplitText.create(titleRef, {
       type: "words",
     });
@@ -90,11 +135,7 @@ const RecentProjectCard = ({
 
     // Animate title characters
     gsap.from(titleSplits.words, {
-      opacity: 0,
-      yPercent: -100,
-      stagger: 0.025,
-      ease: "power2.inOut",
-      duration: 0.8,
+      ...animationConfig,
       scrollTrigger: {
         trigger: isMobile ? mobileTitleRef.current : desktopTitleRef.current,
         start: "top bottom",

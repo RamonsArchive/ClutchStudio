@@ -75,13 +75,10 @@ export const writeProjectTickt = async (formObject: FromDataType) => {
         result.message
       );
 
-      console.log('Email result:', emailResult);
-
       if (!emailResult.success) {
         console.error('Failed to send email:', emailResult.error);
         // Still return success for the ticket creation, but log the email failure
       }
-      console.log('Email sent successfully:', emailResult.messageId);
 
       return parseServerActionResponse({
         status: "SUCCESS",

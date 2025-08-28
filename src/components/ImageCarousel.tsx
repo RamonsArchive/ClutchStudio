@@ -1,6 +1,12 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+  useMemo,
+} from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Play, Pause } from "lucide-react";
@@ -132,7 +138,6 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
   // Handle manual navigation
   const handleImageSelect = (index: number) => {
-    console.log("handleImageSelect", index);
     setCarousel((prev) => ({ ...prev, currentImage: index }));
     resetInterval();
   };
@@ -278,7 +283,6 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
   // Reset progress bars
   useEffect(() => {
-    console.log("useEffect", currentImage);
     progressRef.current.forEach((_, index) => {
       if (index === currentImage) {
         gsap.set(progressRef.current[index], {
@@ -294,12 +298,12 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     });
   }, [currentImage]);
 
-  // Calculate transform with drag offset
-  const getTransformStyle = () => {
+  // Calculate transform with drag offset - memoized for performance
+  const getTransformStyle = useMemo(() => {
     const baseTransform = (-100 * currentImage) / images.length;
     const dragTransform = dragOffset / images.length;
     return `translateX(${baseTransform + dragTransform}%)`;
-  };
+  }, [currentImage, dragOffset, images.length]);
 
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden">
@@ -318,7 +322,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
           className="flex w-full h-full transition-transform duration-300 ease-out"
           style={{
             width: `${images.length * 100}%`,
-            transform: getTransformStyle(),
+            transform: getTransformStyle,
             transition: isDragging ? "none" : "transform 0.3s ease-out",
           }}
         >

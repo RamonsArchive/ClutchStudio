@@ -17,7 +17,7 @@ export const navLinks = [
         name: "Contact",
         href: "/contact",
     }
-]
+] as const;
 
 export const HeroData = {
     HeroVideo: "/Assets/HeroContent/soccerGoal.mp4",
@@ -261,7 +261,7 @@ export const Projects = [
     NBA_Analysis_Hackathon,
     DSGN1_Text_Analysis,
     TheStu,
-]
+] as const;
 
 
 // project page map
@@ -274,7 +274,7 @@ export const ProjectPageMap = {
     "nba-analysis-hackathon": NBA_Analysis_Hackathon,
     "dsgn1-text-analysis": DSGN1_Text_Analysis,
     "the-stu": TheStu,
-}
+} as const;
 
 
 export const AboutData = {
@@ -341,7 +341,7 @@ export const footerQuickLinks = [
       target: undefined,
       rel: undefined,
     },
-  ];
+  ] as const;
 
 export const footerSocials = [
     {
@@ -367,7 +367,7 @@ export const footerSocials = [
         ariaLabel: "Connect with us on LinkedIn",
         title: "LinkedIn",
     },
-]
+] as const;
 
 
 export const footerContact = [
@@ -382,7 +382,7 @@ export const footerContact = [
         value: "949-910-7879",
         title: "Phone",
     },
-]
+] as const;
 
 export const AdminLoginData = {
     title: "Admin Login",
@@ -445,7 +445,7 @@ export const TermsOfService = [
     title: "Contact Me",
     content: "Questions about these terms? Just reach out at clutchdev.apps@gmail.com. I'm happy to clarify anything!"
   }
-];
+] as const;
 
 export const PrivacyPolicy = [
   {
@@ -493,4 +493,4 @@ export const PrivacyPolicy = [
     title: "Contact Me",
     content: "Questions about your privacy or this policy? Just reach out at clutchdev.apps@gmail.com. I'm committed to being transparent about how I handle your information."
   }
-];
+] as const;
