@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Play, Pause } from "lucide-react";
@@ -10,6 +10,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const progressRef = useRef<HTMLSpanElement[]>([]);
   const dotRef = useRef<HTMLSpanElement[]>([]);
   const interval = useRef<NodeJS.Timeout | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const [carousel, setCarousel] = useState({
     currentImage: 0,
@@ -18,8 +19,33 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   });
 
   const [mobile, setMobile] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [currentX, setCurrentX] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
 
   const { currentImage, isPlaying, isLastImage } = carousel;
+
+  // Throttle function for smooth performance
+  const throttle = useCallback((func: Function, delay: number) => {
+    let timeoutId: NodeJS.Timeout;
+    let lastExecTime = 0;
+
+    return function (this: any, ...args: any[]) {
+      const currentTime = Date.now();
+
+      if (currentTime - lastExecTime > delay) {
+        func.apply(this, args);
+        lastExecTime = currentTime;
+      } else {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          func.apply(this, args);
+          lastExecTime = currentTime;
+        }, delay - (currentTime - lastExecTime));
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const isMobile = window.matchMedia("(max-width: 768px)").matches;
@@ -28,7 +54,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!isPlaying || isDragging) return;
 
     interval.current = setInterval(() => {
       setCarousel((prev) => {
@@ -45,7 +71,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
         clearInterval(interval.current);
       }
     };
-  }, [isPlaying, images.length]);
+  }, [isPlaying, images.length, isDragging]);
 
   // GSAP animation for image transitions
   useGSAP(() => {
@@ -93,6 +119,111 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     resetInterval();
   };
 
+  // Touch/Mouse event handlers with throttling
+  const handleStart = useCallback((clientX: number) => {
+    setIsDragging(true);
+    setStartX(clientX);
+    setCurrentX(clientX);
+    setDragOffset(0);
+
+    // Pause auto-advance while dragging
+    if (interval.current) {
+      clearInterval(interval.current);
+    }
+  }, []);
+
+  const handleMove = useCallback(
+    throttle((clientX: number) => {
+      if (!isDragging) return;
+
+      const deltaX = clientX - startX;
+      const containerWidth = containerRef.current?.offsetWidth || 0;
+      const imageWidth = containerWidth / images.length;
+
+      // Calculate drag offset as percentage
+      const offsetPercent = (deltaX / imageWidth) * 100;
+      setDragOffset(offsetPercent);
+      setCurrentX(clientX);
+    }, 16),
+    [isDragging, startX, images.length]
+  );
+
+  const handleEnd = useCallback(() => {
+    if (!isDragging) return;
+
+    setIsDragging(false);
+
+    const containerWidth = containerRef.current?.offsetWidth || 0;
+    const imageWidth = containerWidth / images.length;
+    const threshold = imageWidth * 0.3; // 30% threshold for swipe
+
+    if (Math.abs(currentX - startX) > threshold) {
+      // Determine swipe direction
+      if (currentX < startX) {
+        // Swipe left - next image
+        setCarousel((prev) => {
+          const nextImage = prev.currentImage + 1;
+          if (nextImage >= images.length) {
+            return { ...prev, currentImage: 0, isLastImage: false };
+          }
+          return { ...prev, currentImage: nextImage };
+        });
+      } else {
+        // Swipe right - previous image
+        setCarousel((prev) => {
+          const prevImage = prev.currentImage - 1;
+          if (prevImage < 0) {
+            return {
+              ...prev,
+              currentImage: images.length - 1,
+              isLastImage: true,
+            };
+          }
+          return { ...prev, currentImage: prevImage };
+        });
+      }
+    }
+
+    // Reset drag state
+    setDragOffset(0);
+
+    // Resume auto-advance
+    resetInterval();
+  }, [isDragging, currentX, startX, images.length]);
+
+  // Mouse events for desktop
+  const handleMouseDown = (e: React.MouseEvent) => {
+    e.preventDefault();
+    handleStart(e.clientX);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      handleMove(e.clientX);
+    }
+  };
+
+  const handleMouseUp = () => {
+    handleEnd();
+  };
+
+  // Touch events for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    handleStart(touch.clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (isDragging) {
+      const touch = e.touches[0];
+      handleMove(touch.clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    handleEnd();
+  };
+
   // Reset progress bars
   useEffect(() => {
     progressRef.current.forEach((_, index) => {
@@ -110,14 +241,32 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     });
   }, [currentImage]);
 
+  // Calculate transform with drag offset
+  const getTransformStyle = () => {
+    const baseTransform = (-100 * currentImage) / images.length;
+    const dragTransform = dragOffset / images.length;
+    return `translateX(${baseTransform + dragTransform}%)`;
+  };
+
   return (
     <div className="relative w-full h-full rounded-xl overflow-hidden">
-      <div className="relative w-full h-full overflow-hidden">
+      <div
+        ref={containerRef}
+        className="relative w-full h-full overflow-hidden"
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div
-          className="flex w-full h-full transition-transform duration-1500 ease-in-out"
+          className="flex w-full h-full transition-transform duration-300 ease-out"
           style={{
             width: `${images.length * 100}%`,
-            transform: `translateX(${(-100 * currentImage) / images.length}%)`,
+            transform: getTransformStyle(),
+            transition: isDragging ? "none" : "transform 0.3s ease-out",
           }}
         >
           {images.map((image, index) => (
