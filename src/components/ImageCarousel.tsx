@@ -182,13 +182,17 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
           return { ...prev, currentImage: prevImage };
         });
       }
+
+      // Reset interval after successful swipe
+      resetInterval();
+    } else {
+      // Even if swipe wasn't strong enough, reset interval
+      // This gives user time to look at current image
+      resetInterval();
     }
 
     // Reset drag state
     setDragOffset(0);
-
-    // Resume auto-advance
-    resetInterval();
   }, [isDragging, currentX, startX, images.length]);
 
   // Mouse events for desktop
