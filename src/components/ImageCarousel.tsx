@@ -56,6 +56,12 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   useEffect(() => {
     if (!isPlaying || isDragging) return;
 
+    // Clear any existing interval first
+    if (interval.current) {
+      clearInterval(interval.current);
+      interval.current = null;
+    }
+
     interval.current = setInterval(() => {
       setCarousel((prev) => {
         const nextImage = prev.currentImage + 1;
@@ -69,6 +75,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     return () => {
       if (interval.current) {
         clearInterval(interval.current);
+        interval.current = null;
       }
     };
   }, [isPlaying, images.length, isDragging]);
@@ -99,22 +106,29 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   };
 
   const resetInterval = () => {
+    // Clear any existing interval first
     if (interval.current) {
       clearInterval(interval.current);
+      interval.current = null;
     }
-    interval.current = setInterval(() => {
-      setCarousel((prev) => {
-        const nextImage = prev.currentImage + 1;
-        if (nextImage >= images.length) {
-          return { ...prev, currentImage: 0, isLastImage: false };
-        }
-        return { ...prev, currentImage: nextImage };
-      });
-    }, 5000);
+
+    // Only set new interval if carousel is playing
+    if (isPlaying) {
+      interval.current = setInterval(() => {
+        setCarousel((prev) => {
+          const nextImage = prev.currentImage + 1;
+          if (nextImage >= images.length) {
+            return { ...prev, currentImage: 0, isLastImage: false };
+          }
+          return { ...prev, currentImage: nextImage };
+        });
+      }, 5000);
+    }
   };
 
   // Handle manual navigation
   const handleImageSelect = (index: number) => {
+    console.log("handleImageSelect", index);
     setCarousel((prev) => ({ ...prev, currentImage: index }));
     resetInterval();
   };
@@ -161,39 +175,48 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
       // Determine swipe direction
       if (currentX < startX) {
         // Swipe left - next image
-        setCarousel((prev) => {
-          const nextImage = prev.currentImage + 1;
-          if (nextImage >= images.length) {
-            return { ...prev, currentImage: 0, isLastImage: false };
-          }
-          return { ...prev, currentImage: nextImage };
-        });
+        const nextImage = (currentImage + 1) % images.length;
+        setCarousel((prev) => ({
+          ...prev,
+          currentImage: nextImage,
+          isLastImage: nextImage === images.length - 1,
+        }));
       } else {
         // Swipe right - previous image
-        setCarousel((prev) => {
-          const prevImage = prev.currentImage - 1;
-          if (prevImage < 0) {
-            return {
-              ...prev,
-              currentImage: images.length - 1,
-              isLastImage: true,
-            };
-          }
-          return { ...prev, currentImage: prevImage };
-        });
+        const prevImage =
+          currentImage === 0 ? images.length - 1 : currentImage - 1;
+        setCarousel((prev) => ({
+          ...prev,
+          currentImage: prevImage,
+          isLastImage: prevImage === images.length - 1,
+        }));
       }
 
-      // Reset interval after successful swipe
-      resetInterval();
+      // Clear interval immediately and reset after state update
+      if (interval.current) {
+        clearInterval(interval.current);
+        interval.current = null;
+      }
+
+      // Use setTimeout to ensure state has updated before resetting interval
+      setTimeout(() => {
+        resetInterval();
+      }, 0);
     } else {
       // Even if swipe wasn't strong enough, reset interval
       // This gives user time to look at current image
-      resetInterval();
+      if (interval.current) {
+        clearInterval(interval.current);
+        interval.current = null;
+      }
+      setTimeout(() => {
+        resetInterval();
+      }, 0);
     }
 
     // Reset drag state
     setDragOffset(0);
-  }, [isDragging, currentX, startX, images.length]);
+  }, [isDragging, currentX, startX, currentImage, images.length]);
 
   // Mouse events for desktop
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -230,6 +253,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
   // Reset progress bars
   useEffect(() => {
+    console.log("useEffect", currentImage);
     progressRef.current.forEach((_, index) => {
       if (index === currentImage) {
         gsap.set(progressRef.current[index], {
