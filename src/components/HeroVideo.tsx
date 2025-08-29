@@ -59,7 +59,6 @@ const HeroVideo = () => {
         scrub: 0, // Real-time scrubbing - no delay
         onUpdate: (self) => {
           const progress = self.progress;
-          const videoDuration = video.duration;
 
           // Check if we're past the 0.5 second mark for the goal moment
           if (video.currentTime >= 0.3 && !hasScoredGoal) {

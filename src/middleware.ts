@@ -27,9 +27,9 @@ const requireAdmin = async (request: NextRequest, response: NextResponse) => {
 
     try {
       const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
-      const { payload } = await jwtVerify(token, secret);
+      await jwtVerify(token, secret);
       return response;
-    } catch (error) {
+    } catch {
       const redirectResponse = NextResponse.redirect(new URL('/admin/login', request.url));
       redirectResponse.cookies.delete('admin_session');
       return redirectResponse;

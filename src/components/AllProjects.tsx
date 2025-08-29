@@ -1,12 +1,15 @@
 "use client";
 import React, { useState, useMemo, useRef, useEffect } from "react";
 import { ProjectTemplate } from "@/types/GlobalTypes";
-import ProjectDisplayCard from "./ProjectDisplayCard";
 import { ProjectType } from "@/types/GlobalTypes";
 import { ChevronDown, X, Filter } from "lucide-react";
 import ProjectGrid from "./ProjectGrid";
 
-const AllProjects = ({ projects }: { projects: ProjectTemplate[] }) => {
+const AllProjects = ({
+  projects,
+}: {
+  projects: readonly ProjectTemplate[];
+}) => {
   const [selectedServiceType, setSelectedServiceType] = useState<string>("ALL");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropDownButtonRef = useRef<HTMLButtonElement>(null);
@@ -15,7 +18,7 @@ const AllProjects = ({ projects }: { projects: ProjectTemplate[] }) => {
   const serviceTypes = useMemo(() => {
     const types = projects.map((project) => project.projectType);
     return Array.from(new Set(types));
-  }, []);
+  }, [projects]);
 
   // Filter projects based on selected service type
   const filteredProjects = useMemo(() => {
@@ -25,7 +28,7 @@ const AllProjects = ({ projects }: { projects: ProjectTemplate[] }) => {
     return projects.filter(
       (project) => project.projectType === selectedServiceType
     );
-  }, [selectedServiceType]);
+  }, [selectedServiceType, projects]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {

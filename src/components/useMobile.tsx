@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const useMobile = () => {
   //const newIsMobile = window.matchMedia("(max-width: 768px)").matches;

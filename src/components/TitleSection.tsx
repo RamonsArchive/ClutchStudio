@@ -108,7 +108,7 @@ const TitleSection = ({
         ? mainTitleSplits.chars
         : mainTitleSplits.words;
       if (elements) {
-        elements.forEach((element, index) => {
+        elements.forEach((element) => {
           const textElement = element as HTMLElement;
 
           // Apply premium gradient classes for high-performance animation

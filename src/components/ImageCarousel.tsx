@@ -115,7 +115,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     setCarousel((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
   };
 
-  const resetInterval = () => {
+  const resetInterval = useCallback(() => {
     // Clear any existing interval first
     if (interval.current) {
       clearInterval(interval.current);
@@ -128,13 +128,13 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
         setCarousel((prev) => {
           const nextImage = prev.currentImage + 1;
           if (nextImage >= images.length) {
-            return { ...prev, currentImage: 0, isLastImage: false };
+            return { ...prev, currentImage: 0 };
           }
           return { ...prev, currentImage: nextImage };
         });
       }, 5000);
     }
-  };
+  }, [isPlaying, images.length]);
 
   // Handle manual navigation
   const handleImageSelect = (index: number) => {
@@ -143,21 +143,24 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   };
 
   // Touch/Mouse event handlers with throttling
-  const handleStart = useCallback((clientX: number, clientY: number) => {
-    setIsDragging(true);
-    setStartX(clientX);
-    setStartY(clientY);
-    setCurrentX(clientX);
-    setDragOffset(0);
+  const handleStart = useCallback(
+    (clientX: number, clientY: number) => {
+      setIsDragging(true);
+      setStartX(clientX);
+      setStartY(clientY);
+      setCurrentX(clientX);
+      setDragOffset(0);
 
-    // Pause auto-advance while dragging
-    if (interval.current) {
-      clearInterval(interval.current);
-    }
-  }, []);
+      // Pause auto-advance while dragging
+      if (interval.current) {
+        clearInterval(interval.current);
+      }
+    },
+    [interval]
+  );
 
   const handleMove = useCallback(
-    throttle((clientX: number, clientY: number) => {
+    (clientX: number, clientY: number) => {
       if (!isDragging) return;
 
       const deltaX = clientX - startX;
@@ -188,7 +191,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
       const offsetPercent = (clampedDeltaX / imageWidth) * 100;
       setDragOffset(offsetPercent);
       setCurrentX(clientX);
-    }, 16),
+    },
     [isDragging, startX, startY, images.length]
   );
 
@@ -209,7 +212,6 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
         setCarousel((prev) => ({
           ...prev,
           currentImage: nextImage,
-          isLastImage: nextImage === images.length - 1,
         }));
       } else {
         // Swipe right - previous image
@@ -218,7 +220,6 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
         setCarousel((prev) => ({
           ...prev,
           currentImage: prevImage,
-          isLastImage: prevImage === images.length - 1,
         }));
       }
 
@@ -246,7 +247,14 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
     // Reset drag state
     setDragOffset(0);
-  }, [isDragging, currentX, startX, currentImage, images.length]);
+  }, [
+    isDragging,
+    currentX,
+    startX,
+    currentImage,
+    images.length,
+    resetInterval,
+  ]);
 
   // Mouse events for desktop
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -256,7 +264,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (isDragging) {
-      handleMove(e.clientX, e.clientY);
+      throttle(handleMove, 16)(e.clientX, e.clientY);
     }
   };
 
@@ -273,7 +281,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const handleTouchMove = (e: React.TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      handleMove(touch.clientX, touch.clientY);
+      throttle(handleMove, 16)(touch.clientX, touch.clientY);
     }
   };
 

@@ -43,18 +43,6 @@ const RecentProjectCard = ({
     ]
   );
 
-  // Memoized animation configs to prevent recreation
-  const animationConfig = useMemo(
-    () => ({
-      opacity: 0,
-      yPercent: -100,
-      stagger: 0.025,
-      ease: "power2.inOut",
-      duration: 0.8,
-    }),
-    []
-  );
-
   // Separate refs for mobile and desktop to avoid conflicts
   const mobileTitleRef = useRef<HTMLHeadingElement>(null);
   const mobileDescriptionRef = useRef<HTMLHeadingElement>(null);

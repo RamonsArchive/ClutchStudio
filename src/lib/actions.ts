@@ -1,6 +1,6 @@
 "use server";
 import z from "zod";
-import { formDataToObject, parseServerActionResponse } from "./utils";
+import { parseServerActionResponse } from "./utils";
 import { contactFormSchema } from "./validation";
 import { checkRateLimit } from "./rateLimiter";
 import { prisma } from "./prisma";
@@ -216,13 +216,13 @@ export const authenticateAdmin = async (data: FormData) => {
         });
       }
   
-      const updatedUser = await prisma.authenticatedUser.update({
+            await prisma.authenticatedUser.update({
         where: { id: existingUser.id },
         data: {
           lastLogin: new Date(),
         }
       });
-  
+
       if (isValidPassword) {
         const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
         const token = await new SignJWT({ id: existingUser.id })

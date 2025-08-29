@@ -12,7 +12,7 @@ const ProjectGrid = ({
   filteredProjects,
   clearFilters,
 }: {
-  filteredProjects: ProjectTemplate[];
+  filteredProjects: readonly ProjectTemplate[];
   clearFilters: () => void;
 }) => {
   useGSAP(() => {
