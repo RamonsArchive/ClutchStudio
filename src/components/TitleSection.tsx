@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useRef, useMemo } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -39,6 +33,44 @@ const TitleSection = ({
   const headerTitleRef = useRef<HTMLHeadingElement>(null);
   const mainTitleRef = useRef<HTMLHeadingElement>(null);
   const subTitleRef = useRef<HTMLHeadingElement>(null);
+
+  // Memoized animation configs to prevent recreation - MASSIVE performance boost
+  const animationConfigs = useMemo(
+    () => ({
+      initial: {
+        visibility: "hidden",
+        yPercent: -100,
+      },
+      scroll: {
+        opacity: 0,
+        yPercent: -100,
+        stagger: 0.02,
+      },
+      contactButton: {
+        opacity: 0,
+        yPercent: -100,
+      },
+      scrollTrigger: {
+        trigger: "#title-container",
+        start: "top top",
+        end: "bottom 1%",
+        scrub: 1.2,
+      },
+      subTitleScrollTrigger: {
+        trigger: "#sub-title",
+        start: "top top",
+        end: "bottom 10%",
+        scrub: 1.2,
+      },
+      iconsScrollTrigger: {
+        trigger: "#title-container",
+        start: "top top",
+        end: "bottom 20%",
+        scrub: 1.2,
+      },
+    }),
+    []
+  );
 
   useGSAP(() => {
     // Create SplitText instances
@@ -94,17 +126,10 @@ const TitleSection = ({
         : mainTitleSplits.words || []),
     ];
 
-    gsap.set(allElements, {
-      visibility: "hidden",
-      yPercent: -100,
-    });
+    gsap.set(allElements, animationConfigs.initial);
 
     if (contactButtonElm) {
-      gsap.set(contactButtonElm, {
-        visibility: "hidden",
-        opacity: 0,
-        yPercent: -100,
-      });
+      gsap.set(contactButtonElm, animationConfigs.initial);
     }
 
     // Initial animation timeline
@@ -115,160 +140,113 @@ const TitleSection = ({
         if (!isMobile) {
           // Single consolidated ScrollTrigger for all text elements (same as mobile)
           const desktopScrollTL = gsap.timeline({
-            scrollTrigger: {
-              trigger: "#title-container",
-              start: "top top",
-              end: "bottom 1%",
-              scrub: 1.2,
-            },
+            scrollTrigger: animationConfigs.scrollTrigger,
           });
 
           // Add all text animations to the same timeline
           if (headerTitleSplits?.words) {
-            desktopScrollTL.to(headerTitleSplits.words, {
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.02,
-            });
+            desktopScrollTL.to(
+              headerTitleSplits.words,
+              animationConfigs.scroll
+            );
           }
 
           desktopScrollTL.to(
             useCharsForMainTitle
               ? mainTitleSplits.chars || []
               : mainTitleSplits.words || [],
-            {
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.02,
-            }
+            animationConfigs.scroll
           );
 
           if (subTitleSplits?.words) {
             gsap
               .timeline({
-                scrollTrigger: {
-                  trigger: "#sub-title",
-                  start: "top top",
-                  end: "bottom 10%",
-                  scrub: 1.2,
-                },
+                scrollTrigger: animationConfigs.subTitleScrollTrigger,
               })
-              .to(subTitleSplits.words, {
-                opacity: 0,
-                yPercent: -100,
-                stagger: 0.02,
-              });
+              .to(subTitleSplits.words, animationConfigs.scroll);
           }
 
           // Separate trigger for contact button (less frequent updates)
           if (contactButtonElm) {
-            desktopScrollTL.to(contactButtonElm, {
-              opacity: 0,
-              yPercent: -100,
-            });
+            desktopScrollTL.to(
+              contactButtonElm,
+              animationConfigs.contactButton
+            );
           }
 
           // Consolidated background icons animation
           if (includeBackgroundIcons) {
-            const iconsScrollTrigger = {
-              trigger: "#title-container",
-              start: "top top",
-              end: "bottom 20%",
-              scrub: 1.2,
-            };
-
             const iconsTL = gsap.timeline({
-              scrollTrigger: iconsScrollTrigger,
+              scrollTrigger: animationConfigs.iconsScrollTrigger,
             });
 
+            // Memoized background icon animations
+            const leftIcons = "#clutch-fist-light-1, #clutch-fist-light-3";
+            const rightIcons =
+              "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5";
+
             iconsTL
-              .to("#clutch-fist-light-1, #clutch-fist-light-3", {
+              .to(leftIcons, {
                 opacity: 0,
                 yPercent: -100,
                 xPercent: -50,
                 stagger: 0.1,
               })
-              .to(
-                "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5",
-                {
-                  opacity: 0,
-                  yPercent: -100,
-                  xPercent: 50,
-                  stagger: 0.1,
-                }
-              );
+              .to(rightIcons, {
+                opacity: 0,
+                yPercent: -100,
+                xPercent: 50,
+                stagger: 0.1,
+              });
           }
         } else {
           // Mobile optimization - single timeline for all animations
           const mobileScrollTL = gsap.timeline({
-            scrollTrigger: {
-              trigger: "#title-container",
-              start: "top top",
-              end: "bottom 20%",
-              scrub: 1.2,
-            },
+            scrollTrigger: animationConfigs.scrollTrigger,
           });
 
           if (headerTitleSplits?.words) {
-            mobileScrollTL.to(headerTitleSplits.words, {
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.02,
-            });
+            mobileScrollTL.to(headerTitleSplits.words, animationConfigs.scroll);
           }
 
           mobileScrollTL.to(
             useCharsForMainTitle
               ? mainTitleSplits.chars || []
               : mainTitleSplits.words || [],
-            {
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.02,
-            }
+            animationConfigs.scroll
           );
 
           if (subTitleSplits?.words) {
-            mobileScrollTL.to(subTitleSplits.words, {
-              opacity: 0,
-              yPercent: -100,
-              stagger: 0.02,
-            });
+            mobileScrollTL.to(subTitleSplits.words, animationConfigs.scroll);
           }
 
           if (contactButtonElm) {
-            mobileScrollTL.to(contactButtonElm, {
-              opacity: 0,
-              yPercent: -100,
-            });
+            mobileScrollTL.to(contactButtonElm, animationConfigs.contactButton);
           }
 
           if (includeBackgroundIcons) {
             const mobileIconsTL = gsap.timeline({
-              scrollTrigger: {
-                trigger: "#title-container",
-                start: "top top",
-                end: "bottom 20%",
-                scrub: 1.2,
-              },
+              scrollTrigger: animationConfigs.iconsScrollTrigger,
             });
 
+            // Memoized background icon animations
+            const leftIcons = "#clutch-fist-light-1, #clutch-fist-light-3";
+            const rightIcons =
+              "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5";
+
             mobileIconsTL
-              .to("#clutch-fist-light-1, #clutch-fist-light-3", {
+              .to(leftIcons, {
                 opacity: 0,
                 yPercent: -100,
                 xPercent: -50,
                 stagger: 0.1,
               })
-              .to(
-                "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5",
-                {
-                  opacity: 0,
-                  yPercent: -100,
-                  xPercent: 50,
-                  stagger: 0.1,
-                }
-              );
+              .to(rightIcons, {
+                opacity: 0,
+                yPercent: -100,
+                xPercent: 50,
+                stagger: 0.1,
+              });
           }
         }
       },
@@ -330,7 +308,15 @@ const TitleSection = ({
       gsap.killTweensOf(allElements);
       if (contactButtonElm) gsap.killTweensOf(contactButtonElm);
     };
-  }, [headerTitle, mainTitle, subTitle]);
+  }, [
+    headerTitle,
+    mainTitle,
+    subTitle,
+    includeContactButton,
+    includeBackgroundIcons,
+    useCharsForMainTitle,
+    animationConfigs,
+  ]);
 
   return (
     <div
@@ -424,10 +410,7 @@ const TitleSection = ({
           </div>
         </div>
       ) : (
-        <div
-          id="title-container"
-          className="flex-center w-full flex-col md:flex-row gap-5 md:gap-10 cursor-pointer p-10"
-        >
+        <div className="flex-center w-full flex-col md:flex-row gap-5 md:gap-10 cursor-pointer p-10">
           <div ref={mainTitleRef} className="flex flex-col gap-5">
             {mainTitle && (
               <h1 className={`${mainTitleClassName} invisible`}>{mainTitle}</h1>

@@ -1,6 +1,6 @@
 "use client";
 import { HeroData } from "@/constants";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useMemo } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -11,6 +11,25 @@ const HeroVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [hasScoredGoal, setHasScoredGoal] = useState(false);
+
+  // Memoized GSAP animation configs
+  const animationConfigs = useMemo(
+    () => ({
+      goalPopup: {
+        opacity: 0,
+        yPercent: -100,
+      },
+      container: {
+        scale: 1.3,
+        ease: "power2.out",
+        duration: 1,
+      },
+      containerScale: {
+        ease: "power2.out",
+      },
+    }),
+    []
+  );
 
   useGSAP(() => {
     const video = videoRef.current;
@@ -23,10 +42,7 @@ const HeroVideo = () => {
 
     const goalPopup = document.getElementById("goal-popup");
     if (goalPopup) {
-      gsap.set(goalPopup, {
-        opacity: 0,
-        yPercent: -100,
-      });
+      gsap.set(goalPopup, animationConfigs.goalPopup);
     }
 
     // Initially pause the video and set to beginning
@@ -61,7 +77,7 @@ const HeroVideo = () => {
 
           gsap.set(container, {
             scale,
-            ease: "power2.out",
+            ...animationConfigs.containerScale,
           });
         },
         onEnter: () => {
@@ -88,11 +104,7 @@ const HeroVideo = () => {
     });
 
     // Add the scaling animation to the timeline
-    videoTl.to(container, {
-      scale: 1.3, // Final scale value - fills viewport, no more growing
-      ease: "power2.out",
-      duration: 1, // This will be controlled by ScrollTrigger
-    });
+    videoTl.to(container, animationConfigs.container);
 
     // Clean up function
     return () => {

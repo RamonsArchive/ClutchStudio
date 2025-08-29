@@ -1,11 +1,5 @@
 "use client";
-import React, {
-  useRef,
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-} from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
@@ -222,9 +216,15 @@ const RecentProjectCard = ({
         >
           {title}
         </h1>
-        <div ref={desktopTagsRef} className="flex flex-row items-center">
+        <div
+          ref={desktopTagsRef}
+          className="flex flex-row items-center overflow-x-auto scrollbar-hide min-w-0 flex-shrink-0"
+        >
           {tags.slice(0, 3).map((tag, index) => (
-            <div key={index} className="tag-item flex items-center">
+            <div
+              key={index}
+              className="tag-item flex items-center flex-shrink-0"
+            >
               <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium break-words px-3 py-1 bg-white/90 rounded-full border border-gray-200/50">
                 {tag}
               </span>
