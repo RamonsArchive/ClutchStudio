@@ -39,6 +39,7 @@ const TitleSection = ({
     () => ({
       initial: {
         visibility: "hidden",
+        opacity: 0,
         yPercent: -100,
       },
       scroll: {
@@ -259,6 +260,7 @@ const TitleSection = ({
         yPercent: 0,
         duration: 0.8,
         stagger: 0.03,
+        opacity: 1,
         ease: "back.out(0.8)",
       })
       .to(
@@ -270,6 +272,7 @@ const TitleSection = ({
           yPercent: 0,
           duration: 1,
           stagger: 0.04,
+          opacity: 1,
           ease: "back.out(0.8)",
         },
         "-=0.4"
@@ -281,6 +284,7 @@ const TitleSection = ({
           yPercent: 0,
           duration: 0.8,
           stagger: 0.02,
+          opacity: 1,
           ease: "back.out(0.8)",
         },
         "-=0.6"

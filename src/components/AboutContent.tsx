@@ -34,41 +34,44 @@ const AboutContent = ({
   const contactButtonRef = useRef<HTMLAnchorElement | null>(null);
 
   useGSAP(() => {
-    const subTitleSplit = new SplitText(subtitleRef.current, {
+    const subTitleSplit = SplitText.create(subtitleRef.current, {
       type: "words",
     });
 
-    const introductionTitleSplit = new SplitText(introductionTitleRef.current, {
+    const introductionTitleSplit = SplitText.create(
+      introductionTitleRef.current,
+      {
+        type: "words",
+      }
+    );
+
+    const introductionSplit = SplitText.create(introductionRef.current, {
       type: "words",
     });
 
-    const introductionSplit = new SplitText(introductionRef.current, {
+    const educationTitleSplit = SplitText.create(educationTitleRef.current, {
       type: "words",
     });
 
-    const educationTitleSplit = new SplitText(educationTitleRef.current, {
+    const educationSplit = SplitText.create(educationRef.current, {
       type: "words",
     });
 
-    const educationSplit = new SplitText(educationRef.current, {
-      type: "words",
-    });
-
-    const technicalSkillsTitleSplit = new SplitText(
+    const technicalSkillsTitleSplit = SplitText.create(
       technicalSkillsTitleRef.current,
       {
         type: "words",
       }
     );
 
-    const technicalSkillsSplit = new SplitText(technicalSkillsRef.current, {
+    const technicalSkillsSplit = SplitText.create(technicalSkillsRef.current, {
       type: "words",
     });
 
     gsap.set(contactButtonRef.current, {
       visibility: "visible",
       opacity: 0,
-      yPercent: -100,
+      yPercent: 100,
     });
 
     gsap.from(subTitleSplit.words, {
@@ -78,7 +81,7 @@ const AboutContent = ({
         end: "bottom 95%",
         scrub: 1,
       },
-      yPercent: -100,
+      yPercent: 100,
       opacity: 0,
       duration: 1,
       stagger: 0.2,
@@ -91,7 +94,7 @@ const AboutContent = ({
         end: "bottom 95%",
         scrub: 1,
       },
-      yPercent: -100,
+      yPercent: 100,
       opacity: 0,
       duration: 1,
       stagger: 0.2,
@@ -104,7 +107,7 @@ const AboutContent = ({
         end: "bottom 95%",
         scrub: 1,
       },
-      yPercent: -100,
+      yPercent: 100,
       opacity: 0,
       duration: 1,
       stagger: 0.2,
@@ -117,6 +120,10 @@ const AboutContent = ({
         end: "bottom 95%",
         scrub: 1,
       },
+      yPercent: 100,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
     });
 
     gsap.from(educationSplit.words, {
@@ -126,6 +133,10 @@ const AboutContent = ({
         end: "bottom 95%",
         scrub: 1,
       },
+      yPercent: 100,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.2,
     });
 
     gsap.from(technicalSkillsTitleSplit.words, {
@@ -135,7 +146,7 @@ const AboutContent = ({
         end: "bottom 95%",
         scrub: 1,
       },
-      yPercent: -100,
+      yPercent: 100,
       opacity: 0,
       duration: 1,
       stagger: 0.2,
@@ -148,7 +159,7 @@ const AboutContent = ({
         end: "bottom 95%",
         scrub: 1,
       },
-      yPercent: -100,
+      yPercent: 100,
       opacity: 0,
       duration: 1,
       stagger: 0.2,
