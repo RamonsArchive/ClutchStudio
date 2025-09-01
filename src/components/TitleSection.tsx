@@ -191,14 +191,20 @@ const TitleSection = ({
                 opacity: 0,
                 yPercent: -100,
                 xPercent: -50,
-                stagger: 0.1,
+                stagger: 0.2,
+                duration: 1,
               })
-              .to(rightIcons, {
-                opacity: 0,
-                yPercent: -100,
-                xPercent: 50,
-                stagger: 0.1,
-              });
+              .to(
+                rightIcons,
+                {
+                  opacity: 0,
+                  yPercent: -100,
+                  xPercent: 50,
+                  stagger: 0.2,
+                  duration: 1,
+                },
+                "-=0.5"
+              );
           }
         } else {
           // Mobile optimization - single timeline for all animations
@@ -240,14 +246,20 @@ const TitleSection = ({
                 opacity: 0,
                 yPercent: -100,
                 xPercent: -50,
-                stagger: 0.1,
+                stagger: 0.2,
+                duration: 1,
               })
-              .to(rightIcons, {
-                opacity: 0,
-                yPercent: -100,
-                xPercent: 50,
-                stagger: 0.1,
-              });
+              .to(
+                rightIcons,
+                {
+                  opacity: 0,
+                  yPercent: -100,
+                  xPercent: 50,
+                  stagger: 0.2,
+                  duration: 1,
+                },
+                "-=0.5"
+              );
           }
         }
       },

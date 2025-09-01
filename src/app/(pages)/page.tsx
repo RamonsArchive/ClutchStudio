@@ -34,6 +34,7 @@ export default function Home() {
             mainTitleClassName="font-funnel-sans text-white text-[26px] sm:text-[32px] md:text-[40px] lg:text-[52px] font-bold break-words"
             subTitleClassName="font-funnel-sans text-white text-[12px] md:text-[16px] font-regular break-words"
             includeContactButton={true}
+            includeBackgroundIcons={true}
           />
         </div>
         {/* Hero Video - Infinite scroll effect */}
