@@ -217,7 +217,7 @@ const RecentProjectCard = ({
                 {tag}
               </span>
               {index !== tags.slice(0, 3).length - 1 && (
-                <span className="font-funnel-sans text-white/40 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 break-words">
+                <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 break-words">
                   •
                 </span>
               )}

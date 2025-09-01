@@ -81,7 +81,7 @@ const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
 
       <p
         ref={personalDescriptionRef}
-        className="font-funnel-sans text-white/90 text-[15px] sm:text-[16px] font-light leading-relaxed max-w-2xl"
+        className="font-funnel-sans text-gray-100 text-[15px] sm:text-[16px] font-light leading-relaxed max-w-2xl"
       >
         {data.text.personalDescription}
       </p>
