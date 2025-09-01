@@ -513,8 +513,10 @@ body {
 } */
 
 html {
-  background: var(--background);
+  background: linear-gradient(to bottom,#102235, rgb(0, 0, 0));
+  background-attachment: fixed;
   color: var(--foreground);
+  min-height: 100vh;
 }
 
 /* Contact Button Gradient Animation */
