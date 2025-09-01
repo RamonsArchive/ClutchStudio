@@ -152,7 +152,7 @@ const AboutContent = ({
       scrollTrigger: {
         trigger: favoriteToolsRef.current,
         start: "top 99%",
-        end: "bottom 85%",
+        end: "bottom 80%",
         scrub: 1,
       },
       stagger: 0.2,
