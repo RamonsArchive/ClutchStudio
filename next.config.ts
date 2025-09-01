@@ -3,6 +3,22 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net',
+        port: '',
+        pathname: '/gh/devicons/devicon/icons/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.icons8.com',
+        port: '',
+        pathname: '/color/**',
+      },
+    ],
+  },
 };
 
 export default withSentryConfig(nextConfig, {
