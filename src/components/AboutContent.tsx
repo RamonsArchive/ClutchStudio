@@ -159,7 +159,7 @@ const AboutContent = ({
     });
     favoriteToolsRef.current.forEach((el) => {
       favToolTL.from(el, {
-        yPercent: 20,
+        yPercent: 40,
         opacity: 0,
         duration: 1,
       });
