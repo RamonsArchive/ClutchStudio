@@ -188,25 +188,31 @@ const TitleSection = ({
             const rightIcons =
               "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5";
 
-            iconsTL
-              .to(leftIcons, {
-                opacity: 0,
-                yPercent: -100,
-                xPercent: -50,
-                stagger: 0.3,
-                duration: 1.5,
-              })
-              .to(
-                rightIcons,
-                {
-                  opacity: 0,
-                  yPercent: -100,
-                  xPercent: 50,
-                  stagger: 0.3,
-                  duration: 1.5,
-                },
-                "-=0.8"
-              );
+            // Left icons timeline
+            const leftIconsTL = gsap.timeline({
+              scrollTrigger: animationConfigs.iconsScrollTrigger,
+            });
+
+            leftIconsTL.to(leftIcons, {
+              opacity: 0,
+              yPercent: -100,
+              xPercent: -50,
+              stagger: 0.3,
+              duration: 1.5,
+            });
+
+            // Right icons timeline - starts after left icons finish
+            const rightIconsTL = gsap.timeline({
+              scrollTrigger: animationConfigs.iconsScrollTrigger,
+            });
+
+            rightIconsTL.to(rightIcons, {
+              opacity: 0,
+              yPercent: -100,
+              xPercent: 50,
+              stagger: 0.3,
+              duration: 1.5,
+            });
           }
         } else {
           // Mobile optimization - single timeline for all animations
@@ -244,25 +250,31 @@ const TitleSection = ({
             const rightIcons =
               "#clutch-fist-light-2, #clutch-fist-light-4, #clutch-fist-light-5";
 
-            mobileIconsTL
-              .to(leftIcons, {
-                opacity: 0,
-                yPercent: -100,
-                xPercent: -50,
-                stagger: 0.3,
-                duration: 1.5,
-              })
-              .to(
-                rightIcons,
-                {
-                  opacity: 0,
-                  yPercent: -100,
-                  xPercent: 50,
-                  stagger: 0.3,
-                  duration: 1.5,
-                },
-                "-=0.8"
-              );
+            // Left icons timeline
+            const mobileLeftIconsTL = gsap.timeline({
+              scrollTrigger: animationConfigs.iconsScrollTrigger,
+            });
+
+            mobileLeftIconsTL.to(leftIcons, {
+              opacity: 0,
+              yPercent: -100,
+              xPercent: -50,
+              stagger: 0.3,
+              duration: 1.5,
+            });
+
+            // Right icons timeline - starts after left icons finish
+            const mobileRightIconsTL = gsap.timeline({
+              scrollTrigger: animationConfigs.iconsScrollTrigger,
+            });
+
+            mobileRightIconsTL.to(rightIcons, {
+              opacity: 0,
+              yPercent: -100,
+              xPercent: 50,
+              stagger: 0.3,
+              duration: 1.5,
+            });
           }
         }
       },
@@ -381,7 +393,7 @@ const TitleSection = ({
               alt=""
               width={56}
               height={56}
-              className="absolute top-1/2 right-8 md:top-1/3 md:right-1/3 w-12 h-12 md:w-14 md:h-14 opacity-12 -rotate-12"
+              className="absolute top-1/2 right-20 md:top-1/3 md:right-1/3 w-12 h-12 md:w-14 md:h-14 opacity-12 -rotate-12"
             />
             <Image
               id="clutch-fist-light-5"
