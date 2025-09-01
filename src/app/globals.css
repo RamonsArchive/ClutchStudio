@@ -512,7 +512,10 @@ body {
   @apply font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-regular break-words;
 } */
 
-
+html {
+  background: var(--background);
+  color: var(--foreground);
+}
 
 /* Contact Button Gradient Animation */
 .contact-gradient-btn {
