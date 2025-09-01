@@ -513,7 +513,7 @@ body {
 } */
 
 html {
-  background: linear-gradient(to bottom,#102235, rgb(0, 0, 0));
+  background: #F0F8FF;
   background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;

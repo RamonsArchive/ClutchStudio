@@ -66,8 +66,8 @@ const TitleSection = ({
       iconsScrollTrigger: {
         trigger: "#title-container",
         start: "top top",
-        end: "bottom 20%",
-        scrub: 1.2,
+        end: "bottom 10%",
+        scrub: 1.5,
       },
     }),
     []
