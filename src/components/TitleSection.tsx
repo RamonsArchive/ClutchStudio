@@ -68,6 +68,7 @@ const TitleSection = ({
         start: "top top",
         end: "bottom 10%",
         scrub: 1.5,
+        stagger: 0.3,
       },
     }),
     []
@@ -179,6 +180,7 @@ const TitleSection = ({
           if (includeBackgroundIcons) {
             const iconsTL = gsap.timeline({
               scrollTrigger: animationConfigs.iconsScrollTrigger,
+              stagger: 0.3,
             });
 
             // Memoized background icon animations
@@ -191,8 +193,8 @@ const TitleSection = ({
                 opacity: 0,
                 yPercent: -100,
                 xPercent: -50,
-                stagger: 0.2,
-                duration: 1,
+                stagger: 0.3,
+                duration: 1.5,
               })
               .to(
                 rightIcons,
@@ -200,10 +202,10 @@ const TitleSection = ({
                   opacity: 0,
                   yPercent: -100,
                   xPercent: 50,
-                  stagger: 0.2,
-                  duration: 1,
+                  stagger: 0.3,
+                  duration: 1.5,
                 },
-                "-=0.5"
+                "-=0.8"
               );
           }
         } else {
@@ -234,6 +236,7 @@ const TitleSection = ({
           if (includeBackgroundIcons) {
             const mobileIconsTL = gsap.timeline({
               scrollTrigger: animationConfigs.iconsScrollTrigger,
+              stagger: 0.2,
             });
 
             // Memoized background icon animations
@@ -246,8 +249,8 @@ const TitleSection = ({
                 opacity: 0,
                 yPercent: -100,
                 xPercent: -50,
-                stagger: 0.2,
-                duration: 1,
+                stagger: 0.3,
+                duration: 1.5,
               })
               .to(
                 rightIcons,
@@ -255,10 +258,10 @@ const TitleSection = ({
                   opacity: 0,
                   yPercent: -100,
                   xPercent: 50,
-                  stagger: 0.2,
-                  duration: 1,
+                  stagger: 0.3,
+                  duration: 1.5,
                 },
-                "-=0.5"
+                "-=0.8"
               );
           }
         }
@@ -354,7 +357,7 @@ const TitleSection = ({
               alt=""
               width={64}
               height={64}
-              className="absolute top-10 left-10 w-16 h-16 opacity-10 rotate-12"
+              className="absolute top-4 left-4 md:top-10 md:left-10 w-12 h-12 md:w-16 md:h-16 opacity-10 rotate-12"
             />
             <Image
               id="clutch-fist-light-2"
@@ -362,7 +365,7 @@ const TitleSection = ({
               alt=""
               width={48}
               height={48}
-              className="absolute top-20 right-20 w-12 h-12 opacity-15 -rotate-6"
+              className="absolute top-8 right-4 md:top-20 md:right-20 w-10 h-10 md:w-12 md:h-12 opacity-15 -rotate-6"
             />
             <Image
               id="clutch-fist-light-3"
@@ -370,7 +373,7 @@ const TitleSection = ({
               alt=""
               width={80}
               height={80}
-              className="absolute bottom-20 left-1/4 w-20 h-20 opacity-10 rotate-45"
+              className="absolute bottom-4 left-1/3 md:bottom-20 md:left-1/4 w-16 h-16 md:w-20 md:h-20 opacity-10 rotate-45"
             />
             <Image
               id="clutch-fist-light-4"
@@ -378,7 +381,7 @@ const TitleSection = ({
               alt=""
               width={56}
               height={56}
-              className="absolute top-1/3 right-1/3 w-14 h-14 opacity-12 -rotate-12"
+              className="absolute top-1/2 right-8 md:top-1/3 md:right-1/3 w-12 h-12 md:w-14 md:h-14 opacity-12 -rotate-12"
             />
             <Image
               id="clutch-fist-light-5"
@@ -386,7 +389,7 @@ const TitleSection = ({
               alt=""
               width={72}
               height={72}
-              className="absolute bottom-10 right-10 w-18 h-18 opacity-6 rotate-30"
+              className="absolute bottom-8 right-4 md:bottom-10 md:right-10 w-14 h-14 md:w-18 md:h-18 opacity-6 rotate-30"
             />
           </div>
         </>
