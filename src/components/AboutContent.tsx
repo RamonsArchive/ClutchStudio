@@ -331,7 +331,7 @@ const AboutContent = ({
 
   return (
     <div className="flex flex-col lg:flex-row gap-5 w-full p-3 rounded-xl md:p-5">
-      <div className="flex justify-start w-[40%] h-full">
+      <div className="flex justify-start w-full lg:w-[40%] h-full">
         <div className=" grid grid-cols-2 lg:grid-cols-1 gap-3 md:gap-5 w-full">
           {images.map((image, index) => (
             <Image
@@ -350,7 +350,7 @@ const AboutContent = ({
           ))}
         </div>
       </div>
-      <div className="flex flex-col w-[60%] h-fit gap-10 bg-gradient-to-b from-primary-900 via-black to-accent-950 rounded-xl p-5 md:p-10 shadow-xl">
+      <div className="flex flex-col w-full lg:w-[60%] h-fit gap-10 bg-gradient-to-b from-primary-900 via-black to-accent-950 rounded-xl p-5 md:p-10 shadow-xl">
         <h1
           ref={subtitleRef}
           className="font-funnel-sans text-white text-[24px] xs:text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-extrabold break-words"
