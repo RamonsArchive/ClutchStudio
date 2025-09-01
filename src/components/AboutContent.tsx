@@ -431,7 +431,7 @@ const AboutContent = ({
                   className="bg-white/80 border-2 border-secondary-200/50 p-3 rounded-full whitespace-nowrap flex flex-col items-center justify-center hover:scale-110 hover:border-secondary-300 transition-all duration-300 ease-in-out active:scale-95 shadow-sm hover:shadow-md"
                 />
                 {/* Tooltip */}
-                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-secondary-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-10">
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-secondary-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 group-active:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-10">
                   {title}
                   {/* Tooltip arrow */}
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-secondary-800"></div>
