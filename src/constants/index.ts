@@ -282,7 +282,7 @@ export const AboutData = {
     text: {
         title: "About",
         subtitle: "Hi, my name is Ramon",
-        introduction: "I am a cat lover, gym goer, soccer player, and a software engineer. I've lived in Long Beach CA during my early childhood, until I moved to Irvine CA, before moving to Placerville CA for my high school years, and then finally moving to San Diego CA for my college years. Every city has its own unique charm, and I've been fortunate to experience them all.",
+        introduction: "I am a cat lover, gym goer, soccer player, and a software engineer that is passionate about learning new technologies and building new projects. I've lived in Long Beach CA during my early childhood, until I moved to Irvine CA, before moving to Placerville CA for my high school years, and then finally moving to San Diego CA for my college years. Every city has its own unique charm, and I've been fortunate to experience them all.",
         education: "I am a third year student at UC San Diego studying Cognitive Science with a specialization in Machine Learning and Neural Computation, minoring in Computer Science. Expected graduation: June 2027.",
         releventCoursework: ["Advanced data structures", "Design & Analysis of Algorithms", "Software Engineering", "Machine learning", "Data science", "Object-Oriented Programming", "Discrete Mathematics", "Linear Algebra", "Vector Calculus", "Probability and Statistics"],
         favoriteTools: [
