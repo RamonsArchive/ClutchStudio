@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
 import { useCallback, useRef } from "react";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -337,14 +338,13 @@ const AboutContent = ({
               key={index}
               src={image}
               alt="About"
-              width={500}
-              height={500}
               ref={(el) => {
                 if (imagesRef.current) {
                   imagesRef.current[index] = el;
                 }
               }}
               className="aspect-square object-cover rounded-xl shadow-xl opacity-0 w-full"
+              sizes="(max-width: 768px) 35vw, 25vw"
             />
           ))}
         </div>
