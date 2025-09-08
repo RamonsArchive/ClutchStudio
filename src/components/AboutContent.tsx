@@ -6,7 +6,6 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
 import { useCallback, useRef } from "react";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
