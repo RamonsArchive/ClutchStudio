@@ -319,7 +319,7 @@ export const AboutData = {
             tools: ["Git", "Auth.js", "Redis", "Webhook Integration"],
         }, 
     }, 
-    images: ["/Assets/About/PersonalImage5.JPG", "/Assets/About/prettyMe.png", "/Assets/About/family.png", "/Assets/About/whisper.png"]
+    images: [ "/Assets/About/personal1.png", "/Assets/About/personal5.png", "/Assets/About/whisper1.png", "/Assets/About/family.png"]
     
 }
 
