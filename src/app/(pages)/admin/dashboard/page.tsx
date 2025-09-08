@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import AdminDashboard from "@/components/AdminDashboard";
 import { fetchDashboardData } from "@/lib/actions";
 import Link from "next/link";
@@ -24,7 +23,7 @@ const page = async () => {
           href="/"
           className="relative flex w-full flex-row flex-center max-w-[80%] md:max-w-[60%]"
         >
-          <Image
+          <img
             src="/Assets/Logos/webClutch1SVG.svg"
             alt="logo"
             width={100}

@@ -302,14 +302,14 @@ const RecentProjectCard = ({
           id="recent-project-card-desktop"
           className="flex flex-row gap-3 w-full bg-gradient-to-b from-primary-900 via-black to-accent-950 overflow-x-hidden rounded-xl"
         >
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-1/2 min-h-0">
             {isEven ? (
               renderTextContent()
             ) : (
               <ImageCarousel images={galleryImages} />
             )}
           </div>
-          <div className="flex flex-col flex-1">
+          <div className="flex flex-col flex-1 min-h-0">
             {isEven ? (
               <ImageCarousel images={galleryImages} />
             ) : (

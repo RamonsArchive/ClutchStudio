@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { footerContact, footerQuickLinks, footerSocials } from "@/constants";
 
 const Footer = () => {
@@ -13,7 +12,7 @@ const Footer = () => {
               <h1 className="font-funnel-sans text-white text-[32px] md:text-[38px] font-bold w-full">
                 Socials
               </h1>
-              <div className="flex flex-row sm:flex-col gap-5 w-full">
+              <div className="flex flex-row items-center sm:items-start sm:flex-col gap-5 w-full h-fit">
                 {footerSocials.map((social) => (
                   <Link
                     key={social.id}
@@ -24,12 +23,13 @@ const Footer = () => {
                     aria-label={`Follow us on ${social.title}`}
                   >
                     <div className="relative w-6 h-6 sm:w-7 sm:h-7">
-                      <Image
+                      <img
                         src={social.path}
-                        fill
+                        width={25}
+                        height={25}
                         alt=""
                         sizes="10vw"
-                        className="object-contain filter brightness-0 invert cursor-pointer hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out "
+                        className="w-full h-full object-contain filter brightness-0 invert cursor-pointer hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out"
                       />
                     </div>
                     <span className="hidden text-[16px] md:text-[18px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors cursor-pointer">

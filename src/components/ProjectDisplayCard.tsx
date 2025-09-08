@@ -1,6 +1,5 @@
 "use client";
 import { ProjectTemplate } from "@/types/GlobalTypes";
-import Image from "next/image";
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -36,7 +35,7 @@ const ProjectDisplayCard = ({
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <Image
+      <img
         src={mainImage}
         alt={project.text.name}
         width={500}

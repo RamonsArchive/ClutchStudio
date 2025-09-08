@@ -1,5 +1,4 @@
 "use client";
-import Image from "next/image";
 import React, {
   useEffect,
   useRef,
@@ -341,18 +340,15 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
               style={{ width: `${100 / images.length}%` }}
             >
               <div className="w-full h-full flex-center overflow-hidden bg-black relative">
-                <Image
+                <img
                   src={image}
                   alt={`project image ${index + 1}`}
-                  fill
                   ref={(el) => {
                     if (el) {
                       imageRef.current[index] = el;
                     }
                   }}
-                  className="object-contain"
-                  sizes={mobile ? "80vw" : "40vw"}
-                  priority={index === 0}
+                  className="w-full h-full max-h-[650px] object-contain"
                 />
               </div>
             </div>
