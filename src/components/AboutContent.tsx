@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SplitText from "gsap/SplitText";
 import { useCallback, useRef } from "react";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -333,7 +334,7 @@ const AboutContent = ({
       <div className="flex justify-start w-full lg:w-[40%] h-full">
         <div className=" grid grid-cols-2 lg:grid-cols-1 gap-3 md:gap-5 w-full">
           {images.map((image, index) => (
-            <img
+            <Image
               key={index}
               src={image}
               alt="About"
@@ -342,8 +343,12 @@ const AboutContent = ({
                   imagesRef.current[index] = el;
                 }
               }}
+              width={300}
+              height={300}
               className="aspect-square object-cover rounded-xl shadow-xl opacity-0 w-full"
               sizes="(max-width: 768px) 35vw, 25vw"
+              priority
+              loading="eager"
             />
           ))}
         </div>
