@@ -343,8 +343,8 @@ const AboutContent = ({
                   imagesRef.current[index] = el;
                 }
               }}
-              width={300}
-              height={300}
+              width={350}
+              height={350}
               className="aspect-square object-cover rounded-xl shadow-xl opacity-0 w-full"
               sizes="(max-width: 768px) 35vw, 25vw"
               priority

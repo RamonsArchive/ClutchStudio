@@ -9,6 +9,7 @@ import React, {
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Play, Pause } from "lucide-react";
+import Image from "next/image";
 
 const ImageCarousel = ({ images }: { images: string[] }) => {
   const imageRef = useRef<HTMLImageElement[]>([]);
@@ -340,9 +341,14 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
               style={{ width: `${100 / images.length}%` }}
             >
               <div className="w-full h-full flex-center overflow-hidden bg-black relative">
-                <img
+                <Image
                   src={image}
                   alt={`project image ${index + 1}`}
+                  width={2000}
+                  height={1300}
+                  sizes="90vw"
+                  priority
+                  loading="eager"
                   ref={(el) => {
                     if (el) {
                       imageRef.current[index] = el;
