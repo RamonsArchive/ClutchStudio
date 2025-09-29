@@ -243,16 +243,80 @@ export const TheStu: ProjectTemplate = {
     status: "live" // live, in-progress, archived
 }
 
+export const DigitalRevolution: ProjectTemplate = {
+  id: "digital-revolution",
+  projectType: "WEB_DEVELOPMENT",
+  text: {
+      name: "Digital Revolution",
+      subName: "Building a foundation for digital equity and STEM education",
+      title: "Built a comprehensive e-commerce platform to expand STEM education and technology access to underprivileged communities",
+      workDescription: "I developed a full-stack e-commerce platform for my nonprofit foundation dedicated to expanding STEM education and technology access to underprivileged communities. The platform features a complete shop system with print-on-demand merchandise through the Printful API, a donation system with both one-time and recurring contributions via Stripe, and automated email notifications using the Resend API. I implemented NextAuth.js v5 for secure authentication, built a comprehensive order management system with webhook handlers for both Stripe and Printful, and created a partnerships program to facilitate organization collaborations. The platform includes guest checkout support, persistent shopping carts, real-time inventory management, and a social sharing system to amplify the mission. With 50% of all profits directed to supporting digital equity initiatives, the website serves as both a revenue generator and community hub for creating creators rather than renters in the digital space.",
+      personalDescription: "For summer 2025, I challenged myself to build something bigger than I'd ever attempted - a complete foundation to expand STEM education and technology access to underprivileged communities. I believe deeply in democracy here at home and abroad, and I wanted to help create creators rather than renters in the digital space. As my capstone project before returning to my coursework at UCSD, I leveraged my full-stack development skills to build something truly comprehensive. The technical journey was incredible: implementing NextAuth.js v5 for authentication, integrating Stripe for payments and subscriptions, connecting the Printful API for made-to-order merchandise fulfillment, building webhook handlers to keep everything synchronized, and using Resend for professional email communications. I faced significant challenges like handling guest vs. authenticated user carts, implementing rate limiting to prevent abuse, and creating a seamless checkout flow that worked across all devices. The most rewarding part was building the donation system - seeing the first test donation come through and knowing that 50% of every purchase would go toward helping students access technology and STEM education made all those late nights debugging webhook integrations worth it. This project taught me that full-stack development isn't just about connecting APIs - it's about building systems that can genuinely make a difference in people's lives.",
+  },
+  tags: ["Web Development", "Next.js 15", "React", "TypeScript", "Tailwind CSS", "Prisma", "MySQL", "Stripe", "NextAuth.js", "Printful API", "Resend API", "GSAP"],
+  images: {
+      mainImage: "/Projects/DigitalRevolution/digitalrevolution1.png",
+      galleryImages: [
+          "/Projects/DigitalRevolution/digitalrevolution1.png",
+          "/Projects/DigitalRevolution/digitalrevolution2.png",
+          "/Projects/DigitalRevolution/digitalrevolution3.png",
+          "/Projects/DigitalRevolution/digitalrevolution4.png",
+          "/Projects/DigitalRevolution/digitalrevolution5.png",
+          "/Projects/DigitalRevolution/digitalrevolution6.png",
+          "/Projects/DigitalRevolution/digitalrevolution7.png",
+          "/Projects/DigitalRevolution/digitalrevolution8.png"
+      ]
+  },
+  websiteUrl: "https://digitalrevolution.foundation",
+  githubUrl: "https://github.com/RamonsArchive/DigitalRevolution",
+  dateCompleted: "2025-09-29",
+  featured: true,
+  isClient: false,
+  isWebsite: true,
+  status: "live"
+}
+
+export const FeelWellFurniture: ProjectTemplate = {
+  id: "feel-well-furniture",
+  projectType: "WEB_DEVELOPMENT",
+  text: {
+      name: "Feel Well Furniture",
+      subName: "Connecting US furniture retailers with Chinese manufacturers",
+      title: "Built a bilingual B2B platform connecting US furniture retailers with premium Chinese suppliers",
+      workDescription: "I developed a responsive B2B furniture showcase website that bridges the gap between Chinese manufacturers and US furniture retailers. The project involved translating complex Chinese product specifications and inventory data into clean, accessible English content, creating a comprehensive product catalog with detailed specifications, dimensions, and pricing information. I built the site using Next.js 15 with TypeScript for type safety, implemented comprehensive SEO optimization with structured data markup for better search visibility, and designed a modern interface with Tailwind CSS featuring smooth animations and an elegant color palette. The platform includes a full product navigation system, interactive product displays with high-quality images, detailed material and specification sheets, and contact forms for wholesale inquiries. With PWA capabilities and mobile-first responsive design, the website serves as a professional digital storefront for B2B furniture distribution.",
+      personalDescription: "Summer 2025 turned into an unexpected entrepreneurial adventure when my friends and I decided to help a Chinese furniture manufacturer we knew break into the San Diego market. What started as a simple idea - 'let's connect them with local furniture stores' - quickly became a fascinating technical and business challenge. The biggest hurdle was taking dense Chinese product catalogs and inventory data and transforming them into clean, professional English content that American retailers would trust. I spent countless hours building a system to parse and translate product specifications, creating structured data for 10+ furniture pieces including luxury leather beds, modern sofas, and premium chairs. The technical implementation was straightforward - Next.js 15, TypeScript, Tailwind CSS - but the real challenge was understanding both markets: what information Chinese manufacturers track versus what US retailers need to know. I implemented comprehensive SEO with Schema.org markup, Open Graph tags, and XML sitemaps because I knew we'd need strong search visibility. The most rewarding part has been taking this website door-to-door to furniture stores in San Diego. Watching store owners navigate the site on my laptop, seeing them genuinely interested in the product catalog, and discussing wholesale opportunities made all the late nights worth it. This project taught me that web development isn't just about clean code - it's about building bridges between cultures, markets, and business opportunities. We're still actively pursuing partnerships, and every meeting teaches us something new about what retailers need.",
+  },
+  tags: ["Web Development", "Next.js 15", "React", "TypeScript", "Tailwind CSS", "SEO", "B2B Platform", "Internationalization"],
+  images: {
+      mainImage: "/Projects/FeelWellFurniture/feelwell1.png",
+      galleryImages: [
+          "/Projects/FeelWellFurniture/feelwell1.png",
+          "/Projects/FeelWellFurniture/feelwell2.png",
+          "/Projects/FeelWellFurniture/feelwell3.png",
+          "/Projects/FeelWellFurniture/feelwell4.png"
+      ]
+  },
+  websiteUrl: "https://feel-well-furniture.vercel.app",
+  githubUrl: "https://github.com/YourUsername/feel-well-furniture", // Add your GitHub URL if available
+  dateCompleted: "2025-08-22",
+  featured: true,
+  isClient: false,
+  isWebsite: true,
+  status: "live"
+}
+
 
 // recent projects in hero section
 export const RecentProjects = [
-    GoldenEagle,
-    YoloV8,
-    Relay,
+  DigitalRevolution,
+  YoloV8,
+  CorporateVsPodcast,
 ]
 
 // all projects
 export const Projects = [
+    FeelWellFurniture,
+    DigitalRevolution,
     GoldenEagle,
     YoloV8,
     Relay,
@@ -266,6 +330,8 @@ export const Projects = [
 
 // project page map
 export const ProjectPageMap = {
+    "digital-revolution": DigitalRevolution,
+    "feel-well-furniture": FeelWellFurniture,
     "golden-eagle-estates": GoldenEagle,
     "relay": Relay,
     "yolo-v8": YoloV8,
@@ -322,6 +388,23 @@ export const AboutData = {
     images: [ "/Assets/About/personal1.png", "/Assets/About/personal5.png", "/Assets/About/whisper1.png", "/Assets/About/family.png"]
     
 }
+
+export const WorkExperienceData = {
+    id: "work-experience",
+    text: {
+        title: "Work Experience",
+        subtitle: "Building Real Solutions for Real Clients",
+        experience: [
+            {
+                company: "Clutch Studio",
+                position: "Founder & Full-Stack Developer",
+                duration: "2024 - Present",
+                location: "San Diego, CA",
+                description: "Founded and operate a web development company serving real clients with full-stack solutions using Next.js 15, React 19, and TypeScript. Built comprehensive business platforms with complete admin dashboards, project management systems, and payment processing integration. Developed production applications with cloud infrastructure, real-time data synchronization, and automated CI/CD pipelines. Implemented advanced features including JWT authentication, rate limiting, AWS S3 integration, and comprehensive error monitoring. Delivered end-to-end solutions from initial client consultation through deployment and ongoing maintenance. Key projects include Relay E-commerce Platform (Spring 2025) - a comprehensive e-commerce solution with hybrid database architecture, Stripe payment processing, EasyPost shipping integration, and advanced promo system with usage tracking, and Golden Eagle Estates (Fall 2024) - a complete digital transformation platform for construction company featuring admin dashboard, project management, customer inquiry handling, and sophisticated project ticket system with AWS S3 and Prisma ORM integration."
+            }
+        ]
+    }
+};
 
 export const ContactData = {
     id: "contact",
