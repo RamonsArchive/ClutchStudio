@@ -144,11 +144,6 @@ export const metadata: Metadata = {
     yandex: "your-yandex-verification-code",
     yahoo: "your-yahoo-verification-code",
   },
-  icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
-  },
   manifest: "/site.webmanifest",
   category: "technology",
   classification: "Web Development Services",
@@ -277,10 +272,6 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {/* Safari-specific favicon support */}
-        <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-        <link rel="alternate icon" href="/icon.svg" />
-        <link rel="apple-touch-icon" href="/icon.svg" />
       </head>
       <body className={`${funnelSans.variable} antialiased`}>{children}</body>
     </html>
