@@ -288,12 +288,12 @@ export const FeelWellFurniture: ProjectTemplate = {
   },
   tags: ["Web Development", "Next.js 15", "React", "TypeScript", "Tailwind CSS", "SEO", "B2B Platform", "Internationalization"],
   images: {
-      mainImage: "/Projects/FeelWellFurniture/feelwell1.png",
+      mainImage: "/Projects/FeelWellFurniture/feelwellfurniature1.png",
       galleryImages: [
-          "/Projects/FeelWellFurniture/feelwell1.png",
-          "/Projects/FeelWellFurniture/feelwell2.png",
-          "/Projects/FeelWellFurniture/feelwell3.png",
-          "/Projects/FeelWellFurniture/feelwell4.png"
+          "/Projects/FeelWellFurniture/feelwellfurniature1.png",
+          "/Projects/FeelWellFurniture/feelwellfurniature2.png",
+          "/Projects/FeelWellFurniture/feelwellfurniature3.png",
+          "/Projects/FeelWellFurniture/feelwellfurniature4.png"
       ]
   },
   websiteUrl: "https://feel-well-furniture.vercel.app",
