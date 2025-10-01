@@ -168,7 +168,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
       // Buffer zone: only allow horizontal swipes if movement is clearly horizontal
       const minHorizontalMovement = 20; // 20px minimum horizontal movement
-      const maxVerticalMovement = 10; // 30px maximum vertical movement allowed
+      const maxVerticalMovement = 5; // 30px maximum vertical movement allowed
 
       if (
         Math.abs(deltaX) < minHorizontalMovement ||
