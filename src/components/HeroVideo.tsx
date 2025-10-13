@@ -142,10 +142,6 @@ const HeroVideo = () => {
         loop={true}
         preload="metadata"
         className="absolute inset-0 w-full h-full object-cover"
-        onLoadedMetadata={() => {
-          // Ensure video is ready for scrubbing
-          // console.log("Video loaded and ready");
-        }}
       />
       {/* Optional overlay for better text readability if needed */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
