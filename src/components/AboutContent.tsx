@@ -111,8 +111,8 @@ const AboutContent = ({
     gsap.from(releventCourseworkTitleSplit.words, {
       scrollTrigger: {
         trigger: releventCourseworkTitleRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 70%",
         scrub: 1,
       },
       yPercent: 100,
@@ -125,8 +125,8 @@ const AboutContent = ({
       gsap.from(el, {
         scrollTrigger: {
           trigger: el,
-          start: "top 99%",
-          end: "bottom 80%",
+          start: "top 90%",
+          end: "top 70%",
           scrub: 1,
         },
         yPercent: 40,
@@ -138,8 +138,8 @@ const AboutContent = ({
     gsap.from(favoriteToolsTitleSplit.words, {
       scrollTrigger: {
         trigger: favoriteToolsTitleRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 70%",
         scrub: 1,
       },
       yPercent: 100,
@@ -151,8 +151,8 @@ const AboutContent = ({
     const favToolTL = gsap.timeline({
       scrollTrigger: {
         trigger: favoriteToolsRef.current,
-        start: "top 99%",
-        end: "bottom 80%",
+        start: "top 90%",
+        end: "top 70%",
         scrub: 1,
       },
       stagger: 0.2,
@@ -174,8 +174,8 @@ const AboutContent = ({
     gsap.from(subTitleSplit.words, {
       scrollTrigger: {
         trigger: subtitleRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 70%",
         scrub: 1,
       },
       yPercent: 100,
@@ -187,8 +187,8 @@ const AboutContent = ({
     gsap.from(introductionTitleSplit.words, {
       scrollTrigger: {
         trigger: introductionTitleRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 70%",
         scrub: 1,
       },
       yPercent: 100,
@@ -200,8 +200,8 @@ const AboutContent = ({
     gsap.from(introductionSplit.words, {
       scrollTrigger: {
         trigger: introductionRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 30%",
         scrub: 1,
       },
       yPercent: 100,
@@ -213,8 +213,8 @@ const AboutContent = ({
     gsap.from(educationTitleSplit.words, {
       scrollTrigger: {
         trigger: educationTitleRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 70%",
         scrub: 1,
       },
       yPercent: 100,
@@ -226,7 +226,7 @@ const AboutContent = ({
     gsap.from(educationSplit.words, {
       scrollTrigger: {
         trigger: educationRef.current,
-        start: "top bottom",
+        start: "top 90%",
         end: "bottom 95%",
         scrub: 1,
       },
@@ -239,8 +239,8 @@ const AboutContent = ({
     gsap.from(technicalSkillsTitleSplit.words, {
       scrollTrigger: {
         trigger: technicalSkillsTitleRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 30%",
         scrub: 1,
       },
       yPercent: 100,
@@ -252,8 +252,8 @@ const AboutContent = ({
     gsap.from(technicalSkillsSplit.words, {
       scrollTrigger: {
         trigger: technicalSkillsRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
+        start: "top 90%",
+        end: "top 70%",
         scrub: 1,
       },
       yPercent: 100,
@@ -275,6 +275,7 @@ const AboutContent = ({
     });
 
     // Initial entrance animation for images (snappy and clean)
+
     imagesRef.current.forEach((image, index) => {
       gsap.set(image, {
         opacity: 0,
@@ -282,14 +283,44 @@ const AboutContent = ({
       });
     });
 
-    const imageTimeline = gsap.timeline();
+    Promise.all(
+      imagesRef.current.map(
+        (image) =>
+          new Promise<void>((resolve) => {
+            if (!image) {
+              resolve();
+              return;
+            }
 
-    imageTimeline.to(imagesRef.current, {
-      yPercent: 0,
-      opacity: 1,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "power2.out",
+            const img = image.querySelector("img");
+            if (!img) {
+              resolve();
+              return;
+            }
+
+            if (img.complete) {
+              resolve();
+              return;
+            }
+
+            img.onload = () => {
+              resolve();
+            };
+            img.onerror = () => {
+              resolve();
+            };
+          })
+      )
+    ).then(() => {
+      const imageTimeline = gsap.timeline();
+
+      imageTimeline.to(imagesRef.current, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power2.out",
+      });
     });
 
     return () => {
@@ -345,10 +376,11 @@ const AboutContent = ({
               }}
               width={350}
               height={350}
-              className="aspect-square object-cover rounded-xl shadow-xl opacity-0 w-full"
+              className="about-image aspect-square object-cover rounded-xl shadow-xl opacity-0 w-full"
               sizes="(max-width: 768px) 35vw, 25vw"
               priority
               loading="eager"
+              fetchPriority="high"
             />
           ))}
         </div>
