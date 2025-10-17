@@ -20,7 +20,7 @@ const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
     const personalDescriptionSplit = SplitText.create(
       personalDescriptionRef.current,
       {
-        type: "words",
+        type: "lines",
       }
     );
 
@@ -28,7 +28,7 @@ const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
       scrollTrigger: {
         trigger: titleRef.current,
         start: "top bottom",
-        end: "bottom 95%",
+        end: "top 70%",
         scrub: 1,
       },
       opacity: 0,
@@ -37,11 +37,11 @@ const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
       ease: "power2.inOut",
     });
 
-    gsap.from(personalDescriptionSplit.words, {
+    gsap.from(personalDescriptionSplit.lines, {
       scrollTrigger: {
         trigger: personalDescriptionRef.current,
         start: "top bottom",
-        end: "bottom 95%",
+        end: "top 70%",
         scrub: 1,
       },
       opacity: 0,
@@ -54,7 +54,7 @@ const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
       scrollTrigger: {
         trigger: accentDividerRef.current,
         start: "top bottom",
-        end: "bottom 95%",
+        end: "top 90%",
         scrub: 1,
       },
       opacity: 0,
