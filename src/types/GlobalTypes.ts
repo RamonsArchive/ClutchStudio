@@ -1,4 +1,3 @@
-
 export type ActionState = {
   status: "INITIAL" | "PENDING" | "SUCCESS" | "ERROR";
   error: string | null;
@@ -26,7 +25,7 @@ export enum ProjectTags {
   "DevOps" = "DevOps",
   "Testing and QA" = "Testing and QA",
   "Version Control" = "Version Control",
-  
+
   // Data Science
   "Data Analysis" = "Data Analysis",
   "Data Visualization" = "Data Visualization",
@@ -46,7 +45,7 @@ export enum ProjectTags {
   "Tableau" = "Tableau",
   "Power BI" = "Power BI",
   "Apache Spark" = "Apache Spark",
-  
+
   // AI/Machine Learning
   "Artificial Intelligence" = "Artificial Intelligence",
   "Machine Learning" = "Machine Learning",
@@ -69,7 +68,6 @@ export enum ProjectTags {
   "MLOps" = "MLOps",
   "Model Deployment" = "Model Deployment",
 }
-
 
 // Service category groupings for filtering
 export const ServiceCategories = {
@@ -132,55 +130,52 @@ export const ServiceCategories = {
     ProjectTags["Generative AI"],
     ProjectTags["MLOps"],
     ProjectTags["Model Deployment"],
-  ]
-}
-
+  ],
+};
 
 export const ProjectTypes = {
   WEB_DEVELOPMENT: "Web Development",
-  DATA_SCIENCE: "Data Science", 
-  AI_SOLUTIONS: "AI Solutions"
-}
+  DATA_SCIENCE: "Data Science",
+  AI_SOLUTIONS: "AI Solutions",
+};
 
 export const ProjectFilters = [
   { label: "All Projects", value: "all" },
   { label: "Web Development", value: ProjectTypes.WEB_DEVELOPMENT },
   { label: "Data Science", value: ProjectTypes.DATA_SCIENCE },
-  { label: "AI Solutions", value: ProjectTypes.AI_SOLUTIONS }
-]
-
-
+  { label: "AI Solutions", value: ProjectTypes.AI_SOLUTIONS },
+];
 
 export type ProjectTemplate = {
-  id: string, // kebab-case unique identifier
-  projectType: keyof typeof ProjectTypes, // Simple filter category
+  id: string; // kebab-case unique identifier
+  projectType: keyof typeof ProjectTypes; // Simple filter category
   text: {
-    name: string, // Client/Project name
-    subName: string, // Client/Project sub name
-    title: string, // One-line description
-    workDescription: string, // Technical/business focused description
-    personalDescription: string, // Personal story/connection
-  },
-  tags: string[], // Technologies/services used
+    name: string; // Client/Project name
+    subName: string; // Client/Project sub name
+    title: string; // One-line description
+    workDescription: string; // Technical/business focused description
+    personalDescription: string; // Personal story/connection
+  };
+  tags: string[]; // Technologies/services used
   images: {
-    mainImage: string, // Hero image for the project
-    galleryImages: string[] // Additional screenshots/images
-  },
-  websiteUrl: string, // Live website URL
-  githubUrl: string, // GitHub repository if no live site
-  dateCompleted: string, // YYYY-MM-DD format
-  featured: boolean, // Show on homepage
-  isClient: boolean, // Is the client a real person?
-  isWebsite: boolean, // Is the project a website?
-  status: "live" | "in-progress" | "archived" // live, in-progress, archived
-}
+    mainImage: string; // Hero image for the project
+    galleryImages: string[]; // Additional screenshots/images
+  };
+  websiteUrl: string; // Live website URL
+  githubUrl: string; // GitHub repository if no live site
+  dateCompleted: string; // YYYY-MM-DD format
+  featured: boolean; // Show on homepage
+  isClient: boolean; // Is the client a real person?
+  isWebsite: boolean; // Is the project a website?
+  status: "live" | "in-progress" | "archived"; // live, in-progress, archived
+};
 
-export const ServiceType ={
+export const ServiceType = {
   WEB_DEVELOPMENT: "Web Development",
   DATA_SCIENCE: "Data Science",
   AI_SOLUTIONS: "AI Solutions",
   OTHER: "Other",
-}
+};
 
 export type ServiceStringType = keyof typeof ServiceType;
 
@@ -192,7 +187,7 @@ export type FromDataType = {
   service: string;
   organization: string;
   message: string;
-}
+};
 
 export type ProjectTicketType = {
   id: string;
@@ -207,28 +202,28 @@ export type ProjectTicketType = {
   adminNotes: string;
   createdAt: Date;
   updatedAt: Date;
-}
+};
 
 export type DashboardDataType = {
   projectTickets: ProjectTicketType[];
-}
+};
 
 // Project Status enum for admin interface
 export enum ProjectStatus {
   UNCONFIRMED = "UNCONFIRMED",
-  CONFIRMED = "CONFIRMED", 
+  CONFIRMED = "CONFIRMED",
   IN_PROGRESS = "IN_PROGRESS",
   COMPLETED = "COMPLETED",
   ARCHIVED = "ARCHIVED",
-  CANCELLED = "CANCELLED"
+  CANCELLED = "CANCELLED",
 }
 
-// Project Type enum for admin interface  
+// Project Type enum for admin interface
 export enum ProjectType {
   WEB_DEVELOPMENT = "WEB_DEVELOPMENT",
   DATA_SCIENCE = "DATA_SCIENCE",
   AI_SOLUTIONS = "AI_SOLUTIONS",
-  OTHER = "OTHER"
+  OTHER = "OTHER",
 }
 
 // Status display labels
@@ -238,7 +233,7 @@ export const PROJECT_STATUS_LABELS: Record<ProjectStatus, string> = {
   [ProjectStatus.IN_PROGRESS]: "In Progress",
   [ProjectStatus.COMPLETED]: "Completed",
   [ProjectStatus.ARCHIVED]: "Archived",
-  [ProjectStatus.CANCELLED]: "Cancelled"
+  [ProjectStatus.CANCELLED]: "Cancelled",
 };
 
 // Project type display labels
@@ -246,7 +241,7 @@ export const PROJECT_TYPE_LABELS: Record<ProjectType, string> = {
   [ProjectType.WEB_DEVELOPMENT]: "Web Development",
   [ProjectType.DATA_SCIENCE]: "Data Science",
   [ProjectType.AI_SOLUTIONS]: "AI Solutions",
-  [ProjectType.OTHER]: "Other"
+  [ProjectType.OTHER]: "Other",
 };
 
 // Conversion utilities for backend
@@ -254,7 +249,7 @@ export const PROJECT_TYPE_VALUES: Record<string, ProjectType> = {
   "Web Development": ProjectType.WEB_DEVELOPMENT,
   "Data Science": ProjectType.DATA_SCIENCE,
   "AI Solutions": ProjectType.AI_SOLUTIONS,
-  "Other": ProjectType.OTHER,
+  Other: ProjectType.OTHER,
 };
 
 export const PROJECT_TYPE_VALUES_REVERSE: Record<ProjectType, string> = {
@@ -265,13 +260,16 @@ export const PROJECT_TYPE_VALUES_REVERSE: Record<ProjectType, string> = {
 };
 
 // Admin filter options
-export const projectStatusOptionsAdmin = Object.entries(PROJECT_STATUS_LABELS).map(([value, title]) => ({
+export const projectStatusOptionsAdmin = Object.entries(
+  PROJECT_STATUS_LABELS
+).map(([value, title]) => ({
   value,
-  title
+  title,
 }));
 
-export const projectTypeOptionsAdmin = Object.entries(PROJECT_TYPE_LABELS).map(([value, title]) => ({
-  value,
-  title
-}));
-
+export const projectTypeOptionsAdmin = Object.entries(PROJECT_TYPE_LABELS).map(
+  ([value, title]) => ({
+    value,
+    title,
+  })
+);

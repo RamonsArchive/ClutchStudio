@@ -12,79 +12,90 @@ import bcrypt from "bcryptjs";
 import { sendProjectTicketEmail } from "./ProjectTicketEmail";
 
 export const writeProjectTickt = async (formObject: FromDataType) => {
-    try {
-      const isRateLimited = await checkRateLimit("writeProjectTicket");
-      if (isRateLimited.status === "ERROR") {
-          return isRateLimited;
-      }
-      const validation = contactFormSchema.parseAsync(formObject);
-      if (validation instanceof z.ZodError) {
-          const fieldErrors = z.flattenError(validation).fieldErrors as Record<string, string[]>;
-          const formattedErrors: Record<string, string> = {};
-          Object.keys(fieldErrors).forEach((key) => {
-              formattedErrors[key] = fieldErrors[key]?.[0] || "";
-          });
-          return parseServerActionResponse({
-              status: "ERROR",
-              error: Object.values(formattedErrors).join(", "),
-              data: null,
-          });
-      }
-
-      const { firstName, lastName, email, phoneNumber, organization, message, service } = formObject;
-
-      // Map display values to Prisma enum types
-      const serviceMapping: Record<string, ServiceStringType> = {
-        "Web Development": "WEB_DEVELOPMENT",
-        "Data Science": "DATA_SCIENCE", 
-        "AI Solutions": "AI_SOLUTIONS",
-        "Other": "OTHER"
-      };
-
-      const mappedService = serviceMapping[service] || "WEB_DEVELOPMENT";
-
-      const result = await prisma.projectTicket.create({
-        data: {
-            firstName,
-            lastName,
-            email,
-            phoneNumber,
-            organization,
-            message,
-            service: mappedService
-        }
-      })
-
-      if (!result) {
-        return parseServerActionResponse({
-            status: "ERROR",
-            error: "Failed to create project ticket",
-            data: null,
-        });
-      }
-
-      const emailResult = await sendProjectTicketEmail(
-        result.id, // projectId
-        result.id, // ticketId (using the same ID for now)
-        result.firstName,
-        result.lastName,
-        result.email,
-        result.phoneNumber,
-        result.service,
-        result.organization,
-        result.message
-      );
-
-      if (!emailResult.success) {
-        console.error('Failed to send email:', emailResult.error);
-        // Still return success for the ticket creation, but log the email failure
-      }
-
-      return parseServerActionResponse({
-        status: "SUCCESS",
-        error: null,
-        data: result,
+  try {
+    const isRateLimited = await checkRateLimit("writeProjectTicket");
+    if (isRateLimited.status === "ERROR") {
+      return isRateLimited;
+    }
+    const validation = contactFormSchema.parseAsync(formObject);
+    if (validation instanceof z.ZodError) {
+      const fieldErrors = z.flattenError(validation).fieldErrors as Record<
+        string,
+        string[]
+      >;
+      const formattedErrors: Record<string, string> = {};
+      Object.keys(fieldErrors).forEach((key) => {
+        formattedErrors[key] = fieldErrors[key]?.[0] || "";
       });
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: Object.values(formattedErrors).join(", "),
+        data: null,
+      });
+    }
+
+    const {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      organization,
+      message,
+      service,
+    } = formObject;
+
+    // Map display values to Prisma enum types
+    const serviceMapping: Record<string, ServiceStringType> = {
+      "Web Development": "WEB_DEVELOPMENT",
+      "Data Science": "DATA_SCIENCE",
+      "AI Solutions": "AI_SOLUTIONS",
+      Other: "OTHER",
+    };
+
+    const mappedService = serviceMapping[service] || "WEB_DEVELOPMENT";
+
+    const result = await prisma.projectTicket.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        phoneNumber,
+        organization,
+        message,
+        service: mappedService,
+      },
+    });
+
+    if (!result) {
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: "Failed to create project ticket",
+        data: null,
+      });
+    }
+
+    const emailResult = await sendProjectTicketEmail(
+      result.id, // projectId
+      result.id, // ticketId (using the same ID for now)
+      result.firstName,
+      result.lastName,
+      result.email,
+      result.phoneNumber,
+      result.service,
+      result.organization,
+      result.message
+    );
+
+    if (!emailResult.success) {
+      console.error("Failed to send email:", emailResult.error);
+      // Still return success for the ticket creation, but log the email failure
+    }
+
+    return parseServerActionResponse({
+      status: "SUCCESS",
+      error: null,
+      data: result,
+    });
   } catch (error) {
     console.error(error);
     return parseServerActionResponse({
@@ -95,170 +106,173 @@ export const writeProjectTickt = async (formObject: FromDataType) => {
   }
 };
 
-
-
 export const createAdminUser = async (data: FormData) => {
-    try {
-      const isRateLimited = await checkRateLimit("createAdminUser");
-      if (isRateLimited.status === "ERROR") {
-        return isRateLimited;
-      }
-  
-      const { username, password, role } = Object.fromEntries(data.entries()) as Record<string, string>;
-      if (!username || !password || !role) {
-        return parseServerActionResponse({
-          status: "ERROR",
-          error: "All fields are required",
-          data: null,
-        });
-      }
-  
-      if (password.length < 8) {
-        return parseServerActionResponse({
-          status: "ERROR",
-          error: "Password must be at least 8 characters long",
-          data: null,
-        });
-      }
-  
-      const existingUser = await prisma.authenticatedUser.findUnique({
-        where: { username }
-      });
-  
-      if (existingUser) {
-        return parseServerActionResponse({
-          status: "ERROR",
-          error: "Username already exists",
-          data: null,
-        });
-      }
-  
-      const saltRounds = 12;
-      const hashedPassword = await bcrypt.hash(password, saltRounds);
-  
-      const newAdmin = await prisma.authenticatedUser.create({
-        data: {
-          username,
-          passwordHash: hashedPassword,
-          role: role as keyof typeof Role,
-        }
-      })
-  
-      if (!newAdmin) {
-        return parseServerActionResponse({
-          status: "ERROR",
-          error: "Failed to create admin user",
-          data: null,
-        });
-      }
-  
+  try {
+    const isRateLimited = await checkRateLimit("createAdminUser");
+    if (isRateLimited.status === "ERROR") {
+      return isRateLimited;
+    }
+
+    const { username, password, role } = Object.fromEntries(
+      data.entries()
+    ) as Record<string, string>;
+    if (!username || !password || !role) {
       return parseServerActionResponse({
-        status: "SUCCESS",
-        error: "",
-        data: {
-          newAdmin,
-        }
+        status: "ERROR",
+        error: "All fields are required",
+        data: null,
       });
-  
-    } catch (error) {
-      console.error("Error creating admin user", error);
+    }
+
+    if (password.length < 8) {
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: "Password must be at least 8 characters long",
+        data: null,
+      });
+    }
+
+    const existingUser = await prisma.authenticatedUser.findUnique({
+      where: { username },
+    });
+
+    if (existingUser) {
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: "Username already exists",
+        data: null,
+      });
+    }
+
+    const saltRounds = 12;
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const newAdmin = await prisma.authenticatedUser.create({
+      data: {
+        username,
+        passwordHash: hashedPassword,
+        role: role as keyof typeof Role,
+      },
+    });
+
+    if (!newAdmin) {
       return parseServerActionResponse({
         status: "ERROR",
         error: "Failed to create admin user",
         data: null,
       });
     }
-  }
 
+    return parseServerActionResponse({
+      status: "SUCCESS",
+      error: "",
+      data: {
+        newAdmin,
+      },
+    });
+  } catch (error) {
+    console.error("Error creating admin user", error);
+    return parseServerActionResponse({
+      status: "ERROR",
+      error: "Failed to create admin user",
+      data: null,
+    });
+  }
+};
 
 export const authenticateAdmin = async (data: FormData) => {
-    try {
-      const isRateLimited = await checkRateLimit("authenticateAdmin");
-      if (isRateLimited.status === "ERROR") {
-        return isRateLimited;
-      }
-  
-      const { username, password } = Object.fromEntries(data.entries()) as Record<string, string>;
-  
-      if (!username || !password) {
-        return parseServerActionResponse({
-          status: "ERROR",
-          error: "All fields are required",
-          data: null,
-        });
-      }
-  
-      const existingUser = await prisma.authenticatedUser.findUnique({
-        where: { username, isActive: true },
-        select: {
-          id: true,
-          username: true,
-          role: true,
-          lastLogin: true,
-          passwordHash: true,
-        }
-      });
-  
-      if (!existingUser) {
-        return parseServerActionResponse({
-          status: "ERROR",
-          error: "Invalid username or password",
-          data: null,
-        });
-      }
-  
-      const isValidPassword = await bcrypt.compare(password, existingUser.passwordHash);
-      if (!isValidPassword) {
-        return parseServerActionResponse({
-          status: "ERROR",
-          error: "Invalid username or password",
-          data: null,
-        });
-      }
-  
-            await prisma.authenticatedUser.update({
-        where: { id: existingUser.id },
-        data: {
-          lastLogin: new Date(),
-        }
-      });
+  try {
+    const isRateLimited = await checkRateLimit("authenticateAdmin");
+    if (isRateLimited.status === "ERROR") {
+      return isRateLimited;
+    }
 
-      if (isValidPassword) {
-        const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
-        const token = await new SignJWT({ id: existingUser.id })
-          .setProtectedHeader({ alg: 'HS256' })
-          .setExpirationTime('8h')
-          .sign(secret);
-  
-        (await cookies()).set('admin_session', token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "strict",
-          maxAge: 8 * 60 * 60, // 8 hours
-          path: "/",
-        })
-      }
-  
-      return parseServerActionResponse({
-        status: "SUCCESS",
-        error: "",
-        data: {
-          id: existingUser.id,
-          username: existingUser.username,
-          role: existingUser.role,
-          lastLogin: existingUser.lastLogin,
-        }
-      });
-    } catch (error) {
-      console.error("Error authenticating admin", error);
+    const { username, password } = Object.fromEntries(data.entries()) as Record<
+      string,
+      string
+    >;
+
+    if (!username || !password) {
       return parseServerActionResponse({
         status: "ERROR",
-        error: error,
+        error: "All fields are required",
         data: null,
       });
     }
-  }
 
+    const existingUser = await prisma.authenticatedUser.findUnique({
+      where: { username, isActive: true },
+      select: {
+        id: true,
+        username: true,
+        role: true,
+        lastLogin: true,
+        passwordHash: true,
+      },
+    });
+
+    if (!existingUser) {
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: "Invalid username or password",
+        data: null,
+      });
+    }
+
+    const isValidPassword = await bcrypt.compare(
+      password,
+      existingUser.passwordHash
+    );
+    if (!isValidPassword) {
+      return parseServerActionResponse({
+        status: "ERROR",
+        error: "Invalid username or password",
+        data: null,
+      });
+    }
+
+    await prisma.authenticatedUser.update({
+      where: { id: existingUser.id },
+      data: {
+        lastLogin: new Date(),
+      },
+    });
+
+    if (isValidPassword) {
+      const secret = new TextEncoder().encode(process.env.JWT_SECRET!);
+      const token = await new SignJWT({ id: existingUser.id })
+        .setProtectedHeader({ alg: "HS256" })
+        .setExpirationTime("8h")
+        .sign(secret);
+
+      (await cookies()).set("admin_session", token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 8 * 60 * 60, // 8 hours
+        path: "/",
+      });
+    }
+
+    return parseServerActionResponse({
+      status: "SUCCESS",
+      error: "",
+      data: {
+        id: existingUser.id,
+        username: existingUser.username,
+        role: existingUser.role,
+        lastLogin: existingUser.lastLogin,
+      },
+    });
+  } catch (error) {
+    console.error("Error authenticating admin", error);
+    return parseServerActionResponse({
+      status: "ERROR",
+      error: error,
+      data: null,
+    });
+  }
+};
 
 export const fetchDashboardData = async () => {
   try {
@@ -269,7 +283,7 @@ export const fetchDashboardData = async () => {
 
     const projectTickets = await prisma.projectTicket.findMany({
       orderBy: {
-        createdAt: 'desc' // Most recent first
+        createdAt: "desc", // Most recent first
       },
       select: {
         id: true,
@@ -283,7 +297,7 @@ export const fetchDashboardData = async () => {
         status: true,
         createdAt: true,
         updatedAt: true,
-      }
+      },
     });
 
     if (!projectTickets) {
@@ -299,9 +313,8 @@ export const fetchDashboardData = async () => {
       error: "",
       data: {
         projectTickets,
-      }
+      },
     });
-
   } catch (error) {
     console.error("Error fetching dashboard data", error);
     return parseServerActionResponse({
@@ -310,7 +323,7 @@ export const fetchDashboardData = async () => {
       data: null,
     });
   }
-}
+};
 
 export const updateProjectStatus = async (id: string, status: string) => {
   try {
@@ -326,7 +339,12 @@ export const updateProjectStatus = async (id: string, status: string) => {
     // }
 
     // Convert frontend status to backend status
-    let backendStatus: "PENDING" | "IN_PROGRESS" | "COMPLETED" | "ARCHIVED" | "CANCELLED";
+    let backendStatus:
+      | "PENDING"
+      | "IN_PROGRESS"
+      | "COMPLETED"
+      | "ARCHIVED"
+      | "CANCELLED";
     switch (status) {
       case "UNCONFIRMED":
         backendStatus = "PENDING";
@@ -354,7 +372,7 @@ export const updateProjectStatus = async (id: string, status: string) => {
       where: { id },
       data: {
         status: backendStatus,
-      }
+      },
     });
 
     if (!projectTicket) {
@@ -370,7 +388,7 @@ export const updateProjectStatus = async (id: string, status: string) => {
       error: "",
       data: {
         projectTicket,
-      }
+      },
     });
   } catch (error) {
     console.error("Error updating project status", error);
@@ -380,4 +398,4 @@ export const updateProjectStatus = async (id: string, status: string) => {
       data: null,
     });
   }
-}
+};

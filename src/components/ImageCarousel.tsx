@@ -47,10 +47,13 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
           lastExecTime = currentTime;
         } else {
           clearTimeout(timeoutId);
-          timeoutId = setTimeout(() => {
-            func(clientX, clientY);
-            lastExecTime = currentTime;
-          }, delay - (currentTime - lastExecTime));
+          timeoutId = setTimeout(
+            () => {
+              func(clientX, clientY);
+              lastExecTime = currentTime;
+            },
+            delay - (currentTime - lastExecTime)
+          );
         }
       };
     },

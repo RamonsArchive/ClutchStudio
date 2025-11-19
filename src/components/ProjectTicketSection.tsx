@@ -58,10 +58,10 @@ const ProjectTicketSection = ({
         ticket.service === "WEB_DEVELOPMENT"
           ? ProjectType.WEB_DEVELOPMENT
           : ticket.service === "DATA_SCIENCE"
-          ? ProjectType.DATA_SCIENCE
-          : ticket.service === "AI_SOLUTIONS"
-          ? ProjectType.AI_SOLUTIONS
-          : ProjectType.OTHER;
+            ? ProjectType.DATA_SCIENCE
+            : ticket.service === "AI_SOLUTIONS"
+              ? ProjectType.AI_SOLUTIONS
+              : ProjectType.OTHER;
 
       if (statusFilters.length === 0 && projectTypeFilters.length === 0) {
         return defaultStatus.some((filter) => filter.value === frontendStatus);

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F0F8FF; /* Very light blue background instead of white */
+  --background: #f0f8ff; /* Very light blue background instead of white */
   --foreground: #171717;
 }
 
@@ -57,7 +57,7 @@ aside::-webkit-scrollbar {
 /* For WebKit browsers (Chrome, Safari, Opera) */
 body::-webkit-scrollbar {
   display: none; /* literally remove it */
-} 
+}
 
 /* Debug: Test cursor styles */
 * {
@@ -65,13 +65,15 @@ body::-webkit-scrollbar {
 }
 
 /* Override for specific elements */
-.cursor-pointer, [style*="cursor: pointer"] {
+.cursor-pointer,
+[style*="cursor: pointer"] {
   cursor: pointer !important;
 }
 
 /* Gradient animation for TitleSection */
 @keyframes gradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -81,7 +83,7 @@ body::-webkit-scrollbar {
 
 /* Animated gradient text class */
 .animated-gradient-text {
-  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
+  background: linear-gradient(to right, #00d4ff, #0099ff, #00ff88);
   background-size: 200% 200%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -102,7 +104,7 @@ body::-webkit-scrollbar {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
+  background: linear-gradient(to right, #00d4ff, #0099ff, #00ff88);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   background-clip: text;
@@ -114,21 +116,19 @@ body::-webkit-scrollbar {
   transition: opacity 0.3s ease; /* Smooth fade in */
 }
 
-
-
 /* Alternative: Use text-shadow for a gradient glow effect */
 .animated-gradient-glow {
   color: white;
-  text-shadow: 
-    0 0 10px #00D4FF,
-    0 0 20px #0099FF,
-    0 0 30px #00FF88;
+  text-shadow:
+    0 0 10px #00d4ff,
+    0 0 20px #0099ff,
+    0 0 30px #00ff88;
   animation: gradientShift 8s ease-in-out infinite;
 }
 
 /* Form input styles - consistent sizing and appearance */
 .form-input {
-  font-family: 'FunnelSans', sans-serif;
+  font-family: "FunnelSans", sans-serif;
   font-size: 14px;
   line-height: 1.5;
   padding: 12px 16px;
@@ -187,13 +187,13 @@ select.form-input:focus {
 }
 
 .animated-gradient-text-blend::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to right, #00D4FF, #0099FF, #00FF88);
+  background: linear-gradient(to right, #00d4ff, #0099ff, #00ff88);
   background-size: 200% 200%;
   animation: gradientShift 8s ease-in-out infinite;
   z-index: -1;
@@ -207,7 +207,7 @@ select.form-input:focus {
 }
 
 .wavy-border-bottom::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -25px;
   left: 0;
@@ -221,7 +221,7 @@ select.form-input:focus {
 }
 
 .wavy-border-bottom::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -20px;
   left: 0;
@@ -235,7 +235,7 @@ select.form-input:focus {
 }
 
 .wavy-border-bottom .wave-layer-1 {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -15px;
   left: 0;
@@ -249,7 +249,7 @@ select.form-input:focus {
 }
 
 .wavy-border-bottom .wave-layer-2 {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -10px;
   left: 0;
@@ -263,31 +263,67 @@ select.form-input:focus {
 }
 
 @keyframes fluidWave1 {
-  0%, 100% { background-position: 0% 50%; }
-  25% { background-position: 50% 50%; }
-  50% { background-position: 100% 50%; }
-  75% { background-position: 50% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 50% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  75% {
+    background-position: 50% 50%;
+  }
 }
 
 @keyframes fluidWave2 {
-  0%, 100% { background-position: 0% 50%; }
-  33% { background-position: 66% 50%; }
-  66% { background-position: 33% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  33% {
+    background-position: 66% 50%;
+  }
+  66% {
+    background-position: 33% 50%;
+  }
 }
 
 @keyframes fluidWave3 {
-  0%, 100% { background-position: 0% 50%; }
-  20% { background-position: 40% 50%; }
-  40% { background-position: 80% 50%; }
-  60% { background-position: 60% 50%; }
-  80% { background-position: 20% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  20% {
+    background-position: 40% 50%;
+  }
+  40% {
+    background-position: 80% 50%;
+  }
+  60% {
+    background-position: 60% 50%;
+  }
+  80% {
+    background-position: 20% 50%;
+  }
 }
 
 @keyframes fluidWave4 {
-  0%, 100% { background-position: 0% 50%; }
-  25% { background-position: 75% 50%; }
-  50% { background-position: 25% 50%; }
-  75% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  25% {
+    background-position: 75% 50%;
+  }
+  50% {
+    background-position: 25% 50%;
+  }
+  75% {
+    background-position: 100% 50%;
+  }
 }
 
 /* Animated gradient button with multiple colors */
@@ -295,12 +331,12 @@ select.form-input:focus {
   position: relative;
   background: linear-gradient(
     45deg,
-    #059669,  /* Deep emerald */
-    #10B981,  /* Medium emerald */
-    #34D399,  /* Bright green */
-    #6EE7B7,  /* Light mint */
-    #10B981,  /* Medium emerald */
-    #059669   /* Deep emerald */
+    #059669,
+    /* Deep emerald */ #10b981,
+    /* Medium emerald */ #34d399,
+    /* Bright green */ #6ee7b7,
+    /* Light mint */ #10b981,
+    /* Medium emerald */ #059669 /* Deep emerald */
   );
   background-size: 400% 400%;
   animation: buttonGradientShift 3s ease infinite;
@@ -329,7 +365,8 @@ select.form-input:focus {
 }
 
 @keyframes buttonGradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -338,7 +375,8 @@ select.form-input:focus {
 }
 
 @keyframes gradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -348,7 +386,7 @@ select.form-input:focus {
 
 /* Alternative: More pronounced zigzag wave */
 .wavy-border-bottom-zigzag::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -20px;
   left: 0;
@@ -361,7 +399,7 @@ select.form-input:focus {
 
 /* Alternative: Organic wave with more variation */
 .wavy-border-bottom-organic::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -25px;
   left: 0;
@@ -377,106 +415,106 @@ select.form-input:focus {
   --color-foreground: var(--foreground);
 
   --breakpoint-xs: 380px; /* 480px */
-  
+
   /* Primary Color Variations (Your Blue #0060CD) */
-  --color-primary-50: #EBF4FF;   /* Very light blue for subtle backgrounds */
-  --color-primary-100: #DBEAFE;  /* Light blue for cards/containers */
-  --color-primary-200: #BFDBFE;  /* Lighter blue for hover states */
-  --color-primary-300: #93C5FD;  /* Medium-light blue */
-  --color-primary-400: #60A5FA;  /* Medium blue */
-  --color-primary-500: #0060CD;  /* Your primary blue */
-  --color-primary-600: #0052B4;  /* Darker blue for hover states */
-  --color-primary-700: #00449B;  /* Dark blue for navbar backdrop */
-  --color-primary-800: #003682;  /* Darker blue */
-  --color-primary-900: #002969;  /* Darkest blue for deep shadows */
+  --color-primary-50: #ebf4ff; /* Very light blue for subtle backgrounds */
+  --color-primary-100: #dbeafe; /* Light blue for cards/containers */
+  --color-primary-200: #bfdbfe; /* Lighter blue for hover states */
+  --color-primary-300: #93c5fd; /* Medium-light blue */
+  --color-primary-400: #60a5fa; /* Medium blue */
+  --color-primary-500: #0060cd; /* Your primary blue */
+  --color-primary-600: #0052b4; /* Darker blue for hover states */
+  --color-primary-700: #00449b; /* Dark blue for navbar backdrop */
+  --color-primary-800: #003682; /* Darker blue */
+  --color-primary-900: #002969; /* Darkest blue for deep shadows */
 
   /* Secondary Color Variations (Your Green #008E1A) */
-  --color-secondary-50: #F0FDF4;   /* Very light green */
-  --color-secondary-100: #DCFCE7;  /* Light green for containers */
-  --color-secondary-200: #BBF7D0;  /* Lighter green */
-  --color-secondary-300: #86EFAC;  /* Medium-light green */
-  --color-secondary-400: #4ADE80;  /* Medium green */
-  --color-secondary-500: #008E1A;  /* Your primary green */
-  --color-secondary-600: #007A17;  /* Darker green */
-  --color-secondary-700: #006614;  /* Dark green */
-  --color-secondary-800: #005211;  /* Darker green */
-  --color-secondary-900: #003E0E;  /* Darkest green */
+  --color-secondary-50: #f0fdf4; /* Very light green */
+  --color-secondary-100: #dcfce7; /* Light green for containers */
+  --color-secondary-200: #bbf7d0; /* Lighter green */
+  --color-secondary-300: #86efac; /* Medium-light green */
+  --color-secondary-400: #4ade80; /* Medium green */
+  --color-secondary-500: #008e1a; /* Your primary green */
+  --color-secondary-600: #007a17; /* Darker green */
+  --color-secondary-700: #006614; /* Dark green */
+  --color-secondary-800: #005211; /* Darker green */
+  --color-secondary-900: #003e0e; /* Darkest green */
 
- /* Primary Background Variations */
-  --color-primary-background-50: #F5F7FA;   /* Very light blue-gray */
-  --color-primary-background-100: #E8EDF4;  /* Light blue-gray */
-  --color-primary-background-200: #D1DCE9;  /* Lighter blue-gray */
-  --color-primary-background-300: #A3B8D1;  /* Medium-light blue-gray */
-  --color-primary-background-400: #7593B9;  /* Medium blue-gray */
-  --color-primary-background-500: #44668D;  /* Base primary background */
-  --color-primary-background-600: #375577;  /* Darker blue-gray */
-  --color-primary-background-700: #2A4461;  /* Dark blue-gray */
-  --color-primary-background-800: #1D334B;  /* Darker blue-gray */
-  --color-primary-background-900: #102235;  /* Darkest blue-gray */
+  /* Primary Background Variations */
+  --color-primary-background-50: #f5f7fa; /* Very light blue-gray */
+  --color-primary-background-100: #e8edf4; /* Light blue-gray */
+  --color-primary-background-200: #d1dce9; /* Lighter blue-gray */
+  --color-primary-background-300: #a3b8d1; /* Medium-light blue-gray */
+  --color-primary-background-400: #7593b9; /* Medium blue-gray */
+  --color-primary-background-500: #44668d; /* Base primary background */
+  --color-primary-background-600: #375577; /* Darker blue-gray */
+  --color-primary-background-700: #2a4461; /* Dark blue-gray */
+  --color-primary-background-800: #1d334b; /* Darker blue-gray */
+  --color-primary-background-900: #102235; /* Darkest blue-gray */
 
   /* Secondary Background Variations (Complementary warm tones) */
-  --color-secondary-background-50: #FDF9F5;  /* Very light warm beige */
-  --color-secondary-background-100: #FAF1E8;  /* Light warm beige */
-  --color-secondary-background-200: #F5E3D1;  /* Lighter warm tan */
-  --color-secondary-background-300: #EBC7A3;  /* Medium-light warm tan */
-  --color-secondary-background-400: #E1AB75;  /* Medium warm tan */
-  --color-secondary-background-500: #D78F47;  /* Base secondary background (complementary to #44668D) */
-  --color-secondary-background-600: #B8793A;  /* Darker warm brown */
-  --color-secondary-background-700: #99632D;  /* Dark warm brown */
-  --color-secondary-background-800: #7A4D20;  /* Darker warm brown */
-  --color-secondary-background-900: #5B3713;  /* Darkest warm brown */
+  --color-secondary-background-50: #fdf9f5; /* Very light warm beige */
+  --color-secondary-background-100: #faf1e8; /* Light warm beige */
+  --color-secondary-background-200: #f5e3d1; /* Lighter warm tan */
+  --color-secondary-background-300: #ebc7a3; /* Medium-light warm tan */
+  --color-secondary-background-400: #e1ab75; /* Medium warm tan */
+  --color-secondary-background-500: #d78f47; /* Base secondary background (complementary to #44668D) */
+  --color-secondary-background-600: #b8793a; /* Darker warm brown */
+  --color-secondary-background-700: #99632d; /* Dark warm brown */
+  --color-secondary-background-800: #7a4d20; /* Darker warm brown */
+  --color-secondary-background-900: #5b3713; /* Darkest warm brown */
 
   /* Accent Color Variations (Purple for highlights) */
-  --color-accent-50: #FAF5FF;    /* Very light purple */
-  --color-accent-100: #F3E8FF;   /* Light purple */
-  --color-accent-200: #E9D5FF;   /* Lighter purple */
-  --color-accent-300: #D8B4FE;   /* Medium-light purple */
-  --color-accent-400: #C084FC;   /* Medium purple */
-  --color-accent-500: #A855F7;   /* Base purple */
-  --color-accent-600: #9333EA;   /* Darker purple */
-  --color-accent-700: #7C3AED;   /* Dark purple */
-  --color-accent-800: #6B21A8;   /* Darker purple */
-  --color-accent-900: #581C87;   /* Darkest purple */
-  --color-accent-950: #3E1B5C;   /* Darkest purple - deeper shade */
+  --color-accent-50: #faf5ff; /* Very light purple */
+  --color-accent-100: #f3e8ff; /* Light purple */
+  --color-accent-200: #e9d5ff; /* Lighter purple */
+  --color-accent-300: #d8b4fe; /* Medium-light purple */
+  --color-accent-400: #c084fc; /* Medium purple */
+  --color-accent-500: #a855f7; /* Base purple */
+  --color-accent-600: #9333ea; /* Darker purple */
+  --color-accent-700: #7c3aed; /* Dark purple */
+  --color-accent-800: #6b21a8; /* Darker purple */
+  --color-accent-900: #581c87; /* Darkest purple */
+  --color-accent-950: #3e1b5c; /* Darkest purple - deeper shade */
 
   /* Neutral Variations (Slate grays) */
-  --color-neutral-50: #F8FAFC;   /* Almost white */
-  --color-neutral-100: #F1F5F9;  /* Very light gray */
-  --color-neutral-200: #E2E8F0;  /* Light gray for borders */
-  --color-neutral-300: #CBD5E1;  /* Medium-light gray */
-  --color-neutral-400: #94A3B8;  /* Medium gray for secondary text */
-  --color-neutral-500: #64748B;  /* Base gray */
-  --color-neutral-600: #475569;  /* Darker gray */
-  --color-neutral-700: #334155;  /* Dark gray */
-  --color-neutral-800: #1E293B;  /* Darker gray */
-  --color-neutral-900: #0F172A;  /* Darkest gray */
+  --color-neutral-50: #f8fafc; /* Almost white */
+  --color-neutral-100: #f1f5f9; /* Very light gray */
+  --color-neutral-200: #e2e8f0; /* Light gray for borders */
+  --color-neutral-300: #cbd5e1; /* Medium-light gray */
+  --color-neutral-400: #94a3b8; /* Medium gray for secondary text */
+  --color-neutral-500: #64748b; /* Base gray */
+  --color-neutral-600: #475569; /* Darker gray */
+  --color-neutral-700: #334155; /* Dark gray */
+  --color-neutral-800: #1e293b; /* Darker gray */
+  --color-neutral-900: #0f172a; /* Darkest gray */
 
   /* Text Colors */
-  --color-text-primary: #0F172A;     /* Dark text for light backgrounds */
-  --color-text-secondary: #475569;   /* Secondary text */
-  --color-text-muted: #64748B;       /* Muted text */
-  --color-text-inverse: #FFFFFF;     /* White text for dark backgrounds */
+  --color-text-primary: #0f172a; /* Dark text for light backgrounds */
+  --color-text-secondary: #475569; /* Secondary text */
+  --color-text-muted: #64748b; /* Muted text */
+  --color-text-inverse: #ffffff; /* White text for dark backgrounds */
 
   /* Background Colors */
-  --color-bg-primary: #F0F8FF;       /* Main background (light blue) */
-  --color-bg-secondary: #FFFFFF;     /* Container backgrounds (white) */
-  --color-bg-muted: #F8FAFC;         /* Muted backgrounds */
-  --color-bg-dark: #00449B;          /* Dark background for navbar */
-  --color-bg-hero: #2E5BB8;          /* Hero/title section background (matches your design) */
-  --color-bg-gradient-start: #2E5BB8; /* Gradient start for hero sections */
-  --color-bg-gradient-end: #1E4A9F;   /* Gradient end for depth */
+  --color-bg-primary: #f0f8ff; /* Main background (light blue) */
+  --color-bg-secondary: #ffffff; /* Container backgrounds (white) */
+  --color-bg-muted: #f8fafc; /* Muted backgrounds */
+  --color-bg-dark: #00449b; /* Dark background for navbar */
+  --color-bg-hero: #2e5bb8; /* Hero/title section background (matches your design) */
+  --color-bg-gradient-start: #2e5bb8; /* Gradient start for hero sections */
+  --color-bg-gradient-end: #1e4a9f; /* Gradient end for depth */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #F0F8FF;
+    --background: #f0f8ff;
     --foreground: #171717;
-    --color-bg-primary: #F0F8FF;
-    --color-bg-secondary: #FFFFFF;
-    --color-bg-muted: #F8FAFC;
+    --color-bg-primary: #f0f8ff;
+    --color-bg-secondary: #ffffff;
+    --color-bg-muted: #f8fafc;
     --color-text-primary: #171717;
     --color-text-secondary: #475569;
-    --color-text-muted: #64748B;
+    --color-text-muted: #64748b;
   }
 }
 
@@ -513,7 +551,7 @@ body {
 } */
 
 html {
-  background: #F0F8FF;
+  background: #f0f8ff;
   background-attachment: fixed;
   color: var(--foreground);
   min-height: 100vh;
@@ -565,7 +603,8 @@ html {
 }
 
 @keyframes contactGradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -619,7 +658,8 @@ html {
 }
 
 @keyframes visitGradientFlow {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   25% {
@@ -679,7 +719,8 @@ html {
 }
 
 @keyframes viewProjectGradientFlow {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   25% {
@@ -703,7 +744,16 @@ html {
 .gradient-char {
   position: relative;
   display: inline-block;
-  background: linear-gradient(45deg, #00D4FF, #0099FF, #00FF88, #FF6B6B, #00D4FF, #0099FF, #00FF88);
+  background: linear-gradient(
+    45deg,
+    #00d4ff,
+    #0099ff,
+    #00ff88,
+    #ff6b6b,
+    #00d4ff,
+    #0099ff,
+    #00ff88
+  );
   background-size: 400% 400%;
   background-clip: text;
   -webkit-background-clip: text;
@@ -715,7 +765,8 @@ html {
 }
 
 @keyframes premiumGradientFlow {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   25% {
@@ -769,7 +820,9 @@ html {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-66.67%); /* Move by two-thirds to show seamless loop */
+    transform: translateX(
+      -66.67%
+    ); /* Move by two-thirds to show seamless loop */
   }
 }
 
@@ -795,7 +848,8 @@ html {
 }
 
 @keyframes gradientFlow {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   25% {
@@ -834,11 +888,11 @@ html {
 .gradient-text {
   background: linear-gradient(
     135deg,
-    #00D4FF 0%,
-    #0099FF 25%,
-    #00FF88 50%,
-    #00D4FF 75%,
-    #0099FF 100%
+    #00d4ff 0%,
+    #0099ff 25%,
+    #00ff88 50%,
+    #00d4ff 75%,
+    #0099ff 100%
   );
   background-size: 300% 300%;
   background-clip: text;
@@ -875,4 +929,3 @@ html {
   transform: scale(1.02);
   transition: all 0.3s ease;
 }
-

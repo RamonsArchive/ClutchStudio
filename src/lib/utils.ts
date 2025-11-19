@@ -3,7 +3,11 @@ export const parseServerActionResponse = <T>(response: T): T => {
 };
 
 // Phone number formatting
-export const updatePhoneNumber = (value: string, phoneNumber: string, setPhoneNumber: (value: string) => void) => {
+export const updatePhoneNumber = (
+  value: string,
+  phoneNumber: string,
+  setPhoneNumber: (value: string) => void
+) => {
   // If the user is backspacing and hit a dash, remove the digit before the dash
   const prevLength = phoneNumber.length;
   const newLength = value.length;
