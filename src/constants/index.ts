@@ -435,11 +435,60 @@ export const FeelWellFurniture: ProjectTemplate = {
   status: "live",
 };
 
+export const ColorStack: ProjectTemplate = {
+  id: "color-stack",
+  projectType: "WEB_DEVELOPMENT",
+  text: {
+    name: "ColorStack at UCSD",
+    subName:
+      "Building a community of Black and Hispanic software engineers at UCSD",
+    title:
+      "Built the official ColorStack @ UCSD website to showcase the community, events, and impact of Black and Hispanic software engineers at UCSD",
+    workDescription:
+      "I built the official ColorStack @ UCSD website, the first website for this 2-year-old chapter of a national nonprofit dedicated to increasing the number of Black and Latinx Computer Science graduates entering top tech companies. The website features a comprehensive event calendar for technical workshops, career development sessions, and community building events, a member directory showcasing the community, and a blog section to highlight the work and achievements of members. I implemented sections for Our Values (Community, Excellence, Impact), What We Do (Technical Workshops, Career Development, Mentorship Program, Community Building), and Our Board structure (Executive, Development, Outreach, Finance boards). The site is built using Next.js 16, React 19, TypeScript, Tailwind CSS, and Prisma ORM for database management, with responsive design and modern UI components that reflect the community's mission of excellence and impact.",
+    personalDescription:
+      "After joining the ColorStack @ UCSD community and applying for the outreach chair position, I quickly learned during the interview that a goal for ColorStack was to build their very first website. I knew ColorStack was only 2 years old, but I was astonished that a club of software engineers didn't have a website to begin with. I shuffled a bit in my chair but blurted out, 'I can build that for us.' She took a quick glance at my resume and agreed. Later the next day, I received an email that I didn't get the outreach position, but that instead the board would take me in as the Web Dev Lead whose primary responsibility was to build and maintain ColorStack's first website. Fast forward 2 weeks later and voilà - I couldn't do it without the amazing tech stack, Next.js 16, React 19, TypeScript, Tailwind CSS, and the amazing community of ColorStack @ UCSD who helped me along the way in every which way. I'm proud to say that ColorStack @ UCSD now has a website that they can be proud of and use to showcase their community, events, values, and the incredible impact they're making in the tech industry. It's wild to think that what started as a casual comment during an interview turned into building the first digital home for this amazing community.",
+  },
+  tags: [
+    "Web Development",
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS",
+    "Community Platform",
+    "Event Management",
+    "Member Directory",
+  ],
+  images: {
+    mainImage: "/Projects/ColorStack/Images/cs1.png",
+    galleryImages: [
+      "/Projects/ColorStack/Images/cs1.png",
+      "/Projects/ColorStack/Images/cs2.png",
+      "/Projects/ColorStack/Images/cs3.png",
+      "/Projects/ColorStack/Images/cs4.png",
+      "/Projects/ColorStack/Images/cs5.png",
+    ],
+  },
+  websiteUrl: "https://colorstackucsd.org",
+  githubUrl: "https://github.com/RamonsArchive/colorstack-ucsd-site",
+  dateCompleted: "2025-11-15",
+  featured: true,
+  isClient: false,
+  isWebsite: true,
+  status: "live",
+};
+
 // recent projects in hero section
-export const RecentProjects = [DigitalRevolution, YoloV8, CorporateVsPodcast];
+export const RecentProjects = [
+  ColorStack,
+  DigitalRevolution,
+  YoloV8,
+  CorporateVsPodcast,
+];
 
 // all projects
 export const Projects = [
+  ColorStack,
   FeelWellFurniture,
   DigitalRevolution,
   GoldenEagle,

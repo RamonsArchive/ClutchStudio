@@ -201,7 +201,7 @@ const AboutContent = ({
       scrollTrigger: {
         trigger: introductionRef.current,
         start: "top 90%",
-        end: "top 30%",
+        end: "bottom 95%",
         scrub: 1,
       },
       yPercent: 100,
@@ -402,7 +402,7 @@ const AboutContent = ({
           </h2>
           <p
             ref={introductionRef}
-            className="font-funnel-sans text-gray-100 text-[14px] sm:text-[16px] font-regular break-words leading-relaxed"
+            className="font-funnel-sans text-gray-200 text-[14px] sm:text-[16px] font-regular break-words leading-relaxed"
           >
             {introduction}
           </p>
@@ -416,7 +416,7 @@ const AboutContent = ({
           </h2>
           <p
             ref={educationRef}
-            className="font-funnel-sans text-gray-100 text-[14px] sm:text-[16px] font-regular break-words leading-relaxed"
+            className="font-funnel-sans text-gray-200 text-[14px] sm:text-[16px] font-regular break-words leading-relaxed"
           >
             {education}
           </p>

@@ -214,7 +214,7 @@ const RecentProjectCard = ({
         </div>
         <h2
           ref={desktopDescriptionRef}
-          className="font-funnel-sans text-gray-100 text-[12px] xs:text-[16px] font-regular break-words leading-relaxed"
+          className="font-funnel-sans text-gray-200 text-[12px] xs:text-[16px] font-regular break-words leading-relaxed"
         >
           {workDescription}
         </h2>
@@ -265,7 +265,7 @@ const RecentProjectCard = ({
             </div>
             <h2
               ref={mobileDescriptionRef}
-              className="font-funnel-sans text-gray-100 text-[12px] xs:text-[16px] font-regular break-words leading-relaxed"
+              className="font-funnel-sans text-gray-200 text-[12px] xs:text-[16px] font-regular break-words leading-relaxed"
             >
               {workDescription}
             </h2>
