@@ -42,3 +42,19 @@ next-env.d.ts
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+# Media files - too large for git
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.HEIC
+*.heic
+# Large images (keep small ones if needed)
+# Uncomment if you want to exclude all images:
+# *.png
+# *.jpg
+# *.jpeg
+# *.gif
+# *.webp
