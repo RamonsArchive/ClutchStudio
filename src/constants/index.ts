@@ -503,6 +503,7 @@ export const Projects = [
 
 // project page map
 export const ProjectPageMap = {
+  "color-stack": ColorStack,
   "digital-revolution": DigitalRevolution,
   "feel-well-furniture": FeelWellFurniture,
   "golden-eagle-estates": GoldenEagle,
