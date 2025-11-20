@@ -373,7 +373,7 @@ export const DigitalRevolution: ProjectTemplate = {
     "GSAP",
   ],
   images: {
-    mainImage: "/Projects/DigitalRevolution/digitalrevolution1.png",
+    mainImage: "/Projects/DigitalRevolution/ddStill2.jpg",
     galleryImages: [
       "/Projects/DigitalRevolution/digitalrevolution1.png",
       "/Projects/DigitalRevolution/digitalrevolution2.png",
@@ -418,7 +418,7 @@ export const FeelWellFurniture: ProjectTemplate = {
     "Internationalization",
   ],
   images: {
-    mainImage: "/Projects/FeelWellFurniture/feelwellfurniture1.png",
+    mainImage: "/Projects/FeelWellFurniture/ffStill2.jpg",
     galleryImages: [
       "/Projects/FeelWellFurniture/feelwellfurniture1.png",
       "/Projects/FeelWellFurniture/feelwellfurniture2.png",
@@ -460,7 +460,7 @@ export const ColorStack: ProjectTemplate = {
     "Member Directory",
   ],
   images: {
-    mainImage: "/Projects/ColorStack/Images/cs1.png",
+    mainImage: "/Projects/ColorStack/Images/csStill.jpg",
     galleryImages: [
       "/Projects/ColorStack/Images/cs1.png",
       "/Projects/ColorStack/Images/cs2.png",
