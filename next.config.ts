@@ -6,6 +6,8 @@ const nextConfig = {
   experimental: {
     turbopackFileSystemCacheForDev: true,
   },
+  // Disable source maps in production to prevent 404 errors
+  productionBrowserSourceMaps: false,
   images: {
     remotePatterns: [
       {
