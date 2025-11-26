@@ -31,41 +31,41 @@ const HeroVideo = () => {
     []
   );
 
-  // // Explicitly play video on mount to handle autoplay policies
-  // useEffect(() => {
-  //   const video = videoRef.current;
-  //   if (!video) return;
+  // Explicitly play video on mount to handle autoplay policies
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
 
-  //   // Ensure video is muted for autoplay policies
-  //   video.muted = true;
-  //   video.playsInline = true;
+    // Ensure video is muted for autoplay policies
+    video.muted = true;
+    video.playsInline = true;
 
-  //   // Function to attempt playing the video
-  //   const attemptPlay = async () => {
-  //     try {
-  //       await video.play();
-  //     } catch (error) {
-  //       // Autoplay was prevented - this is expected in some browsers
-  //       // The video will play when user interacts or on scroll
-  //       console.log("Video autoplay prevented, will play on interaction");
-  //     }
-  //   };
+    // Function to attempt playing the video
+    const attemptPlay = async () => {
+      try {
+        await video.play();
+      } catch (error) {
+        // Autoplay was prevented - this is expected in some browsers
+        // The video will play when user interacts or on scroll
+        console.log("Video autoplay prevented, will play on interaction");
+      }
+    };
 
-  //   // Try to play when video is ready
-  //   if (video.readyState >= 2) {
-  //     // Video is already loaded enough
-  //     attemptPlay();
-  //   } else {
-  //     // Wait for video to be ready
-  //     video.addEventListener("loadeddata", attemptPlay, { once: true });
-  //     video.addEventListener("canplay", attemptPlay, { once: true });
-  //   }
+    // Try to play when video is ready
+    if (video.readyState >= 2) {
+      // Video is already loaded enough
+      attemptPlay();
+    } else {
+      // Wait for video to be ready
+      video.addEventListener("loadeddata", attemptPlay, { once: true });
+      video.addEventListener("canplay", attemptPlay, { once: true });
+    }
 
-  //   return () => {
-  //     video.removeEventListener("loadeddata", attemptPlay);
-  //     video.removeEventListener("canplay", attemptPlay);
-  //   };
-  // }, []);
+    return () => {
+      video.removeEventListener("loadeddata", attemptPlay);
+      video.removeEventListener("canplay", attemptPlay);
+    };
+  }, []);
 
   useGSAP(() => {
     const video = videoRef.current;
