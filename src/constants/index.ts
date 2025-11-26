@@ -20,7 +20,7 @@ export const navLinks = [
 ] as const;
 
 export const HeroData = {
-  HeroVideo: "/Assets/HeroContent/soccerGoal.mp4",
+  HeroVideo: "/Assets/HeroContent/soccerGoal.mp4", // soccerGoal.mp4
 };
 
 // projects
@@ -489,7 +489,6 @@ export const RecentProjects = [
 // all projects
 export const Projects = [
   ColorStack,
-  FeelWellFurniture,
   DigitalRevolution,
   GoldenEagle,
   YoloV8,
@@ -499,6 +498,7 @@ export const Projects = [
   NBA_Analysis_Hackathon,
   DSGN1_Text_Analysis,
   TheStu,
+  FeelWellFurniture,
 ] as const;
 
 // project page map
