@@ -142,6 +142,7 @@ const HeroVideo = () => {
         loop={true}
         preload="metadata"
         className="absolute inset-0 w-full h-full object-cover"
+        autoPlay={true}
       />
       {/* Optional overlay for better text readability if needed */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
