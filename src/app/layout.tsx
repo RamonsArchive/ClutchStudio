@@ -267,6 +267,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#F0F8FF" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
 
         <script
           type="application/ld+json"

@@ -1,6 +1,6 @@
 "use client";
 import { HeroData } from "@/constants";
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -30,6 +30,42 @@ const HeroVideo = () => {
     }),
     []
   );
+
+  // // Explicitly play video on mount to handle autoplay policies
+  // useEffect(() => {
+  //   const video = videoRef.current;
+  //   if (!video) return;
+
+  //   // Ensure video is muted for autoplay policies
+  //   video.muted = true;
+  //   video.playsInline = true;
+
+  //   // Function to attempt playing the video
+  //   const attemptPlay = async () => {
+  //     try {
+  //       await video.play();
+  //     } catch (error) {
+  //       // Autoplay was prevented - this is expected in some browsers
+  //       // The video will play when user interacts or on scroll
+  //       console.log("Video autoplay prevented, will play on interaction");
+  //     }
+  //   };
+
+  //   // Try to play when video is ready
+  //   if (video.readyState >= 2) {
+  //     // Video is already loaded enough
+  //     attemptPlay();
+  //   } else {
+  //     // Wait for video to be ready
+  //     video.addEventListener("loadeddata", attemptPlay, { once: true });
+  //     video.addEventListener("canplay", attemptPlay, { once: true });
+  //   }
+
+  //   return () => {
+  //     video.removeEventListener("loadeddata", attemptPlay);
+  //     video.removeEventListener("canplay", attemptPlay);
+  //   };
+  // }, []);
 
   useGSAP(() => {
     const video = videoRef.current;
@@ -122,7 +158,7 @@ const HeroVideo = () => {
       {hasScoredGoal && (
         <div
           id="goal-popup"
-          className="absolute pointer-events-none flex-center w-full -translate-y-1/4 md:left-1/3 md:translate-y-0  md:-translate-x-1/2 inset-y-0 z-[100] animate-fade-in"
+          className="absolute pointer-events-none flex-center w-full -translate-y-1/4 md:left-1/3 md:translate-y-0  md:-translate-x-1/2 inset-y-0 z-100 animate-fade-in"
         >
           <div className="bg-black/80 backdrop-blur-sm rounded-lg px-4 sm:px-6 py-2 sm:py-4 border border-white/20">
             <h2 className="text-white text-center text-[14px] sm:text-[16px] md:text-[20px] font-bold">
@@ -140,9 +176,9 @@ const HeroVideo = () => {
         muted
         playsInline
         loop={true}
-        preload="metadata"
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover"
-        autoPlay={true}
+        autoPlay
       />
       {/* Optional overlay for better text readability if needed */}
       <div className="absolute inset-0 bg-black/20 pointer-events-none" />
