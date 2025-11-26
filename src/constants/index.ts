@@ -20,7 +20,7 @@ export const navLinks = [
 ] as const;
 
 export const HeroData = {
-  HeroVideo: "/Assets/HeroContent/soccerGoal.mp4", // soccerGoal.mp4
+  HeroVideo: "/Assets/HeroContent/soccerGoal.mp4",
 };
 
 // projects
