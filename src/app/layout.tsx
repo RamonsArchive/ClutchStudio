@@ -247,8 +247,10 @@ export default function RootLayout({
       ],
     },
     sameAs: [
-      "https://github.com/yourusername",
-      "https://linkedin.com/in/yourusername",
+      "https://goldeneagle.one",
+      "https://clutchstudio.dev",
+      "https://digitalrevolution.foundation",
+      "https://colorstackucsd.org",
     ],
     openingHours: "Mo-Fr 09:00-17:00",
     priceRange: "$$",
