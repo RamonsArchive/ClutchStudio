@@ -70,7 +70,7 @@ const InfiniteScrollSocials = ({
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
                 title={social.title}
               >
