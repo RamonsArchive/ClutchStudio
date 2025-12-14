@@ -479,12 +479,7 @@ export const ColorStack: ProjectTemplate = {
 };
 
 // recent projects in hero section
-export const RecentProjects = [
-  ColorStack,
-  DigitalRevolution,
-  YoloV8,
-  CorporateVsPodcast,
-];
+export const RecentProjects = [ColorStack, DigitalRevolution, YoloV8];
 
 // all projects
 export const Projects = [

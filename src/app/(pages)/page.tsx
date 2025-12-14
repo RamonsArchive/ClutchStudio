@@ -189,74 +189,12 @@ export default function Home() {
     };
   });
 
-  // Mobile animations - separate useGSAP hook (optimized for performance)
-  useGSAP(() => {
-    if (
-      !textDataRefMobile.current ||
-      !photoRefMobile.current ||
-      !buttonsRefMobile.current
-    )
-      return;
-
-    // Set initial states with GPU-accelerated properties only
-    gsap.set(textDataRefMobile.current, {
-      opacity: 0,
-      x: -50,
-      force3D: true,
-    });
-
-    gsap.set(photoRefMobile.current, {
-      opacity: 0,
-      x: 50,
-      force3D: true,
-    });
-
-    gsap.set(buttonsRefMobile.current, {
-      opacity: 0,
-      x: -50,
-      force3D: true,
-    });
-
-    // Optimized timeline - use x instead of xPercent for better performance
-    const mobileTL = gsap.timeline({ defaults: { force3D: true } });
-
-    mobileTL
-      .to(textDataRefMobile.current, {
-        opacity: 1,
-        x: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      })
-      .to(
-        photoRefMobile.current,
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        "-=0.4"
-      )
-      .to(
-        buttonsRefMobile.current,
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        "-=0.4"
-      );
-
-    return () => {
-      gsap.killTweensOf(textDataRefMobile.current);
-      gsap.killTweensOf(photoRefMobile.current);
-      gsap.killTweensOf(buttonsRefMobile.current);
-    };
-  });
+  // Mobile: Use CSS animations (GPU-accelerated, no JS overhead)
+  // Desktop: Keep GSAP for complex animations
+  // No useGSAP needed for mobile - pure CSS handles it
 
   const desktopHomeContent = (
-    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto gap-1">
+    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto gap-2">
       <h1
         ref={titleRef}
         className="font-funnel-sans text-white text-[58px] xs:text-[60px] md:text-[68px] font-bold wrap-break-word whitespace-nowrap overflow-hidden"
@@ -316,8 +254,7 @@ export default function Home() {
     <div className="flex max-h-[50dvh] h-full sm:hidden flex-col w-full max-w-sm mx-auto gap-3">
       <div
         ref={textDataRefMobile}
-        className="flex flex-col w-full gap-2"
-        style={{ opacity: 0 }}
+        className="flex flex-col w-full gap-2 mobile-animate-text"
       >
         <div className="flex flex-col w-full">
           <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
@@ -336,8 +273,7 @@ export default function Home() {
       </div>
       <div
         ref={photoRefMobile}
-        className="relative w-full flex"
-        style={{ opacity: 0 }}
+        className="relative w-full flex mobile-animate-photo"
       >
         <Image
           src="/Assets/About/personal1.png"
@@ -350,8 +286,7 @@ export default function Home() {
       </div>
       <div
         ref={buttonsRefMobile}
-        className="flex flex-col sm:flex-row gap-3 mt-2 mb-20"
-        style={{ opacity: 0 }}
+        className="flex flex-col sm:flex-row gap-3 mt-2 mb-20 mobile-animate-buttons"
       >
         <Link
           href="/projects"

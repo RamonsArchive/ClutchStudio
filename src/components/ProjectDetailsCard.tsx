@@ -16,7 +16,7 @@ const ProjectDetailsCard = ({ data }: { data: ProjectTemplate }) => {
   const tags = data.tags;
   const url = data.websiteUrl ? data.websiteUrl : data.githubUrl;
   const isWebsite = data.isWebsite;
-  const visitButtonRef = useRef<HTMLAnchorElement>(null);
+  const visitButtonRef = useRef<HTMLDivElement>(null);
   const clientRef = useRef<HTMLDivElement>(null);
   const clientNameRef = useRef<HTMLHeadingElement>(null);
 
@@ -155,8 +155,8 @@ const ProjectDetailsCard = ({ data }: { data: ProjectTemplate }) => {
         </div>
       </div>
 
-      <div className="flex w-full flex-col">
-        <VisitButton url={url} isWebsite={isWebsite} ref={visitButtonRef} />
+      <div ref={visitButtonRef} className="flex w-full flex-col">
+        <VisitButton url={url} isWebsite={isWebsite} />
       </div>
     </div>
   );
