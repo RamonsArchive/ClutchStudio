@@ -41,10 +41,10 @@ const InfiniteScrollText = ({
   }, [text, direction]);
 
   return (
-    <div className="overflow-hidden w-full min-w-0 py-2">
+    <div className="overflow-hidden w-full min-w-0 flex items-center justify-center py-4">
       <div
         ref={containerRef}
-        className="flex flex-row gap-10 relative"
+        className="flex flex-row gap-10 relative items-center"
         style={
           {
             animation: scrollDistance

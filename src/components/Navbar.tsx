@@ -141,50 +141,19 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    // Initialize scroll position to handle Instagram's browser quirks
-    let lastScrollY = 0;
+    let lastScrollY = window.scrollY || window.pageYOffset || 0;
     let ticking = false;
-    let hasScrolled = false;
-    let initialized = false;
-
-    // Force scroll to top on mount to fix Instagram's initial scroll position
-    const forceScrollToTop = () => {
-      if (window.scrollY > 0 || window.pageYOffset > 0) {
-        window.scrollTo(0, 0);
-      }
-      lastScrollY = 0;
-      setShowFloatingNavbar(false);
-      initialized = true;
-    };
-
-    // Initialize immediately and after delays to catch Instagram's delayed scroll
-    forceScrollToTop();
-    const initTimeout1 = setTimeout(forceScrollToTop, 50);
-    const initTimeout2 = setTimeout(forceScrollToTop, 200);
 
     const updateNavbar = () => {
-      console.log("updateNavbar");
-      if (!initialized) return;
-
-      console.log("initialized");
-
       const currentScrollY = Math.max(
         0,
         window.scrollY || window.pageYOffset || 0
       );
 
-      console.log("currentScrollY", currentScrollY);
-
       const navbarHeight = 43; // Height of the navbar
 
-      // Detect if user has actually scrolled (not just initial load quirk)
-      const scrollDelta = Math.abs(currentScrollY - lastScrollY);
-      if (scrollDelta > 2) {
-        hasScrolled = true;
-      }
-
-      // Only show floating navbar when we've actually scrolled and are past navbar
-      if (hasScrolled && currentScrollY > navbarHeight) {
+      // Only show floating navbar when we've scrolled past navbar
+      if (currentScrollY > navbarHeight) {
         // Scrolling down
         if (currentScrollY > lastScrollY) {
           setShowFloatingNavbar(true);
@@ -194,7 +163,7 @@ const Navbar = () => {
           setShowFloatingNavbar(false);
         }
       } else {
-        // At top or haven't scrolled yet, hide floating navbar
+        // At top, hide floating navbar
         setShowFloatingNavbar(false);
       }
 
@@ -203,20 +172,19 @@ const Navbar = () => {
     };
 
     const handleScroll = () => {
-      console.log("scorlling");
-      if (!ticking && initialized) {
-        console.log("ticking");
+      console.log("scrolling....");
+      if (!ticking) {
         window.requestAnimationFrame(updateNavbar);
         ticking = true;
       }
     };
 
+    console.log("handleScroll");
+
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      clearTimeout(initTimeout1);
-      clearTimeout(initTimeout2);
     };
   }, []);
 

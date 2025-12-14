@@ -39,7 +39,7 @@ const InfiniteScrollSocials = ({
   }, [direction]);
 
   return (
-    <div className="flex items-center justify-center overflow-hidden w-full min-w-0 py-4">
+    <div className="flex items-center justify-center overflow-hidden w-full min-w-0 py-4 min-h-[80px]">
       <div
         ref={containerRef}
         className="flex flex-row gap-10 relative items-center"

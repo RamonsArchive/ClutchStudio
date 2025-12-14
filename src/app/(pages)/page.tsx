@@ -331,10 +331,10 @@ export default function Home() {
           <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-full flex justify-center">
             <div
               ref={scrollIndicatorRef}
-              className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2.5 md:px-6 md:py-3 border border-white/20"
+              className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 border border-white/20"
               style={{ visibility: "hidden", opacity: 0 }}
             >
-              <p className="font-funnel-sans text-white text-[10px] xs:text-[12px] sm:text-[14px] md:text-[16px] font-medium whitespace-nowrap">
+              <p className="font-funnel-sans text-white text-[10px] xs:text-[12px] md:text-[14px] font-medium whitespace-nowrap">
                 Scroll down to view recent project
               </p>
               <ArrowDownIcon className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 text-white shrink-0" />
