@@ -16,7 +16,7 @@ const TermsPage = () => {
       </div>
 
       <div className="flex flex-col gap-y-6 w-full px-5 sm:px-10 pb-10 ">
-        <div className="flex flex-col gap-y-8 max-w-4xl p-5 md:p-10 mx-auto w-full rounded-2xl bg-gradient-to-br from-primary-background-900/80 via-primary-800/90 to-secondary-900/90 backdrop-blur-sm border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300">
+        <div className="flex flex-col gap-y-8 max-w-4xl p-5 md:p-10 mx-auto w-full rounded-2xl bg-gradient-to-br from-primary-background-950/80 via-primary-800/90 to-secondary-900/90 backdrop-blur-sm border border-white/10 shadow-xl hover:shadow-2xl transition-all duration-300">
           <div className="text-center mb-6">
             <p className="font-plex-sans font-light text-[12px] sm:text-[14px] text-white/70">
               Last updated: 08/24/2025

@@ -385,7 +385,7 @@ const AboutContent = ({
           ))}
         </div>
       </div>
-      <div className="flex flex-col w-full lg:w-[60%] h-fit gap-10 bg-gradient-to-b from-primary-900 via-black to-accent-950 rounded-xl p-5 md:p-10 shadow-xl">
+      <div className="flex flex-col w-full lg:w-[60%] h-fit gap-10 bg-gradient-to-b from-primary-950 via-black to-accent-950 rounded-xl p-5 md:p-10 shadow-xl">
         <h1
           ref={subtitleRef}
           className="font-funnel-sans text-white text-[24px] xs:text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] font-extrabold break-words"
@@ -424,7 +424,7 @@ const AboutContent = ({
         <div className="flex flex-col gap-4 w-full bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-xl p-4 md:p-6 border border-primary-200/30 shadow-sm">
           <h2
             ref={releventCourseworkTitleRef}
-            className="font-funnel-sans text-primary-900 text-[18px] sm:text-[20px] break-words font-bold border-b border-primary-200 pb-2"
+            className="font-funnel-sans text-primary-950 text-[18px] sm:text-[20px] break-words font-bold border-b border-primary-200 pb-2"
           >
             Relevant Coursework
           </h2>
@@ -478,7 +478,7 @@ const AboutContent = ({
         <div className="flex flex-col gap-4 w-full p-4 md:p-6 bg-gradient-to-br from-primary-50 to-primary-100/50 rounded-xl border border-primary-200/30 shadow-sm">
           <h2
             ref={technicalSkillsTitleRef}
-            className="font-funnel-sans text-primary-900 text-[18px] sm:text-[20px] break-words font-bold border-b border-primary-200 pb-2"
+            className="font-funnel-sans text-primary-950 text-[18px] sm:text-[20px] break-words font-bold border-b border-primary-200 pb-2"
           >
             Technical Skills
           </h2>

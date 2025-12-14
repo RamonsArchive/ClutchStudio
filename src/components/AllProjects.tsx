@@ -110,10 +110,10 @@ const AllProjects = ({
 
         {/* Filter Section */}
         <div className="mb-12">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-8 bg-gradient-to-r from-[#F0F8FF] via-[#F5F7FA] to-[#F0F8FF] rounded-2xl border border-[#E2E8F0] shadow-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-8 bg-linear-to-r from-primary-background-800/50 via-primary-background-700/50 to-primary-background-800/50 rounded-2xl border border-white/10 shadow-sm">
             {/* Filter Label */}
-            <div className="flex items-center gap-2 text-[#475569] font-medium">
-              <Filter className="w-5 h-5 text-[#0060CD]" />
+            <div className="flex items-center gap-2 text-white/80 font-medium">
+              <Filter className="w-5 h-5 text-primary-400" />
               <span>Filter by:</span>
             </div>
 
@@ -121,13 +121,13 @@ const AllProjects = ({
             <div className="relative">
               <button
                 ref={dropDownButtonRef}
-                className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-white to-[#F8FAFC] border-2 border-[#E2E8F0] rounded-xl shadow-sm hover:border-[#0060CD] hover:shadow-md transition-all duration-200 min-w-[200px] justify-between"
+                className="flex items-center gap-2 px-6 py-3 bg-linear-to-r from-primary-background-700 to-primary-background-600 border-2 border-white/20 rounded-xl shadow-sm hover:border-primary-400 hover:shadow-md transition-all duration-200 min-w-[200px] justify-between"
               >
-                <span className="text-[#0F172A] font-medium">
+                <span className="text-white font-medium">
                   {getServiceTypeDisplayName(selectedServiceType)}
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 text-[#64748B] transition-transform duration-200 ${
+                  className={`w-5 h-5 text-white/60 transition-transform duration-200 ${
                     isDropdownOpen ? "rotate-180" : ""
                   }`}
                 />

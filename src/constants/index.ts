@@ -658,31 +658,8 @@ export const footerQuickLinks = [
   },
 ] as const;
 
-export const footerSocials = [
-  {
-    id: "instagram",
-    path: "/Assets/Icons/instagram.svg",
-    href: "https://www.instagram.com/clutchdev_studio",
-    ariaLabel: "Follow us on Instagram",
-    title: "Instagram",
-  },
-
-  {
-    id: "facebook",
-    path: "/Assets/Icons/facebook.svg",
-    href: "https://www.facebook.com/profile.php?id=61569189908839",
-    ariaLabel: "Follow us on Facebook",
-    title: "Facebook",
-  },
-
-  {
-    id: "linkedin",
-    path: "/Assets/Icons/LI-In-Bug.png",
-    href: "https://www.linkedin.com/in/ramonmnm100",
-    ariaLabel: "Connect with us on LinkedIn",
-    title: "LinkedIn",
-  },
-] as const;
+// footerSocials has been moved to src/constants/links_index.ts
+// Import from there: import { footerSocials } from "@/constants/links_index";
 
 export const footerContact = [
   {
