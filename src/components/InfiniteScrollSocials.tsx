@@ -72,8 +72,9 @@ const InfiniteScrollSocials = ({
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
                 className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14"
                 aria-label={social.ariaLabel}
+                title={social.title}
               >
-                <div className="w-full h-full text-white flex items-center justify-center">
+                <div className="w-full h-full text-white flex items-center justify-center pointer-events-none">
                   {scaledIcon}
                 </div>
               </Link>
@@ -98,7 +99,7 @@ const InfiniteScrollSocials = ({
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
                 <div className="w-full h-full text-white flex items-center justify-center">
@@ -126,7 +127,7 @@ const InfiniteScrollSocials = ({
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
                 <div className="w-full h-full text-white flex items-center justify-center">
@@ -154,7 +155,7 @@ const InfiniteScrollSocials = ({
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
                 <div className="w-full h-full text-white flex items-center justify-center">
@@ -182,7 +183,7 @@ const InfiniteScrollSocials = ({
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
                 <div className="w-full h-full text-white flex items-center justify-center">

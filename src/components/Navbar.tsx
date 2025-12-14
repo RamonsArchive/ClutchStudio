@@ -72,7 +72,9 @@ const NavbarContent = ({
                 aria-label={link.ariaLabel}
                 title={link.title}
               >
-                <div className="w-6 h-6 text-white">{icon}</div>
+                <div className="w-6 h-6 text-white pointer-events-none">
+                  {icon}
+                </div>
               </Link>
             );
           })}
@@ -145,14 +147,10 @@ const Navbar = () => {
     let ticking = false;
 
     const updateNavbar = () => {
-      console.log("updateNavbar");
-      console.log("lastScrollY", lastScrollY);
       const currentScrollY = Math.max(
         0,
         window.scrollY || window.pageYOffset || 0
       );
-
-      console.log("currentScrollY", currentScrollY);
 
       const navbarHeight = 43; // Height of the navbar
 
@@ -161,12 +159,10 @@ const Navbar = () => {
         // Scrolling down
         if (currentScrollY > lastScrollY) {
           setShowFloatingNavbar(true);
-          console.log("showFloatingNavbar", true);
         }
         // Scrolling up - hide floating navbar
         else if (currentScrollY < lastScrollY) {
           setShowFloatingNavbar(false);
-          console.log("showFloatingNavbar", false);
         }
       } else {
         // At top, hide floating navbar
@@ -178,15 +174,11 @@ const Navbar = () => {
     };
 
     const handleScroll = () => {
-      console.log("scrolling....");
-      console.log("ticking", ticking);
       if (!ticking) {
         window.requestAnimationFrame(updateNavbar);
         ticking = true;
       }
     };
-
-    console.log("handleScroll");
 
     window.addEventListener("scroll", handleScroll, { passive: true });
 

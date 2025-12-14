@@ -24,6 +24,12 @@ export default function Home() {
   const desktopIconsRef = useRef<HTMLDivElement>(null);
   const mobileIconsRef = useRef<HTMLDivElement>(null);
 
+  // Mobile refs (separate from desktop)
+  const titleRefMobile = useRef<HTMLHeadingElement>(null);
+  const textDataRefMobile = useRef<HTMLDivElement>(null);
+  const photoRefMobile = useRef<HTMLDivElement>(null);
+  const buttonsRefMobile = useRef<HTMLDivElement>(null);
+
   useGSAP(() => {
     if (
       !titleRef.current ||
@@ -129,7 +135,10 @@ export default function Home() {
     const animateIcons = (container: HTMLDivElement | null, prefix: string) => {
       if (!container) return;
 
-      const leftIcons = `#${prefix}-fist-1, #${prefix}-fist-3`;
+      const leftIcons =
+        prefix === "home-desktop"
+          ? `#${prefix}-fist-1, #${prefix}-fist-3, #${prefix}-fist-6`
+          : `#${prefix}-fist-1, #${prefix}-fist-3`;
       const rightIcons = `#${prefix}-fist-2, #${prefix}-fist-4, #${prefix}-fist-5`;
 
       const iconsScrollTrigger = {
@@ -179,10 +188,191 @@ export default function Home() {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   });
+
+  // Mobile animations - separate useGSAP hook (optimized for performance)
+  useGSAP(() => {
+    if (
+      !textDataRefMobile.current ||
+      !photoRefMobile.current ||
+      !buttonsRefMobile.current
+    )
+      return;
+
+    // Set initial states with GPU-accelerated properties only
+    gsap.set(textDataRefMobile.current, {
+      opacity: 0,
+      x: -50,
+      force3D: true,
+    });
+
+    gsap.set(photoRefMobile.current, {
+      opacity: 0,
+      x: 50,
+      force3D: true,
+    });
+
+    gsap.set(buttonsRefMobile.current, {
+      opacity: 0,
+      x: -50,
+      force3D: true,
+    });
+
+    // Optimized timeline - use x instead of xPercent for better performance
+    const mobileTL = gsap.timeline({ defaults: { force3D: true } });
+
+    mobileTL
+      .to(textDataRefMobile.current, {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      })
+      .to(
+        photoRefMobile.current,
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      )
+      .to(
+        buttonsRefMobile.current,
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      );
+
+    return () => {
+      gsap.killTweensOf(textDataRefMobile.current);
+      gsap.killTweensOf(photoRefMobile.current);
+      gsap.killTweensOf(buttonsRefMobile.current);
+    };
+  });
+
+  const desktopHomeContent = (
+    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto gap-1">
+      <h1
+        ref={titleRef}
+        className="font-funnel-sans text-white text-[58px] xs:text-[60px] md:text-[68px] font-bold wrap-break-word whitespace-nowrap overflow-hidden"
+        style={{ visibility: "hidden", opacity: 0 }}
+      >
+        Hi, I'm Ramon
+      </h1>
+      <div className="flex flex-row w-full gap-4 md:gap-6">
+        {/* Image - exactly 50% width on desktop */}
+        <div
+          ref={photoRef}
+          className="relative w-1/2 shrink-0 flex"
+          style={{ visibility: "hidden", opacity: 0 }}
+        >
+          <Image
+            src="/Assets/About/personal1.png"
+            alt="Ramon"
+            width={500}
+            height={500}
+            priority
+            className="w-full h-full object-cover rounded-xl"
+          />
+        </div>
+        {/* Right side - exactly 50% width with content */}
+        <div
+          ref={textDataRef}
+          className="flex flex-col w-1/2 shrink-0 justify-center gap-3 md:gap-4"
+          style={{ visibility: "hidden", opacity: 0 }}
+        >
+          <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
+            I'm a Full Stack Developer & Machine Learning Engineer
+          </h2>
+          <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
+            Based in San Diego, California
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3 mt-2">
+            <Link
+              href="/projects"
+              className="w-full sm:w-auto px-6 py-2.5 bg-white text-black font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/90 active:bg-white/80 transition-all duration-300 ease-in-out text-center cursor-pointer"
+            >
+              Projects
+            </Link>
+            <a
+              href="/Assets/Documents/ramon_resume.pdf"
+              download
+              className="w-full sm:w-auto px-6 py-2.5 bg-transparent border-2 border-white text-white font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/10 active:bg-white/20 transition-all duration-300 ease-in-out text-center cursor-pointer"
+            >
+              Resume
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const mobileHomeContent = (
+    <div className="flex max-h-[50dvh] h-full sm:hidden flex-col w-full max-w-sm mx-auto gap-3">
+      <div
+        ref={textDataRefMobile}
+        className="flex flex-col w-full gap-2"
+        style={{ opacity: 0 }}
+      >
+        <div className="flex flex-col w-full">
+          <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
+            Based in San Diego, California
+          </p>
+          <h1
+            ref={titleRefMobile}
+            className="font-funnel-sans text-white text-[42px] xs:text-[48px] font-bold wrap-break-word overflow-hidden"
+          >
+            Hi, I'm Ramon
+          </h1>
+        </div>
+        <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
+          I'm a Full Stack Developer & Machine Learning Engineer
+        </h2>
+      </div>
+      <div
+        ref={photoRefMobile}
+        className="relative w-full flex"
+        style={{ opacity: 0 }}
+      >
+        <Image
+          src="/Assets/About/personal1.png"
+          alt="Ramon"
+          width={500}
+          height={500}
+          priority
+          className="w-full h-full object-cover rounded-xl aspect-square"
+        />
+      </div>
+      <div
+        ref={buttonsRefMobile}
+        className="flex flex-col sm:flex-row gap-3 mt-2 mb-20"
+        style={{ opacity: 0 }}
+      >
+        <Link
+          href="/projects"
+          className="w-full sm:w-auto px-6 py-2.5 bg-white text-black font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/90 active:bg-white/80 transition-all duration-300 ease-in-out text-center cursor-pointer"
+        >
+          Projects
+        </Link>
+        <a
+          href="/Assets/Documents/ramon_resume.pdf"
+          download
+          className="w-full sm:w-auto px-6 py-2.5 bg-transparent border-2 border-white text-white font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/10 active:bg-white/20 transition-all duration-300 ease-in-out text-center cursor-pointer"
+        >
+          Resume
+        </a>
+      </div>
+    </div>
+  );
   return (
     <section className="flex flex-col w-dvw overflow-y-auto scrollbar-hide gap-10 pb-15">
-      <div className="flex flex-col h-[calc(100vh-43px)] w-full bg-linear-to-b from-primary-background-950 via-black to-primary-950 wavy-border-bottom overflow-hidden">
-        <div className="relative w-full h-full p-5 md:p-16 lg:p-20">
+      <div className="flex flex-col h-[calc(100vh-43px)] w-full bg-linear-to-b from-primary-background-950 via-black to-primary-950 wavy-border-bottom overflow-hidden md:overflow-hidden overflow-y-auto">
+        <div className="relative w-full h-full py-10 px-5 md:py-16 md:px-10 lg:py-16 lg:px-20">
           {/* Desktop clutch fist icons */}
           <div
             ref={desktopIconsRef}
@@ -227,6 +417,14 @@ export default function Home() {
               width={72}
               height={72}
               className="absolute bottom-8 right-4 md:bottom-10 md:right-10 w-14 h-14 md:w-18 md:h-18 opacity-6 rotate-30"
+            />
+            <img
+              id="home-desktop-fist-6"
+              src="/Assets/Logos/clutchFistLight.svg"
+              alt=""
+              width={60}
+              height={60}
+              className="absolute bottom-1/4 left-4 md:bottom-1/3 md:left-8 w-12 h-12 md:w-14 md:h-14 opacity-10 rotate-20"
             />
           </div>
           {/* Mobile clutch fist icons */}
@@ -275,69 +473,18 @@ export default function Home() {
               className="absolute bottom-8 right-4 w-14 h-14 opacity-6 rotate-30"
             />
           </div>
-          <div className="flex flex-col h-full w-full max-w-2xl mx-auto gap-3">
-            <h1
-              ref={titleRef}
-              className="font-funnel-sans text-white text-[58px] xs:text-[60px] md:text-[68px] font-bold wrap-break-word whitespace-nowrap overflow-hidden"
-              style={{ visibility: "hidden", opacity: 0 }}
-            >
-              Hi, I'm Ramon
-            </h1>
-            <div className="flex flex-row w-full gap-4 md:gap-6">
-              {/* Image - exactly 50% width on desktop */}
-              <div
-                ref={photoRef}
-                className="relative w-1/2 shrink-0 flex"
-                style={{ visibility: "hidden", opacity: 0 }}
-              >
-                <Image
-                  src="/Assets/About/personal1.png"
-                  alt="Ramon"
-                  width={500}
-                  height={500}
-                  className="w-full h-full object-cover rounded-xl"
-                />
-              </div>
-              {/* Right side - exactly 50% width with content */}
-              <div
-                ref={textDataRef}
-                className="flex flex-col w-1/2 shrink-0 justify-center gap-3 md:gap-4"
-                style={{ visibility: "hidden", opacity: 0 }}
-              >
-                <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
-                  Full Stack Developer & Machine Learning Engineer
-                </h2>
-                <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
-                  Based in San Diego, California
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 mt-2">
-                  <Link
-                    href="/projects"
-                    className="w-full sm:w-auto px-6 py-2.5 bg-white text-black font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/90 active:bg-white/80 transition-all duration-300 ease-in-out text-center cursor-pointer"
-                  >
-                    Projects
-                  </Link>
-                  <a
-                    href="/Assets/Documents/ramon_resume.pdf"
-                    download
-                    className="w-full sm:w-auto px-6 py-2.5 bg-transparent border-2 border-white text-white font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/10 active:bg-white/20 transition-all duration-300 ease-in-out text-center cursor-pointer"
-                  >
-                    Resume
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-full flex justify-center">
+          {desktopHomeContent}
+          {mobileHomeContent}
+          <div className="hidden sm:flex absolute bottom-5 left-1/2 -translate-x-1/2 w-full justify-center">
             <div
               ref={scrollIndicatorRef}
               className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 border border-white/20"
               style={{ visibility: "hidden", opacity: 0 }}
             >
-              <p className="font-funnel-sans text-white text-[10px] xs:text-[12px] md:text-[14px] font-medium whitespace-nowrap">
+              <p className="font-funnel-sans text-white text-[10px] xs:text-[12px] font-medium whitespace-nowrap">
                 Scroll down to view recent project
               </p>
-              <ArrowDownIcon className="w-3 h-3 xs:w-4 xs:h-4 sm:w-5 sm:h-5 text-white shrink-0" />
+              <ArrowDownIcon className="w-3 h-3 xs:w-4 xs:h-4 text-white shrink-0" />
             </div>
           </div>
         </div>

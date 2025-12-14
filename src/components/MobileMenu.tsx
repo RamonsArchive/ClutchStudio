@@ -172,7 +172,9 @@ const MobileMenu = ({
                         title={link.title}
                         onClick={onClose}
                       >
-                        <div className="w-8 h-8 text-white">{icon}</div>
+                        <div className="w-8 h-8 text-white pointer-events-none">
+                          {icon}
+                        </div>
                       </Link>
                     );
                   })}

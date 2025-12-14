@@ -22,13 +22,15 @@ const Footer = () => {
                   {...(link.download
                     ? { download: true }
                     : { target: "_blank", rel: "noopener noreferrer" })}
-                  className="group flex items-center gap-2 text-white text-[14px] md:text-[16px] font-medium hover:text-primary-400 active:text-primary-400 transition-colors duration-300 ease-in-out cursor-pointer w-fit"
+                  className="group flex items-center gap-2 text-white text-[14px] md:text-[16px] font-medium hover:text-primary-400 active:text-primary-400 transition-all duration-300 ease-in-out w-fit"
                   aria-label={link.ariaLabel}
+                  title={link.title}
+                  style={{ cursor: "pointer" }}
                 >
-                  <div className="relative w-6 h-6 sm:w-7 sm:h-7 text-white">
+                  <div className="relative w-6 h-6 sm:w-7 sm:h-7 text-white group-hover:text-primary-400 transition-colors duration-300 pointer-events-none">
                     {socialIcons.pdf}
                   </div>
-                  <span className="hidden text-[16px] md:text-[18px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors cursor-pointer">
+                  <span className="hidden text-[16px] md:text-[18px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors pointer-events-none">
                     {link.title}
                   </span>
                 </a>
@@ -41,28 +43,34 @@ const Footer = () => {
                 Socials
               </h1>
               <div className="flex flex-row items-center sm:items-start sm:flex-col gap-5 w-full h-fit">
-                {footerSocials.map((link) => {
-                  const icon = socialIcons[link.id] || socialIcons.pdf;
-                  return (
-                    <Link
-                      key={link.id}
-                      href={link.href}
-                      target={link.id === "gmail" ? undefined : "_blank"}
-                      rel={
-                        link.id === "gmail" ? undefined : "noopener noreferrer"
-                      }
-                      className="group flex items-center gap-2 cursor-pointer w-fit hover:opacity-50 active:opacity-50 transition-opacity duration-300 ease-in-out"
-                      aria-label={link.ariaLabel}
-                    >
-                      <div className="relative w-6 h-6 sm:w-7 sm:h-7 text-white">
-                        {icon}
-                      </div>
-                      <span className="hidden text-[14px] md:text-[16px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors cursor-pointer">
-                        {link.title}
-                      </span>
-                    </Link>
-                  );
-                })}
+                {footerSocials
+                  .filter((link) => footerMap.includes(link.id))
+                  .map((link) => {
+                    const icon = socialIcons[link.id] || socialIcons.pdf;
+                    return (
+                      <Link
+                        key={link.id}
+                        href={link.href}
+                        target={link.id === "gmail" ? undefined : "_blank"}
+                        rel={
+                          link.id === "gmail"
+                            ? undefined
+                            : "noopener noreferrer"
+                        }
+                        className="group flex items-center gap-2 w-fit hover:opacity-50 active:opacity-50 transition-opacity duration-300 ease-in-out"
+                        aria-label={link.ariaLabel}
+                        title={link.title}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <div className="relative w-6 h-6 sm:w-7 sm:h-7 text-white pointer-events-none">
+                          {icon}
+                        </div>
+                        <span className="hidden text-[14px] md:text-[16px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors pointer-events-none">
+                          {link.title}
+                        </span>
+                      </Link>
+                    );
+                  })}
               </div>
             </div>
           </div>

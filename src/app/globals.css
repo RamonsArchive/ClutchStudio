@@ -60,13 +60,11 @@ body::-webkit-scrollbar {
   display: none; /* literally remove it */
 }
 
-/* Debug: Test cursor styles */
-* {
-  cursor: auto !important;
-}
-
-/* Override for specific elements */
+/* Override for specific elements that need pointer cursor */
+a,
+button,
 .cursor-pointer,
+[style*="cursor: pointer"],
 [style*="cursor: pointer"] {
   cursor: pointer !important;
 }
