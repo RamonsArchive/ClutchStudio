@@ -347,7 +347,7 @@ const CreateAdminForm = () => {
     }
   };
 
-  const [state, formAction, isPending] = useActionState(submitForm, {
+  const [_state, formAction, isPending] = useActionState(submitForm, {
     status: "INITIAL",
     error: "",
     data: null,
@@ -358,7 +358,7 @@ const CreateAdminForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 md:gap-10 p-5 md:p-10 w-full bg-gradient-to-b from-primary-900 via-black to-accent-950 max-w-[1200px] mx-auto rounded-xl shadow-lg">
+    <div className="flex flex-col gap-5 md:gap-10 p-5 md:p-10 w-full bg-gradient-to-b from-primary-950 via-black to-accent-950 max-w-[1200px] mx-auto rounded-xl shadow-lg">
       <div className="flex flex-col w-full gap-5">
         <h1
           ref={titleRef}

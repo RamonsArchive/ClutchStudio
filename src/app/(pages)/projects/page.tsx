@@ -5,7 +5,7 @@ import AllProjects from "@/components/AllProjects";
 
 const page = () => {
   return (
-    <section className="flex flex-col w-[100dvw] h-full pb-20 gap-10">
+    <section className="flex flex-col w-dvw h-full pb-20 gap-10">
       <div className="relative flex flex-col h-[calc(50dvh-43px)] w-full overflow-hidden">
         <TitleSection
           mainTitle={

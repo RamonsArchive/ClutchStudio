@@ -1,14 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #e2e8f0; /* Darker, more visible neutral background (slate-200) */
-  --foreground: #0f172a; /* Darker text for better contrast (slate-900) */
+  --background: #020617; /* Dark slate to match website theme */
+  --foreground: #f8fafc; /* Light text for dark background */
 }
 
 html {
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  height: 100%;
+  background: #020617 !important; /* Dark slate to match website theme */
+  background-attachment: fixed;
+  color: var(--foreground);
+  min-height: 100vh;
 }
 
 body {
@@ -59,13 +60,11 @@ body::-webkit-scrollbar {
   display: none; /* literally remove it */
 }
 
-/* Debug: Test cursor styles */
-* {
-  cursor: auto !important;
-}
-
-/* Override for specific elements */
+/* Override for specific elements that need pointer cursor */
+a,
+button,
 .cursor-pointer,
+[style*="cursor: pointer"],
 [style*="cursor: pointer"] {
   cursor: pointer !important;
 }
@@ -427,6 +426,7 @@ select.form-input:focus {
   --color-primary-700: #00449b; /* Dark blue for navbar backdrop */
   --color-primary-800: #003682; /* Darker blue */
   --color-primary-900: #002969; /* Darkest blue for deep shadows */
+  --color-primary-950: #001a3d; /* Darkest blue - deeper shade */
 
   /* Secondary Color Variations (Your Green #008E1A) */
   --color-secondary-50: #f0fdf4; /* Very light green */
@@ -440,17 +440,18 @@ select.form-input:focus {
   --color-secondary-800: #005211; /* Darker green */
   --color-secondary-900: #003e0e; /* Darkest green */
 
-  /* Primary Background Variations */
-  --color-primary-background-50: #e2e8f0; /* Main background (slate-200) */
-  --color-primary-background-100: #cbd5e1; /* Light blue-gray (slate-300) */
-  --color-primary-background-200: #d1dce9; /* Lighter blue-gray */
-  --color-primary-background-300: #a3b8d1; /* Medium-light blue-gray */
-  --color-primary-background-400: #7593b9; /* Medium blue-gray */
-  --color-primary-background-500: #44668d; /* Base primary background */
-  --color-primary-background-600: #375577; /* Darker blue-gray */
-  --color-primary-background-700: #2a4461; /* Dark blue-gray */
-  --color-primary-background-800: #1d334b; /* Darker blue-gray */
-  --color-primary-background-900: #102235; /* Darkest blue-gray */
+  /* Primary Background Variations - Dark Slate for Navbar */
+  --color-primary-background-50: #f8fafc; /* Very light slate */
+  --color-primary-background-100: #f1f5f9; /* Light slate */
+  --color-primary-background-200: #e2e8f0; /* Lighter slate */
+  --color-primary-background-300: #cbd5e1; /* Medium-light slate */
+  --color-primary-background-400: #94a3b8; /* Medium slate */
+  --color-primary-background-500: #64748b; /* Base slate */
+  --color-primary-background-600: #475569; /* Darker slate */
+  --color-primary-background-700: #334155; /* Dark slate */
+  --color-primary-background-800: #1e293b; /* Darker slate */
+  --color-primary-background-900: #0f172a; /* Darkest slate - for navbar (sleek charcoal) */
+  --color-primary-background-950: #020617; /* Darkest slate - deeper shade */
 
   /* Secondary Background Variations (Complementary warm tones) */
   --color-secondary-background-50: #fdf9f5; /* Very light warm beige */
@@ -464,18 +465,18 @@ select.form-input:focus {
   --color-secondary-background-800: #7a4d20; /* Darker warm brown */
   --color-secondary-background-900: #5b3713; /* Darkest warm brown */
 
-  /* Accent Color Variations (Purple for highlights) */
-  --color-accent-50: #faf5ff; /* Very light purple */
-  --color-accent-100: #f3e8ff; /* Light purple */
-  --color-accent-200: #e9d5ff; /* Lighter purple */
-  --color-accent-300: #d8b4fe; /* Medium-light purple */
-  --color-accent-400: #c084fc; /* Medium purple */
-  --color-accent-500: #a855f7; /* Base purple */
-  --color-accent-600: #9333ea; /* Darker purple */
-  --color-accent-700: #7c3aed; /* Dark purple */
-  --color-accent-800: #6b21a8; /* Darker purple */
-  --color-accent-900: #581c87; /* Darkest purple */
-  --color-accent-950: #3e1b5c; /* Darkest purple - deeper shade */
+  /* Accent Color Variations (Slate for highlights) */
+  --color-accent-50: #f8fafc; /* Very light slate */
+  --color-accent-100: #f1f5f9; /* Light slate */
+  --color-accent-200: #e2e8f0; /* Lighter slate */
+  --color-accent-300: #cbd5e1; /* Medium-light slate */
+  --color-accent-400: #94a3b8; /* Medium slate */
+  --color-accent-500: #64748b; /* Base slate */
+  --color-accent-600: #475569; /* Darker slate */
+  --color-accent-700: #334155; /* Dark slate */
+  --color-accent-800: #1e293b; /* Darker slate */
+  --color-accent-900: #0f172a; /* Darkest slate */
+  --color-accent-950: #020617; /* Darkest slate - deeper shade */
 
   /* Neutral Variations (Slate grays) */
   --color-neutral-50: #f8fafc; /* Almost white */
@@ -507,19 +508,19 @@ select.form-input:focus {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #e2e8f0; /* Keep light theme even in dark mode preference */
-    --foreground: #0f172a;
-    --color-bg-primary: #e2e8f0;
-    --color-bg-secondary: #ffffff;
-    --color-bg-muted: #cbd5e1;
-    --color-text-primary: #0f172a;
-    --color-text-secondary: #334155;
-    --color-text-muted: #475569;
+    --background: #020617; /* Dark slate to match website theme */
+    --foreground: #f8fafc;
+    --color-bg-primary: #020617; /* Darkest slate */
+    --color-bg-secondary: #0f172a; /* Dark slate */
+    --color-bg-muted: #1e293b; /* Darker slate */
+    --color-text-primary: #f8fafc; /* Light text for dark background */
+    --color-text-secondary: #cbd5e1; /* Medium light text */
+    --color-text-muted: #94a3b8; /* Muted light text */
   }
 }
 
 body {
-  background: #e2e8f0 !important; /* Darker background (slate-200) */
+  background: #020617 !important; /* Dark slate to match website theme */
   color: var(--foreground);
   width: 100%;
   scroll-behavior: smooth;
@@ -549,13 +550,6 @@ body {
 @utility title-section-sub-title {
   @apply font-funnel-sans text-white text-[12px] xs:text-[14px] md:text-[16px] font-regular break-words;
 } */
-
-html {
-  background: #e2e8f0 !important; /* Darker, more visible background (slate-200) */
-  background-attachment: fixed;
-  color: var(--foreground);
-  min-height: 100vh;
-}
 
 /* Contact Button Gradient Animation */
 .contact-gradient-btn {
@@ -823,6 +817,25 @@ html {
     transform: translateX(
       -66.67%
     ); /* Move by two-thirds to show seamless loop */
+  }
+}
+
+/* Infinite scroll animations */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(var(--scroll-distance) * -1));
+  }
+}
+
+@keyframes scroll-right {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(var(--scroll-distance));
   }
 }
 

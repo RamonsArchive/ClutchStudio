@@ -65,7 +65,7 @@ const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
   }, [titleRef, personalDescriptionRef, accentDividerRef]);
 
   return (
-    <div className="flex flex-col gap-6 bg-primary-background-900 rounded-xl p-6 shadow-lg">
+    <div className="flex flex-col gap-6 bg-primary-background-950 rounded-xl p-6 shadow-lg">
       <h2
         ref={titleRef}
         className="font-funnel-sans text-white text-[28px] sm:text-[32px] font-bold leading-tight"

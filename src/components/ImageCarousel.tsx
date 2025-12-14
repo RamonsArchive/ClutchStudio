@@ -21,17 +21,15 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const [carousel, setCarousel] = useState({
     currentImage: 0,
     isPlaying: true,
-    isLastImage: false,
   });
 
-  const [mobile, setMobile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [startY, setStartY] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
 
-  const { currentImage, isPlaying, isLastImage } = carousel;
+  const { currentImage, isPlaying } = carousel;
 
   // Throttle function for smooth performance
   const throttle = useCallback(
@@ -60,11 +58,6 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     []
   );
 
-  useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    setMobile(isMobile);
-  }, []);
-
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
     if (!isPlaying || isDragging) return;
@@ -79,7 +72,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
       setCarousel((prev) => {
         const nextImage = prev.currentImage + 1;
         if (nextImage >= images.length) {
-          return { ...prev, currentImage: 0, isLastImage: false };
+          return { ...prev, currentImage: 0 };
         }
         return { ...prev, currentImage: nextImage };
       });
@@ -340,7 +333,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
           {images.map((image, index) => (
             <div
               key={index}
-              className="w-full h-full flex-shrink-0"
+              className="w-full h-full shrink-0"
               style={{ width: `${100 / images.length}%` }}
             >
               <div className="w-full h-full flex-center overflow-hidden bg-black relative">

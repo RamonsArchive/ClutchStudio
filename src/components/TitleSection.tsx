@@ -177,11 +177,6 @@ const TitleSection = ({
 
           // Consolidated background icons animation
           if (includeBackgroundIcons) {
-            const iconsTL = gsap.timeline({
-              scrollTrigger: animationConfigs.iconsScrollTrigger,
-              stagger: 0.3,
-            });
-
             // Memoized background icon animations
             const leftIcons = "#clutch-fist-light-1, #clutch-fist-light-3";
             const rightIcons =
@@ -239,7 +234,7 @@ const TitleSection = ({
           }
 
           if (includeBackgroundIcons) {
-            const mobileIconsTL = gsap.timeline({
+            gsap.timeline({
               scrollTrigger: animationConfigs.iconsScrollTrigger,
               stagger: 0.2,
             });
@@ -351,7 +346,7 @@ const TitleSection = ({
   return (
     <div
       id="title-container"
-      className="flex p-5 gap-10 w-full h-full bg-gradient-to-b from-primary-background-900 via-black to-primary-900 wavy-border-bottom overflow-hidden"
+      className="flex p-5 gap-10 w-full h-full bg-linear-to-b from-primary-background-950 via-black to-primary-950 wavy-border-bottom overflow-hidden"
     >
       {/* Additional wave layers for enhanced animation */}
       <div className="wave-layer-1"></div>

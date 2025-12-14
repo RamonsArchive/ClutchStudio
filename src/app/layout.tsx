@@ -271,6 +271,14 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
 
+        {/* Preload hero image for better animation performance */}
+        <link
+          rel="preload"
+          href="/Assets/About/personal1.png"
+          as="image"
+          fetchPriority="high"
+        />
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
