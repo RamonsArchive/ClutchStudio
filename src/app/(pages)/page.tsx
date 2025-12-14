@@ -194,7 +194,7 @@ export default function Home() {
   // No useGSAP needed for mobile - pure CSS handles it
 
   const desktopHomeContent = (
-    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto gap-1">
+    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto gap-2">
       <h1
         ref={titleRef}
         className="font-funnel-sans text-white text-[58px] xs:text-[60px] md:text-[68px] font-bold wrap-break-word whitespace-nowrap overflow-hidden"
