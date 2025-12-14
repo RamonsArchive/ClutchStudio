@@ -276,7 +276,7 @@ const AboutContent = ({
 
     // Initial entrance animation for images (snappy and clean)
 
-    imagesRef.current.forEach((image, index) => {
+    imagesRef.current.forEach((image, _index) => {
       gsap.set(image, {
         opacity: 0,
         yPercent: 100,

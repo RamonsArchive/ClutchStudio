@@ -291,7 +291,7 @@ const LoginAdminForm = () => {
     }
   };
 
-  const [state, formAction, isPending] = useActionState(submitForm, {
+  const [_state, formAction, isPending] = useActionState(submitForm, {
     status: "INITIAL",
     error: "",
     data: null,

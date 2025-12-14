@@ -177,11 +177,6 @@ const TitleSection = ({
 
           // Consolidated background icons animation
           if (includeBackgroundIcons) {
-            const iconsTL = gsap.timeline({
-              scrollTrigger: animationConfigs.iconsScrollTrigger,
-              stagger: 0.3,
-            });
-
             // Memoized background icon animations
             const leftIcons = "#clutch-fist-light-1, #clutch-fist-light-3";
             const rightIcons =
@@ -239,7 +234,7 @@ const TitleSection = ({
           }
 
           if (includeBackgroundIcons) {
-            const mobileIconsTL = gsap.timeline({
+            gsap.timeline({
               scrollTrigger: animationConfigs.iconsScrollTrigger,
               stagger: 0.2,
             });

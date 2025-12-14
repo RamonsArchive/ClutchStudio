@@ -59,7 +59,7 @@ const InfiniteScrollSocials = ({
             if (!icon) return null;
             // Clone the icon and override className to fill container
             const scaledIcon = React.cloneElement(
-              icon as React.ReactElement<any>,
+              icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
               {
                 className: "w-full h-full",
               }
@@ -88,7 +88,7 @@ const InfiniteScrollSocials = ({
             const icon = socialIcons[social.id];
             if (!icon) return null;
             const scaledIcon = React.cloneElement(
-              icon as React.ReactElement<any>,
+              icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
               {
                 className: "w-full h-full",
               }
@@ -116,7 +116,7 @@ const InfiniteScrollSocials = ({
             const icon = socialIcons[social.id];
             if (!icon) return null;
             const scaledIcon = React.cloneElement(
-              icon as React.ReactElement<any>,
+              icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
               {
                 className: "w-full h-full",
               }
@@ -144,7 +144,7 @@ const InfiniteScrollSocials = ({
             const icon = socialIcons[social.id];
             if (!icon) return null;
             const scaledIcon = React.cloneElement(
-              icon as React.ReactElement<any>,
+              icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
               {
                 className: "w-full h-full",
               }
@@ -172,7 +172,7 @@ const InfiniteScrollSocials = ({
             const icon = socialIcons[social.id];
             if (!icon) return null;
             const scaledIcon = React.cloneElement(
-              icon as React.ReactElement<any>,
+              icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
               {
                 className: "w-full h-full",
               }
