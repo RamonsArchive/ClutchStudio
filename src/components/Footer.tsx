@@ -10,7 +10,7 @@ const Footer = () => {
     <>
       <section className="flex-center w-full bg-linear-to-b from-accent-950 via-primary-950 to-black py-15 px-5 md:p-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 w-full gap-10 rounded-xl mx-auto">
-          <div className="flex flex-col gap-5 w-full p-5 md:p-10 bg-primary-background-500/20 rounded-xl">
+          <div className="flex flex-col gap-5 w-full p-5 md:p-10 bg-primary-950/20 rounded-xl">
             <h1 className="font-funnel-sans text-white text-[20px] md:text-[24px] font-bold w-full">
               Resume & Research
             </h1>
@@ -36,7 +36,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex flex-col gap-5 ">
-            <div className="flex flex-col gap-5 w-full p-5 md:p-10 bg-primary-background-500/20 rounded-xl">
+            <div className="flex flex-col gap-5 w-full p-5 md:p-10 bg-primary-950/20 rounded-xl">
               <h1 className="font-funnel-sans text-white text-[20px] md:text-[24px] font-bold w-full">
                 Socials
               </h1>
@@ -66,7 +66,7 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-5 p-5 md:p-10 bg-primary-background-500/20 rounded-xl">
+          <div className="flex flex-col gap-5 p-5 md:p-10 bg-primary-950/20 rounded-xl">
             <div className="flex flex-col gap-5">
               <h1 className="font-funnel-sans text-white text-[20px] md:text-[24px] font-bold w-full">
                 Let&apos;s Connect
@@ -86,7 +86,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-5 p-5 md:p-10 bg-primary-background-500/20 rounded-xl">
+          <div className="flex flex-col gap-5 p-5 md:p-10 bg-primary-950/20 rounded-xl">
             <div className="flex flex-col gap-5">
               <h1 className="font-funnel-sans text-white text-[20px] md:text-[24px] font-bold w-full">
                 Quick Links

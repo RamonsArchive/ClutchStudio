@@ -41,7 +41,7 @@ const InfiniteScrollText = ({
   }, [text, direction]);
 
   return (
-    <div className="overflow-hidden w-full min-w-0 flex items-center justify-center py-4">
+    <div className="overflow-hidden w-full min-w-0 flex items-center justify-center">
       <div
         ref={containerRef}
         className="flex flex-row gap-10 relative items-center"

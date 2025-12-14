@@ -57,17 +57,24 @@ const InfiniteScrollSocials = ({
           {footerSocials.map((social, idx) => {
             const icon = socialIcons[social.id];
             if (!icon) return null;
+            // Clone the icon and override className to fill container
+            const scaledIcon = React.cloneElement(
+              icon as React.ReactElement<any>,
+              {
+                className: "w-full h-full",
+              }
+            );
             return (
               <Link
                 key={`first-${idx}`}
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14"
                 aria-label={social.ariaLabel}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 text-white">
-                  {icon}
+                <div className="w-full h-full text-white flex items-center justify-center">
+                  {scaledIcon}
                 </div>
               </Link>
             );
@@ -79,17 +86,23 @@ const InfiniteScrollSocials = ({
           {footerSocials.map((social, idx) => {
             const icon = socialIcons[social.id];
             if (!icon) return null;
+            const scaledIcon = React.cloneElement(
+              icon as React.ReactElement<any>,
+              {
+                className: "w-full h-full",
+              }
+            );
             return (
               <Link
                 key={`second-${idx}`}
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 text-white">
-                  {icon}
+                <div className="w-full h-full text-white flex items-center justify-center">
+                  {scaledIcon}
                 </div>
               </Link>
             );
@@ -101,17 +114,23 @@ const InfiniteScrollSocials = ({
           {footerSocials.map((social, idx) => {
             const icon = socialIcons[social.id];
             if (!icon) return null;
+            const scaledIcon = React.cloneElement(
+              icon as React.ReactElement<any>,
+              {
+                className: "w-full h-full",
+              }
+            );
             return (
               <Link
                 key={`third-${idx}`}
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 text-white">
-                  {icon}
+                <div className="w-full h-full text-white flex items-center justify-center">
+                  {scaledIcon}
                 </div>
               </Link>
             );
@@ -123,17 +142,23 @@ const InfiniteScrollSocials = ({
           {footerSocials.map((social, idx) => {
             const icon = socialIcons[social.id];
             if (!icon) return null;
+            const scaledIcon = React.cloneElement(
+              icon as React.ReactElement<any>,
+              {
+                className: "w-full h-full",
+              }
+            );
             return (
               <Link
                 key={`fourth-${idx}`}
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 text-white">
-                  {icon}
+                <div className="w-full h-full text-white flex items-center justify-center">
+                  {scaledIcon}
                 </div>
               </Link>
             );
@@ -145,17 +170,23 @@ const InfiniteScrollSocials = ({
           {footerSocials.map((social, idx) => {
             const icon = socialIcons[social.id];
             if (!icon) return null;
+            const scaledIcon = React.cloneElement(
+              icon as React.ReactElement<any>,
+              {
+                className: "w-full h-full",
+              }
+            );
             return (
               <Link
                 key={`fifth-${idx}`}
                 href={social.href}
                 target={social.id === "gmail" ? undefined : "_blank"}
                 rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 text-white">
-                  {icon}
+                <div className="w-full h-full text-white flex items-center justify-center">
+                  {scaledIcon}
                 </div>
               </Link>
             );

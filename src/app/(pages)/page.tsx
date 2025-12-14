@@ -182,7 +182,7 @@ export default function Home() {
   return (
     <section className="flex flex-col w-dvw overflow-y-auto scrollbar-hide gap-10 pb-15">
       <div className="flex flex-col h-[calc(100vh-43px)] w-full bg-linear-to-b from-primary-background-950 via-black to-primary-950 wavy-border-bottom overflow-hidden">
-        <div className="relative w-full h-full p-5 md:p-10 lg:p-16">
+        <div className="relative w-full h-full p-5 md:p-16 lg:p-20">
           {/* Desktop clutch fist icons */}
           <div
             ref={desktopIconsRef}

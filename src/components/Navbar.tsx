@@ -39,7 +39,7 @@ const NavbarContent = ({
               <Link
                 href={link.href}
                 key={link.name}
-                className="text-white text-[18px] font-medium py-2 px-5 md:px-10 duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center z-100 cursor-pointer"
+                className="text-white text-[18px] font-medium py-2 px-6 duration-300 ease-in-out hover:bg-primary-background-400 transition-colors text-center z-100 cursor-pointer"
               >
                 {link.name}
               </Link>
@@ -104,7 +104,7 @@ const StaticNavbar = ({
   isMenuOpen: boolean;
 }) => {
   return (
-    <div className="lg:hidden relative z-10 w-full shrink-0">
+    <div className="relative z-10 w-full shrink-0">
       <NavbarContent onMenuToggle={onMenuToggle} isMenuOpen={isMenuOpen} />
     </div>
   );
@@ -122,7 +122,7 @@ const FloatingNavbar = ({
 }) => {
   return (
     <div
-      className={`lg:hidden fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
         isVisible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -145,10 +145,14 @@ const Navbar = () => {
     let ticking = false;
 
     const updateNavbar = () => {
+      console.log("updateNavbar");
+      console.log("lastScrollY", lastScrollY);
       const currentScrollY = Math.max(
         0,
         window.scrollY || window.pageYOffset || 0
       );
+
+      console.log("currentScrollY", currentScrollY);
 
       const navbarHeight = 43; // Height of the navbar
 
@@ -157,10 +161,12 @@ const Navbar = () => {
         // Scrolling down
         if (currentScrollY > lastScrollY) {
           setShowFloatingNavbar(true);
+          console.log("showFloatingNavbar", true);
         }
         // Scrolling up - hide floating navbar
         else if (currentScrollY < lastScrollY) {
           setShowFloatingNavbar(false);
+          console.log("showFloatingNavbar", false);
         }
       } else {
         // At top, hide floating navbar
@@ -173,6 +179,7 @@ const Navbar = () => {
 
     const handleScroll = () => {
       console.log("scrolling....");
+      console.log("ticking", ticking);
       if (!ticking) {
         window.requestAnimationFrame(updateNavbar);
         ticking = true;
@@ -203,14 +210,6 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Background placeholder - always visible */}
-      <div className="flex w-full h-[43px] bg-primary-background-950" />
-
-      {/* Desktop: Always visible navbar */}
-      <div className="hidden lg:block absolute top-0 left-0 right-0 w-full h-[43px] z-10">
-        <NavbarContent onMenuToggle={toggleMenu} isMenuOpen={isMenuOpen} />
-      </div>
-
       {/* Mobile: Static navbar */}
       <StaticNavbar onMenuToggle={toggleMenu} isMenuOpen={isMenuOpen} />
 
