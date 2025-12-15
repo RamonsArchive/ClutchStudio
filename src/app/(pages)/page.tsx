@@ -194,7 +194,7 @@ export default function Home() {
   // No useGSAP needed for mobile - pure CSS handles it
 
   const desktopHomeContent = (
-    <div className="hidden sm:flex flex-col h-full w-full max-w-4xl mx-auto my-auto gap-6">
+    <div className="hidden sm:flex flex-col w-full max-w-4xl mx-auto gap-6">
       <div className="flex flex-row w-full gap-5 lg:gap-8 items-center">
         {/* Image - left */}
         <div
@@ -340,7 +340,7 @@ export default function Home() {
   return (
     <section className="flex flex-col w-dvw overflow-y-auto scrollbar-hide gap-10 pb-15">
       <div className="flex flex-col h-[calc(100vh-43px)] w-full bg-linear-to-b from-primary-background-950 via-black to-primary-950 wavy-border-bottom overflow-hidden md:overflow-hidden overflow-y-auto">
-        <div className="relative w-full h-full py-10 px-5 md:py-16 md:px-10 lg:py-16 lg:px-20">
+        <div className="relative flex items-center justify-center w-full h-full py-10 px-5 md:py-16 md:px-10 lg:py-16 lg:px-20">
           {/* Desktop clutch fist icons */}
           <div
             ref={desktopIconsRef}
@@ -443,7 +443,7 @@ export default function Home() {
           </div>
           {desktopHomeContent}
           {mobileHomeContent}
-          <div className="hidden sm:flex absolute bottom-5 left-1/2 -translate-x-1/2 w-full justify-center">
+          <div className="hidden sm:flex absolute bottom-5 left-1/2 -translate-x-1/2 w-full justify-center items-center">
             <div
               ref={scrollIndicatorRef}
               className="flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-4 py-2 md:px-6 md:py-3 border border-white/20"
