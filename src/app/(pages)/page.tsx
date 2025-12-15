@@ -194,44 +194,62 @@ export default function Home() {
   // No useGSAP needed for mobile - pure CSS handles it
 
   const desktopHomeContent = (
-    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto my-auto gap-2">
-      <h1
-        ref={titleRef}
-        className="font-funnel-sans text-white text-[58px] xs:text-[60px] md:text-[68px] font-bold wrap-break-word whitespace-nowrap overflow-hidden"
-        style={{ visibility: "hidden", opacity: 0 }}
-      >
-        Hi, I'm Ramon
-      </h1>
-      <div className="flex flex-row w-full gap-4 md:gap-6">
-        {/* Image - exactly 50% width on desktop */}
+    <div className="hidden sm:flex flex-col h-full w-full max-w-4xl mx-auto my-auto gap-6">
+      <div className="flex flex-row w-full gap-5 lg:gap-8 items-center">
+        {/* Image - left */}
         <div
           ref={photoRef}
           className="relative w-1/2 shrink-0 flex"
           style={{ visibility: "hidden", opacity: 0 }}
         >
-          <Image
-            src="/Assets/About/personal1.png"
-            alt="Ramon"
-            width={500}
-            height={500}
-            priority
-            className="w-full h-full object-cover rounded-xl"
-          />
+          <div className="relative w-full h-[360px] md:h-[420px] lg:h-[460px] overflow-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30">
+            <Image
+              src="/Assets/About/personal1.png"
+              alt="Ramon"
+              fill
+              priority
+              className="object-cover"
+              sizes="(min-width: 1024px) 40vw, 60vw"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent" />
+          </div>
         </div>
-        {/* Right side - exactly 50% width with content */}
+
+        {/* Text side - right */}
         <div
           ref={textDataRef}
-          className="flex flex-col w-1/2 shrink-0 justify-center gap-3 md:gap-4"
+          className="flex flex-col w-1/2 shrink-0 justify-center gap-4 md:gap-5"
           style={{ visibility: "hidden", opacity: 0 }}
         >
-          <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
+          <div className="flex items-center gap-2 w-fit rounded-full border border-white/20 bg-black/40 px-3 py-1.5 backdrop-blur-sm">
+            <span className="text-[11px] tracking-[0.18em] uppercase text-primary-100">
+              San Diego, CA
+            </span>
+            <span className="h-1 w-1 rounded-full bg-primary-300" />
+            <span className="text-[11px] text-white/80">
+              UCSD · B.S. CogSci (ML/AI) + CS Minor
+            </span>
+          </div>
+
+          <h1
+            ref={titleRef}
+            className="font-funnel-sans text-white text-[54px] xs:text-[60px] md:text-[66px] font-bold wrap-break-word leading-[1.05] overflow-hidden"
+            style={{ visibility: "hidden", opacity: 0 }}
+          >
+            Hi, I'm Ramon
+          </h1>
+
+          <p className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[22px] font-semibold leading-relaxed">
             I&apos;m glad you&apos;re here! Look around to see my Full Stack and
             Machine Learning projects 😊.
-          </h2>
-          <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
-            Based in San Diego, California
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 mt-2">
+
+          <p className="font-funnel-sans text-white/75 text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed">
+            I build products end-to-end: front-end polish, scalable backends,
+            and applied ML. Focused on performant, human-centered experiences.
+          </p>
+
+          <div className="flex flex-wrap sm:flex-row gap-3 mt-2">
             <Link
               href="/projects"
               className="w-full sm:w-auto px-6 py-2.5 bg-white text-black font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/90 active:bg-white/80 transition-all duration-300 ease-in-out text-center cursor-pointer"
@@ -245,6 +263,13 @@ export default function Home() {
             >
               Resume
             </a>
+            <a
+              href="/Assets/Documents/research_paper1.pdf"
+              download
+              className="w-full sm:w-auto px-6 py-2.5 bg-transparent border-2 border-white/60 text-white font-funnel-sans text-[14px] md:text-[16px] font-semibold rounded-lg hover:bg-white/10 active:bg-white/20 transition-all duration-300 ease-in-out text-center cursor-pointer"
+            >
+              ML Research
+            </a>
           </div>
         </div>
       </div>
@@ -252,15 +277,21 @@ export default function Home() {
   );
 
   const mobileHomeContent = (
-    <div className="flex max-h-[50dvh] h-full sm:hidden flex-col w-full max-w-sm mx-auto gap-3">
+    <div className="flex max-h-[50dvh] h-full sm:hidden flex-col w-full max-w-sm mx-auto gap-4">
       <div
         ref={textDataRefMobile}
-        className="flex flex-col w-full gap-2 mobile-animate-text"
+        className="flex flex-col w-full gap-3 mobile-animate-text"
       >
+        <div className="flex items-center gap-2 w-fit rounded-full border border-white/15 bg-white/5 px-3 py-1.5 backdrop-blur">
+          <span className="text-[10px] tracking-[0.18em] uppercase text-primary-100">
+            San Diego, CA
+          </span>
+          <span className="h-1 w-1 rounded-full bg-primary-300" />
+          <span className="text-[10px] text-white/80">
+            UCSD · B.S. CogSci (ML/AI) + CS Minor
+          </span>
+        </div>
         <div className="flex flex-col w-full">
-          <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
-            Based in San Diego, California
-          </p>
           <h1
             ref={titleRefMobile}
             className="font-funnel-sans text-white text-[42px] xs:text-[48px] font-bold wrap-break-word overflow-hidden"
