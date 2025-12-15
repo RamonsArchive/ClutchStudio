@@ -516,6 +516,43 @@ export const ML_FootballInjuryPrediction: ProjectTemplate = {
   status: "live",
 };
 
+export const TypeQuest: ProjectTemplate = {
+  id: "type-quest",
+  projectType: "WEB_DEVELOPMENT",
+  text: {
+    name: "Type Quest",
+    subName:
+      "A typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary",
+    title:
+      "Helped build the Best Project Award in my Software Engineering course by winning a typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary",
+    workDescription:
+      "With a team of 5 other students, we built a typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary. As the product owner in an agile development process, I developed the product backlog and and requiremtns for the project. For example, I prioritzed mulitplary funcaiotnlut and user stories that made the expeince more engaing and fun like adding AI generatd assets. In addition to being the Product Owner and settign tasks for each Sprint backlog, I also created the proejcets Arcitexture, Initail Desing, File Strucutre, and Code Structure in termso fo resauble compnents and modules. We used React, TypeScript, Tailwind CSS, and a Redis Database for the backend. In addiiton to techinal skills I delvoepd such as MVP and Agile developemnt, I also learned leadership skills in spearheading priorites and managing the teams progress. ",
+    personalDescription:
+      "With a team of 5 other students in our Software Enigneering course, we knew we w anted to build a typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary. And so we came up with the idea of TypeQuest as the main game, Unscamble as one minigmae and Treuasture Hunt as another minigmae. We used React, TypeScript, Tailwind CSS, and a Redis Database for the backend. Throughout the project, I was the Product Owner resposnbile for the product backlock and tasks for the team in the spring backlog. I managed the github repo as well as hosting the project on Vercel. As the Product Owner, I also empahized advanced functionality such as Mulitplayer and AI generated assets to make it more astheitcally pleasing. In addition to being the Product Ownder, I also created the projecst architexture with Next.js 16 in mind, the Inital Figma desing, and the file structure and code structure in terms of resauble compnents and modules. Thhough there were some challenges like ghosting teamates and some merge confilcts, leading this PRoject adn winning the best project award in the entire software enineerin gcoures tought me a lot about leadership, team communication, and about successufl agile develoemtn. My faovirte part was presenting the preojct at the end while demonstraign mutipleary funcaiotnlkty.   ",
+  },
+  tags: [
+    "Web Development",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Agile Development",
+  ],
+  images: {
+    mainImage: "/Projects/TypeQuest/tq1.png",
+    galleryImages: [
+      "/Projects/TypeQuest/tq1.png",
+      "/Projects/TypeQuest/tq2.png",
+      "/Projects/TypeQuest/tq3.png",
+      "/Projects/TypeQuest/tq4.png",
+      "/Projects/TypeQuest/tq5.png",
+      "/Projects/TypeQuest/tq6.png",
+      "/Projects/TypeQuest/tq7.png",
+      "/Projects/TypeQuest/tq8.png",
+    ],
+  },
+  websiteUrl: "https://racer-game-cse-110.vercel.app",
+};
+
 // recent projects in hero section
 export const RecentProjects = [ColorStack, DigitalRevolution, YoloV8];
 

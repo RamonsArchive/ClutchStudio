@@ -113,10 +113,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/icon.png",
         width: 1200,
-        height: 630,
-        alt: "Clutch Studio - Web Development Portfolio San Diego",
+        height: 1200,
+        alt: "Clutch Studio Logo",
       },
     ],
   },
@@ -125,7 +125,7 @@ export const metadata: Metadata = {
     title: "Clutch Studio - Web Development Portfolio | San Diego, CA",
     description:
       "Professional web development services in San Diego, California. Specializing in React, Next.js, TypeScript, and modern web applications.",
-    images: ["/og-image.jpg"],
+    images: ["/icon.png"],
     creator: "@clutchstudio",
   },
   robots: {
