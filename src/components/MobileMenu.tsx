@@ -145,13 +145,15 @@ const MobileMenu = ({
                 </div>
 
                 {/* Icon Links - Before nav links */}
-                <div className="flex flex-row gap-4 px-5 pb-6 justify-center">
+                <div className="flex flex-row gap-4 px-5 pb-6 justify-center flex-wrap">
                   {links.map((link) => {
                     const icon =
                       link.id === "github" || link.id === "linkedin"
                         ? socialIcons[link.id]
                         : socialIcons.pdf;
                     if (!icon) return null;
+                    const isPdfLink =
+                      link.id === "resume" || link.id === "research_paper1";
                     return (
                       <Link
                         key={link.id}
@@ -167,7 +169,7 @@ const MobileMenu = ({
                             : "noopener noreferrer"
                         }
                         {...(link.download ? { download: true } : {})}
-                        className="flex items-center justify-center w-8 h-8 text-white opacity-70 hover:opacity-100 active:opacity-100 transition-opacity duration-300"
+                        className="flex flex-col items-center justify-center gap-1 w-8 h-8 text-white opacity-70 hover:opacity-100 active:opacity-100 transition-opacity duration-300"
                         aria-label={link.ariaLabel}
                         title={link.title}
                         onClick={onClose}
@@ -175,6 +177,11 @@ const MobileMenu = ({
                         <div className="w-8 h-8 text-white pointer-events-none">
                           {icon}
                         </div>
+                        {isPdfLink && (
+                          <span className="text-[8px] xs:text-[10px] text-white/80 font-medium pointer-events-none">
+                            {link.title}
+                          </span>
+                        )}
                       </Link>
                     );
                   })}

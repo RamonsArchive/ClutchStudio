@@ -22,7 +22,7 @@ const Footer = () => {
                   {...(link.download
                     ? { download: true }
                     : { target: "_blank", rel: "noopener noreferrer" })}
-                  className="group flex items-center gap-2 text-white text-[14px] md:text-[16px] font-medium hover:text-primary-400 active:text-primary-400 transition-all duration-300 ease-in-out w-fit"
+                  className="group flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-white text-[14px] md:text-[16px] font-medium hover:text-primary-400 active:text-primary-400 transition-all duration-300 ease-in-out w-fit"
                   aria-label={link.ariaLabel}
                   title={link.title}
                   style={{ cursor: "pointer" }}
@@ -30,7 +30,7 @@ const Footer = () => {
                   <div className="relative w-6 h-6 sm:w-7 sm:h-7 text-white group-hover:text-primary-400 transition-colors duration-300 pointer-events-none">
                     {socialIcons.pdf}
                   </div>
-                  <span className="hidden text-[16px] md:text-[18px] font-medium sm:inline font-plex-sans text-sm text-white group-hover:text-primary-400 transition-colors pointer-events-none">
+                  <span className="text-[10px] xs:text-[12px] sm:text-[14px] md:text-[16px] font-medium font-plex-sans text-white group-hover:text-primary-400 transition-colors pointer-events-none">
                     {link.title}
                   </span>
                 </a>

@@ -139,7 +139,7 @@ export const pdfLinks = [
     href: "/Assets/Documents/research_paper1.pdf", // Direct download from public folder (recommended)
     // href: "https://github.com/username/repo/raw/main/research_paper1.pdf", // Alternative: GitHub link
     ariaLabel: "View my research paper on Machine Learning",
-    title: "ML Research Paper",
+    title: "ML",
     download: true, // Set to true for direct downloads, false for GitHub links
   },
 ] as const;
@@ -172,7 +172,7 @@ export const navbarLinks = [
     name: "Research Paper",
     href: "/Assets/Documents/research_paper1.pdf",
     ariaLabel: "View my research paper on Machine Learning",
-    title: "ML Research Paper",
+    title: "ML",
     download: true,
   },
 ];
