@@ -193,6 +193,62 @@ const InfiniteScrollSocials = ({
             );
           })}
         </div>
+        {/* Sixth duplicate set */}
+        <div className="hidden 2xl:flex items-center gap-10 shrink-0">
+          {footerSocials.map((social, idx) => {
+            const icon = socialIcons[social.id];
+            if (!icon) return null;
+            const scaledIcon = React.cloneElement(
+              icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
+              {
+                className: "w-full h-full",
+              }
+            );
+            return (
+              <Link
+                key={`sixth-${idx}`}
+                href={social.href}
+                target={social.id === "gmail" ? undefined : "_blank"}
+                rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
+                aria-label={social.ariaLabel}
+                title={social.title}
+              >
+                <div className="w-full h-full text-white flex items-center justify-center">
+                  {scaledIcon}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+        {/* Seventh duplicate set */}
+        <div className="hidden 2xl:flex items-center gap-10 shrink-0">
+          {footerSocials.map((social, idx) => {
+            const icon = socialIcons[social.id];
+            if (!icon) return null;
+            const scaledIcon = React.cloneElement(
+              icon as React.ReactElement<React.SVGProps<SVGSVGElement>>,
+              {
+                className: "w-full h-full",
+              }
+            );
+            return (
+              <Link
+                key={`seventh-${idx}`}
+                href={social.href}
+                target={social.id === "gmail" ? undefined : "_blank"}
+                rel={social.id === "gmail" ? undefined : "noopener noreferrer"}
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
+                aria-label={social.ariaLabel}
+                title={social.title}
+              >
+                <div className="w-full h-full text-white flex items-center justify-center">
+                  {scaledIcon}
+                </div>
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

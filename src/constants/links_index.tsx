@@ -134,10 +134,10 @@ export const pdfLinks = [
     download: true, // Set to true for direct downloads, false for GitHub links
   },
   {
-    id: "research-paper",
+    id: "research_paper1",
     name: "Research Paper",
-    href: "/Assets/Documents/research-paper.pdf", // Direct download from public folder (recommended)
-    // href: "https://github.com/username/repo/raw/main/research-paper.pdf", // Alternative: GitHub link
+    href: "/Assets/Documents/research_paper1.pdf", // Direct download from public folder (recommended)
+    // href: "https://github.com/username/repo/raw/main/research_paper1.pdf", // Alternative: GitHub link
     ariaLabel: "View my research paper on Machine Learning",
     title: "ML Research Paper",
     download: true, // Set to true for direct downloads, false for GitHub links
@@ -168,9 +168,9 @@ export const navbarLinks = [
     download: true,
   },
   {
-    id: "research-paper",
+    id: "research_paper1",
     name: "Research Paper",
-    href: "/Assets/Documents/research-paper.pdf",
+    href: "/Assets/Documents/research_paper1.pdf",
     ariaLabel: "View my research paper on Machine Learning",
     title: "ML Research Paper",
     download: true,

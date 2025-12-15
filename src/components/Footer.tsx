@@ -8,7 +8,7 @@ const footerMap = ["instagram", "linkedin", "facebook"];
 const Footer = () => {
   return (
     <>
-      <section className="flex-center w-full bg-linear-to-b from-accent-950 via-primary-950 to-black py-15 px-5 md:p-10">
+      <section className="flex-center w-full bg-linear-to-b from-accent-950 via-black to-accent-950 py-15 px-5 md:p-10">
         <div className="grid grid-cols-1 lg:grid-cols-4 w-full gap-10 rounded-xl mx-auto">
           <div className="flex flex-col gap-5 w-full p-5 md:p-10 bg-primary-950/20 rounded-xl border border-white/10">
             <h1 className="font-funnel-sans text-white text-[20px] md:text-[24px] font-bold w-full">

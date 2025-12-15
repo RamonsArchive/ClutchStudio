@@ -76,7 +76,7 @@ const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
       {/* Purple accent divider */}
       <div
         ref={accentDividerRef}
-        className="w-18 h-3 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full shadow-sm"
+        className="w-18 h-3 bg-linear-to-r from-purple-400 to-purple-600 rounded-full shadow-sm"
       ></div>
 
       <p
