@@ -277,7 +277,7 @@ export default function Home() {
   );
 
   const mobileHomeContent = (
-    <div className="flex max-h-[50dvh] h-full sm:hidden flex-col w-full max-w-sm mx-auto gap-4">
+    <div className="flex h-full sm:hidden flex-col w-full max-w-sm mx-auto gap-4">
       <div
         ref={textDataRefMobile}
         className="flex flex-col w-full gap-3 mobile-animate-text"
