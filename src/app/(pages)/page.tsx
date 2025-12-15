@@ -436,7 +436,7 @@ export default function Home() {
         <InfiniteScrollText
           text="Recent Projects"
           direction="left"
-          className="font-funnel-sans text-white text-[42px] sm:text-[50px] md:text-[60px] lg:text-[72px] font-bold gradient-text whitespace-nowrap"
+          className="font-funnel-sans text-white text-[50px] md:text-[60px] lg:text-[72px] font-bold gradient-text whitespace-nowrap"
         />
       </div>
 

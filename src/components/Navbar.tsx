@@ -55,6 +55,7 @@ const NavbarContent = ({
                 ? socialIcons[link.id]
                 : socialIcons.pdf;
             if (!icon) return null;
+            const isPdf = Boolean(link.download);
             return (
               <Link
                 key={link.id}
@@ -68,13 +69,18 @@ const NavbarContent = ({
                     : "noopener noreferrer"
                 }
                 {...(link.download ? { download: true } : {})}
-                className="flex items-center justify-center w-6 h-6 text-white opacity-70 hover:opacity-100 active:opacity-100 transition-opacity duration-300"
+                className="flex flex-col items-center justify-center gap-1 w-10 h-10 text-white opacity-70 hover:opacity-100 active:opacity-100 transition-opacity duration-300"
                 aria-label={link.ariaLabel}
                 title={link.title}
               >
                 <div className="w-6 h-6 text-white pointer-events-none">
                   {icon}
                 </div>
+                {isPdf && (
+                  <span className="text-[10px] text-white/80 leading-none pointer-events-none">
+                    {link.title}
+                  </span>
+                )}
               </Link>
             );
           })}
