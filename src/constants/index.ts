@@ -478,11 +478,50 @@ export const ColorStack: ProjectTemplate = {
   status: "live",
 };
 
+export const ML_FootballInjuryPrediction: ProjectTemplate = {
+  id: "ml-football-injury-prediction",
+  projectType: "AI_SOLUTIONS",
+  text: {
+    name: "ML Football Injury Prediction",
+    subName: "Using Machine Learning to predict football injuries",
+    title:
+      "Built 8 different Machine Learning models to predict football injuries using game-specific data",
+    workDescription:
+      "I developed a comprehensive machine learning pipeline to predict football injuries using game-specific features including weather conditions, location, time since last game, and team statistics. I implemented 8 different models: log-transformed OLS, Polynomial Regression, Logistic Regression (for binary classification of num_injuries > 4), Poisson Regression, log-transformed Elastic Net, Random Forest, Gradient Boosting, and Neural Networks. I applied various predictor selection techniques ranging from backward selection for linear models to using the full predictor set for tree ensemble and neural network models. All models used an 80/20 train-test split with 10-fold cross-validation for robust evaluation. Despite significant noise in the dataset and limited signal from predictors, the best-performing model was Elastic Net with alpha = 0.001 and L1 ratio = 0.8, achieving an Adjusted R² of 21.7%. The project provided valuable experience in model comparison, variable selection, hyperparameter tuning with GridSearchCV, and comprehensive model evaluation.",
+    personalDescription:
+      "For my Machine Learning class at UCSD, the final project required building one model with three variants, but I wanted to push myself further and explore the full landscape of ML techniques. Instead of the minimum, I built 8 completely different models - from traditional linear methods like log-transformed OLS and Poisson Regression, to advanced ensemble methods like Random Forest and Gradient Boosting, all the way to Neural Networks. The most interesting challenge was applying different predictor selection strategies: backward selection for linear models, Ridge (L2) and Lasso (L1) regularization through Elastic Net with various hyperparameters, and letting tree-based models and neural networks work with the full feature set. I spent countless hours tuning hyperparameters with GridSearchCV, implementing 10-fold cross-validation for all models, and analyzing why certain approaches worked better than others. Unfortunately, the dataset had a lot of noise and not enough signal from the predictors to determine strong relationships with injury counts - which is actually a valuable lesson in itself about the importance of data quality and feature engineering. Despite the limitations, seeing Elastic Net achieve that 21.7% Adjusted R² after all the tuning was incredibly satisfying. This project taught me so much about the practical realities of machine learning: that sometimes the data tells you more about what's not possible than what is, and that the process of systematically comparing models is just as valuable as the final results. It was a great learning experience that gave me deep hands-on experience with the entire ML workflow from data preprocessing to model evaluation.",
+  },
+  tags: [
+    "Machine Learning",
+    "Python",
+    "Scikit-learn",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+  ],
+  images: {
+    mainImage: "/Projects/ML_FootballInjuryPrediction/fb3.png",
+    galleryImages: [
+      "/Projects/ML_FootballInjuryPrediction/fb1.png",
+      "/Projects/ML_FootballInjuryPrediction/fb2.png",
+      "/Projects/ML_FootballInjuryPrediction/fb3.png",
+    ],
+  },
+  websiteUrl: "",
+  githubUrl: "https://github.com/RamonsArchive/ML_FootballInjuryPrediction",
+  dateCompleted: "2025-12-03",
+  featured: false,
+  isClient: false,
+  isWebsite: false,
+  status: "live",
+};
+
 // recent projects in hero section
 export const RecentProjects = [ColorStack, DigitalRevolution, YoloV8];
 
 // all projects
 export const Projects = [
+  ML_FootballInjuryPrediction,
   ColorStack,
   DigitalRevolution,
   GoldenEagle,
@@ -498,6 +537,7 @@ export const Projects = [
 
 // project page map
 export const ProjectPageMap = {
+  "ml-football-injury-prediction": ML_FootballInjuryPrediction,
   "color-stack": ColorStack,
   "digital-revolution": DigitalRevolution,
   "feel-well-furniture": FeelWellFurniture,
