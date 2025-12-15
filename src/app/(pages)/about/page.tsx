@@ -13,7 +13,7 @@ const page = () => {
   const technicalSkills = AboutData.text.technical_skills;
   const favoriteTools = AboutData.text.favoriteTools;
   return (
-    <section className="flex flex-col w-[100dvw] h-full pb-15 gap-10">
+    <section className="flex flex-col w-dvw h-full pb-15 gap-10">
       <div className="relative flex flex-col h-[calc(50dvh-43px)] w-full overflow-hidden">
         <TitleSection
           mainTitle={title}

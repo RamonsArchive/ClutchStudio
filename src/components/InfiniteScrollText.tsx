@@ -78,6 +78,16 @@ const InfiniteScrollText = ({
         <div className="xs:flex hidden items-center gap-10 shrink-0">
           <h2 className={className}>{text}</h2>
         </div>
+
+        {/* Sixth duplicate set */}
+        <div className="hidden 2xl:flex items-center gap-10 shrink-0">
+          <h2 className={className}>{text}</h2>
+        </div>
+
+        {/* Seventh duplicate set */}
+        <div className="hidden 2xl:flex items-center gap-10 shrink-0">
+          <h2 className={className}>{text}</h2>
+        </div>
       </div>
     </div>
   );

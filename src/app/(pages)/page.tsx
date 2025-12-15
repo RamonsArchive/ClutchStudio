@@ -194,7 +194,7 @@ export default function Home() {
   // No useGSAP needed for mobile - pure CSS handles it
 
   const desktopHomeContent = (
-    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto gap-2">
+    <div className="hidden sm:flex flex-col h-full w-full max-w-2xl mx-auto my-auto gap-2">
       <h1
         ref={titleRef}
         className="font-funnel-sans text-white text-[58px] xs:text-[60px] md:text-[68px] font-bold wrap-break-word whitespace-nowrap overflow-hidden"
@@ -225,7 +225,8 @@ export default function Home() {
           style={{ visibility: "hidden", opacity: 0 }}
         >
           <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
-            I'm a Full Stack Developer & Machine Learning Engineer
+            I&apos;m glad you&apos;re here! Look around to see my Full Stack and
+            Machine Learning projects 😊.
           </h2>
           <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
             Based in San Diego, California
@@ -268,7 +269,8 @@ export default function Home() {
           </h1>
         </div>
         <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
-          I'm a Full Stack Developer & Machine Learning Engineer
+          I&apos;m glad you&apos;re here! Look around to see my Full Stack and
+          Machine Learning projects 😊.
         </h2>
       </div>
       <div

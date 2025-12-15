@@ -865,21 +865,24 @@ body {
 /* Mobile animation classes - only on mobile screens */
 @media (max-width: 640px) {
   .mobile-animate-text {
-    animation: mobileSlideInLeft 0.5s ease-out forwards;
+    animation: mobileSlideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+      forwards;
     opacity: 0;
     will-change: transform, opacity;
     transform: translate3d(0, 0, 0); /* Force GPU acceleration */
   }
 
   .mobile-animate-photo {
-    animation: mobileSlideInRight 0.5s ease-out 0.2s forwards;
+    animation: mobileSlideInRight 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s
+      forwards;
     opacity: 0;
     will-change: transform, opacity;
     transform: translate3d(0, 0, 0); /* Force GPU acceleration */
   }
 
   .mobile-animate-buttons {
-    animation: mobileSlideInLeft 0.5s ease-out 0.4s forwards;
+    animation: mobileSlideInLeft 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.7s
+      forwards;
     opacity: 0;
     will-change: transform, opacity;
     transform: translate3d(0, 0, 0); /* Force GPU acceleration */
