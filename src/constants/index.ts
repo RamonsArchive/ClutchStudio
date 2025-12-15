@@ -522,13 +522,13 @@ export const TypeQuest: ProjectTemplate = {
   text: {
     name: "Type Quest",
     subName:
-      "A typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary",
+      "A typing game for elementary school students to test typing speed, grammar, spelling, math, and vocabulary",
     title:
-      "Helped build the Best Project Award in my Software Engineering course by winning a typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary",
+      "Led development of Best Project Award-winning typing game for elementary school students to test typing speed, grammar, spelling, math, and vocabulary",
     workDescription:
-      "With a team of 5 other students, we built a typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary. As the product owner in an agile development process, I developed the product backlog and and requiremtns for the project. For example, I prioritzed mulitplary funcaiotnlut and user stories that made the expeince more engaing and fun like adding AI generatd assets. In addition to being the Product Owner and settign tasks for each Sprint backlog, I also created the proejcets Arcitexture, Initail Desing, File Strucutre, and Code Structure in termso fo resauble compnents and modules. We used React, TypeScript, Tailwind CSS, and a Redis Database for the backend. In addiiton to techinal skills I delvoepd such as MVP and Agile developemnt, I also learned leadership skills in spearheading priorites and managing the teams progress. ",
+      "I led a team of 5 students in building TypeQuest, an educational typing game for elementary school students that tests typing speed, grammar, spelling, math, and vocabulary. As the Product Owner in an agile development process, I developed the product backlog, requirements, and sprint planning. I prioritized advanced features like multiplayer functionality and AI-generated assets to create a more engaging user experience. Beyond product management, I architected the entire project structure including the initial design, file organization, and code architecture focused on reusable components and modules. The tech stack included React, TypeScript, Tailwind CSS, and Redis for the backend database. I managed the GitHub repository, handled deployment and hosting on Vercel, and coordinated team workflows throughout the development lifecycle. This project strengthened my technical skills in MVP development and agile methodologies, while also developing critical leadership abilities in priority management and team coordination.",
     personalDescription:
-      "With a team of 5 other students in our Software Enigneering course, we knew we w anted to build a typing game for elementary school students to test typing speed, grammer, spelling, math, and vocabulary. And so we came up with the idea of TypeQuest as the main game, Unscamble as one minigmae and Treuasture Hunt as another minigmae. We used React, TypeScript, Tailwind CSS, and a Redis Database for the backend. Throughout the project, I was the Product Owner resposnbile for the product backlock and tasks for the team in the spring backlog. I managed the github repo as well as hosting the project on Vercel. As the Product Owner, I also empahized advanced functionality such as Mulitplayer and AI generated assets to make it more astheitcally pleasing. In addition to being the Product Ownder, I also created the projecst architexture with Next.js 16 in mind, the Inital Figma desing, and the file structure and code structure in terms of resauble compnents and modules. Thhough there were some challenges like ghosting teamates and some merge confilcts, leading this PRoject adn winning the best project award in the entire software enineerin gcoures tought me a lot about leadership, team communication, and about successufl agile develoemtn. My faovirte part was presenting the preojct at the end while demonstraign mutipleary funcaiotnlkty.   ",
+      "For our Software Engineering course, our team of 5 students wanted to build something meaningful for elementary school students. We came up with TypeQuest - a typing game with three main components: the main TypeQuest game, Unscramble as one minigame, and Treasure Hunt as another. We built it using React, TypeScript, Tailwind CSS, and Redis for the backend. I took on the Product Owner role, which meant I was responsible for the product backlog, sprint planning, and task assignment. I also managed the GitHub repository and handled all the deployment and hosting on Vercel. As Product Owner, I pushed for advanced features like multiplayer functionality and AI-generated assets to make the game more aesthetically pleasing and engaging. Beyond product management, I designed the entire project architecture with Next.js 16 in mind, created the initial Figma designs, and established the file structure and code organization around reusable components and modules. The project wasn't without challenges - we dealt with teammates who ghosted us and had to navigate merge conflicts, but leading this project and winning the Best Project Award in the entire Software Engineering course taught me invaluable lessons about leadership, team communication, and successful agile development. My favorite part was presenting the project at the end and demonstrating the multiplayer functionality - seeing everyone's reactions when multiple players could compete in real-time was incredibly rewarding!",
   },
   tags: [
     "Web Development",
@@ -550,7 +550,13 @@ export const TypeQuest: ProjectTemplate = {
       "/Projects/TypeQuest/tq8.png",
     ],
   },
-  websiteUrl: "https://racer-game-cse-110.vercel.app",
+  websiteUrl: "https://typequest-legends.vercel.app",
+  githubUrl: "https://github.com/RamonsArchive/TypeQuest",
+  dateCompleted: "2025-12-05",
+  featured: true,
+  isClient: false,
+  isWebsite: true,
+  status: "live",
 };
 
 // recent projects in hero section
