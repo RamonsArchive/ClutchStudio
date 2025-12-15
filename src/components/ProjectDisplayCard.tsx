@@ -30,7 +30,7 @@ const ProjectDisplayCard = ({
   return (
     <Link
       href={`/projects/${id}`}
-      className="group relative flex-center w-full aspect-[16/9] border-1 border-white/50 rounded-lg overflow-hidden"
+      className="group relative flex-center w-full aspect-video border border-white/20 rounded-lg overflow-hidden"
       data-project-index={dataProjectIndex}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
