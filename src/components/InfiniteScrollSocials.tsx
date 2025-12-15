@@ -106,7 +106,7 @@ const InfiniteScrollSocials = ({
                   {scaledIcon}
                 </div>
                 {isPdfLinkForLabel && (
-                  <span className="text-[8px] xs:text-[10px] text-white/80 font-medium sm:hidden pointer-events-none">
+                  <span className="text-[8px] xs:text-[10px] sm:text-[11px] text-white/80 font-medium pointer-events-none leading-none">
                     {social.title}
                   </span>
                 )}
@@ -148,7 +148,7 @@ const InfiniteScrollSocials = ({
                   {scaledIcon}
                 </div>
                 {isPdfLinkForLabel && (
-                  <span className="text-[8px] xs:text-[10px] text-white/80 font-medium sm:hidden pointer-events-none">
+                  <span className="text-[8px] xs:text-[10px] sm:text-[11px] text-white/80 font-medium pointer-events-none leading-none">
                     {social.title}
                   </span>
                 )}
@@ -190,7 +190,7 @@ const InfiniteScrollSocials = ({
                   {scaledIcon}
                 </div>
                 {isPdfLinkForLabel && (
-                  <span className="text-[8px] xs:text-[10px] text-white/80 font-medium sm:hidden pointer-events-none">
+                  <span className="text-[8px] xs:text-[10px] sm:text-[11px] text-white/80 font-medium pointer-events-none leading-none">
                     {social.title}
                   </span>
                 )}
@@ -211,6 +211,8 @@ const InfiniteScrollSocials = ({
               }
             );
             const isPdf = isPdfLink(social);
+            const isPdfLinkForLabel =
+              social.id === "resume" || social.id === "research_paper1";
             return (
               <Link
                 key={`fourth-${idx}`}
@@ -222,13 +224,18 @@ const InfiniteScrollSocials = ({
                     : "noopener noreferrer"
                 }
                 {...(isPdf ? { download: true } : {})}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
                 title={social.title}
               >
                 <div className="w-full h-full text-white flex items-center justify-center pointer-events-none">
                   {scaledIcon}
                 </div>
+                {isPdfLinkForLabel && (
+                  <span className="text-[8px] xs:text-[10px] sm:text-[11px] text-white/80 font-medium pointer-events-none leading-none">
+                    {social.title}
+                  </span>
+                )}
               </Link>
             );
           })}
@@ -246,6 +253,8 @@ const InfiniteScrollSocials = ({
               }
             );
             const isPdf = isPdfLink(social);
+            const isPdfLinkForLabel =
+              social.id === "resume" || social.id === "research_paper1";
             return (
               <Link
                 key={`fifth-${idx}`}
@@ -257,13 +266,18 @@ const InfiniteScrollSocials = ({
                     : "noopener noreferrer"
                 }
                 {...(isPdf ? { download: true } : {})}
-                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
+                className="shrink-0 text-white opacity-70 active:opacity-100 hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center w-10 h-10 sm:w-16 sm:h-16"
                 aria-label={social.ariaLabel}
                 title={social.title}
               >
                 <div className="w-full h-full text-white flex items-center justify-center pointer-events-none">
                   {scaledIcon}
                 </div>
+                {isPdfLinkForLabel && (
+                  <span className="text-[8px] xs:text-[10px] sm:text-[11px] text-white/80 font-medium pointer-events-none leading-none">
+                    {social.title}
+                  </span>
+                )}
               </Link>
             );
           })}

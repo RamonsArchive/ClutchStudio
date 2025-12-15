@@ -15,6 +15,7 @@ const InfiniteScrollText = ({
   const secondSetRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollDistance, setScrollDistance] = useState(0);
+  const [animationDuration, setAnimationDuration] = useState(20);
 
   useEffect(() => {
     const measureWidth = () => {
@@ -28,6 +29,14 @@ const InfiniteScrollText = ({
           const secondSetLeft = secondSetRef.current.offsetLeft;
           const distance = secondSetLeft - firstSetLeft;
           setScrollDistance(direction === "left" ? -distance : distance);
+
+          // Keep a consistent speed (px/sec) regardless of content width
+          const baseSpeedPxPerSec = 25; // matches social scroll velocity
+          const durationSeconds = Math.max(
+            12,
+            Math.abs(distance) / baseSpeedPxPerSec
+          );
+          setAnimationDuration(durationSeconds);
         }
       });
     };
@@ -48,7 +57,7 @@ const InfiniteScrollText = ({
         style={
           {
             animation: scrollDistance
-              ? `scroll-${direction} ${20}s linear infinite`
+              ? `scroll-${direction} ${animationDuration}s linear infinite`
               : "none",
             "--scroll-distance": `${Math.abs(scrollDistance)}px`,
           } as React.CSSProperties & { "--scroll-distance": string }
