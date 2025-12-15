@@ -220,7 +220,7 @@ const RecentProjectCard = ({
         </div>
         <h2
           ref={desktopDescriptionRef}
-          className="font-funnel-sans text-gray-200 text-[12px] xs:text-[16px] font-regular wrap-break-words leading-relaxed"
+          className="font-funnel-sans text-white/75 text-[12px] xs:text-[16px] font-regular wrap-break-words leading-relaxed"
         >
           {workDescription}
         </h2>
@@ -240,7 +240,7 @@ const RecentProjectCard = ({
       {isMobile ? (
         <div
           id="recent-project-card-mobile"
-          className="flex flex-col gap-3 w-full pb-6 bg-linear-to-b from-accent-900 via-accent-950 to-accent-900 overflow-x-hidden rounded-xl border border-white/10"
+          className="flex flex-col gap-3 w-full pb-6 bg-black/40 backdrop-blur-sm overflow-x-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30"
         >
           <div className="flex flex-col w-full h-[50dvh]">
             <ImageCarousel images={galleryImages} />
@@ -271,7 +271,7 @@ const RecentProjectCard = ({
             </div>
             <h2
               ref={mobileDescriptionRef}
-              className="font-funnel-sans text-gray-200 text-[12px] xs:text-[16px] font-regular wrap-break-words leading-relaxed"
+              className="font-funnel-sans text-white/75 text-[12px] xs:text-[16px] font-regular wrap-break-words leading-relaxed"
             >
               {workDescription}
             </h2>
@@ -287,7 +287,7 @@ const RecentProjectCard = ({
       ) : (
         <div
           id="recent-project-card-desktop"
-          className="flex flex-row gap-3 w-full bg-linear-to-b from-accent-900 via-accent-950 to-accent-900 overflow-x-hidden rounded-xl border border-white/10"
+          className="flex flex-row gap-3 w-full bg-black/40 backdrop-blur-sm overflow-x-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30"
         >
           <div className="flex flex-col w-1/2 min-h-0">
             {isEven ? (

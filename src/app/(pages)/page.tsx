@@ -471,7 +471,7 @@ export default function Home() {
         />
       </div>
 
-      <div className="flex flex-col w-full gap-5 px-3 pb-5 md:px-5 md:pb-5 rounded-xl">
+      <div className="flex flex-col w-full gap-10 px-3 pb-5 md:px-5 md:pb-10">
         {RecentProjects.map((project, index) => (
           <Suspense
             key={project.id}
