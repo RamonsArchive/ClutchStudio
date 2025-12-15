@@ -225,7 +225,8 @@ export default function Home() {
           style={{ visibility: "hidden", opacity: 0 }}
         >
           <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
-            I'm a Full Stack Developer & Machine Learning Engineer
+            I&apos;m glad you&apos;re here! Look around to see my Full Stack and
+            Machine Learning projects 😊.
           </h2>
           <p className="font-funnel-sans text-white/60 text-[12px] sm:text-[14px] md:text-[16px] font-light">
             Based in San Diego, California
@@ -268,7 +269,8 @@ export default function Home() {
           </h1>
         </div>
         <h2 className="font-funnel-sans text-white text-[16px] sm:text-[18px] md:text-[20px] lg:text-[24px] font-extrabold">
-          I'm a Full Stack Developer & Machine Learning Engineer
+          I&apos;m glad you&apos;re here! Look around to see my Full Stack and
+          Machine Learning projects 😊.
         </h2>
       </div>
       <div
