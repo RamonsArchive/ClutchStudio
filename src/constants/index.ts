@@ -427,7 +427,7 @@ export const FeelWellFurniture: ProjectTemplate = {
     ],
   },
   websiteUrl: "https://feel-well-furniture.vercel.app",
-  githubUrl: "https://github.com/YourUsername/feel-well-furniture", // Add your GitHub URL if available
+  githubUrl: "https://github.com/RamonsArchive/FeelWellFurniture", // Add your GitHub URL if available
   dateCompleted: "2025-08-22",
   featured: true,
   isClient: false,
@@ -559,18 +559,18 @@ export const TypeQuest: ProjectTemplate = {
   status: "live",
 };
 
-export const EmpiricalComparisonOfAIModles: ProjectTemplate = {
+export const EmpiricalComparisonOfAIModels: ProjectTemplate = {
   id: "empirical-comparison-of-ai-models",
   projectType: "AI_SOLUTIONS",
   text: {
-    name: "Empirical Comparison of Classification and Regression Algorithms",
+    name: "ML Research Paper",
     subName: "Comparing the performance of different AI models",
     title:
       "Comparing the performance of different Classification and Regression Algorithms",
     workDescription:
-      "I built a comprehensive machine learning pipeline for tabular data and for both regression and classifcaiton tasks that compared the performance of Graient XGBoosting, Random Forest, Nerual Networks, and SVM's (though SVM's are exculded from the paper due to time constraints in hyperpramter tuning especially for large datasets for it to competeitve, but you can try it yourself). We compared three diff splits 20/80, 50/50, and 80/20 accross three indpendent trials with differnt seeds using 10Fold stratified CV for classificaiotn and 10KFold for regression for each model and each data. The results were very close, but the best model was Gradient Boosting as it had the best F1 score for two out of the three calssifcaiotn datasets and the best RMSE score for one out of the two the regression datasets. This Research paper followed the NerulIPS 2023 format and was inspired by Richard Caruana and Alexandru Niculescu-Mizil, in their paper An Empirical Comparison of Supervised Learning Algorithms. The paper is not yet submitted for publication, but with some revison like adding more datasets and fully integrating the SVM into the paper, it could be submitted for publication.",
+      "I built a comprehensive machine learning pipeline for tabular data and for both regression and classification tasks that compared the performance of Gradient XGBoosting, Random Forest, Neural Networks, and SVMs (though SVMs are excluded from the paper due to time constraints in hyperparameter tuning especially for large datasets for it to be competitive, but you can try it yourself). We compared three different splits 20/80, 50/50, and 80/20 across three independent trials with different seeds using 10-Fold stratified CV for classification and 10-Fold CV for regression for each model and each dataset. The results were very close, but the best model was Gradient Boosting as it had the best F1 score for two out of the three classification datasets and the best RMSE score for one out of the two regression datasets. This research paper followed the NeurIPS 2023 format and was inspired by Richard Caruana and Alexandru Niculescu-Mizil in their paper An Empirical Comparison of Supervised Learning Algorithms. The paper is not yet submitted for publication, but with some revision like adding more datasets and fully integrating the SVM into the paper, it could be submitted for publication.",
     personalDescription:
-      "For my Machine Learning Course at UCSD, I wanted to push myself by publishing a research paper that closley followeed the NerulIPS 2023 format and which was similar to the paper by Richard Caruana and Alexandru Niculescu-Mizil, in their paper An Empirical Comparison of Supervised Learning Algorithms. To do this, I determeind the algohimts of intrest were Gradient XGBoosing for built in regulariazation, random forest, and Nerual Networks which could all be applied to both classifiaon and regressoint asks. I then decided onusing F1 score as the pirmary metric for classication to handle class inbalnces with roc-auc as the seocondary measure. For regression, RMSE was teh primaery measure becuase it was Interpretaible and able to be used accorss modles and R^2 was the seocndary measure.. I built a comprehensive machine learning pipeline for tabular data and for both regression and classifcaiton tasks that compared the performance of Graient XGBoosting, Random Forest, Nerual Networks, and SVM's (though SVM's are exculded from the paper due to time constraints in hyperpramter tuning especially for large datasets for it to competeitve, but you can try it yourself). We compared three diff splits 20/80, 50/50, and 80/20 accross three indpendent trials with differnt seeds using 10Fold stratified CV for classificaiotn and 10KFold for regression for each model and each data. The results were very close, but the best model was Gradient Boosting as it had the best F1 score for two out of the three calssifcaiotn datasets and the best RMSE score for one out of the two the regression datasets. This Research paper followed the NerulIPS 2023 format and was inspired by Richard Caruana and Alexandru Niculescu-Mizil, in their paper An Empirical Comparison of Supervised Learning Algorithms. Alhtough there was some overfitting, espiecally for the neurl netowrks on the smaller datasets, after tweaking hyperpamtes furhter and fully integarting SVM's results given more teim, I belive I coudl pubhis this paper. The paper is not yet submitted for publication, but with some revison like adding more datasets and fully integrating the SVM into the paper, it could be submitted for publication.",
+      "For my Machine Learning Course at UCSD, I wanted to push myself by publishing a research paper that closely followed the NeurIPS 2023 format and which was similar to the paper by Richard Caruana and Alexandru Niculescu-Mizil in their paper An Empirical Comparison of Supervised Learning Algorithms. To do this, I determined the algorithms of interest were Gradient XGBoosting for built-in regularization, Random Forest, and Neural Networks which could all be applied to both classification and regression tasks. I then decided on using F1 score as the primary metric for classification to handle class imbalances with ROC-AUC as the secondary measure. For regression, RMSE was the primary measure because it was interpretable and able to be used across models and R² was the secondary measure. I built a comprehensive machine learning pipeline for tabular data and for both regression and classification tasks that compared the performance of Gradient XGBoosting, Random Forest, Neural Networks, and SVMs (though SVMs are excluded from the paper due to time constraints in hyperparameter tuning especially for large datasets for it to be competitive, but you can try it yourself). We compared three different splits 20/80, 50/50, and 80/20 across three independent trials with different seeds using 10-Fold stratified CV for classification and 10-Fold CV for regression for each model and each dataset. The results were very close, but the best model was Gradient Boosting as it had the best F1 score for two out of the three classification datasets and the best RMSE score for one out of the two regression datasets. This research paper followed the NeurIPS 2023 format and was inspired by Richard Caruana and Alexandru Niculescu-Mizil in their paper An Empirical Comparison of Supervised Learning Algorithms. Although there was some overfitting, especially for the neural networks on the smaller datasets, after tweaking hyperparameters further and fully integrating SVM results given more time, I believe I could publish this paper. The paper is not yet submitted for publication, but with some revision like adding more datasets and fully integrating the SVM into the paper, it could be submitted for publication.",
   },
   tags: [
     "AI",
@@ -600,7 +600,7 @@ export const EmpiricalComparisonOfAIModles: ProjectTemplate = {
 
 // recent projects in hero section
 export const RecentProjects = [
-  EmpiricalComparisonOfAIModles,
+  EmpiricalComparisonOfAIModels,
   ColorStack,
   DigitalRevolution,
   YoloV8,
@@ -608,7 +608,7 @@ export const RecentProjects = [
 
 // all projects
 export const Projects = [
-  EmpiricalComparisonOfAIModles,
+  EmpiricalComparisonOfAIModels,
   TypeQuest,
   ML_FootballInjuryPrediction,
   ColorStack,
@@ -626,7 +626,7 @@ export const Projects = [
 
 // project page map
 export const ProjectPageMap = {
-  "empirical-comparison-of-ai-models": EmpiricalComparisonOfAIModles,
+  "empirical-comparison-of-ai-models": EmpiricalComparisonOfAIModels,
   "type-quest": TypeQuest,
   "ml-football-injury-prediction": ML_FootballInjuryPrediction,
   "color-stack": ColorStack,
