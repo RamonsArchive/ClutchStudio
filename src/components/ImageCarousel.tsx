@@ -162,9 +162,9 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
       const deltaX = clientX - startX;
       const deltaY = clientY - startY;
 
-      // Buffer zone: only allow horizontal swipes if movement is clearly horizontal
-      const minHorizontalMovement = 20; // 20px minimum horizontal movement
-      const maxVerticalMovement = 5; // 30px maximum vertical movement allowed
+      // Buffer zone: allow swipe with mild vertical movement, but prefer clear horizontal intent
+      const minHorizontalMovement = 10; // require at least 10px horizontal movement
+      const maxVerticalMovement = 40; // allow up to 40px vertical wiggle before cancelling swipe
 
       if (
         Math.abs(deltaX) < minHorizontalMovement ||
@@ -198,7 +198,7 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
 
     const containerWidth = containerRef.current?.offsetWidth || 0;
     const imageWidth = containerWidth / images.length;
-    const threshold = imageWidth * 0.3; // 30% threshold for swipe
+    const threshold = imageWidth * 0.2; // 20% threshold for swipe (easier to trigger)
 
     if (Math.abs(currentX - startX) > threshold) {
       // Determine swipe direction
@@ -272,11 +272,15 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const handleTouchStart = (e: React.TouchEvent) => {
     const touch = e.touches[0];
     handleStart(touch.clientX, touch.clientY);
+    // Prevent the browser from starting a scroll gesture immediately
+    e.preventDefault();
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
+      // While dragging horizontally, prevent vertical page scrolling
+      e.preventDefault();
       throttle(handleMove, 16)(touch.clientX, touch.clientY);
     }
   };
