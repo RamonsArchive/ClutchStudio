@@ -45,6 +45,7 @@ next-env.d.ts
 
 # Media files - too large for git
 *.mp4
+*.mp3
 !public/Assets/HeroContent/soccerGoal.mp4
 *.mov
 *.avi

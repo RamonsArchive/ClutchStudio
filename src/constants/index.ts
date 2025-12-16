@@ -500,7 +500,7 @@ export const ML_FootballInjuryPrediction: ProjectTemplate = {
     "Matplotlib",
   ],
   images: {
-    mainImage: "/Projects/ML_FootballInjuryPrediction/fb3.png",
+    mainImage: "/Projects/ML_FootballInjuryPrediction/mlfb_still.jpg",
     galleryImages: [
       "/Projects/ML_FootballInjuryPrediction/fb1.png",
       "/Projects/ML_FootballInjuryPrediction/fb2.png",
@@ -538,7 +538,7 @@ export const TypeQuest: ProjectTemplate = {
     "Agile Development",
   ],
   images: {
-    mainImage: "/Projects/TypeQuest/tq1.png",
+    mainImage: "/Projects/TypeQuest/tq_still.jpg",
     galleryImages: [
       "/Projects/TypeQuest/tq1.png",
       "/Projects/TypeQuest/tq2.png",
@@ -559,11 +559,57 @@ export const TypeQuest: ProjectTemplate = {
   status: "live",
 };
 
+export const EmpiricalComparisonOfAIModles: ProjectTemplate = {
+  id: "empirical-comparison-of-ai-models",
+  projectType: "AI_SOLUTIONS",
+  text: {
+    name: "Empirical Comparison of Classification and Regression Algorithms",
+    subName: "Comparing the performance of different AI models",
+    title:
+      "Comparing the performance of different Classification and Regression Algorithms",
+    workDescription:
+      "I built a comprehensive machine learning pipeline for tabular data and for both regression and classifcaiton tasks that compared the performance of Graient XGBoosting, Random Forest, Nerual Networks, and SVM's (though SVM's are exculded from the paper due to time constraints in hyperpramter tuning especially for large datasets for it to competeitve, but you can try it yourself). We compared three diff splits 20/80, 50/50, and 80/20 accross three indpendent trials with differnt seeds using 10Fold stratified CV for classificaiotn and 10KFold for regression for each model and each data. The results were very close, but the best model was Gradient Boosting as it had the best F1 score for two out of the three calssifcaiotn datasets and the best RMSE score for one out of the two the regression datasets. This Research paper followed the NerulIPS 2023 format and was inspired by Richard Caruana and Alexandru Niculescu-Mizil, in their paper An Empirical Comparison of Supervised Learning Algorithms. The paper is not yet submitted for publication, but with some revison like adding more datasets and fully integrating the SVM into the paper, it could be submitted for publication.",
+    personalDescription:
+      "For my Machine Learning Course at UCSD, I wanted to push myself by publishing a research paper that closley followeed the NerulIPS 2023 format and which was similar to the paper by Richard Caruana and Alexandru Niculescu-Mizil, in their paper An Empirical Comparison of Supervised Learning Algorithms. To do this, I determeind the algohimts of intrest were Gradient XGBoosing for built in regulariazation, random forest, and Nerual Networks which could all be applied to both classifiaon and regressoint asks. I then decided onusing F1 score as the pirmary metric for classication to handle class inbalnces with roc-auc as the seocondary measure. For regression, RMSE was teh primaery measure becuase it was Interpretaible and able to be used accorss modles and R^2 was the seocndary measure.. I built a comprehensive machine learning pipeline for tabular data and for both regression and classifcaiton tasks that compared the performance of Graient XGBoosting, Random Forest, Nerual Networks, and SVM's (though SVM's are exculded from the paper due to time constraints in hyperpramter tuning especially for large datasets for it to competeitve, but you can try it yourself). We compared three diff splits 20/80, 50/50, and 80/20 accross three indpendent trials with differnt seeds using 10Fold stratified CV for classificaiotn and 10KFold for regression for each model and each data. The results were very close, but the best model was Gradient Boosting as it had the best F1 score for two out of the three calssifcaiotn datasets and the best RMSE score for one out of the two the regression datasets. This Research paper followed the NerulIPS 2023 format and was inspired by Richard Caruana and Alexandru Niculescu-Mizil, in their paper An Empirical Comparison of Supervised Learning Algorithms. Alhtough there was some overfitting, espiecally for the neurl netowrks on the smaller datasets, after tweaking hyperpamtes furhter and fully integarting SVM's results given more teim, I belive I coudl pubhis this paper. The paper is not yet submitted for publication, but with some revison like adding more datasets and fully integrating the SVM into the paper, it could be submitted for publication.",
+  },
+  tags: [
+    "AI",
+    "Machine Learning",
+    "Python",
+    "Scikit-learn",
+    "Pandas",
+    "NumPy",
+    "Matplotlib",
+  ],
+  images: {
+    mainImage: "/Projects/ML_Comparision/mlr1_still.jpg",
+    galleryImages: [
+      "/Projects/ML_Comparision/c1.png",
+      "/Projects/ML_Comparision/c2.png",
+      "/Projects/ML_Comparision/c3.png",
+    ],
+  },
+  websiteUrl: "",
+  githubUrl: "https://github.com/RamonsArchive/empirical-ml-comparison",
+  dateCompleted: "2025-12-09",
+  featured: false,
+  isClient: false,
+  isWebsite: false,
+  status: "live",
+};
+
 // recent projects in hero section
-export const RecentProjects = [ColorStack, DigitalRevolution, YoloV8];
+export const RecentProjects = [
+  EmpiricalComparisonOfAIModles,
+  ColorStack,
+  DigitalRevolution,
+  YoloV8,
+];
 
 // all projects
 export const Projects = [
+  EmpiricalComparisonOfAIModles,
+  TypeQuest,
   ML_FootballInjuryPrediction,
   ColorStack,
   DigitalRevolution,
@@ -580,6 +626,8 @@ export const Projects = [
 
 // project page map
 export const ProjectPageMap = {
+  "empirical-comparison-of-ai-models": EmpiricalComparisonOfAIModles,
+  "type-quest": TypeQuest,
   "ml-football-injury-prediction": ML_FootballInjuryPrediction,
   "color-stack": ColorStack,
   "digital-revolution": DigitalRevolution,
