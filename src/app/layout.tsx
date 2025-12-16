@@ -104,16 +104,16 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://clutchstudio.dev",
+    siteName: "Clutch Studio",
     title: "Clutch Studio - Web Development Portfolio | San Diego, CA",
     description:
       "Professional web development services in San Diego, California. Specializing in React, Next.js, TypeScript, and modern web applications.",
-    url: "https://clutchstudio.dev",
-    siteName: "Clutch Studio",
-    locale: "en_US",
-    type: "website",
     images: [
       {
-        url: "/icon.png",
+        url: "https://clutchstudio.dev/icon.png",
         width: 1200,
         height: 1200,
         alt: "Clutch Studio Logo",
@@ -125,7 +125,7 @@ export const metadata: Metadata = {
     title: "Clutch Studio - Web Development Portfolio | San Diego, CA",
     description:
       "Professional web development services in San Diego, California. Specializing in React, Next.js, TypeScript, and modern web applications.",
-    images: ["/icon.png"],
+    images: ["https://clutchstudio.dev/icon.png"],
     creator: "@clutchstudio",
   },
   robots: {
