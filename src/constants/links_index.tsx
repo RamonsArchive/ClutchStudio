@@ -79,7 +79,7 @@ export const footerSocials = [
   {
     id: "instagram",
     name: "Instagram",
-    href: "https://www.instagram.com/clutchdev_studio",
+    href: "https://www.instagram.com/clutchstudio.dev",
     ariaLabel: "Follow us on Instagram",
     title: "Instagram",
   },
