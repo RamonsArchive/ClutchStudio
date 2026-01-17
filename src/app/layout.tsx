@@ -251,6 +251,7 @@ export default function RootLayout({
       "https://clutchstudio.dev",
       "https://digitalrevolution.foundation",
       "https://colorstackucsd.org",
+      "https://ascend.rodeo",
     ],
     openingHours: "Mo-Fr 09:00-17:00",
     priceRange: "$$",
