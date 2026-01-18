@@ -596,16 +596,61 @@ export const EmpiricalComparisonOfAIModels: ProjectTemplate = {
   status: "live",
 };
 
+export const Ascend: ProjectTemplate = {
+  id: "ascend",
+  projectType: "WEB_DEVELOPMENT",
+  text: {
+    name: "Ascend",
+    subName: "A hackathon and ideathon platform for student orgs and companies",
+    title:
+      "Built a feature rich hackathon and ideathon platform for student orgs and companies.",
+    workDescription:
+      "I built a full-featured hackathon and ideathon platform for student organizations and companies to host, manage, and scale their competitions. The platform is data-driven and designed around an intuitive end-to-end workflow, including organization management, event creation, team formation, built-in matchmaking, submissions, judging, and live leaderboards. It supports multiple event types, role-based access control, and real-time state changes across the entire judging and submission pipeline. The platform is built with Next.js 16, React 19, TypeScript, and Tailwind CSS, with AWS S3 handling media storage. I used Prisma ORM for database modeling and authentication, and implemented custom server actions for form handling, permissions, and transactional workflows.",
+    personalDescription:
+      "The project started when a friend from another student organization reached out, expecting a simple static website to host basic information about their hackathon. Instead, I saw an opportunity to build something far more durable and reusable — a platform that could support not just one event, but every future hackathon or ideathon run by any student organization or company. I wanted Ascend to feel less like a one-off website and more like real infrastructure. That mindset shaped every decision, from the data model to the user flows for organizers, participants, judges, and admins. I focused on building a system that reduced operational overhead while still feeling intuitive and polished to use. The most rewarding moment was walking my friend through the finished platform and watching their expectations completely shift — from ‘this will work for one quarter’ to ‘we can run everything on this.’ Building Ascend reinforced for me how powerful software can be when it directly removes friction from real workflows, not just when it looks good on the surface.",
+  },
+  tags: [
+    "Startups",
+    "AWS S3",
+    "Web Development",
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS",
+  ],
+  images: {
+    mainImage: "/Projects/Ascend/ascend_still.jpg",
+    galleryImages: [
+      "/Projects/Ascend/a1.png",
+      "/Projects/Ascend/a2.png",
+      "/Projects/Ascend/a3.png",
+      "/Projects/Ascend/a4.png",
+      "/Projects/Ascend/a5.png",
+      "/Projects/Ascend/a6.png",
+      "/Projects/Ascend/a7.png",
+    ],
+  },
+  websiteUrl: "https://ascend.rodeo",
+  githubUrl: "https://github.com/RamonsArchive/Ascend",
+  dateCompleted: "2025-01-18",
+  featured: true,
+  isClient: false,
+  isWebsite: true,
+  status: "live",
+};
+
 // recent projects in hero section
 export const RecentProjects = [
   EmpiricalComparisonOfAIModels,
-  ColorStack,
+  Ascend,
   DigitalRevolution,
   YoloV8,
 ];
 
 // all projects
 export const Projects = [
+  Ascend,
+
   EmpiricalComparisonOfAIModels,
   TypeQuest,
   ML_FootballInjuryPrediction,
@@ -624,6 +669,7 @@ export const Projects = [
 
 // project page map
 export const ProjectPageMap = {
+  ascend: Ascend,
   "empirical-comparison-of-ai-models": EmpiricalComparisonOfAIModels,
   "type-quest": TypeQuest,
   "ml-football-injury-prediction": ML_FootballInjuryPrediction,
