@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://clutchstudio.dev/sitemap.xml
+Sitemap: https://rvector.dev/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1
@@ -14,6 +14,7 @@ Disallow: /api/
 # Allow important pages
 Allow: /about
 Allow: /projects
+Allow: /services
 Allow: /contact
 Allow: /terms
 Allow: /privacy

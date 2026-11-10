@@ -1,90 +1,70 @@
 "use client";
 import { ProjectTemplate } from "@/types/GlobalTypes";
-import React, { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitText from "gsap/SplitText";
+import React from "react";
+import Reveal from "./Reveal";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+// Descriptions are one long string; a blank line ("\n\n") starts a new paragraph
+const toParagraphs = (text: string) =>
+  text
+    .split(/\n{2,}/)
+    .map((paragraph) => paragraph.trim())
+    .filter(Boolean);
 
 const ProjectTextCard = ({ data }: { data: ProjectTemplate }) => {
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const personalDescriptionRef = useRef<HTMLParagraphElement>(null);
-  const accentDividerRef = useRef<HTMLDivElement>(null);
-  useGSAP(() => {
-    const titleSplit = SplitText.create(titleRef.current, {
-      type: "words",
-    });
-
-    const personalDescriptionSplit = SplitText.create(
-      personalDescriptionRef.current,
-      {
-        type: "lines",
-      }
-    );
-
-    gsap.from(titleSplit.words, {
-      scrollTrigger: {
-        trigger: titleRef.current,
-        start: "top bottom",
-        end: "top 70%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-
-    gsap.from(personalDescriptionSplit.lines, {
-      scrollTrigger: {
-        trigger: personalDescriptionRef.current,
-        start: "top bottom",
-        end: "top 70%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-
-    gsap.from(accentDividerRef.current, {
-      scrollTrigger: {
-        trigger: accentDividerRef.current,
-        start: "top bottom",
-        end: "top 90%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-  }, [titleRef, personalDescriptionRef, accentDividerRef]);
+  const sections = [
+    {
+      index: "03",
+      label: "The work",
+      heading: "What I built",
+      text: data.text.workDescription,
+    },
+    {
+      index: "04",
+      label: "The story",
+      heading: "Why it mattered",
+      text: data.text.personalDescription,
+    },
+  ].filter((section) => section.text);
 
   return (
-    <div className="flex flex-col gap-6 bg-primary-background-950 rounded-xl p-6 shadow-lg">
-      <h2
-        ref={titleRef}
-        className="font-funnel-sans text-white text-[28px] sm:text-[32px] font-bold leading-tight"
-      >
-        {data.text.title}
-      </h2>
+    <div className="flex flex-col gap-12 md:gap-20 w-full">
+      {/* Lead statement */}
+      <Reveal className="flex flex-col gap-5">
+        {/* Orange accent divider */}
+        <div className="w-12 h-1 bg-secondary-500 rounded-full" />
+        <h2 className="font-funnel-sans text-white text-[22px] xs:text-[24px] md:text-[32px] lg:text-[36px] font-bold leading-[1.2] tracking-tight max-w-4xl">
+          {data.text.title}
+        </h2>
+      </Reveal>
 
-      {/* Purple accent divider */}
-      <div
-        ref={accentDividerRef}
-        className="w-18 h-3 bg-linear-to-r from-purple-400 to-purple-600 rounded-full shadow-sm"
-      ></div>
+      {sections.map((section) => (
+        <Reveal
+          key={section.index}
+          className="grid grid-cols-1 md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[280px_minmax(0,1fr)] gap-5 md:gap-10 border-t border-white/10 pt-8 md:pt-12"
+        >
+          <div className="flex flex-col gap-3 md:sticky md:top-24 md:self-start">
+            <p className="eyebrow flex items-center gap-3">
+              <span className="text-secondary-400">{section.index}</span>
+              <span className="h-px w-8 bg-white/20" />
+              <span>{section.label}</span>
+            </p>
+            <h3 className="font-funnel-sans text-white text-[24px] md:text-[28px] font-bold leading-tight tracking-tight">
+              {section.heading}
+            </h3>
+          </div>
 
-      <p
-        ref={personalDescriptionRef}
-        className="font-funnel-sans text-gray-100 text-[15px] sm:text-[16px] font-light leading-relaxed max-w-2xl"
-      >
-        {data.text.personalDescription}
-      </p>
+          <div className="flex flex-col gap-5 max-w-[70ch]">
+            {toParagraphs(section.text).map((paragraph, i) => (
+              <p
+                key={i}
+                className="font-funnel-sans text-slate-300 text-[15px] md:text-[17px] leading-[1.75]"
+              >
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </Reveal>
+      ))}
     </div>
   );
 };

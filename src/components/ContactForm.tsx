@@ -13,8 +13,18 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import SplitText from "gsap/SplitText";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
+
+// Shared classes so every field in the form looks the same
+const labelClassName =
+  "font-mono text-slate-300 text-[11px] sm:text-[12px] uppercase tracking-[0.18em] leading-relaxed";
+const optionalClassName = "text-slate-400 normal-case tracking-normal";
+const errorClassName =
+  "font-funnel-sans text-red-400 text-[12px] sm:text-[14px] leading-relaxed";
+
+const MESSAGE_MAX_LENGTH = 500; // matches contactFormSchema
 
 const ContactForm = ({
   subtitle,
@@ -25,6 +35,7 @@ const ContactForm = ({
   subsubtitle: string;
   services: string[];
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const accentDividerRef = useRef<HTMLDivElement>(null);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -71,18 +82,18 @@ const ContactForm = ({
     message?: string;
   }>({});
 
-  useGSAP(() => {
-    // Add a small delay for Vercel deployment stability
-    const initAnimations = () => {
+  // Runs once on mount. The whole form reveals a single time when it scrolls
+  // into view (no scrub), so every `.form-input` always ends up visible.
+  useGSAP(
+    () => {
       // Check if all refs are available before proceeding
       if (
+        !containerRef.current ||
         !subtitleRef.current ||
         !subsubtitleRef.current ||
         !firstNameLabelRef.current ||
         !lastNameLabelRef.current ||
-        !firstNameRef.current ||
-        !lastNameRef.current ||
-        !emailRef.current ||
+        !emailLabelRef.current ||
         !phoneNumberLabelRef.current ||
         !serviceLabelRef.current ||
         !organizationLabelRef.current ||
@@ -90,7 +101,6 @@ const ContactForm = ({
         !accentDividerRef.current ||
         !submitButtonRef.current
       ) {
-        setTimeout(initAnimations, 100);
         return;
       }
 
@@ -130,63 +140,11 @@ const ContactForm = ({
         type: "words",
       });
 
-      gsap.set(
-        [
-          ...subtitleSplit.words,
-          ...subsubtitleSplit.words,
-          ...firstNameLabelSplit.words,
-          ...lastNameLabelSplit.words,
-          ...emailLabelSplit.words,
-          ...phoneNumberLabelSplit.words,
-          ...serviceLabelSplit.words,
-          ...organizationLabelSplit.words,
-          ...messageLabelSplit.words,
-        ],
-        {
-          opacity: 0,
-          yPercent: 100,
-        }
-      );
-
-      gsap.set(
-        [
-          firstNameRef.current,
-          lastNameRef.current,
-          emailRef.current,
-          phoneNumberRef.current,
-          serviceRef.current,
-          organizationRef.current,
-          messageRef.current,
-          accentDividerRef.current,
-          submitButtonRef.current,
-        ],
-        {
-          opacity: 0,
-          yPercent: 100,
-        }
-      );
-
-      // create scroll trigger and animation for subtitles
-      // Use single container trigger for all text elements
       const allTextElements = [
         ...subtitleSplit.words,
         ...subsubtitleSplit.words,
       ];
 
-      gsap.to(allTextElements, {
-        scrollTrigger: {
-          trigger: "#contact-form",
-          start: "top 90%",
-          end: "top 30%",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        stagger: 0.03, // Small stagger for smooth sequence
-      });
-
-      // create scroll trigger and animation for labels
-      // Use single container trigger for all labels to avoid conflicts
       const allLabels = [
         ...firstNameLabelSplit.words,
         ...lastNameLabelSplit.words,
@@ -197,20 +155,6 @@ const ContactForm = ({
         ...messageLabelSplit.words,
       ];
 
-      gsap.to(allLabels, {
-        scrollTrigger: {
-          trigger: "#contact-form",
-          start: "top 85%",
-          end: "top 25%",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        stagger: 0.02, // Small stagger for smooth sequence
-      });
-
-      // create scroll trigger and animation for inputs
-      // Use single container trigger for all inputs to avoid conflicts
       const allInputs = [
         firstNameRef.current,
         lastNameRef.current,
@@ -221,35 +165,72 @@ const ContactForm = ({
         messageRef.current,
       ];
 
-      gsap.to(allInputs, {
-        scrollTrigger: {
-          trigger: "#contact-form",
-          start: "top 80%",
-          end: "top 20%",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        stagger: 0.05, // Small stagger for smooth sequence
-      });
-
-      // create scroll trigger and animation for accent divider and submit button
       const remainingElements = [
         accentDividerRef.current,
         submitButtonRef.current,
       ];
 
-      gsap.to(remainingElements, {
+      gsap.set([...allTextElements, ...allLabels], {
+        opacity: 0,
+        yPercent: 100,
+      });
+
+      gsap.set([...allInputs, ...remainingElements], {
+        opacity: 0,
+        y: 16,
+      });
+
+      // one timeline, played once when the form panel enters the viewport
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out", duration: 0.5 },
         scrollTrigger: {
-          trigger: "#contact-form",
-          start: "top 75%",
-          end: "top 15%",
-          scrub: 1,
+          trigger: containerRef.current,
+          start: "top 88%",
+          once: true,
         },
+      });
+
+      tl.to(allTextElements, {
         opacity: 1,
         yPercent: 0,
-        stagger: 0.1, // Slightly more stagger for visual separation
-      });
+        stagger: 0.02,
+      })
+        .to(
+          accentDividerRef.current,
+          {
+            opacity: 1,
+            y: 0,
+          },
+          "-=0.3"
+        )
+        .to(
+          allLabels,
+          {
+            opacity: 1,
+            yPercent: 0,
+            stagger: 0.02,
+          },
+          "-=0.3"
+        )
+        .to(
+          allInputs,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.05,
+            clearProps: "transform",
+          },
+          "<"
+        )
+        .to(
+          submitButtonRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            clearProps: "transform", // let the CSS hover lift work again
+          },
+          "-=0.3"
+        );
 
       return () => {
         subtitleSplit.revert();
@@ -261,19 +242,10 @@ const ContactForm = ({
         serviceLabelSplit.revert();
         organizationLabelSplit.revert();
         messageLabelSplit.revert();
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       };
-    };
-    initAnimations();
-  }, [
-    firstNameLabelRef.current,
-    lastNameLabelRef.current,
-    emailLabelRef.current,
-    phoneNumberLabelRef.current,
-    serviceLabelRef.current,
-    organizationLabelRef.current,
-    messageLabelRef.current,
-  ]);
+    },
+    { scope: containerRef }
+  );
 
   const resetForm = () => {
     setStoreFormData({
@@ -316,9 +288,7 @@ const ContactForm = ({
       }
 
       resetForm();
-      setStatusMessage(
-        "Form submitted successfully. We will get back to you soon!"
-      );
+      setStatusMessage("Message sent. I'll get back to you by email soon!");
       toast.success("SUCCESS", {
         description: "Form submitted successfully",
       });
@@ -365,7 +335,7 @@ const ContactForm = ({
     }
   };
 
-  const [, formAction, isPending] = useActionState(submitForm, {
+  const [state, formAction, isPending] = useActionState(submitForm, {
     status: "INITIAL",
     error: "",
     data: null,
@@ -382,50 +352,60 @@ const ContactForm = ({
     setStoreFormData({ ...storeFormData, [key]: value });
   };
 
+  const messageLength = storeFormData.message.length;
+
   return (
-    <div className="flex flex-col gap-5 md:gap-10 p-5 md:p-10 w-full bg-gradient-to-b from-primary-950 via-black to-accent-950 max-w-[1200px] mx-auto rounded-xl shadow-lg">
-      <div className="flex flex-col w-full gap-5">
-        <h1
+    <div
+      ref={containerRef}
+      className="panel flex flex-col gap-6 md:gap-8 p-5 md:p-8 w-full"
+    >
+      <div className="flex flex-col w-full gap-3">
+        <p className="eyebrow flex items-center gap-3">
+          <span className="text-secondary-400">02</span>
+          <span className="h-px w-8 bg-white/20" />
+          <span>Send a message</span>
+        </p>
+        <h2
           ref={subtitleRef}
-          className="font-funnel-sans text-white text-[28px] sm:text-[32px] font-bold leading-tight"
+          className="font-funnel-sans text-white text-[26px] sm:text-[30px] md:text-[34px] font-bold leading-tight tracking-tight"
         >
           {subtitle}
-        </h1>
+        </h2>
 
         <p
           ref={subsubtitleRef}
-          className="font-funnel-sans text-white/90 text-[15px] sm:text-[16px] font-light leading-relaxed max-w-2xl"
+          className="font-funnel-sans text-slate-300 text-[15px] md:text-[16px] leading-relaxed max-w-2xl"
         >
           {subsubtitle}
         </p>
       </div>
-      {/* Purple accent divider */}
+      {/* Brand accent divider (cyan to orange) */}
       <div
         ref={accentDividerRef}
-        className="w-18 h-3 bg-gradient-to-r from-purple-400 to-purple-600
-          rounded-full shadow-sm"
+        className="w-16 h-[3px] bg-linear-to-r from-primary-500 to-secondary-500 rounded-full opacity-0"
       />
       <div className="flex flex-col gap-5">
         <Form
           action={formAction}
-          className="flex flex-col gap-10 md:gap-20"
+          className="flex flex-col gap-8"
           id="contact-form"
         >
-          <div className="flex flex-col gap-5 md:gap-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
-              <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-5 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="firstName"
                   ref={firstNameLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  First Name <span className="text-red-500">*</span>
+                  First Name <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
                   name="firstName"
                   id="firstName"
-                  placeholder="First Name"
+                  placeholder="First name"
+                  autoComplete="given-name"
                   ref={firstNameRef}
                   className="form-input"
                   value={storeFormData.firstName}
@@ -434,42 +414,39 @@ const ContactForm = ({
                   }
                 />
                 {errors.firstName && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.firstName}
-                  </p>
+                  <p className={errorClassName}>{errors.firstName}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="lastName"
                   ref={lastNameLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Last Name <span className="text-red-500">*</span>
+                  Last Name <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
                   name="lastName"
                   id="lastName"
-                  placeholder="Last Name"
+                  placeholder="Last name"
+                  autoComplete="family-name"
                   ref={lastNameRef}
                   className="form-input"
                   value={storeFormData.lastName}
                   onChange={(e) => handleFormChange("lastName", e.target.value)}
                 />
                 {errors.lastName && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.lastName}
-                  </p>
+                  <p className={errorClassName}>{errors.lastName}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="email"
                   ref={emailLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Email <span className="text-red-500">*</span>
+                  Email <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="email"
@@ -477,23 +454,23 @@ const ContactForm = ({
                   id="email"
                   ref={emailRef}
                   className="form-input"
-                  placeholder="Email"
+                  placeholder="you@company.com"
+                  autoComplete="email"
                   value={storeFormData.email}
                   onChange={(e) => handleFormChange("email", e.target.value)}
                 />
                 {errors.email && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.email}
-                  </p>
+                  <p className={errorClassName}>{errors.email}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="phoneNumber"
                   ref={phoneNumberLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Phone Number
+                  Phone Number{" "}
+                  <span className={optionalClassName}>(optional)</span>
                 </label>
                 <input
                   type="tel"
@@ -501,25 +478,24 @@ const ContactForm = ({
                   id="phoneNumber"
                   ref={phoneNumberRef}
                   className="form-input"
-                  placeholder="Phone Number"
+                  placeholder="Phone number"
+                  autoComplete="tel"
                   value={phoneNumber}
                   onChange={(e) =>
                     handleFormChange("phoneNumber", e.target.value)
                   }
                 />
                 {errors.phoneNumber && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.phoneNumber}
-                  </p>
+                  <p className={errorClassName}>{errors.phoneNumber}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="service"
                   ref={serviceLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Service <span className="text-red-500">*</span>
+                  Service <span className="text-red-400">*</span>
                 </label>
                 <select
                   name="service"
@@ -536,18 +512,17 @@ const ContactForm = ({
                   ))}
                 </select>
                 {errors.service && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.service}
-                  </p>
+                  <p className={errorClassName}>{errors.service}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="organization"
                   ref={organizationLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Organization
+                  Organization{" "}
+                  <span className={optionalClassName}>(optional)</span>
                 </label>
                 <input
                   type="text"
@@ -555,7 +530,8 @@ const ContactForm = ({
                   id="organization"
                   ref={organizationRef}
                   className="form-input"
-                  placeholder="Organization"
+                  placeholder="Company or team"
+                  autoComplete="organization"
                   value={storeFormData.organization}
                   onChange={(e) =>
                     handleFormChange("organization", e.target.value)
@@ -563,44 +539,69 @@ const ContactForm = ({
                 />
               </div>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-2 min-w-0">
               <label
                 htmlFor="message"
                 ref={messageLabelRef}
-                className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                className={labelClassName}
               >
-                Message <span className="text-red-500">*</span>
+                Message <span className="text-red-400">*</span>
               </label>
               <textarea
                 name="message"
                 id="message"
                 ref={messageRef}
-                className="form-input min-h-[100px]"
-                placeholder="Message"
+                className="form-input min-h-[140px] resize-y"
+                placeholder="What are you building, hiring for, or looking to host?"
                 value={storeFormData.message}
                 onChange={(e) => handleFormChange("message", e.target.value)}
               />
-              {errors.message && (
-                <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                  {errors.message}
+              <div className="flex flex-row items-start justify-between gap-3">
+                {errors.message ? (
+                  <p className={errorClassName}>{errors.message}</p>
+                ) : (
+                  <span />
+                )}
+                <p
+                  className={`font-mono text-[11px] sm:text-[12px] shrink-0 ${
+                    messageLength > MESSAGE_MAX_LENGTH
+                      ? "text-red-400"
+                      : "text-slate-400"
+                  }`}
+                >
+                  {messageLength}/{MESSAGE_MAX_LENGTH}
                 </p>
-              )}
+              </div>
             </div>
-            <div className="flex w-full justify-center">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-2">
               <button
                 type="submit"
                 ref={submitButtonRef}
-                className="animated-gradient-button w-full max-w-sm px-3 py-2 rounded-xl cursor-pointer"
+                className="animated-gradient-button group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 rounded-full cursor-pointer font-funnel-sans text-[14px] md:text-[15px] opacity-0"
                 disabled={isPending}
               >
-                {isPending ? "Submitting..." : "Submit"}
+                {isPending ? "Sending..." : "Send message"}
+                <ArrowRight
+                  className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
+                  aria-hidden
+                />
               </button>
+              <p className="font-funnel-sans text-slate-400 text-[12px] sm:text-[13px] leading-relaxed">
+                Fields marked <span className="text-red-400">*</span> are
+                required.
+              </p>
             </div>
           </div>
         </Form>
         {statusMessage && (
-          <div className="flex-center w-full mt-5">
-            <p className="text-white text-[12px] sm:text-[14px] font-light leading-relaxed text-center px-3 py-2 rounded-xl bg-accent-900">
+          <div className="flex w-full" role="status" aria-live="polite">
+            <p
+              className={`font-funnel-sans text-[13px] sm:text-[14px] leading-relaxed px-4 py-3 rounded-xl border w-full ${
+                state.status === "ERROR"
+                  ? "border-red-400/40 bg-red-400/10 text-red-300"
+                  : "border-primary-500/40 bg-primary-500/10 text-primary-100"
+              }`}
+            >
               {statusMessage}
             </p>
           </div>

@@ -1,15 +1,12 @@
 "use client";
-import React, { useRef, useEffect, useState, useMemo } from "react";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { SplitText } from "gsap/SplitText";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React from "react";
 import ImageCarousel from "./ImageCarousel";
-import { ProjectTemplate } from "@/types/GlobalTypes";
+import { ProjectTemplate, ProjectTypes } from "@/types/GlobalTypes";
 import VisitButton from "./VisitButton";
 import ViewProjectButton from "./ViewProjectButton";
-
-gsap.registerPlugin(SplitText, ScrollTrigger);
+import SpotlightCard from "./SpotlightCard";
+import Reveal from "./Reveal";
+import { StatusIndicator } from "./ProjectDisplayCard";
 
 const RecentProjectCard = ({
   project,
@@ -18,294 +15,72 @@ const RecentProjectCard = ({
   project: ProjectTemplate;
   index: number;
 }) => {
-  // Memoize expensive calculations
-  const { url, isWebsite, isEven } = useMemo(
-    () => ({
-      url: project.websiteUrl || project.githubUrl,
-      isWebsite: !!project.websiteUrl,
-      isEven: index % 2 === 0,
-    }),
-    [project.websiteUrl, project.githubUrl, index]
-  );
+  const url = project.websiteUrl || project.githubUrl;
+  const isWebsite = !!project.websiteUrl;
+  const isEven = index % 2 === 0;
 
-  const { title, workDescription, tags, galleryImages } = useMemo(
-    () => ({
-      title: project.text.title,
-      workDescription: project.text.workDescription,
-      tags: project.tags,
-      galleryImages: project.images.galleryImages,
-    }),
-    [
-      project.text.title,
-      project.text.workDescription,
-      project.tags,
-      project.images.galleryImages,
-    ]
-  );
-
-  const displayTags = useMemo(() => tags.slice(0, 3), [tags]);
-
-  // Separate refs for mobile and desktop
-  const mobileTitleRef = useRef<HTMLHeadingElement>(null);
-  const mobileDescriptionRef = useRef<HTMLHeadingElement>(null);
-  const mobileTagsRef = useRef<HTMLDivElement>(null);
-  const mobileButtonRef = useRef<HTMLDivElement>(null);
-
-  const desktopTitleRef = useRef<HTMLHeadingElement>(null);
-  const desktopDescriptionRef = useRef<HTMLHeadingElement>(null);
-  const desktopTagsRef = useRef<HTMLDivElement>(null);
-  const desktopButtonRef = useRef<HTMLDivElement>(null);
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    setIsMobile(mediaQuery.matches);
-
-    const handleChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mediaQuery.addEventListener("change", handleChange);
-
-    return () => mediaQuery.removeEventListener("change", handleChange);
-  }, []);
-
-  useGSAP(
-    () => {
-      // Get the appropriate refs based on current mobile state
-      const titleRef = isMobile
-        ? mobileTitleRef.current
-        : desktopTitleRef.current;
-      const descriptionRef = isMobile
-        ? mobileDescriptionRef.current
-        : desktopDescriptionRef.current;
-      const tagsRef = isMobile ? mobileTagsRef.current : desktopTagsRef.current;
-      // Button refs now point to the wrapper div, not individual buttons
-      const buttonRef = isMobile
-        ? mobileButtonRef.current
-        : desktopButtonRef.current;
-
-      if (!titleRef || !descriptionRef || !tagsRef || !buttonRef) {
-        return;
-      }
-
-      // Store SplitText instances for cleanup
-      let titleSplits: SplitText | null = null;
-      let descriptionSplits: SplitText | null = null;
-      let tagSplit: SplitText | null = null;
-
-      // Simplified animations for mobile, full animations for desktop
-      if (isMobile) {
-        // Mobile: Simple fade-in only (no SplitText, no complex animations)
-        const mobileConfig = {
-          opacity: 0,
-          y: 20,
-          ease: "power1.out",
-          duration: 0.4,
-          scrollTrigger: {
-            trigger: titleRef,
-            start: "top 90%",
-            toggleActions: "play none none none",
-          },
-        };
-
-        gsap.from([titleRef, descriptionRef, tagsRef, buttonRef], {
-          ...mobileConfig,
-          stagger: 0.05,
-        });
-      } else {
-        // Desktop: Full animations with SplitText
-        const baseConfig = {
-          opacity: 0,
-          yPercent: -100,
-          stagger: 0.025,
-          ease: "power2.inOut",
-          duration: 0.8,
-        };
-
-        titleSplits = SplitText.create(titleRef, {
-          type: "words",
-        });
-
-        descriptionSplits = SplitText.create(descriptionRef, {
-          type: "lines",
-        });
-
-        tagSplit = SplitText.create(tagsRef, { type: "chars" });
-
-        // Animate title
-        gsap.from(titleSplits.words, {
-          ...baseConfig,
-          scrollTrigger: {
-            trigger: titleRef,
-            start: "top bottom",
-            end: "bottom 95%",
-            scrub: 1,
-          },
-        });
-
-        // Animate description
-        gsap.from(descriptionSplits.lines, {
-          ...baseConfig,
-          scrollTrigger: {
-            trigger: descriptionRef,
-            start: "top bottom",
-            end: "bottom 95%",
-            scrub: 1,
-          },
-        });
-
-        // Animate tags
-        gsap.from(tagSplit.chars, {
-          ...baseConfig,
-          scrollTrigger: {
-            trigger: tagsRef,
-            start: "top bottom",
-            end: "bottom 95%",
-            scrub: 1,
-          },
-        });
-
-        // Animate buttons
-        gsap.from(buttonRef, {
-          opacity: 0,
-          yPercent: -100,
-          ease: "power2.inOut",
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: buttonRef,
-            start: "top bottom",
-            end: "bottom 95%",
-            scrub: 1,
-          },
-        });
-
-        // Buttons are now animated together in the wrapper div
-      }
-
-      return () => {
-        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-        // Only revert SplitText if it was created (desktop only)
-        if (titleSplits) titleSplits.revert();
-        if (descriptionSplits) descriptionSplits.revert();
-        if (tagSplit) tagSplit.revert();
-      };
-    },
-    { dependencies: [isMobile] }
-  );
-
-  const renderTextContent = () => {
-    return (
-      <div className="flex flex-col w-full h-full gap-5 px-5 py-3 sm:p-10">
-        <h1
-          ref={desktopTitleRef}
-          className="font-funnel-sans text-white text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px] font-bold wrap-break-words"
-        >
-          {title}
-        </h1>
-        <div
-          ref={desktopTagsRef}
-          className="flex flex-row items-center overflow-x-auto scrollbar-hide min-w-0 shrink-0 gap-2"
-        >
-          {displayTags.map((tag, i) => (
-            <React.Fragment key={tag}>
-              <span className="font-funnel-sans text-primary-800 text-[13px] xs:text-[14px] font-medium wrap-break-words px-3 py-1.5 bg-white/95 rounded-full border border-white/50 shadow-sm hover:bg-white hover:scale-105 transition-all duration-200 whitespace-nowrap">
-                {tag}
-              </span>
-              {i !== displayTags.length - 1 && (
-                <span className="font-funnel-sans text-white/60 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3">
-                  •
-                </span>
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-        <h2
-          ref={desktopDescriptionRef}
-          className="font-funnel-sans text-white/75 text-[12px] xs:text-[16px] font-regular wrap-break-words leading-relaxed"
-        >
-          {workDescription}
-        </h2>
-        <div
-          ref={desktopButtonRef}
-          className="flex w-full mt-8 flex-row gap-3 md:gap-5"
-        >
-          <VisitButton url={url} isWebsite={isWebsite} />
-          <ViewProjectButton href={`/projects/${project.id}`} />
-        </div>
-      </div>
-    );
-  };
+  const { name, title, workDescription } = project.text;
+  const galleryImages = project.images.galleryImages;
+  const displayTags = project.tags.slice(0, 4);
+  const cardNumber = String(index + 1).padStart(2, "0");
 
   return (
-    <>
-      {isMobile ? (
-        <div
-          id="recent-project-card-mobile"
-          className="flex flex-col gap-3 w-full pb-6 bg-black/40 backdrop-blur-sm overflow-x-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30"
-        >
-          <div className="flex flex-col w-full h-[50dvh]">
-            <ImageCarousel images={galleryImages} />
-          </div>
-          <div className="flex flex-col flex-1 w-full h-full px-5 py-3 gap-5 overflow-x-hidden">
-            <h1
-              ref={mobileTitleRef}
-              className="font-funnel-sans text-white text-[20px] xs:text-[24px] sm:text-[28px] md:text-[32px] font-bold wrap-break-words"
-            >
-              {title}
-            </h1>
-            <div
-              ref={mobileTagsRef}
-              className="flex flex-row items-center overflow-x-auto scrollbar-hide min-w-0 shrink-0 gap-2"
-            >
-              {displayTags.map((tag, i) => (
-                <React.Fragment key={tag}>
-                  <span className="font-funnel-sans text-primary-800 text-[13px] xs:text-[14px] font-medium wrap-break-words px-3 py-1.5 bg-white/95 rounded-full border border-white/50 shadow-sm hover:bg-white hover:scale-105 transition-all duration-200 whitespace-nowrap">
-                    {tag}
-                  </span>
-                  {i !== displayTags.length - 1 && (
-                    <span className="font-funnel-sans text-white/40 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 shrink-0">
-                      •
-                    </span>
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-            <h2
-              ref={mobileDescriptionRef}
-              className="font-funnel-sans text-white/75 text-[12px] xs:text-[16px] font-regular wrap-break-words leading-relaxed"
-            >
-              {workDescription}
-            </h2>
-            <div
-              ref={mobileButtonRef}
-              className="flex w-full mt-5 flex-row gap-3"
-            >
-              <VisitButton url={url} isWebsite={isWebsite} />
-              <ViewProjectButton href={`/projects/${project.id}`} />
+    <Reveal className="w-full">
+      {/* Mobile: image on top. Desktop: text and image swap sides on every other card. */}
+      <SpotlightCard
+        as="article"
+        className={`flex flex-col w-full ${
+          isEven ? "md:flex-row-reverse" : "md:flex-row"
+        }`}
+      >
+        {/* Image side */}
+        <div className="relative w-full md:w-1/2 shrink-0 h-[calc(56vw+64px)] min-h-[250px] max-h-[70dvh] md:h-auto md:max-h-none md:min-h-[440px]">
+          <div className="absolute inset-0 p-2 md:p-3">
+            <div className="w-full h-full rounded-2xl border border-white/10 overflow-hidden">
+              <ImageCarousel images={galleryImages} />
             </div>
           </div>
         </div>
-      ) : (
-        <div
-          id="recent-project-card-desktop"
-          className="flex flex-row gap-3 w-full bg-black/40 backdrop-blur-sm overflow-x-hidden rounded-2xl border border-white/10 shadow-2xl shadow-black/30"
-        >
-          <div className="flex flex-col w-1/2 min-h-0">
-            {isEven ? (
-              renderTextContent()
-            ) : (
-              <ImageCarousel images={galleryImages} />
-            )}
+
+        {/* Text side */}
+        <div className="flex flex-col justify-center w-full md:w-1/2 min-w-0 gap-4 md:gap-5 p-5 xs:p-6 md:p-8 lg:p-10">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <p className="eyebrow flex items-center gap-3">
+              <span className="text-secondary-400">{cardNumber}</span>
+              <span className="h-px w-8 bg-white/20" />
+              <span>{ProjectTypes[project.projectType]}</span>
+            </p>
+            <StatusIndicator status={project.status} />
           </div>
-          <div className="flex flex-col flex-1 min-h-0">
-            {isEven ? (
-              <ImageCarousel images={galleryImages} />
-            ) : (
-              renderTextContent()
-            )}
+
+          <h3 className="font-funnel-sans text-white text-[28px] xs:text-[32px] md:text-[36px] lg:text-[42px] font-bold leading-[1.05] tracking-tight wrap-break-word">
+            {name}
+          </h3>
+
+          <p className="font-funnel-sans text-slate-200 text-[15px] md:text-[17px] font-medium leading-snug">
+            {title}
+          </p>
+
+          <p className="font-funnel-sans text-slate-400 text-[14px] md:text-[15px] leading-relaxed line-clamp-3 lg:line-clamp-4">
+            {workDescription}
+          </p>
+
+          <div className="flex flex-wrap gap-2">
+            {displayTags.map((tag) => (
+              <span key={tag} className="chip">
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Buttons share the row; on very narrow screens they stack full-width */}
+          <div className="flex flex-row flex-wrap gap-3 pt-2 md:pt-4 [&>a]:flex-1 sm:[&>a]:flex-none">
+            <ViewProjectButton href={`/projects/${project.id}`} />
+            <VisitButton url={url} isWebsite={isWebsite} />
           </div>
         </div>
-      )}
-    </>
+      </SpotlightCard>
+    </Reveal>
   );
 };
 

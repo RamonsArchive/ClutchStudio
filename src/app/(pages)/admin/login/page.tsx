@@ -1,20 +1,22 @@
 import TitleSection from "@/components/TitleSection";
 import React from "react";
-import { AdminLoginData } from "@/constants";
+import { AdminLoginData, SiteData } from "@/constants";
 import LoginAdminForm from "@/components/LoginAdminForm";
 
 const page = () => {
   const title = AdminLoginData.title;
   return (
-    <section className="flex flex-col w-[100dvw] h-full pb-15 gap-10">
-      <div className="relative flex flex-col h-[calc(50dvh-43px)] w-full overflow-hidden">
+    <section className="flex flex-col w-full h-full pb-20 gap-10 md:gap-16">
+      <div className="relative grid min-h-[36dvh] w-full overflow-hidden">
         <TitleSection
+          headerTitle={`${SiteData.domain} / Admin`}
           mainTitle={title}
-          mainTitleClassName="font-funnel-sans text-white text-[58px] xs:text-[68px] sm:text-[78px] md:text-[84px] lg:text-[100px] font-bold break-words"
           includeBackgroundIcons={true}
         />
       </div>
-      <LoginAdminForm />
+      <div className="section-shell">
+        <LoginAdminForm />
+      </div>
     </section>
   );
 };

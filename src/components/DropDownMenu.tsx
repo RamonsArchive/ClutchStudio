@@ -26,29 +26,42 @@ const DropDownMenu = ({
   return (
     <div className="relative" ref={outerRef}>
       <button
-        className="flex flex-row items-center gap-2 px-3 py-2 bg-secondary-600/60 hover:bg-secondary-500/80 duration-300 rounded-sm ease-in-out cursor-pointer"
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+        className={`flex flex-row items-center gap-2 px-4 py-2 rounded-full border duration-300 ease-in-out cursor-pointer ${
+          isOpen
+            ? "border-primary-500 bg-primary-500/15"
+            : "border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/30"
+        }`}
         onClick={() => {
           // This will be handled by the parent component's click outside logic
         }}
       >
-        <p className="font-montserrat font-normal text-[10px] sm:text-[12px] md:text-[14px] text-white">
+        <p className="font-funnel-sans font-medium text-[13px] md:text-[14px] text-white whitespace-nowrap">
           {title}
         </p>
-        <ChevronDown className="w-4 h-4 text-white" />
+        <ChevronDown
+          className={`w-4 h-4 text-primary-300 transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
+          aria-hidden
+        />
       </button>
 
       {isOpen && (
         <div
           ref={innerRef}
-          className="absolute top-full left-0 mt-1 bg-secondary-800 border border-secondary-600 rounded-sm shadow-lg z-50 min-w-[200px] max-h-[300px] overflow-y-auto"
+          className="absolute top-full left-0 mt-2 p-1 bg-primary-background-900 border border-white/15 rounded-xl shadow-[0_20px_40px_-12px_rgba(0,0,0,0.7)] z-50 min-w-[200px] max-w-[calc(100vw-80px)] max-h-[300px] overflow-y-auto"
         >
           {options.map((option) => (
             <button
+              type="button"
               key={option.value}
-              className="w-full text-left px-3 py-2 hover:bg-secondary-700 duration-200 ease-in-out cursor-pointer"
+              className="w-full text-left px-3 py-2 rounded-lg hover:bg-primary-500/15 duration-200 ease-in-out cursor-pointer"
               onClick={() => updateFilters(option.value, option.title)}
             >
-              <p className="font-montserrat font-normal text-[10px] sm:text-[12px] md:text-[14px] text-white">
+              <p className="font-funnel-sans font-normal text-[13px] md:text-[14px] text-slate-200">
                 {option.title}
               </p>
             </button>

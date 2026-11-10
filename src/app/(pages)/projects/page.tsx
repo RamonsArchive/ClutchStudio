@@ -5,15 +5,17 @@ import AllProjects from "@/components/AllProjects";
 
 const page = () => {
   return (
-    <section className="flex flex-col w-dvw h-full pb-20 gap-10">
-      <div className="relative flex flex-col h-[calc(50dvh-43px)] w-full overflow-hidden">
+    <section className="flex flex-col w-full h-full pb-20 md:pb-28">
+      <div className="relative grid min-h-[42dvh] w-full overflow-hidden">
         <TitleSection
+          headerTitle="Index / Projects"
           mainTitle={
             <>
               <span className="font-bold">Projects</span>
             </>
           }
-          mainTitleClassName="font-funnel-sans text-white text-[58px] xs:text-[68px] sm:text-[78px] md:text-[84px] lg:text-[100px] font-bold break-words"
+          subTitle="Things I've designed, built, and shipped, from production platforms to research."
+          mainTitleClassName="text-[52px] xs:text-[60px] md:text-[76px] lg:text-[92px]"
           includeBackgroundIcons={true}
           useCharsForMainTitle={true}
         />

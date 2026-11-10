@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { JetBrains_Mono } from "next/font/google";
 
 const funnelSans = localFont({
   src: [
@@ -65,68 +66,78 @@ const funnelSans = localFont({
       style: "italic",
     },
   ],
-  variable: "--font-funnel-sans",
+  variable: "--font-funnel",
   display: "swap",
   preload: true,
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
+
+const SITE_URL = "https://rvector.dev";
+const SITE_TITLE = "rvector.dev | Ramon, Full-Stack Engineer & Web Hosting";
+const SITE_DESCRIPTION =
+  "Portfolio of Ramon, a full-stack software engineer in San Diego, CA. Full-stack and machine learning projects, plus custom website design, development, and managed hosting for businesses.";
+
 export const metadata: Metadata = {
-  title: "Clutch Studio - Web Development Portfolio | San Diego, CA",
-  description:
-    "Professional web development services in San Diego, California. Specializing in React, Next.js, TypeScript, and modern web applications. View portfolio of responsive websites, e-commerce solutions, and custom web applications.",
+  title: {
+    default: SITE_TITLE,
+    template: "%s | rvector.dev",
+  },
+  description: SITE_DESCRIPTION,
   keywords: [
-    "web development San Diego",
+    "rvector",
+    "rvector.dev",
+    "Ramon software engineer",
+    "full-stack developer San Diego",
+    "Next.js developer San Diego",
     "React developer San Diego",
-    "Next.js developer California",
-    "TypeScript developer San Diego",
+    "TypeScript developer",
+    "machine learning projects",
     "web design San Diego",
+    "website hosting for small business",
+    "managed web hosting San Diego",
     "custom web applications",
-    "responsive website design",
-    "e-commerce development",
+    "web development San Diego",
     "portfolio website",
-    "frontend developer San Diego",
-    "full-stack developer California",
-    "modern web development",
-    "UI/UX design San Diego",
-    "web application development",
-    "San Diego web developer",
   ],
-  authors: [{ name: "Clutch Studio", url: "https://clutchstudio.dev" }],
-  creator: "Clutch Studio",
-  publisher: "Clutch Studio",
+  authors: [{ name: "Ramon", url: SITE_URL }],
+  creator: "Ramon",
+  publisher: "rvector.dev",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://clutchstudio.dev"),
+  metadataBase: new URL(SITE_URL),
   alternates: {
     canonical: "/",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://clutchstudio.dev",
-    siteName: "Clutch Studio",
-    title: "Clutch Studio - Web Development Portfolio | San Diego, CA",
-    description:
-      "Professional web development services in San Diego, California. Specializing in React, Next.js, TypeScript, and modern web applications.",
+    url: SITE_URL,
+    siteName: "rvector.dev",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
-        url: "https://clutchstudio.dev/icon.png",
+        url: "/og-image.png",
         width: 1200,
-        height: 1200,
-        alt: "Clutch Studio Logo",
+        height: 630,
+        alt: "rvector.dev logo: a beaver coding on a laptop",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Clutch Studio - Web Development Portfolio | San Diego, CA",
-    description:
-      "Professional web development services in San Diego, California. Specializing in React, Next.js, TypeScript, and modern web applications.",
-    images: ["https://clutchstudio.dev/icon.png"],
-    creator: "@clutchstudio",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -139,33 +150,11 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-    yahoo: "your-yahoo-verification-code",
-  },
   manifest: "/site.webmanifest",
   category: "technology",
-  classification: "Web Development Services",
   other: {
     "geo.region": "US-CA",
     "geo.placename": "San Diego",
-    "geo.position": "32.7157;-117.1611",
-    ICBM: "32.7157, -117.1611",
-    "DC.title": "Clutch Studio Web Development Portfolio",
-    "DC.creator": "Clutch Studio",
-    "DC.subject": "Web Development, React, Next.js, TypeScript, San Diego",
-    "DC.description":
-      "Professional web development services in San Diego, California",
-    "DC.publisher": "Clutch Studio",
-    "DC.contributor": "Clutch Studio",
-    "DC.date": "2025",
-    "DC.type": "Service",
-    "DC.format": "text/html",
-    "DC.identifier": "https://clutchstudio.dev",
-    "DC.language": "en",
-    "DC.coverage": "San Diego, California, United States",
-    "DC.rights": "Copyright 2025 Clutch Studio",
   },
 };
 
@@ -176,87 +165,63 @@ export default function RootLayout({
 }>) {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    name: "Clutch Studio",
-    description:
-      "Professional web development services in San Diego, California. Specializing in React, Next.js, TypeScript, and modern web applications.",
-    url: "https://clutchstudio.dev",
-    telephone: "+1-619-XXX-XXXX",
-    email: "clutchdev.apps@gmail.com",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "San Diego",
-      addressRegion: "CA",
-      addressCountry: "US",
-      postalCode: "92101",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 32.7157,
-      longitude: -117.1611,
-    },
-    areaServed: {
-      "@type": "City",
-      name: "San Diego",
-    },
-    serviceArea: {
-      "@type": "GeoCircle",
-      geoMidpoint: {
-        "@type": "GeoCoordinates",
-        latitude: 32.7157,
-        longitude: -117.1611,
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": `${SITE_URL}/#person`,
+        name: "Ramon",
+        url: SITE_URL,
+        jobTitle: "Software Engineer",
+        worksFor: { "@type": "Organization", name: "ModalAI" },
+        alumniOf: {
+          "@type": "CollegeOrUniversity",
+          name: "University of California San Diego",
+        },
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "San Diego",
+          addressRegion: "CA",
+          addressCountry: "US",
+        },
+        sameAs: [
+          "https://github.com/RamonsArchive",
+          "https://www.linkedin.com/in/ramonmnm100",
+        ],
       },
-      geoRadius: "50000",
-    },
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Web Development Services",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "React Development",
-            description: "Custom React applications and components",
-          },
+      {
+        "@type": "ProfessionalService",
+        "@id": `${SITE_URL}/#business`,
+        name: "rvector.dev",
+        description:
+          "Custom website design, development, and managed hosting for businesses and organizations.",
+        url: SITE_URL,
+        image: `${SITE_URL}/og-image.png`,
+        email: "clutchdev.apps@gmail.com",
+        founder: { "@id": `${SITE_URL}/#person` },
+        areaServed: { "@type": "City", name: "San Diego" },
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "San Diego",
+          addressRegion: "CA",
+          addressCountry: "US",
         },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Next.js Development",
-            description: "Full-stack Next.js applications",
-          },
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Web design and hosting services",
+          itemListElement: [
+            "Custom website design and development",
+            "Managed website hosting",
+            "Admin dashboards",
+            "Payments and integrations",
+            "SEO and performance",
+            "Ongoing maintenance",
+          ].map((name) => ({
+            "@type": "Offer",
+            itemOffered: { "@type": "Service", name },
+          })),
         },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "TypeScript Development",
-            description: "Type-safe web applications",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Service",
-            name: "Responsive Web Design",
-            description: "Mobile-first responsive websites",
-          },
-        },
-      ],
-    },
-    sameAs: [
-      "https://goldeneagle.one",
-      "https://clutchstudio.dev",
-      "https://digitalrevolution.foundation",
-      "https://colorstackucsd.org",
-      "https://ascend.rodeo",
+      },
     ],
-    openingHours: "Mo-Fr 09:00-17:00",
-    priceRange: "$$",
-    currenciesAccepted: "USD",
-    paymentAccepted: "Credit Card, PayPal, Bank Transfer",
   };
 
   return (
@@ -267,25 +232,23 @@ export default function RootLayout({
           name="viewport"
           content="width=device-width, initial-scale=1.0, viewport-fit=cover"
         />
-        <meta name="theme-color" content="#F0F8FF" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="mobile-web-app-capable" content="yes" />
-
-        {/* Preload hero image for better animation performance */}
-        <link
-          rel="preload"
-          href="/Assets/About/personal1.png"
-          as="image"
-          fetchPriority="high"
+        <meta name="theme-color" content="#070E1B" />
+        <meta
+          name="apple-mobile-web-app-status-bar-style"
+          content="black-translucent"
         />
+        <meta name="mobile-web-app-capable" content="yes" />
 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
       </head>
-      <body className={`${funnelSans.variable} antialiased`}>{children}</body>
+      <body
+        className={`${funnelSans.variable} ${jetbrainsMono.variable} font-funnel-sans antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

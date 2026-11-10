@@ -1,9 +1,10 @@
 "use client";
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { ProjectTemplate } from "@/types/GlobalTypes";
 import { ProjectType } from "@/types/GlobalTypes";
-import { ChevronDown, X, Filter } from "lucide-react";
+import { X } from "lucide-react";
 import ProjectGrid from "./ProjectGrid";
+import Reveal from "./Reveal";
 
 const AllProjects = ({
   projects,
@@ -11,9 +12,7 @@ const AllProjects = ({
   projects: readonly ProjectTemplate[];
 }) => {
   const [selectedServiceType, setSelectedServiceType] = useState<string>("ALL");
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropDownButtonRef = useRef<HTMLButtonElement>(null);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+
   // Get unique service types from projects
   const serviceTypes = useMemo(() => {
     const types = projects.map((project) => project.projectType);
@@ -30,38 +29,9 @@ const AllProjects = ({
     );
   }, [selectedServiceType, projects]);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      const dropDownTarget = dropdownRef.current?.contains(
-        event.target as Node
-      );
-      const dropDownButtonTarget = dropDownButtonRef.current?.contains(
-        event.target as Node
-      );
-
-      // If clicking outside both the dropdown and button, close it
-      if (!dropDownTarget && !dropDownButtonTarget) {
-        setIsDropdownOpen(false);
-      }
-      // If clicking the button, toggle it
-      else if (dropDownButtonTarget && !dropDownTarget) {
-        setIsDropdownOpen((prev) => !prev);
-      }
-      // If clicking inside dropdown, keep it open (don't toggle)
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
-    };
-  }, []);
-
   // Handle service type selection
   const handleServiceTypeSelect = (serviceType: string) => {
     setSelectedServiceType(serviceType);
-    setIsDropdownOpen(false);
   };
 
   // Clear all filters
@@ -86,130 +56,113 @@ const AllProjects = ({
     }
   };
 
+  // How many projects sit behind each filter pill
+  const getServiceTypeCount = (serviceType: string) => {
+    if (serviceType === "ALL") return projects.length;
+    return projects.filter((project) => project.projectType === serviceType)
+      .length;
+  };
+
   // Check if any filters are active
   const hasActiveFilters = selectedServiceType !== "ALL";
 
+  const formatCount = (count: number) => String(count).padStart(2, "0");
+
   return (
-    <div className="w-full h-full py-10 px-3 md:px-5">
-      <div className="max-w-7xl mx-auto">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 animated-gradient-text">
+    <div className="section-shell flex flex-col gap-8 md:gap-10 pt-12 md:pt-16">
+      {/* Header Section */}
+      <Reveal className="flex flex-col gap-4">
+        <p className="eyebrow flex items-center gap-3">
+          <span className="text-secondary-400">01</span>
+          <span className="h-px w-8 bg-white/20" />
+          <span>Selected work</span>
+        </p>
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <h2 className="heading-display max-w-3xl">
             {hasActiveFilters
               ? getServiceTypeDisplayName(selectedServiceType)
               : "All Projects"}
-          </h1>
-          <p className="text-lg sm:text-xl text-[#475569] max-w-3xl mx-auto">
-            {hasActiveFilters
-              ? `Explore my ${getServiceTypeDisplayName(
-                  selectedServiceType
-                ).toLowerCase()} projects and see how I solve real-world problems with innovative solutions.`
-              : "Explore my portfolio of web development, data science, and AI solutions projects"}
+          </h2>
+          <p className="font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-slate-400 whitespace-nowrap md:pb-2">
+            Showing{" "}
+            <span className="text-white">
+              {formatCount(filteredProjects.length)}
+            </span>{" "}
+            / {formatCount(projects.length)}
           </p>
         </div>
+        <p className="body-copy max-w-2xl">
+          {hasActiveFilters
+            ? `My ${getServiceTypeDisplayName(
+                selectedServiceType
+              ).toLowerCase()} work: what I built, how I built it, and why.`
+            : "Full-stack products, data science, and machine learning. Pick a project to read the full case study."}
+        </p>
+      </Reveal>
 
-        {/* Filter Section */}
-        <div className="mb-12">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-8 bg-linear-to-r from-primary-background-800/50 via-primary-background-700/50 to-primary-background-800/50 rounded-2xl border border-white/10 shadow-sm">
-            {/* Filter Label */}
-            <div className="flex items-center gap-2 text-white/80 font-medium">
-              <Filter className="w-5 h-5 text-primary-400" />
-              <span>Filter by:</span>
-            </div>
-
-            {/* Service Type Dropdown */}
-            <div className="relative">
+      {/* Filter Section */}
+      <div className="flex flex-col gap-4">
+        <div className="rv-divider" />
+        <div
+          role="group"
+          aria-label="Filter projects by type"
+          className="flex flex-wrap items-center gap-2 md:gap-3"
+        >
+          {["ALL", ...serviceTypes].map((serviceType) => {
+            const isActive = selectedServiceType === serviceType;
+            return (
               <button
-                ref={dropDownButtonRef}
-                className="flex items-center gap-2 px-6 py-3 bg-linear-to-r from-primary-background-700 to-primary-background-600 border-2 border-white/20 rounded-xl shadow-sm hover:border-primary-400 hover:shadow-md transition-all duration-200 min-w-[200px] justify-between"
+                key={serviceType}
+                onClick={() => handleServiceTypeSelect(serviceType)}
+                aria-pressed={isActive}
+                className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 font-funnel-sans text-[13px] md:text-[14px] font-semibold whitespace-nowrap transition-all duration-300 ease-out ${
+                  isActive
+                    ? "border-primary-500 bg-primary-500 text-primary-background-950 shadow-[0_8px_24px_-10px_rgba(35,196,225,0.7)]"
+                    : "border-white/10 bg-white/5 text-slate-300 hover:border-primary-500/60 hover:text-white hover:-translate-y-0.5"
+                }`}
               >
-                <span className="text-white font-medium">
-                  {getServiceTypeDisplayName(selectedServiceType)}
-                </span>
-                <ChevronDown
-                  className={`w-5 h-5 text-white/60 transition-transform duration-200 ${
-                    isDropdownOpen ? "rotate-180" : ""
+                {getServiceTypeDisplayName(serviceType)}
+                <span
+                  className={`font-mono text-[11px] md:text-[12px] ${
+                    isActive
+                      ? "text-primary-background-950/70"
+                      : "text-slate-500"
                   }`}
-                />
-              </button>
-
-              {/* Dropdown Menu */}
-              {isDropdownOpen && (
-                <div
-                  ref={dropdownRef}
-                  className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-[#E2E8F0] rounded-xl shadow-lg z-10 overflow-hidden"
                 >
-                  {/* All Projects Option */}
-
-                  <button
-                    onClick={() => handleServiceTypeSelect("ALL")}
-                    className={`w-full px-6 py-3 text-left hover:bg-[#F0FDF4] transition-colors duration-150 ${
-                      selectedServiceType === "ALL"
-                        ? "bg-[#DCFCE7] text-[#008E1A] font-semibold"
-                        : "text-[#475569]"
-                    }`}
-                  >
-                    All Projects
-                  </button>
-
-                  {/* Service Type Options */}
-                  {serviceTypes.map((serviceType) => (
-                    <button
-                      key={serviceType}
-                      onClick={() => handleServiceTypeSelect(serviceType)}
-                      className={`w-full px-6 py-3 text-left hover:bg-[#F0FDF4] transition-colors duration-150 ${
-                        selectedServiceType === serviceType
-                          ? "bg-[#DCFCE7] text-[#008E1A] font-semibold"
-                          : "text-[#475569]"
-                      }`}
-                    >
-                      {getServiceTypeDisplayName(serviceType)}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Clear Filters Button */}
-            {hasActiveFilters && (
-              <button
-                onClick={clearFilters}
-                className="flex items-center gap-2 px-4 py-3 bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#475569] rounded-xl transition-colors duration-200 font-medium"
-              >
-                <X className="w-4 h-4" />
-                Clear Filters
+                  {formatCount(getServiceTypeCount(serviceType))}
+                </span>
               </button>
-            )}
-          </div>
+            );
+          })}
 
-          {/* Active Filter Display */}
+          {/* Clear Filters Button */}
           {hasActiveFilters && (
-            <div className="mt-4 text-center">
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-[#DCFCE7] text-[#008E1A] rounded-full text-sm font-medium">
-                <Filter className="w-4 h-4" />
-                Showing {filteredProjects.length}{" "}
-                {filteredProjects.length === 1 ? "project" : "projects"} in{" "}
-                {getServiceTypeDisplayName(selectedServiceType)}
-              </span>
-            </div>
+            <button
+              onClick={clearFilters}
+              className="inline-flex items-center gap-1.5 px-2 py-2 font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-slate-400 transition-colors duration-300 hover:text-secondary-400"
+            >
+              <X className="w-3.5 h-3.5" />
+              Clear
+            </button>
           )}
         </div>
-
-        {/* Projects Grid */}
-        <ProjectGrid
-          filteredProjects={filteredProjects}
-          clearFilters={clearFilters}
-        />
-
-        {/* Results Summary */}
-        <div className="mt-12 text-center text-gray-600">
-          <p>
-            {hasActiveFilters
-              ? `Showing ${filteredProjects.length} of ${projects.length} total projects`
-              : `Showing all ${projects.length} projects`}
-          </p>
-        </div>
       </div>
+
+      {/* Projects Grid */}
+      <ProjectGrid
+        filteredProjects={filteredProjects}
+        clearFilters={clearFilters}
+      />
+
+      {/* Results Summary */}
+      <p
+        aria-live="polite"
+        className="font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-slate-500 text-center pt-4"
+      >
+        {hasActiveFilters
+          ? `Showing ${filteredProjects.length} of ${projects.length} total projects`
+          : `Showing all ${projects.length} projects`}
+      </p>
     </div>
   );
 };

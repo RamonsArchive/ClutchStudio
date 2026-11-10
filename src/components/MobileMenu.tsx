@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { createPortal } from "react-dom";
 import SplitText from "gsap/SplitText";
 import { navbarLinks, socialIcons } from "@/constants/links_index";
+import RvectorLogo from "./RvectorLogo";
 
 gsap.registerPlugin(SplitText);
 
@@ -125,27 +126,59 @@ const MobileMenu = ({
         createPortal(
           <>
             {/* Backdrop */}
-            <div className="fixed inset-0 bg-black/30 z-40" onClick={onClose} />
+            <div
+              className="fixed inset-0 bg-primary-background-950/70 backdrop-blur-sm z-140"
+              onClick={onClose}
+            />
 
             {/* Mobile Menu */}
             <div
               id="mobile-menu"
               ref={menuRef}
-              className="fixed inset-y-0 right-0 w-[70%] max-w-sm bg-linear-to-b from-primary-950 via-black to-accent-950 z-150"
+              className="fixed inset-y-0 right-0 w-[82%] max-w-sm bg-primary-background-900 border-l border-white/10 rv-dot-grid z-150"
             >
               <div className="flex flex-col h-full">
-                {/* Close Button */}
-                <div className="flex justify-end p-5">
-                  <div
-                    className="flex-center p-1 rounded-full bg-primary-background-950 cursor-pointer hover:bg-primary-background-400 transition-colors"
+                {/* Logo + Close Button */}
+                <div className="flex items-center justify-between h-16 px-5 border-b border-white/10">
+                  <RvectorLogo onClick={onClose} />
+                  <button
+                    className="flex-center w-10 h-10 rounded-full border border-white/10 bg-white/5 cursor-pointer hover:bg-white/10 transition-colors"
                     onClick={onClose}
+                    aria-label="Close menu"
                   >
                     <X className="w-5 h-5" color="white" />
-                  </div>
+                  </button>
                 </div>
 
-                {/* Icon Links - Before nav links */}
-                <div className="flex flex-row gap-4 px-5 pb-6 justify-center flex-wrap">
+                {/* Navigation Links */}
+                <div className="flex-1 flex flex-col justify-center px-6">
+                  <p className="eyebrow pb-4">Menu</p>
+                  <div className="flex flex-col w-full">
+                    {navLinks.map((link, index) => (
+                      <Link
+                        href={link.href}
+                        key={link.name}
+                        className="flex items-baseline gap-4 border-b border-white/10 py-3"
+                        onClick={onClose}
+                      >
+                        <span className="font-mono text-[11px] text-secondary-400">
+                          0{index + 1}
+                        </span>
+                        <span className="text-mobile-menu">{link.name}</span>
+                      </Link>
+                    ))}
+                  </div>
+                  <Link
+                    href="/contact"
+                    onClick={onClose}
+                    className="btn-primary mt-8 w-full"
+                  >
+                    Let&apos;s talk
+                  </Link>
+                </div>
+
+                {/* Icon Links */}
+                <div className="flex flex-row gap-3 px-6 py-6 border-t border-white/10 flex-wrap">
                   {links.map((link) => {
                     const icon =
                       link.id === "github" || link.id === "linkedin"
@@ -169,38 +202,22 @@ const MobileMenu = ({
                             : "noopener noreferrer"
                         }
                         {...(link.download ? { download: true } : {})}
-                        className="flex flex-col items-center justify-center gap-1 w-8 h-8 text-white opacity-70 hover:opacity-100 active:opacity-100 transition-opacity duration-300"
+                        className="flex items-center justify-center gap-1.5 h-10 px-3 rounded-full border border-white/10 bg-white/5 text-slate-300 hover:text-primary-300 active:text-primary-300 transition-colors duration-300"
                         aria-label={link.ariaLabel}
-                        title={link.title}
+                        title={link.name}
                         onClick={onClose}
                       >
-                        <div className="w-8 h-8 text-white pointer-events-none">
+                        <div className="w-5 h-5 pointer-events-none [&>svg]:w-5 [&>svg]:h-5">
                           {icon}
                         </div>
                         {isPdfLink && (
-                          <span className="text-[8px] xs:text-[10px] text-white/80 font-medium pointer-events-none">
+                          <span className="font-mono text-[10px] uppercase tracking-[0.14em] pointer-events-none">
                             {link.title}
                           </span>
                         )}
                       </Link>
                     );
                   })}
-                </div>
-
-                {/* Navigation Links */}
-                <div className="flex-1 items-center flex-col gap-8">
-                  <div className="flex flex-col gap-6 w-full px-5">
-                    {navLinks.map((link) => (
-                      <Link
-                        href={link.href}
-                        key={link.name}
-                        className="text-mobile-menu"
-                        onClick={onClose}
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>

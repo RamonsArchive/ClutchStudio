@@ -1,5 +1,5 @@
 import React from "react";
-import { AboutData } from "@/constants";
+import { AboutData, WorkExperienceData } from "@/constants";
 import TitleSection from "@/components/TitleSection";
 import AboutContent from "@/components/AboutContent";
 
@@ -12,12 +12,13 @@ const page = () => {
   const releventCoursework = AboutData.text.releventCoursework;
   const technicalSkills = AboutData.text.technical_skills;
   const favoriteTools = AboutData.text.favoriteTools;
+  const workExperience = WorkExperienceData.text;
   return (
-    <section className="flex flex-col w-dvw h-full pb-15 gap-10">
-      <div className="relative flex flex-col h-[calc(50dvh-43px)] w-full overflow-hidden">
+    <section className="flex flex-col w-full h-full">
+      <div className="relative grid min-h-[42dvh] w-full overflow-hidden">
         <TitleSection
+          headerTitle="rvector.dev / About"
           mainTitle={title}
-          mainTitleClassName="font-funnel-sans text-white text-[58px] xs:text-[68px] sm:text-[78px] md:text-[84px] lg:text-[100px] font-bold break-words"
           includeBackgroundIcons={true}
           useCharsForMainTitle={true}
         />
@@ -30,6 +31,7 @@ const page = () => {
         favoriteTools={favoriteTools}
         technicalSkills={technicalSkills}
         images={images}
+        workExperience={workExperience}
       />
     </section>
   );

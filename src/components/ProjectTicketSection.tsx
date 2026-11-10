@@ -86,7 +86,7 @@ const ProjectTicketSection = ({
   }, [projectTickets, statusFilters, projectTypeFilters]);
 
   useEffect(() => {
-    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+    const handleClickOutside = (e: PointerEvent) => {
       const clickedOutsideStatus = outerStatusRef.current?.contains(
         e.target as Node
       );
@@ -113,12 +113,12 @@ const ProjectTicketSection = ({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
+    // pointerdown covers mouse and touch with a single event. Listening to
+    // both mousedown and touchstart toggled the menu twice on phones.
+    document.addEventListener("pointerdown", handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("pointerdown", handleClickOutside);
     };
   }, []);
 
@@ -146,7 +146,7 @@ const ProjectTicketSection = ({
   };
 
   return (
-    <div className="w-full h-full rounded-xl pt-5">
+    <div className="flex flex-col w-full h-full gap-5 md:gap-6">
       <AdminFilters
         titles={["Status", "Project Type"]}
         selectedFilters={[statusFilters, projectTypeFilters]}
@@ -164,11 +164,32 @@ const ProjectTicketSection = ({
         resetFilters={resetFilters}
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 pt-10">
-        {tickets.map((ticket) => (
-          <ProjectTicketCard key={ticket.id} projectTicket={ticket} />
-        ))}
-      </div>
+      <p className="font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-slate-400">
+        Showing {tickets.length} of {projectTickets.length} tickets
+        {statusFilters.length === 0 && (
+          <span className="normal-case tracking-normal">
+            {" "}
+            (open statuses only: {defaultStatus.map((s) => s.title).join(", ")})
+          </span>
+        )}
+      </p>
+
+      {tickets.length === 0 ? (
+        <div className="panel flex flex-col flex-center gap-2 p-8 md:p-12 text-center">
+          <p className="font-funnel-sans font-semibold text-[16px] md:text-[18px] text-white">
+            No tickets match these filters
+          </p>
+          <p className="font-funnel-sans text-[14px] md:text-[15px] text-slate-300">
+            Change or reset the filters to see more tickets.
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5">
+          {tickets.map((ticket) => (
+            <ProjectTicketCard key={ticket.id} projectTicket={ticket} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

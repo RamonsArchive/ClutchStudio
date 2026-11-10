@@ -1,5 +1,5 @@
 import React from "react";
-import { X } from "lucide-react";
+import { X, SlidersHorizontal } from "lucide-react";
 import DropDownMenu from "./DropDownMenu";
 
 interface FilterOption {
@@ -28,48 +28,55 @@ const AdminFilters = ({
   innerRef,
   resetFilters,
 }: Props) => {
+  const hasSelectedFilters = selectedFilters.some(
+    (filterArray) => filterArray.length > 0
+  );
+
   return (
-    <div className="flex flex-col gap-5 p-5 bg-secondary-800/50 rounded-xl">
-      <div className="flex flex-row gap-2 items-center">
-        <p className="font-montserrat font-normal text-[14px] sm:text-[16px] md:text-[20px] text-white">
-          Filters
-        </p>
+    // z-20 keeps the open dropdowns above the ticket cards below
+    <div className="panel relative z-20 flex flex-col gap-4 md:gap-5 p-4 md:p-5">
+      <div className="flex flex-row flex-wrap gap-3 items-center justify-between">
+        <div className="flex flex-row gap-2 items-center">
+          <SlidersHorizontal className="w-4 h-4 text-primary-400" aria-hidden />
+          <p className="font-mono text-[11px] md:text-[12px] uppercase tracking-[0.22em] text-primary-400">
+            Filters
+          </p>
+        </div>
+
+        {/* Reset Filters Button */}
+        {hasSelectedFilters && (
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="flex flex-row flex-center px-3 py-1.5 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/30 duration-300 ease-in-out cursor-pointer w-fit"
+          >
+            <p className="font-mono text-[11px] md:text-[12px] text-slate-200">
+              Reset Filters
+            </p>
+          </button>
+        )}
       </div>
 
       {/* Dropdown Menus */}
-      <div className="flex flex-row gap-2 xs:gap-5">
-        <div className="flex flex-row gap-2 items-center">
-          {titles.map((title, index) => (
-            <DropDownMenu
-              key={`${title}-${index}`}
-              title={title}
-              outerRef={outerRef[index]}
-              innerRef={innerRef[index]}
-              updateFilters={(value: string, title: string) =>
-                updateFilters(value, title, index)
-              }
-              options={options[index] || []}
-              isOpen={isOpen[index] || false}
-            />
-          ))}
-        </div>
+      <div className="flex flex-row flex-wrap gap-2 xs:gap-3 items-center">
+        {titles.map((title, index) => (
+          <DropDownMenu
+            key={`${title}-${index}`}
+            title={title}
+            outerRef={outerRef[index]}
+            innerRef={innerRef[index]}
+            updateFilters={(value: string, title: string) =>
+              updateFilters(value, title, index)
+            }
+            options={options[index] || []}
+            isOpen={isOpen[index] || false}
+          />
+        ))}
       </div>
 
-      {/* Reset Filters Button */}
-      {selectedFilters.some((filterArray) => filterArray.length > 0) && (
-        <button
-          onClick={resetFilters}
-          className="flex flex-row flex-center px-3 py-2 bg-secondary-400/60 hover:bg-slate-300/80 duration-300 rounded-sm ease-in-out cursor-pointer w-fit"
-        >
-          <p className="font-montserrat font-normal text-[10px] sm:text-[12px] md:text-[14px] text-white">
-            Reset Filters
-          </p>
-        </button>
-      )}
-
       {/* Selected Filters Display */}
-      {selectedFilters.some((filterArray) => filterArray.length > 0) && (
-        <div className="flex flex-col gap-3">
+      {hasSelectedFilters && (
+        <div className="flex flex-col gap-3 pt-4 border-t border-white/10">
           {selectedFilters.map(
             (filterArray, filterIndex) =>
               filterArray.length > 0 && (
@@ -77,14 +84,16 @@ const AdminFilters = ({
                   key={`filter-group-${filterIndex}`}
                   className="flex flex-col gap-2"
                 >
-                  <p className="font-montserrat font-normal text-[12px] sm:text-[14px] text-slate-300">
+                  <p className="font-mono text-[11px] md:text-[12px] uppercase tracking-[0.18em] text-slate-400">
                     {titles[filterIndex]}:
                   </p>
-                  <div className="flex flex-row gap-2 xs:gap-5 rounded-xl overflow-x-auto scrollbar-hide w-full">
+                  <div className="flex flex-row flex-wrap gap-2 w-full">
                     {filterArray.map((filter) => (
                       <button
+                        type="button"
                         key={`${filterIndex}-${filter.value}`}
-                        className="flex flex-row justify-between gap-3 items-center font-montserrat font-normal text-[10px] sm:text-[12px] md:text-[14px] text-white bg-secondary-600/60 hover:bg-secondary-500/80 rounded-xl px-3 py-2 md:px-5 md:py-3 duration-300 ease-in-out cursor-pointer whitespace-nowrap"
+                        aria-label={`Remove filter ${filter.title}`}
+                        className="group flex flex-row justify-between gap-2 items-center font-mono text-[11px] md:text-[12px] text-primary-100 border border-primary-500/40 bg-primary-500/10 hover:bg-primary-500/20 hover:border-primary-400 rounded-full pl-3 pr-2 py-1.5 duration-300 ease-in-out cursor-pointer whitespace-nowrap"
                         onClick={() => {
                           updateFilters(
                             filter.value.toString(),
@@ -94,8 +103,11 @@ const AdminFilters = ({
                         }}
                       >
                         {filter.title}
-                        <span className="flex flex-row items-center text-white z-5">
-                          <X className="w-4 h-4 xl:w-5 xl:h-5 hover:text-gray-400 duration-300 ease-in-out z-10" />
+                        <span className="flex flex-row items-center">
+                          <X
+                            className="w-3.5 h-3.5 text-primary-300 group-hover:text-white duration-300 ease-in-out"
+                            aria-hidden
+                          />
                         </span>
                       </button>
                     ))}

@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
+import { Projects } from "@/constants";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://clutchstudio.dev";
+  const baseUrl = "https://rvector.dev";
 
   return [
     {
@@ -22,6 +23,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.9,
     },
+    {
+      url: `${baseUrl}/services`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
+    ...Projects.map((project) => ({
+      url: `${baseUrl}/projects/${project.id}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
     {
       url: `${baseUrl}/contact`,
       lastModified: new Date(),

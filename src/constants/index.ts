@@ -14,6 +14,10 @@ export const navLinks = [
     href: "/projects",
   },
   {
+    name: "Services",
+    href: "/services",
+  },
+  {
     name: "Contact",
     href: "/contact",
   },
@@ -24,6 +28,50 @@ export const HeroData = {
 };
 
 // projects
+export const ModalAI: ProjectTemplate = {
+  id: "modal-ai",
+  projectType: "WEB_DEVELOPMENT",
+  text: {
+    name: "ModalAI",
+    subName: "The manufacturing platform behind drone production",
+    title:
+      "Building the internal manufacturing platform that runs drone production, purchasing, inventory, and testing at ModalAI",
+    workDescription:
+      "I've been a software engineer at ModalAI since June 2026, working across the full stack (Next.js 16, React 19, TypeScript, Prisma, PostgreSQL on Supabase) of the company's internal manufacturing platform, with more than 650 commits so far. One of my biggest contributions is the Purchase Tracking Sheet: a live table of every purchase order line in one place, showing vendor, PO status, per-line ETA, quantity ordered and received, linked work orders, and formatted vendor notes. Receiving reuses the original receive logic, refuses over-receipts and fractional stock, and derives the purchase request's status from what was received, while a shared cached snapshot that clears on every receipt keeps the sheet live without being slow. Around it I built PO notifications and page subscriptions, permission-aware editing, sticky headers and highlighted filter matches. Beyond purchasing, I linked work orders to the demand they serve (Shopify customer orders and internal stock requests) with an Order Planning status board, built Blockers and low-stock scoring pages that rank parts by how fast stock is running out, and shipped a multi-build planner that plans several builds against a shared stock ledger so two builds can't count the same parts twice. I also built an alternate parts system, a bulk BOM editor with pending changes and restore, number-first purchase requests, role-based approval chains, units of measure beyond 'each', and board flashing and batch test analytics with lot and serial tracking. On the data side, I analyzed 1,290 orders and 23k stock movements to write a findings report recommending a Bayesian demand model at the drone SKU level, then built the demand forecast, buy plan, and plan calendar pages on top of it, and I measure real vendor lead times from receiving data to turn them into 'order by' dates. I migrated test data and device registrations from Firestore to PostgreSQL, write DB-backed integration tests, and keep CI green.",
+    personalDescription:
+      "ModalAI is where I get to see software move real hardware. The platform I work on is what the team uses every day to buy parts, plan builds, pick stock, and test drones, so when something I ship is slow or wrong, somebody on the shop floor feels it right away. That's changed how I build: every stock movement goes through one choke point, receiving refuses over-receipts, and line costs and received quantities can't be edited inline, because the ledger has to stay right. The Purchase Tracking Sheet is one of the accomplishments I'm proudest of. It started in July 2026 as a way to see every purchase order line in one place, and I've kept improving it since, from guarded receiving and cached snapshots to notifications so people get alerts on the orders they care about. I also love that the work isn't only on a screen. I calibrate drone cameras and work directly on VOXL hardware with voxl-portal, ADB shell, Linux, and Docker, and I get to turn the company's own data into forecasting, lead time, and test insights. I plan to join full time in June 2027.",
+  },
+  tags: [
+    "Full-Stack Development",
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Prisma",
+    "PostgreSQL",
+    "Supabase",
+    "Manufacturing",
+    "Inventory & Purchasing",
+    "Demand Forecasting",
+    "Integration Testing",
+    "Drones & Hardware",
+  ],
+  images: {
+    mainImage: "/Projects/ModalAI/modalai1_cropped.png",
+    galleryImages: [
+      "/Projects/ModalAI/modalai1_cropped.png",
+      "/Projects/ModalAI/modalai2_cropped.png",
+      "/Projects/ModalAI/modalai3_cropped.png",
+    ],
+  },
+  websiteUrl: "https://www.modalai.com",
+  githubUrl: "",
+  dateCompleted: "2026-11-10",
+  featured: true,
+  isClient: true,
+  isWebsite: true,
+  status: "in-progress", // live, in-progress, archived
+};
+
 export const GoldenEagle: ProjectTemplate = {
   id: "golden-eagle-estates",
   projectType: "WEB_DEVELOPMENT",
@@ -641,16 +689,16 @@ export const Ascend: ProjectTemplate = {
 
 // recent projects in hero section
 export const RecentProjects = [
+  ModalAI,
   EmpiricalComparisonOfAIModels,
   Ascend,
   DigitalRevolution,
-  YoloV8,
 ];
 
 // all projects
 export const Projects = [
+  ModalAI,
   Ascend,
-
   EmpiricalComparisonOfAIModels,
   TypeQuest,
   ML_FootballInjuryPrediction,
@@ -669,6 +717,7 @@ export const Projects = [
 
 // project page map
 export const ProjectPageMap = {
+  "modal-ai": ModalAI,
   ascend: Ascend,
   "empirical-comparison-of-ai-models": EmpiricalComparisonOfAIModels,
   "type-quest": TypeQuest,
@@ -686,6 +735,115 @@ export const ProjectPageMap = {
   "the-stu": TheStu,
 } as const;
 
+// Site-wide brand constants
+export const SiteData = {
+  name: "rvector",
+  domain: "rvector.dev",
+  url: "https://rvector.dev",
+  owner: "Ramon",
+  tagline: "Full-stack engineer. I build it, ship it, and host it.",
+  location: "San Diego, CA",
+  email: "clutchdev.apps@gmail.com",
+  logos: {
+    beaver: "/Assets/Logos/rvector/rvector_beaver.png", // tight crop, transparent
+    beaverSmall: "/Assets/Logos/rvector/rvector_beaver_small.png", // navbar size
+    transparent: "/Assets/Logos/rvector/rvector_transparent_logo.png", // square, transparent
+    navy: "/Assets/Logos/rvector/rvector_bearonly_logo.png", // square, navy bg
+    black: "/Assets/Logos/rvector/rvector_black_logo.png", // square, black bg
+    white: "/Assets/Logos/rvector/rvector_whitebg_logo.png", // square, white bg
+    full: "/Assets/Logos/rvector/rvector_fullsize_logo.jpg", // beaver + rvector.dev text
+  },
+};
+
+// Numbers shown in the home hero
+export const HeroStats = [
+  { value: 650, suffix: "+", label: "Commits at ModalAI" },
+  { value: Projects.length, suffix: "", label: "Projects shipped" },
+  { value: 8, suffix: "", label: "Sites live in production" },
+  { value: 23, suffix: "k", label: "Stock movements analyzed" },
+] as const;
+
+// Web design + hosting offering (home page section and /services page)
+export const ServicesData = {
+  id: "services",
+  text: {
+    eyebrow: "Web design & hosting",
+    title: "Need a website for your business? I build it and host it.",
+    subtitle:
+      "Beyond my own projects, I design, build, and host websites for companies and organizations. You get one person who handles everything, from the first sketch to keeping the site online.",
+    cta: "Start a project",
+  },
+  services: [
+    {
+      id: "design-build",
+      icon: "code",
+      title: "Custom design & build",
+      description:
+        "A site designed around your business and built with Next.js, React, and TypeScript. No templates, and it works on every screen size.",
+    },
+    {
+      id: "hosting",
+      icon: "server",
+      title: "Managed hosting",
+      description:
+        "I deploy your site, connect your domain, set up SSL, and keep it online, so you never have to think about servers.",
+    },
+    {
+      id: "admin",
+      icon: "dashboard",
+      title: "Admin dashboards",
+      description:
+        "Update your own content, track customer inquiries, and manage projects from a private dashboard built for your team.",
+    },
+    {
+      id: "integrations",
+      icon: "plug",
+      title: "Payments & integrations",
+      description:
+        "Stripe checkout, contact forms with email notifications, file storage on AWS S3, and the other tools your business runs on.",
+    },
+    {
+      id: "seo",
+      icon: "search",
+      title: "SEO & performance",
+      description:
+        "Structured data, sitemaps, fast load times, and analytics, so customers can find you and the site feels quick when they do.",
+    },
+    {
+      id: "maintenance",
+      icon: "wrench",
+      title: "Ongoing maintenance",
+      description:
+        "Security updates, error monitoring, and changes when your business changes. I stay on after launch.",
+    },
+  ],
+  process: [
+    {
+      step: "01",
+      title: "Talk",
+      description: "Tell me about your business and what the site needs to do.",
+    },
+    {
+      step: "02",
+      title: "Design & build",
+      description:
+        "I design and build it, and you review it as it comes together.",
+    },
+    {
+      step: "03",
+      title: "Launch",
+      description: "I connect your domain and put the site live.",
+    },
+    {
+      step: "04",
+      title: "Host & maintain",
+      description: "I keep it online, secure, and up to date.",
+    },
+  ],
+  // Sites I built and run for clients and organizations
+  clients: [GoldenEagle, ColorStack, DigitalRevolution, Ascend],
+};
+
 export const AboutData = {
   id: "about",
   text: {
@@ -694,7 +852,7 @@ export const AboutData = {
     introduction:
       "I am a cat lover, gym goer, soccer player, and a software engineer that is passionate about learning new technologies and building new projects. I've lived in Long Beach CA during my early childhood, until I moved to Irvine CA, before moving to Placerville CA for my high school years, and then finally moving to San Diego CA for my college years. Every city has its own unique charm, and I've been fortunate to experience them all.",
     education:
-      "I am a third year student at UC San Diego studying Cognitive Science with a specialization in Machine Learning and Neural Computation, minoring in Computer Science. Expected graduation: June 2027.",
+      "I am a fourth year student at UC San Diego studying Cognitive Science with a specialization in Machine Learning and Neural Computation, minoring in Computer Science. Expected graduation: June 2027. I currently work as a software engineer at ModalAI and plan to join full time after graduating.",
     releventCoursework: [
       "Advanced data structures",
       "Design & Analysis of Algorithms",
@@ -735,7 +893,14 @@ export const AboutData = {
     ],
     technical_skills: {
       frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      backend: ["Node.js", "MySQL", "Prisma", "Sanity CMS"],
+      backend: [
+        "Node.js",
+        "PostgreSQL",
+        "MySQL",
+        "Prisma",
+        "Supabase",
+        "Sanity CMS",
+      ],
       cloud_and_apis: [
         "Vercel",
         "Oracle Cloud",
@@ -746,7 +911,7 @@ export const AboutData = {
       ],
       ml_ai: [
         "YOLOv8",
-        "siklearn",
+        "scikit-learn",
         "OpenCV",
         "Whisper",
         "Python",
@@ -756,6 +921,7 @@ export const AboutData = {
     },
   },
   images: [
+    "/Assets/About/ramon_portrait.jpg",
     "/Assets/About/personal1.png",
     "/Assets/About/personal5.png",
     "/Assets/About/whisper1.png",
@@ -770,12 +936,20 @@ export const WorkExperienceData = {
     subtitle: "Building Real Solutions for Real Clients",
     experience: [
       {
-        company: "Clutch Studio",
+        company: "ModalAI",
+        position: "Software Engineer",
+        duration: "June 2026 - Present",
+        location: "San Diego, CA",
+        description:
+          "Build features and fix bugs across the whole stack (Next.js 16, React 19, TypeScript, Prisma, PostgreSQL on Supabase) of the internal manufacturing platform that runs drone production, purchasing, inventory, and testing, with 650+ commits since June 2026. Built a live Purchase Tracking Sheet with guarded receiving, cached snapshots, and PO notifications. Linked work orders to the Shopify orders and internal stock requests they serve, and shipped a multi-build planner on a shared stock ledger so two builds can't count the same parts twice. Analyzed 1,290 orders and 23k stock movements to recommend a Bayesian demand model, then built the demand forecast, buy plan, and plan calendar pages on top of it. Migrated test data from Firestore to PostgreSQL, write DB-backed integration tests, calibrate drone cameras, and work directly on VOXL hardware.",
+      },
+      {
+        company: "rvector.dev (formerly Clutch Studio)",
         position: "Founder & Full-Stack Developer",
         duration: "2024 - Present",
         location: "San Diego, CA",
         description:
-          "Founded and operate a web development company serving real clients with full-stack solutions using Next.js 15, React 19, and TypeScript. Built comprehensive business platforms with complete admin dashboards, project management systems, and payment processing integration. Developed production applications with cloud infrastructure, real-time data synchronization, and automated CI/CD pipelines. Implemented advanced features including JWT authentication, rate limiting, AWS S3 integration, and comprehensive error monitoring. Delivered end-to-end solutions from initial client consultation through deployment and ongoing maintenance. Key projects include Relay E-commerce Platform (Spring 2025) - a comprehensive e-commerce solution with hybrid database architecture, Stripe payment processing, EasyPost shipping integration, and advanced promo system with usage tracking, and Golden Eagle Estates (Fall 2024) - a complete digital transformation platform for construction company featuring admin dashboard, project management, customer inquiry handling, and sophisticated project ticket system with AWS S3 and Prisma ORM integration.",
+          "Founded and operate a web development and hosting studio serving real clients with full-stack solutions using Next.js 15, React 19, and TypeScript. Built comprehensive business platforms with complete admin dashboards, project management systems, and payment processing integration. Developed production applications with cloud infrastructure, real-time data synchronization, and automated CI/CD pipelines. Implemented advanced features including JWT authentication, rate limiting, AWS S3 integration, and comprehensive error monitoring. Delivered end-to-end solutions from initial client consultation through deployment and ongoing maintenance. Key projects include Relay E-commerce Platform (Spring 2025) - a comprehensive e-commerce solution with hybrid database architecture, Stripe payment processing, EasyPost shipping integration, and advanced promo system with usage tracking, and Golden Eagle Estates (Fall 2024) - a complete digital transformation platform for construction company featuring admin dashboard, project management, customer inquiry handling, and sophisticated project ticket system with AWS S3 and Prisma ORM integration.",
       },
     ],
   },
@@ -785,8 +959,9 @@ export const ContactData = {
   id: "contact",
   text: {
     title: "Contact",
-    subtitle: "It's Fourth Quarter. Crunch Time.",
-    subsubtitle: "Call a timeout—let's draw up your winning play",
+    subtitle: "Got something to build?",
+    subsubtitle:
+      "Tell me about your project, whether it's a new website, hosting for your business, or a role you're hiring for.",
   },
 
   services: [
@@ -798,6 +973,13 @@ export const ContactData = {
 };
 
 export const footerQuickLinks = [
+  {
+    id: "services",
+    href: "/services",
+    title: "Web Design & Hosting",
+    target: undefined,
+    rel: undefined,
+  },
   {
     id: "github",
     href: "https://github.com/RamonsArchive",
@@ -860,7 +1042,7 @@ export const TermsOfService = [
     id: 2,
     title: "What This Site Is",
     content:
-      "This is my personal portfolio website showcasing my software development, web development, data science, and AI projects. It's designed to help potential clients and employers learn about my work and get in touch.",
+      "This is my personal portfolio website, rvector.dev, showcasing my software development, web development, data science, and AI projects, along with the web design and hosting services I offer. It's designed to help potential clients and employers learn about my work and get in touch.",
   },
   {
     id: 3,

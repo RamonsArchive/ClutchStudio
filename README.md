@@ -1,11 +1,11 @@
-# Clutch Studio Portfolio Website
+# rvector.dev
 
-A modern, full-stack portfolio website built with Next.js 15, React 19, and TypeScript.
+Ramon's portfolio and web design + hosting site (formerly Clutch Studio), built with Next.js 16, React 19, and TypeScript.
 
 ## Tech Stack
 
-- **Framework:** Next.js 15.4.6
-- **React:** 19.1.0
+- **Framework:** Next.js 16.4
+- **React:** 19.3
 - **TypeScript:** 5.x
 - **Database:** MySQL with Prisma ORM
 - **Styling:** Tailwind CSS 4.x

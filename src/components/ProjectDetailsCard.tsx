@@ -1,162 +1,120 @@
 "use client";
 import React from "react";
-import { ProjectTemplate } from "@/types/GlobalTypes";
+import { ProjectTemplate, ProjectTypes } from "@/types/GlobalTypes";
+import { ArrowUpRight } from "lucide-react";
 import VisitButton from "./VisitButton";
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import SplitText from "gsap/SplitText";
+import Reveal from "./Reveal";
+import { StatusIndicator, formatProjectDate } from "./ProjectDisplayCard";
 
-gsap.registerPlugin(ScrollTrigger, SplitText);
+// "https://www.modalai.com/x" -> "modalai.com"
+const getLinkLabel = (url: string) => {
+  try {
+    const host = new URL(url).hostname.replace(/^www\./, "");
+    return host === "github.com" ? "GitHub" : host;
+  } catch {
+    return url;
+  }
+};
 
 const ProjectDetailsCard = ({ data }: { data: ProjectTemplate }) => {
-  const { name } = data.text;
-  const isClient = data.isClient;
   const tags = data.tags;
   const url = data.websiteUrl ? data.websiteUrl : data.githubUrl;
-  const isWebsite = data.isWebsite;
-  const visitButtonRef = useRef<HTMLDivElement>(null);
-  const clientRef = useRef<HTMLDivElement>(null);
-  const clientNameRef = useRef<HTMLHeadingElement>(null);
+  const isWebsite = !!data.websiteUrl;
+  const isInProgress = data.status === "in-progress";
 
-  const servicesRef = useRef<HTMLDivElement>(null);
-  const servicesTagsRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    const clientSplit = SplitText.create(clientRef.current, {
-      type: "words",
-    });
-
-    const clientNameSplit = SplitText.create(clientNameRef.current, {
-      type: "words",
-    });
-
-    const servicesSplit = SplitText.create(servicesRef.current, {
-      type: "words",
-    });
-
-    const servicesTagsSplit = SplitText.create(servicesTagsRef.current, {
-      type: "words",
-    });
-
-    gsap.from(clientSplit.words, {
-      scrollTrigger: {
-        trigger: clientRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-
-    gsap.from(servicesSplit.words, {
-      scrollTrigger: {
-        trigger: servicesRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-
-    gsap.from(servicesTagsSplit.words, {
-      scrollTrigger: {
-        trigger: servicesTagsRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-
-    gsap.from(clientNameSplit.words, {
-      scrollTrigger: {
-        trigger: clientNameRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-
-    gsap.from(visitButtonRef.current, {
-      scrollTrigger: {
-        trigger: visitButtonRef.current,
-        start: "top bottom",
-        end: "bottom 95%",
-        scrub: 1,
-      },
-      opacity: 0,
-      yPercent: -100,
-      duration: 0.5,
-      ease: "power2.inOut",
-    });
-  }, [visitButtonRef, clientRef, servicesRef, servicesTagsRef, clientNameRef]);
+  const labelClassName =
+    "font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-slate-500";
+  const valueClassName =
+    "font-funnel-sans text-white text-[15px] md:text-[17px] font-semibold leading-snug";
+  const cellClassName =
+    "flex flex-col gap-2 min-w-0 bg-primary-background-900 p-4 md:p-6";
 
   return (
-    <div className="flex flex-col gap-6 bg-primary-100 rounded-xl p-6 shadow-lg w-full">
-      <div className="flex flex-col gap-4 pb-6 border-b border-gray-300/40">
-        <div className="flex flex-col gap-2">
-          <h3
-            ref={clientRef}
-            className="font-funnel-sans text-gray-600 text-[14px] font-medium uppercase tracking-wide"
-          >
-            {isClient ? "Client" : "Project"}
-          </h3>
-          <h1
-            ref={clientNameRef}
-            className="font-funnel-sans text-black text-[28px] sm:text-[32px] font-bold leading-tight"
-          >
-            {name}
-          </h1>
-        </div>
-      </div>
-
-      <div className="flex flex-col gap-4 pb-6 border-b border-gray-300/40">
-        <h3
-          ref={servicesRef}
-          className="font-funnel-sans text-gray-600 text-[14px] font-medium uppercase tracking-wide"
-        >
-          Services Provided
-        </h3>
-
-        <div
-          ref={servicesTagsRef}
-          className="flex flex-col lg:flex-row gap-3 flex-wrap"
-        >
-          {tags.slice(0, 5).map((tag, index) => {
-            const visibleTags = tags.slice(0, 5);
-            return (
-              <div key={index} className="tag-item flex items-center">
-                <span className="font-funnel-sans text-black/80 text-[13px] xs:text-[14px] font-medium wrap-break-words px-3 py-1 bg-white/80 rounded-full border border-gray-200/50">
-                  {tag}
-                </span>
-                {index !== visibleTags.length - 1 && (
-                  <span className="font-funnel-sans text-black/40 text-[12px] xs:text-[14px] font-light mx-2 xs:mx-3 wrap-break-words">
-                    |
-                  </span>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      <div ref={visitButtonRef} className="flex w-full flex-col">
+    <div className="flex flex-col gap-6 md:gap-8 w-full">
+      <Reveal className="flex flex-wrap items-end justify-between gap-4">
+        <p className="eyebrow flex items-center gap-3">
+          <span className="text-secondary-400">01</span>
+          <span className="h-px w-8 bg-white/20" />
+          <span>Overview</span>
+        </p>
         <VisitButton url={url} isWebsite={isWebsite} />
+      </Reveal>
+
+      {/* Facts row */}
+      <Reveal>
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-2xl border border-white/10 bg-white/10 overflow-hidden">
+          <div className={cellClassName}>
+            <dt className={labelClassName}>Type</dt>
+            <dd className={valueClassName}>{ProjectTypes[data.projectType]}</dd>
+          </div>
+
+          <div className={cellClassName}>
+            <dt className={labelClassName}>
+              {isInProgress ? "Timeline" : "Completed"}
+            </dt>
+            <dd className={valueClassName}>
+              {isInProgress ? "Ongoing" : formatProjectDate(data.dateCompleted)}
+            </dd>
+          </div>
+
+          <div className={cellClassName}>
+            <dt className={labelClassName}>Status</dt>
+            <dd className="flex items-center min-h-[22px] md:min-h-[24px]">
+              <StatusIndicator status={data.status} />
+            </dd>
+          </div>
+
+          <div className={cellClassName}>
+            <dt className={labelClassName}>Links</dt>
+            <dd className="flex flex-col gap-1.5 min-w-0">
+              {data.websiteUrl && (
+                <a
+                  href={data.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 min-w-0 font-mono text-[12px] md:text-[13px] text-primary-300 transition-colors duration-300 hover:text-white"
+                >
+                  <span className="truncate">
+                    {getLinkLabel(data.websiteUrl)}
+                  </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              )}
+              {data.githubUrl && (
+                <a
+                  href={data.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-1.5 min-w-0 font-mono text-[12px] md:text-[13px] text-primary-300 transition-colors duration-300 hover:text-white"
+                >
+                  <span className="truncate">
+                    {getLinkLabel(data.githubUrl)}
+                  </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              )}
+              {!data.websiteUrl && !data.githubUrl && (
+                <span className="font-mono text-[12px] md:text-[13px] text-slate-500">
+                  Private
+                </span>
+              )}
+            </dd>
+          </div>
+        </dl>
+      </Reveal>
+
+      {/* Tag chips */}
+      <div className="flex flex-col gap-3">
+        <p className={labelClassName}>
+          {data.isClient ? "Services & stack" : "Stack"}
+        </p>
+        <Reveal stagger={0.03} y={12} className="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <span key={tag} className="chip">
+              {tag}
+            </span>
+          ))}
+        </Reveal>
       </div>
     </div>
   );

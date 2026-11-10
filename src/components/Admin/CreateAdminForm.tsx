@@ -24,7 +24,14 @@ const adminFormSchema = z.object({
 
 type AdminFormData = z.infer<typeof adminFormSchema>;
 
+// Shared classes so every field in the form looks the same
+const labelClassName =
+  "font-mono text-slate-300 text-[11px] sm:text-[12px] uppercase tracking-[0.18em] leading-relaxed";
+const errorClassName =
+  "font-funnel-sans text-red-400 text-[12px] sm:text-[14px] leading-relaxed";
+
 const CreateAdminForm = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -52,219 +59,105 @@ const CreateAdminForm = () => {
     role?: string;
   }>({});
 
-  useGSAP(() => {
-    // get the split text elements
-    const titleSplit = new SplitText(titleRef.current, {
-      type: "words",
-    });
-    const subtitleSplit = new SplitText(subtitleRef.current, {
-      type: "words",
-    });
+  // Runs once on mount. The form reveals a single time when it scrolls into
+  // view (no scrub), so every `.form-input` always ends up visible.
+  useGSAP(
+    () => {
+      // get the split text elements
+      const titleSplit = new SplitText(titleRef.current, {
+        type: "words",
+      });
+      const subtitleSplit = new SplitText(subtitleRef.current, {
+        type: "words",
+      });
 
-    // label splits
-    const usernameLabelSplit = new SplitText(usernameLabelRef.current, {
-      type: "words",
-    });
-    const passwordLabelSplit = new SplitText(passwordLabelRef.current, {
-      type: "words",
-    });
-    const roleLabelSplit = new SplitText(roleLabelRef.current, {
-      type: "words",
-    });
+      // label splits
+      const usernameLabelSplit = new SplitText(usernameLabelRef.current, {
+        type: "words",
+      });
+      const passwordLabelSplit = new SplitText(passwordLabelRef.current, {
+        type: "words",
+      });
+      const roleLabelSplit = new SplitText(roleLabelRef.current, {
+        type: "words",
+      });
 
-    // create scroll trigger and animation for title
-    gsap.fromTo(
-      titleSplit.words,
-      {
+      const allTextElements = [...titleSplit.words, ...subtitleSplit.words];
+      const allLabels = [
+        ...usernameLabelSplit.words,
+        ...passwordLabelSplit.words,
+        ...roleLabelSplit.words,
+      ];
+      const allInputs = [
+        usernameRef.current,
+        passwordRef.current,
+        roleRef.current,
+      ];
+
+      gsap.set([...allTextElements, ...allLabels], {
         opacity: 0,
         yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
+      });
 
-    gsap.fromTo(
-      subtitleSplit.words,
-      {
+      gsap.set([...allInputs, submitButtonRef.current], {
         opacity: 0,
-        yPercent: 100,
-      },
-      {
+        y: 16,
+      });
+
+      // one timeline, played once when the panel enters the viewport
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out", duration: 0.5 },
         scrollTrigger: {
-          trigger: subtitleRef.current,
+          trigger: containerRef.current,
           start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
+          once: true,
         },
+      });
+
+      tl.to(allTextElements, {
         opacity: 1,
         yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
+        stagger: 0.02,
+      })
+        .to(
+          allLabels,
+          {
+            opacity: 1,
+            yPercent: 0,
+            stagger: 0.02,
+          },
+          "-=0.3"
+        )
+        .to(
+          allInputs,
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.05,
+            clearProps: "transform",
+          },
+          "<"
+        )
+        .to(
+          submitButtonRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            clearProps: "transform", // let the CSS hover lift work again
+          },
+          "-=0.3"
+        );
 
-    // create scroll trigger and animation for labels
-    gsap.fromTo(
-      usernameLabelSplit.words,
-      {
-        opacity: 0,
-        yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: usernameLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
-
-    gsap.fromTo(
-      passwordLabelSplit.words,
-      {
-        opacity: 0,
-        yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: passwordLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
-
-    gsap.fromTo(
-      roleLabelSplit.words,
-      {
-        opacity: 0,
-        yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: roleLabelRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
-
-    // create scroll trigger and animation for inputs
-    gsap.fromTo(
-      usernameRef.current,
-      {
-        opacity: 0,
-        yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: usernameRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
-
-    gsap.fromTo(
-      passwordRef.current,
-      {
-        opacity: 0,
-        yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: passwordRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
-
-    gsap.fromTo(
-      roleRef.current,
-      {
-        opacity: 0,
-        yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: roleRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
-
-    // create scroll trigger and animation for submit button
-    gsap.fromTo(
-      submitButtonRef.current,
-      {
-        opacity: 0,
-        yPercent: 100,
-      },
-      {
-        scrollTrigger: {
-          trigger: submitButtonRef.current,
-          start: "top 90%",
-          end: "bottom bottom",
-          scrub: 1,
-        },
-        opacity: 1,
-        yPercent: 0,
-        duration: 0.5,
-        ease: "power2.inOut",
-      }
-    );
-
-    return () => {
-      titleSplit.revert();
-      subtitleSplit.revert();
-      usernameLabelSplit.revert();
-      passwordLabelSplit.revert();
-      roleLabelSplit.revert();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  });
+      return () => {
+        titleSplit.revert();
+        subtitleSplit.revert();
+        usernameLabelSplit.revert();
+        passwordLabelSplit.revert();
+        roleLabelSplit.revert();
+      };
+    },
+    { scope: containerRef }
+  );
 
   const resetForm = () => {
     setStoreFormData({
@@ -347,7 +240,7 @@ const CreateAdminForm = () => {
     }
   };
 
-  const [_state, formAction, isPending] = useActionState(submitForm, {
+  const [state, formAction, isPending] = useActionState(submitForm, {
     status: "INITIAL",
     error: "",
     data: null,
@@ -358,18 +251,22 @@ const CreateAdminForm = () => {
   };
 
   return (
-    <div className="flex flex-col gap-5 md:gap-10 p-5 md:p-10 w-full bg-gradient-to-b from-primary-950 via-black to-accent-950 max-w-[1200px] mx-auto rounded-xl shadow-lg">
-      <div className="flex flex-col w-full gap-5">
-        <h1
+    <div
+      ref={containerRef}
+      className="panel flex flex-col gap-6 md:gap-8 p-5 md:p-8 w-full max-w-[720px] mx-auto"
+    >
+      <div className="flex flex-col w-full gap-3">
+        <p className="eyebrow">Admin / Users</p>
+        <h2
           ref={titleRef}
-          className="font-funnel-sans text-white text-[28px] sm:text-[32px] font-bold leading-tight"
+          className="font-funnel-sans text-white text-[26px] sm:text-[30px] font-bold leading-tight tracking-tight"
         >
           Create Admin User
-        </h1>
+        </h2>
 
         <p
           ref={subtitleRef}
-          className="font-funnel-sans text-white/90 text-[15px] sm:text-[16px] font-light leading-relaxed max-w-2xl"
+          className="font-funnel-sans text-slate-300 text-[15px] md:text-[16px] leading-relaxed max-w-2xl"
         >
           Create a new administrator account with appropriate permissions and
           role assignment.
@@ -377,64 +274,62 @@ const CreateAdminForm = () => {
       </div>
 
       <div className="flex flex-col gap-5">
-        <Form action={formAction} className="flex flex-col gap-10 md:gap-20">
-          <div className="flex flex-col gap-5 md:gap-10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10">
-              <div className="flex flex-col gap-2">
+        <Form action={formAction} className="flex flex-col gap-8">
+          <div className="flex flex-col gap-5 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="username"
                   ref={usernameLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Username <span className="text-red-500">*</span>
+                  Username <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="text"
                   name="username"
                   id="username"
                   placeholder="Username"
+                  autoComplete="off"
                   ref={usernameRef}
                   className="form-input"
                   value={storeFormData.username}
                   onChange={(e) => handleFormChange("username", e.target.value)}
                 />
                 {errors.username && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.username}
-                  </p>
+                  <p className={errorClassName}>{errors.username}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="password"
                   ref={passwordLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Password <span className="text-red-500">*</span>
+                  Password <span className="text-red-400">*</span>
                 </label>
                 <input
                   type="password"
                   name="password"
                   id="password"
                   placeholder="Password"
+                  autoComplete="new-password"
                   ref={passwordRef}
                   className="form-input"
                   value={storeFormData.password}
                   onChange={(e) => handleFormChange("password", e.target.value)}
                 />
                 {errors.password && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.password}
-                  </p>
+                  <p className={errorClassName}>{errors.password}</p>
                 )}
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 min-w-0">
                 <label
                   htmlFor="role"
                   ref={roleLabelRef}
-                  className="font-funnel-sans text-white text-[12px] sm:text-[14px] font-light leading-relaxed"
+                  className={labelClassName}
                 >
-                  Role <span className="text-red-500">*</span>
+                  Role <span className="text-red-400">*</span>
                 </label>
                 <select
                   name="role"
@@ -447,18 +342,14 @@ const CreateAdminForm = () => {
                   <option value="ADMIN">Admin</option>
                   <option value="VIEWER">Viewer</option>
                 </select>
-                {errors.role && (
-                  <p className="text-red-500 text-[12px] sm:text-[14px] font-light leading-relaxed">
-                    {errors.role}
-                  </p>
-                )}
+                {errors.role && <p className={errorClassName}>{errors.role}</p>}
               </div>
             </div>
-            <div className="flex w-full justify-center">
+            <div className="flex w-full pt-2">
               <button
                 type="submit"
                 ref={submitButtonRef}
-                className="animated-gradient-button w-full max-w-sm px-3 py-2 rounded-xl cursor-pointer"
+                className="animated-gradient-button w-full sm:w-auto px-8 py-3 rounded-full cursor-pointer font-funnel-sans text-[14px] md:text-[15px] opacity-0"
                 disabled={isPending}
               >
                 {isPending ? "Creating..." : "Create Admin"}
@@ -467,8 +358,14 @@ const CreateAdminForm = () => {
           </div>
         </Form>
         {statusMessage && (
-          <div className="flex-center w-full mt-5">
-            <p className="text-white text-[12px] sm:text-[14px] font-light leading-relaxed text-center px-3 py-2 rounded-xl bg-accent-900">
+          <div className="flex w-full" role="status" aria-live="polite">
+            <p
+              className={`font-funnel-sans text-[13px] sm:text-[14px] leading-relaxed px-4 py-3 rounded-xl border w-full ${
+                state.status === "ERROR"
+                  ? "border-red-400/40 bg-red-400/10 text-red-300"
+                  : "border-primary-500/40 bg-primary-500/10 text-primary-100"
+              }`}
+            >
               {statusMessage}
             </p>
           </div>

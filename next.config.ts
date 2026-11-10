@@ -1,7 +1,9 @@
-import { withSentryConfig } from "@sentry/nextjs";
+import { withSentryConfig } from "@sentry/nextjs/config";
 
 const nextConfig = {
   /* config options here */
+  cacheComponents: true,
+  partialPrefetching: true,
   reactCompiler: true,
   experimental: {
     turbopackFileSystemCacheForDev: true,
@@ -32,7 +34,7 @@ export default withSentryConfig(nextConfig, {
 
   org: "relent",
 
-  project: "clutch-studio",
+  project: "clutch-studio", // Sentry project slug (rename in Sentry before changing)
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,

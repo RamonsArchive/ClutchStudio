@@ -1,22 +1,26 @@
 "use client";
-import React, {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-  useMemo,
-} from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Play, Pause } from "lucide-react";
+import {
+  Play,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
+  Maximize2,
+  X,
+} from "lucide-react";
 import Image from "next/image";
 
+const SLIDE_DURATION = 5; // seconds each image stays up while playing
+
+const formatPlate = (n: number) => String(n).padStart(2, "0");
+
 const ImageCarousel = ({ images }: { images: string[] }) => {
-  const imageRef = useRef<HTMLImageElement[]>([]);
   const progressRef = useRef<HTMLSpanElement[]>([]);
-  const dotRef = useRef<HTMLSpanElement[]>([]);
-  const interval = useRef<NodeJS.Timeout | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
 
   const [carousel, setCarousel] = useState({
     currentImage: 0,
@@ -28,229 +32,181 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   const [startY, setStartY] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+
+  // Only auto-advance while the carousel is on screen
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.25 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const { currentImage, isPlaying } = carousel;
+  const imageCount = images?.length ?? 0;
+  const hasMultiple = imageCount > 1;
 
-  // Throttle function for smooth performance
-  const throttle = useCallback(
-    (func: (clientX: number, clientY: number) => void, delay: number) => {
-      let timeoutId: NodeJS.Timeout;
-      let lastExecTime = 0;
+  // Auto-advance is paused while dragging or while the lightbox is open
+  const isAdvancing =
+    isPlaying && isInView && !isDragging && !isLightboxOpen && hasMultiple;
 
-      return function (clientX: number, clientY: number) {
-        const currentTime = Date.now();
+  const goToNext = useCallback(() => {
+    setCarousel((prev) => ({
+      ...prev,
+      currentImage: (prev.currentImage + 1) % imageCount,
+    }));
+  }, [imageCount]);
 
-        if (currentTime - lastExecTime > delay) {
-          func(clientX, clientY);
-          lastExecTime = currentTime;
-        } else {
-          clearTimeout(timeoutId);
-          timeoutId = setTimeout(
-            () => {
-              func(clientX, clientY);
-              lastExecTime = currentTime;
-            },
-            delay - (currentTime - lastExecTime)
-          );
-        }
-      };
+  const goToPrev = useCallback(() => {
+    setCarousel((prev) => ({
+      ...prev,
+      currentImage:
+        prev.currentImage === 0 ? imageCount - 1 : prev.currentImage - 1,
+    }));
+  }, [imageCount]);
+
+  // Auto-advance carousel every 5 seconds.
+  // Keyed on currentImage so any manual navigation restarts the timer.
+  useEffect(() => {
+    if (!isAdvancing) return;
+
+    const timeout = setTimeout(goToNext, SLIDE_DURATION * 1000);
+    return () => clearTimeout(timeout);
+  }, [isAdvancing, currentImage, goToNext]);
+
+  // GSAP animation for the progress bar inside the active indicator
+  useGSAP(
+    () => {
+      const bars = progressRef.current.filter(Boolean);
+      if (bars.length === 0) return;
+
+      gsap.set(bars, { scaleX: 0 });
+
+      const activeBar = progressRef.current[currentImage];
+      if (!activeBar) return;
+
+      if (isAdvancing) {
+        gsap.to(activeBar, {
+          scaleX: 1,
+          duration: SLIDE_DURATION,
+          ease: "none",
+        });
+      } else {
+        // Paused: show the active indicator as full
+        gsap.set(activeBar, { scaleX: 1 });
+      }
     },
-    []
+    { dependencies: [currentImage, isAdvancing, imageCount] }
   );
 
-  // Auto-advance carousel every 5 seconds
+  // Lightbox fade-in
+  useGSAP(
+    () => {
+      if (!isLightboxOpen || !lightboxRef.current) return;
+      gsap.fromTo(
+        lightboxRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.25, ease: "power2.out" }
+      );
+    },
+    { dependencies: [isLightboxOpen] }
+  );
+
+  // Lightbox: keyboard controls + lock page scroll
   useEffect(() => {
-    if (!isPlaying || isDragging) return;
+    if (!isLightboxOpen) return;
 
-    // Clear any existing interval first
-    if (interval.current) {
-      clearInterval(interval.current);
-      interval.current = null;
-    }
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsLightboxOpen(false);
+      if (event.key === "ArrowRight") goToNext();
+      if (event.key === "ArrowLeft") goToPrev();
+    };
 
-    interval.current = setInterval(() => {
-      setCarousel((prev) => {
-        const nextImage = prev.currentImage + 1;
-        if (nextImage >= images.length) {
-          return { ...prev, currentImage: 0 };
-        }
-        return { ...prev, currentImage: nextImage };
-      });
-    }, 5000);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      if (interval.current) {
-        clearInterval(interval.current);
-        interval.current = null;
-      }
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isPlaying, images.length, isDragging]);
-
-  // GSAP animation for image transitions
-  useGSAP(() => {
-    // Animate progress bar
-    if (progressRef.current[currentImage]) {
-      gsap.to(progressRef.current[currentImage], {
-        clipPath: "circle(50% at center)",
-        scale: 1,
-        duration: 5,
-        ease: "none",
-        onComplete: () => {
-          // Reset progress bar
-          gsap.set(progressRef.current[currentImage], {
-            clipPath: "circle(0% at center)",
-            scale: 0,
-          });
-        },
-      });
-    }
-  }, [currentImage]);
+  }, [isLightboxOpen, goToNext, goToPrev]);
 
   // Handle play/pause
   const handlePlayPause = () => {
     setCarousel((prev) => ({ ...prev, isPlaying: !prev.isPlaying }));
   };
 
-  const resetInterval = useCallback(() => {
-    // Clear any existing interval first
-    if (interval.current) {
-      clearInterval(interval.current);
-      interval.current = null;
-    }
-
-    // Only set new interval if carousel is playing
-    if (isPlaying) {
-      interval.current = setInterval(() => {
-        setCarousel((prev) => {
-          const nextImage = prev.currentImage + 1;
-          if (nextImage >= images.length) {
-            return { ...prev, currentImage: 0 };
-          }
-          return { ...prev, currentImage: nextImage };
-        });
-      }, 5000);
-    }
-  }, [isPlaying, images.length]);
-
   // Handle manual navigation
   const handleImageSelect = (index: number) => {
     setCarousel((prev) => ({ ...prev, currentImage: index }));
-    resetInterval();
   };
 
-  // Touch/Mouse event handlers with throttling
-  const handleStart = useCallback(
-    (clientX: number, clientY: number) => {
-      setIsDragging(true);
-      setStartX(clientX);
-      setStartY(clientY);
-      setCurrentX(clientX);
-      setDragOffset(0);
+  // Touch/Mouse drag handlers
+  const handleStart = (clientX: number, clientY: number) => {
+    if (!hasMultiple) return;
+    setIsDragging(true);
+    setStartX(clientX);
+    setStartY(clientY);
+    setCurrentX(clientX);
+    setDragOffset(0);
+  };
 
-      // Pause auto-advance while dragging
-      if (interval.current) {
-        clearInterval(interval.current);
-      }
-    },
-    [interval]
-  );
+  const handleMove = (clientX: number, clientY: number) => {
+    if (!isDragging) return;
 
-  const handleMove = useCallback(
-    (clientX: number, clientY: number) => {
-      if (!isDragging) return;
+    const deltaX = clientX - startX;
+    const deltaY = clientY - startY;
 
-      const deltaX = clientX - startX;
-      const deltaY = clientY - startY;
+    // Buffer zone: allow swipe with mild vertical movement, but prefer clear horizontal intent
+    const minHorizontalMovement = 10; // require at least 10px horizontal movement
+    const maxVerticalMovement = 40; // allow up to 40px vertical wiggle before cancelling swipe
 
-      // Buffer zone: allow swipe with mild vertical movement, but prefer clear horizontal intent
-      const minHorizontalMovement = 10; // require at least 10px horizontal movement
-      const maxVerticalMovement = 40; // allow up to 40px vertical wiggle before cancelling swipe
+    if (
+      Math.abs(deltaX) < minHorizontalMovement ||
+      Math.abs(deltaY) > maxVerticalMovement
+    ) {
+      return; // Don't process as horizontal swipe
+    }
 
-      if (
-        Math.abs(deltaX) < minHorizontalMovement ||
-        Math.abs(deltaY) > maxVerticalMovement
-      ) {
-        return; // Don't process as horizontal swipe
-      }
+    const imageWidth = containerRef.current?.offsetWidth || 1;
 
-      const containerWidth = containerRef.current?.offsetWidth || 0;
-      const imageWidth = containerWidth / images.length;
+    // Limit drag distance to prevent over-scrolling
+    const maxDragDistance = imageWidth * 0.8; // 80% of image width max
+    const clampedDeltaX = Math.max(
+      -maxDragDistance,
+      Math.min(maxDragDistance, deltaX)
+    );
 
-      // Limit drag distance to prevent over-scrolling
-      const maxDragDistance = imageWidth * 0.8; // 80% of image width max
-      const clampedDeltaX = Math.max(
-        -maxDragDistance,
-        Math.min(maxDragDistance, deltaX)
-      );
+    // Calculate drag offset as a percentage of one image
+    setDragOffset((clampedDeltaX / imageWidth) * 100);
+    setCurrentX(clientX);
+  };
 
-      // Calculate drag offset as percentage
-      const offsetPercent = (clampedDeltaX / imageWidth) * 100;
-      setDragOffset(offsetPercent);
-      setCurrentX(clientX);
-    },
-    [isDragging, startX, startY, images.length]
-  );
-
-  const handleEnd = useCallback(() => {
+  const handleEnd = () => {
     if (!isDragging) return;
 
     setIsDragging(false);
 
-    const containerWidth = containerRef.current?.offsetWidth || 0;
-    const imageWidth = containerWidth / images.length;
-    const threshold = imageWidth * 0.2; // 20% threshold for swipe (easier to trigger)
+    const imageWidth = containerRef.current?.offsetWidth || 1;
+    const threshold = Math.min(imageWidth * 0.2, 90); // easy to trigger, even on wide screens
 
     if (Math.abs(currentX - startX) > threshold) {
-      // Determine swipe direction
       if (currentX < startX) {
-        // Swipe left - next image
-        const nextImage = (currentImage + 1) % images.length;
-        setCarousel((prev) => ({
-          ...prev,
-          currentImage: nextImage,
-        }));
+        goToNext(); // Swipe left - next image
       } else {
-        // Swipe right - previous image
-        const prevImage =
-          currentImage === 0 ? images.length - 1 : currentImage - 1;
-        setCarousel((prev) => ({
-          ...prev,
-          currentImage: prevImage,
-        }));
+        goToPrev(); // Swipe right - previous image
       }
-
-      // Clear interval immediately and reset after state update
-      if (interval.current) {
-        clearInterval(interval.current);
-        interval.current = null;
-      }
-
-      // Use setTimeout to ensure state has updated before resetting interval
-      setTimeout(() => {
-        resetInterval();
-      }, 0);
-    } else {
-      // Even if swipe wasn't strong enough, reset interval
-      // This gives user time to look at current image
-      if (interval.current) {
-        clearInterval(interval.current);
-        interval.current = null;
-      }
-      setTimeout(() => {
-        resetInterval();
-      }, 0);
     }
 
     // Reset drag state
     setDragOffset(0);
-  }, [
-    isDragging,
-    currentX,
-    startX,
-    currentImage,
-    images.length,
-    resetInterval,
-  ]);
+  };
 
   // Mouse events for desktop
   const handleMouseDown = (e: React.MouseEvent) => {
@@ -259,29 +215,23 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (isDragging) {
-      throttle(handleMove, 16)(e.clientX, e.clientY);
-    }
+    if (isDragging) handleMove(e.clientX, e.clientY);
   };
 
   const handleMouseUp = () => {
     handleEnd();
   };
 
-  // Touch events for mobile
+  // Touch events for mobile (vertical page scroll stays native via `touch-pan-y`)
   const handleTouchStart = (e: React.TouchEvent) => {
     const touch = e.touches[0];
     handleStart(touch.clientX, touch.clientY);
-    // Prevent the browser from starting a scroll gesture immediately
-    e.preventDefault();
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (isDragging) {
       const touch = e.touches[0];
-      // While dragging horizontally, prevent vertical page scrolling
-      e.preventDefault();
-      throttle(handleMove, 16)(touch.clientX, touch.clientY);
+      handleMove(touch.clientX, touch.clientY);
     }
   };
 
@@ -289,35 +239,23 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
     handleEnd();
   };
 
-  // Reset progress bars
-  useEffect(() => {
-    progressRef.current.forEach((_, index) => {
-      if (index === currentImage) {
-        gsap.set(progressRef.current[index], {
-          clipPath: "circle(0% at center)",
-          scale: 0,
-        });
-      } else {
-        gsap.set(progressRef.current[index], {
-          clipPath: "circle(0% at center)",
-          scale: 0,
-        });
-      }
-    });
-  }, [currentImage]);
+  if (imageCount === 0) return null;
 
-  // Calculate transform with drag offset - memoized for performance
-  const getTransformStyle = useMemo(() => {
-    const baseTransform = (-100 * currentImage) / images.length;
-    const dragTransform = dragOffset / images.length;
-    return `translateX(${baseTransform + dragTransform}%)`;
-  }, [currentImage, dragOffset, images.length]);
+  // Track is `imageCount` images wide, so one image = 100 / imageCount percent
+  const trackTransform = `translateX(${
+    (-100 * currentImage + dragOffset) / imageCount
+  }%)`;
+
+  const controlButtonClassName =
+    "flex-center w-8 h-8 md:w-9 md:h-9 rounded-full border border-white/10 bg-primary-background-950/80 text-slate-200 transition-all duration-300 ease-out hover:border-primary-500/60 hover:text-primary-300";
 
   return (
-    <div className="relative w-full h-full rounded-xl overflow-hidden">
+    <div className="group/carousel relative flex flex-col w-full h-full rounded-2xl overflow-hidden bg-primary-background-900">
       <div
         ref={containerRef}
-        className="relative w-full h-full overflow-hidden"
+        className={`relative w-full flex-1 min-h-0 overflow-hidden touch-pan-y select-none ${
+          hasMultiple ? (isDragging ? "cursor-grabbing" : "cursor-grab") : ""
+        }`}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -325,93 +263,203 @@ const ImageCarousel = ({ images }: { images: string[] }) => {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       >
         <div
-          className="flex w-full h-full transition-transform duration-300 ease-out"
+          className="flex h-full"
           style={{
-            width: `${images.length * 100}%`,
-            transform: getTransformStyle,
-            transition: isDragging ? "none" : "transform 0.3s ease-out",
+            width: `${imageCount * 100}%`,
+            transform: trackTransform,
+            transition: isDragging
+              ? "none"
+              : "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
         >
           {images.map((image, index) => (
             <div
               key={index}
-              className="w-full h-full shrink-0"
-              style={{ width: `${100 / images.length}%` }}
+              className="relative h-full shrink-0 bg-primary-background-900"
+              style={{ width: `${100 / imageCount}%` }}
+              aria-hidden={index !== currentImage}
             >
-              <div className="w-full h-full flex-center overflow-hidden bg-black relative">
-                <Image
-                  src={image}
-                  alt={`project image ${index + 1}`}
-                  width={2000}
-                  height={1300}
-                  sizes="90vw"
-                  priority
-                  loading="eager"
-                  ref={(el) => {
-                    if (el) {
-                      imageRef.current[index] = el;
-                    }
-                  }}
-                  className="w-full h-full max-h-[650px] object-contain"
-                />
-              </div>
+              <Image
+                src={image}
+                alt={`project image ${index + 1}`}
+                fill
+                sizes="(min-width: 1280px) 1100px, 95vw"
+                priority={index === 0}
+                loading={
+                  index === 0
+                    ? undefined
+                    : Math.abs(index - currentImage) <= 1
+                      ? "eager"
+                      : "lazy"
+                }
+                draggable={false}
+                className="object-contain p-2 sm:p-3"
+              />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Progress Dots */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20">
-        <div className="flex flex-row w-full max-w-md items-center gap-5">
-          <div className="flex items-center space-x-3 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2">
+      {/* Previous / next arrows (desktop hover; mobile swipes) */}
+      {hasMultiple && (
+        <>
+          <div className="absolute left-3 top-[calc(50%-24px)] -translate-y-1/2 z-20 hidden sm:block opacity-0 transition-opacity duration-300 group-hover/carousel:opacity-100 focus-within:opacity-100">
+            <button
+              onClick={goToPrev}
+              aria-label="Previous image"
+              className={`group/arrow ${controlButtonClassName}`}
+            >
+              <ChevronLeft className="w-5 h-5 transition-transform duration-300 group-hover/arrow:-translate-x-0.5" />
+            </button>
+          </div>
+          <div className="absolute right-3 top-[calc(50%-24px)] -translate-y-1/2 z-20 hidden sm:block opacity-0 transition-opacity duration-300 group-hover/carousel:opacity-100 focus-within:opacity-100">
+            <button
+              onClick={goToNext}
+              aria-label="Next image"
+              className={`group/arrow ${controlButtonClassName}`}
+            >
+              <ChevronRight className="w-5 h-5 transition-transform duration-300 group-hover/arrow:translate-x-0.5" />
+            </button>
+          </div>
+        </>
+      )}
+
+      {/* Control bar: plate label, progress indicators, play/pause, full screen */}
+      <div className="flex items-center justify-between gap-3 shrink-0 h-12 px-3 md:px-4 border-t border-white/10 bg-primary-background-950/60">
+        <span className="font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-slate-300 whitespace-nowrap">
+          <span className="hidden sm:inline">Plate Nº </span>
+          {formatPlate(currentImage + 1)}
+          <span className="text-slate-500"> / {formatPlate(imageCount)}</span>
+        </span>
+
+        {hasMultiple && (
+          <div className="flex items-center gap-1.5 min-w-0 overflow-hidden">
             {images.map((_, index) => (
-              <span
+              <button
                 key={index}
-                ref={(el) => {
-                  if (el) {
-                    dotRef.current[index] = el;
-                  }
-                }}
-                className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 relative ${
-                  index === currentImage ? "bg-white" : "bg-white/40"
-                }`}
                 onClick={() => handleImageSelect(index)}
+                aria-label={`Go to image ${index + 1}`}
+                aria-current={index === currentImage}
+                className="group/dot flex items-center h-8"
               >
-                {/* Progress bar overlay - circular fill */}
                 <span
-                  ref={(el) => {
-                    if (el) {
-                      progressRef.current[index] = el;
-                    }
-                  }}
-                  className={`absolute inset-0 rounded-full transition-all duration-300 ${
-                    index === currentImage ? "bg-blue-400" : "bg-transparent"
+                  className={`relative block h-1.5 rounded-full overflow-hidden transition-all duration-300 ease-out ${
+                    index === currentImage
+                      ? "w-7 bg-white/20"
+                      : "w-1.5 bg-white/30 group-hover/dot:bg-white/70"
                   }`}
-                  style={{
-                    clipPath:
+                >
+                  {/* Progress bar overlay */}
+                  <span
+                    ref={(el) => {
+                      if (el) {
+                        progressRef.current[index] = el;
+                      }
+                    }}
+                    className={`absolute inset-0 rounded-full origin-left ${
                       index === currentImage
-                        ? "circle(0% at center)"
-                        : "circle(0% at center)",
-                    transform: "scale(0)",
-                  }}
-                />
-              </span>
+                        ? "bg-primary-500"
+                        : "bg-transparent"
+                    }`}
+                    style={{ transform: "scaleX(0)" }}
+                  />
+                </span>
+              </button>
             ))}
           </div>
+        )}
+
+        <div className="flex items-center gap-2 shrink-0">
+          {hasMultiple && (
+            <button
+              onClick={handlePlayPause}
+              aria-label={isPlaying ? "Pause slideshow" : "Play slideshow"}
+              className={controlButtonClassName}
+            >
+              {isPlaying ? (
+                <Pause className="w-3.5 h-3.5" />
+              ) : (
+                <Play className="w-3.5 h-3.5" />
+              )}
+            </button>
+          )}
           <button
-            onClick={handlePlayPause}
-            className="w-10 h-10 bg-black/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-black/70 transition-all duration-300"
+            onClick={() => setIsLightboxOpen(true)}
+            aria-label="View image full screen"
+            className={controlButtonClassName}
           >
-            {isPlaying ? (
-              <Pause className="w-5 h-5 text-white" />
-            ) : (
-              <Play className="w-5 h-5 text-white" />
-            )}
+            <Maximize2 className="w-3.5 h-3.5" />
           </button>
         </div>
       </div>
+
+      {/* Lightbox (portalled to <body> so it always covers the whole screen) */}
+      {isLightboxOpen &&
+        createPortal(
+          <div
+            ref={lightboxRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image viewer"
+            className="fixed inset-0 z-[200] flex flex-col bg-primary-background-950/97 backdrop-blur-md"
+            onClick={() => setIsLightboxOpen(false)}
+          >
+            <div className="flex items-center justify-between gap-3 px-4 py-3 md:px-6 md:py-4 border-b border-white/10">
+              <span className="font-mono text-[11px] md:text-[12px] uppercase tracking-[0.2em] text-slate-300">
+                Plate Nº {formatPlate(currentImage + 1)}
+                <span className="text-slate-500">
+                  {" "}
+                  / {formatPlate(imageCount)}
+                </span>
+              </span>
+              <button
+                onClick={() => setIsLightboxOpen(false)}
+                aria-label="Close image viewer"
+                autoFocus
+                className={controlButtonClassName}
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="relative flex-1 min-h-0 m-3 md:m-6">
+              <Image
+                key={images[currentImage]}
+                src={images[currentImage]}
+                alt={`project image ${currentImage + 1}`}
+                fill
+                sizes="100vw"
+                className="object-contain"
+              />
+            </div>
+
+            {hasMultiple && (
+              <div
+                className="flex items-center justify-center gap-3 px-4 pb-4 md:pb-6"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={goToPrev}
+                  aria-label="Previous image"
+                  className={controlButtonClassName}
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={goToNext}
+                  aria-label="Next image"
+                  className={controlButtonClassName}
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };

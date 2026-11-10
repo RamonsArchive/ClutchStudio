@@ -1,14 +1,16 @@
 import Link from "next/link";
 import React from "react";
+import { ArrowRight } from "lucide-react";
 
 const ViewProjectButton = ({ href }: { href: string }) => {
   return (
     <Link
       id="view-project-button"
       href={href}
-      className="w-full max-w-sm text-center view-project-button-gradient font-funnel-sans text-white text-[12px] xs:text-[14px] font-medium px-4 py-2 rounded-lg transition-all duration-300 ease-in-out shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 hover:text-gray-500 active:text-gray-500"
+      className="group btn-primary px-5 xs:px-6 text-[13px] xs:text-[14px] md:text-[15px] whitespace-nowrap"
     >
       View Project
+      <ArrowRight className="w-4 h-4 shrink-0 transition-transform duration-300 ease-out group-hover:translate-x-1" />
     </Link>
   );
 };
