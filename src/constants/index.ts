@@ -852,7 +852,7 @@ export const AboutData = {
     introduction:
       "I am a cat lover, gym goer, soccer player, and a software engineer that is passionate about learning new technologies and building new projects. I've lived in Long Beach CA during my early childhood, until I moved to Irvine CA, before moving to Placerville CA for my high school years, and then finally moving to San Diego CA for my college years. Every city has its own unique charm, and I've been fortunate to experience them all.",
     education:
-      "I am a fourth year student at UC San Diego studying Cognitive Science with a specialization in Machine Learning and Neural Computation, minoring in Computer Science. Expected graduation: June 2027. I currently work as a software engineer at ModalAI and plan to join full time after graduating.",
+      "I am a fourth year student at UC San Diego double majoring in Computer Science (B.S.) and Cognitive Science (B.S.) with a specialization in Machine Learning and AI. Expected graduation: June 2027. I currently work as a software engineer at ModalAI and plan to join full time after graduating.",
     releventCoursework: [
       "Advanced data structures",
       "Design & Analysis of Algorithms",
@@ -950,6 +950,14 @@ export const WorkExperienceData = {
         location: "San Diego, CA",
         description:
           "Founded and operate a web development and hosting studio serving real clients with full-stack solutions using Next.js 15, React 19, and TypeScript. Built comprehensive business platforms with complete admin dashboards, project management systems, and payment processing integration. Developed production applications with cloud infrastructure, real-time data synchronization, and automated CI/CD pipelines. Implemented advanced features including JWT authentication, rate limiting, AWS S3 integration, and comprehensive error monitoring. Delivered end-to-end solutions from initial client consultation through deployment and ongoing maintenance. Key projects include Relay E-commerce Platform (Spring 2025) - a comprehensive e-commerce solution with hybrid database architecture, Stripe payment processing, EasyPost shipping integration, and advanced promo system with usage tracking, and Golden Eagle Estates (Fall 2024) - a complete digital transformation platform for construction company featuring admin dashboard, project management, customer inquiry handling, and sophisticated project ticket system with AWS S3 and Prisma ORM integration.",
+      },
+      {
+        company: "In-N-Out Burger",
+        position: "Associate",
+        duration: "May 2022 - September 2025",
+        location: "California",
+        description:
+          "Worked as an In-N-Out Associate for more than three years. Packaged food orders, made fries, and delivered exceptional customer service in a fast-paced kitchen.",
       },
     ],
   },

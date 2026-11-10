@@ -13,10 +13,9 @@ import Reveal from "@/components/Reveal";
 import AboutExperience, {
   AboutExperienceItem,
 } from "@/components/AboutExperience";
+import { RESUME_HREF } from "@/constants/links_index";
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
-
-const RESUME_HREF = "/Assets/Documents/ramon_resume.pdf";
 
 const pad = (n: number) => String(n).padStart(2, "0");
 

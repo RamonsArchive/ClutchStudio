@@ -14,6 +14,7 @@ import { ArrowDownIcon, ArrowUpRight } from "lucide-react";
 import InfiniteScrollSocials from "@/components/InfiniteScrollSocials";
 import InfiniteScrollText from "@/components/InfiniteScrollText";
 import ServicesSection from "@/components/ServicesSection";
+import { RESUME_HREF } from "@/constants/links_index";
 import VectorField from "@/components/VectorField";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
@@ -295,11 +296,7 @@ export default function Home() {
                 <Link href="/services" className="btn-secondary">
                   Web design &amp; hosting
                 </Link>
-                <a
-                  href="/Assets/Documents/ramon_resume.pdf"
-                  download
-                  className="btn-ghost"
-                >
+                <a href={RESUME_HREF} download className="btn-ghost">
                   Resume
                 </a>
               </div>

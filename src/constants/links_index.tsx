@@ -74,6 +74,12 @@ export const socialIcons: Record<string, React.ReactElement> = {
   ),
 };
 
+// Resume PDF: the one place the path lives.
+// Source of truth is ~/Developer/GithubStatic/Resume (github.com/RamonsArchive/RamonResume).
+// When the resume changes, copy the new PDF into public/Assets/Documents/
+// and update this path if the file name changed.
+export const RESUME_HREF = "/Assets/Documents/Ramons_Resume_2027.pdf";
+
 // Social links configuration
 export const footerSocials = [
   {
@@ -127,7 +133,7 @@ export const pdfLinks = [
   {
     id: "resume",
     name: "Resume",
-    href: "/Assets/Documents/ramon_resume.pdf", // Direct download from public folder (recommended)
+    href: RESUME_HREF, // Direct download from public folder (recommended)
     // href: "https://github.com/username/repo/raw/main/resume.pdf", // Alternative: GitHub link
     ariaLabel: "Download my resume",
     title: "Resume",
@@ -162,7 +168,7 @@ export const navbarLinks = [
   {
     id: "resume",
     name: "Resume",
-    href: "/Assets/Documents/ramon_resume.pdf",
+    href: RESUME_HREF,
     ariaLabel: "Download my resume",
     title: "Resume",
     download: true,
